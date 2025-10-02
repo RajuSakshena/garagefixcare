@@ -1,0 +1,13 @@
+# Ignore backend folder
+server
+backend
+api
+*.log
+
+# Node modules cache
+node_modules
+
+# Git and misc
+.git
+.gitignore
+.vercel
