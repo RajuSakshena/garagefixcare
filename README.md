@@ -1,4 +1,4 @@
-# GarageOnCall - Professional Mobile Auto Service
+# GarageFixCare - Professional Mobile Auto Service
 
 A professional full-stack web application for mobile automotive services, inspired by modern service platforms.
 
@@ -21,7 +21,7 @@ A professional full-stack web application for mobile automotive services, inspir
 ### Forms
 - **Functional contact form** for general inquiries
 - **Service booking form** with vehicle and scheduling details
-- **Instant email notifications** sent to jackmyble@gmail.com
+- **Instant email notifications** sent to garagefixcare@gmail.com
 - **Success/error feedback** for users
 
 ## 🛠️ Tech Stack
@@ -139,7 +139,7 @@ A professional full-stack web application for mobile automotive services, inspir
 
 ## 📧 Email Notifications
 
-All form submissions automatically send formatted emails to `jackmyble@gmail.com` with:
+All form submissions automatically send formatted emails to `garagefixcare@gmail.com` with:
 - Complete form data in organized format
 - Timestamp of submission
 - Professional HTML formatting
