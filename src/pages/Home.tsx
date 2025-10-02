@@ -335,7 +335,7 @@ const Home = () => {
   equipped with essential tools and quality parts. Save valuable time while ensuring your bike 
   receives tailored maintenance for peak performance and safety. With our trusted and reliable 
   service, you can enjoy hassle-free repairs and keep your bike in top condition without ever 
-  needling to visit a workshop.
+  needing to visit a workshop.
 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
