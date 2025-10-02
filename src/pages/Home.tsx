@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// FIX 2: Removed 'Phone as PhoneIcon' and kept 'Phone' for consistency.
-import { CheckCircle, Star, Flame, X ,Plus, Phone} from 'lucide-react'; 
+import { CheckCircle, Star, Flame, X ,Plus, Phone as PhoneIcon} from 'lucide-react'; // Added PhoneIcon
 import SEOHelmet from '../components/SEOHelmet';
-import axios from 'axios'; 
+import axios from 'axios'; // <-- NEW: Import for API calls
 
 // Import react-slick and its styles
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaWhatsapp } from "react-icons/fa";
-// FIX 2: Removed duplicate import: // import { Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 
 
-// FIX 8: Extracted the hardcoded phone number into a constant for reusability.
-const CONTACT_PHONE = '9318478483';
-
+//last section 
 // Import your local images
 import bikeServiceOfferImage from '../images/offer11.jpg';
 import doorstepImage from '../images/offer22.jpg';
@@ -31,10 +28,10 @@ import doorstepService from "../images/Doorstep Service.png";
 import wheelCare from "../images/Wheel Care.png";
 import bikeBatteries from "../images/Bike Battery.png";
 import engineRepair from "../images/Engine Repair.png";
-import warrantyImg from "../images/warranty.webp";
-import pickupImg from "../images/free pickup.webp";
-import transparentImg from "../images/transparent.webp";
-import trainedImg from "../images/trainie.webp";
+import warrantyImg from "../images/Warranty.webp";
+import pickupImg from "../images/Free Pickup.webp";
+import transparentImg from "../images/Transparent.webp";
+import trainedImg from "../images/Trainie.webp";
 import handshakeImg from "../images/handshake.jpg";
 import wurthImg from "../images/WURTH.png";
 import motulImg from "../images/Motul.jpeg";
@@ -58,7 +55,7 @@ import fourValveEngineImg from "../images/Four-valves.webp";
 import driveBeltScootyImg from "../images/Drive-belt.webp";
 import heroImage from "../images/mechanic.jpg";
 
-// Interface for clean type-checking
+// Interface for clean type-checking (required for the new logic)
 interface Service {
   title: string;
   subtitle: string;
@@ -70,13 +67,10 @@ const Home = () => {
   const [reviewScore, setReviewScore] = useState(4.6);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  // FIX 3: Removed unused state variables
-  // const [modalServiceTitle, setModalServiceTitle] = useState('');
-  // const [modalServiceSubtitle, setModalServiceSubtitle] = useState('');
+  // OLD Modal State (Kept but modified)
+  const [modalServiceTitle, setModalServiceTitle] = useState('');
+  const [modalServiceSubtitle, setModalServiceSubtitle] = useState('');
   
-  // FIX 4: Added state for the modal's Terms and Conditions checkbox
-  const [modalTermsAccepted, setModalTermsAccepted] = useState(false); 
-
   // NEW Modal State for API booking
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [modalPhoneNumber, setModalPhoneNumber] = useState(''); // State for phone input in modal
@@ -226,10 +220,12 @@ const Home = () => {
   
   // 1. Function to open the modal (Now uses selectedService state)
   const handleSeeChecklist = (title: string, subtitle: string) => {
+    // OLD: setModalServiceTitle(title); setModalServiceSubtitle(subtitle);
+    
+    // NEW: Combine service details with the full checklist and save it
     setSelectedService({ title, subtitle, checklist: checklistItems }); 
     setModalPhoneNumber(''); // Clear phone number whenever a new modal opens
-    setModalTermsAccepted(false); // FIX 4: Clear T&C state on open
-    setIsModalOpen(true);
+    setIsModalOpen(true); // OLD: setIsModalOpen(true);
   };
 
   // 2. Function to close the modal (remains mostly the same, clears new state too)
@@ -237,7 +233,6 @@ const Home = () => {
     setIsModalOpen(false);
     setSelectedService(null);
     setModalPhoneNumber('');
-    setModalTermsAccepted(false); // FIX 4: Reset T&C state on close
   };
 
   // 3. NEW: Function to handle the final submission (Called by the modal's "Book Now" button)
@@ -246,18 +241,13 @@ const Home = () => {
         alert('Please enter a valid 10-digit phone number.');
         return;
     }
-    // FIX 4: Added check for Terms and Conditions agreement
-    if (!modalTermsAccepted) {
-        alert('Please accept the Terms of Service to proceed with booking.');
-        return;
-    }
     if (!selectedService) return; // Safety check
 
     try {
         const serviceType = `${selectedService.title} (${selectedService.subtitle})`;
         
-        // FIX 5: Removed the leading '/' from the API path to prevent '//api/' if VITE_API_URL has a trailing slash.
-        await axios.post(`${import.meta.env.VITE_API_URL}api/quick-book-service`, { 
+        // API call to the new dedicated quick-book endpoint
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/quick-book-service`, { 
             phoneNumber: modalPhoneNumber,
             serviceType: serviceType
         });
@@ -319,7 +309,7 @@ const Home = () => {
     { name: "Gurugram", color: "text-indigo-700" },
     { name: "Ghaziabad", color: "text-gray-900" },
     { name: "Faridabad", color: "text-orange-700" },
-    // FIX 1: Removed duplicate entry for "Greater Noida"
+    { name: "Greater Noida", color: "text-slate-800" },
 ];
   return (
     <>
@@ -333,87 +323,87 @@ const Home = () => {
         <section className="bg-slate-800 text-white py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Main Text and Buttons (Optimized for Mobile) */}
-              <div className="text-center lg:text-left"> 
-                <h1 className="text-red-600 text-4xl md:text-6xl font-bold mb-4 leading-tight">
+              {/* Main Text and Buttons */}
+              <div>
+                <h1 className="text-red-600 md:text-6xl font-bold mb-6 leading-tight">
                   Professional Auto Repair
-                  <span className="text-orange-500 block"> At Your Doorstep</span> 
+                  <span className="text-orange-500"> At Your Doorstep</span>
                 </h1>
-                <p className="font-poppins text-base leading-relaxed text-white mb-6 px-2 sm:px-0"> 
+                <p className="font-poppins text-lg leading-relaxed text-white mb-8">
   Experience the ultimate convenience of professional bike care at your doorstep. 
   Our expert mechanics come directly to your location—whether at home, work, or on the go—
   equipped with essential tools and quality parts. Save valuable time while ensuring your bike 
   receives tailored maintenance for peak performance and safety. With our trusted and reliable 
   service, you can enjoy hassle-free repairs and keep your bike in top condition without ever 
-  needing to visit a workshop.
+  needling to visit a workshop.
 </p>
 
-                {/* NEW: Input field (similar to the screenshot) */}
-                <div className="flex flex-col items-center justify-center lg:items-start lg:justify-start gap-4 mb-6">
-                  {/* Phone Number Input Field (New) */}
-                  <input
-                    type="tel"
-                    placeholder="Enter your number*"
-                    required
-                    maxLength={10}
-                    className="w-full sm:w-3/4 max-w-sm px-4 py-3 rounded-lg text-black border border-gray-300 focus:outline-none focus:border-red-600 shadow-lg text-center"
-                  />
-                  {/* Book Now Button (Made full width on mobile) */}
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     to="/book"
-                    className="w-full sm:w-3/4 max-w-sm bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors duration-200 text-center"
+                    className="bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-orange-700 transition-colors duration-200 text-center"
                   >
-                    BOOK NOW
+                    Book Service Now
                   </Link>
+                  <a
+                    href="tel:9318478483"
+                    className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-900 transition-colors duration-200 text-center flex items-center justify-center gap-2"
+                  >
+                    <Phone className="h-5 w-5" />
+                    Call Now
+                  </a>
                 </div>
-
               </div>
 
-              {/* Combined Image and Reviews on the right (Optimized for Mobile) */}
-             <div className="relative flex flex-col items-center lg:items-end gap-6 order-first lg:order-last">
-                {/* Hidden on mobile to prioritize the CTA/input */}
-                <img
-                  src={heroImage}
-                  alt="Professional mechanic working on bike"
-                  className="rounded-lg shadow-2xl w-full hidden lg:block" 
-                />
+              {/* Combined Image and Reviews on the right */}
+             <div className="relative flex flex-col items-center lg:items-end gap-6">
+  <img
+    src={heroImage}
+    alt="Professional mechanic working on bike"
+    className="rounded-lg shadow-2xl w-full"
+  />
 
-                {/* Dynamic Google Review & Happy Customers Section (Optimized for Mobile) */}
-                <div className="flex flex-row items-center justify-center gap-4 w-full px-2"> 
-                  {/* FIX 7: Changed 'flex-1' to 'w-1/2' for explicit and predictable width */}
-                  <div className="bg-transparent text-white p-2 rounded-lg shadow-none w-1/2">
+                {/* Dynamic Google Review & Happy Customers Section */}
+                <div className="flex flex-row md:flex-row items-center justify-center gap-4 w-full">
+                  <div className="bg-sky-100 text-black p-4 rounded-lg shadow-lg flex-1">
                     <div className="flex items-center justify-center gap-2 text-2xl font-bold">
                       <Star className="h-5 w-5 text-yellow-400 fill-current" />
                       {reviewScore.toFixed(1)}/5
                     </div>
-                    <div className="text-sm font-semibold text-center mt-1">Based on 1,00,000+ Reviews</div> 
+                    <div className="text-sm font-semibold text-center">Google Review</div>
                   </div>
-                  {/* FIX 7: Changed 'flex-1' to 'w-1/2' for explicit and predictable width */}
-                  <div className="bg-transparent text-white p-2 rounded-lg shadow-none w-1/2">
+                  <div className="bg-sky-100 text-black p-4 rounded-lg shadow-lg flex-1">
                     <div className="text-2xl font-bold text-center">
                       {happyCustomersCount.toLocaleString()}+
                     </div>
-                    <div className="text-sm font-semibold text-center mt-1">Happy Customers</div>
+                    <div className="text-sm font-semibold text-center">Happy Customers</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+{/* --- Insert this new section after the Hero section --- */}
 
 {/* Background color based on your Navbar: likely a light gray or white. 
     Assuming the Navbar is bg-white or bg-gray-50 based on the screenshot. */}
 <div className="bg-sky-100 border-y border-gray-200 py-3 overflow-hidden">
     
+    {/* 1. ADJUSTMENT 1: Reduce horizontal padding (px-4 to px-0) 
+       on the inner container to let content start further left/right. 
+       We only keep max-w-7xl mx-auto for content width. */}
     <div className="flex items-center text-lg font-semibold max-w-7xl mx-auto">
         
-        <div className="flex-shrink-0 px-4 sm:px-6 lg:px-8 pr-4 text-sm sm:text-lg"> 
-            <span className="text-red-600 mr-1 font-bold">Service Available in</span> 
+        {/* 2. ADJUSTMENT 2: Reduce right padding (pr-8 to pr-4 or pr-2) 
+           on the static title to bring the scrolling cities closer. */}
+        <div className="flex-shrink-0 px-4 sm:px-6 lg:px-8 pr-4"> 
+            <span className="text-red-600 mr-2 font-bold">Service Available in</span>
             <span className="text-orange-600 font-bold">Delhi NCR</span>
-            <span className="text-brandRed font-bold hidden sm:inline"> (10% off)</span> 
-            <span className="text-gray-400 ml-2">|</span> 
+            <span className="text-brandRed font-bold"> (10% off)</span>
+            <span className="text-gray-400 ml-4">|</span>
         </div>
 
+        {/* 3. SCROLLING RIGHT SECTION (No change needed here) */}
         <div className="flex-1 min-w-0 overflow-hidden">
     <div className="flex items-center animate-marquee">
 
@@ -422,7 +412,8 @@ const Home = () => {
             serviceCities.map((city, index) => (
                 <span 
                     key={`${repetitionIndex}-${index}`}
-                    className={`ml-6 md:ml-16 tracking-wider flex-shrink-0 font-bold text-sm sm:text-lg ${city.color}`} 
+                    // Added: font-bold for better visibility and a professional look
+                    className={`ml-10 md:ml-16 tracking-wider flex-shrink-0 font-bold ${city.color}`}
                 >
                     {city.name}
                 </span>
@@ -441,16 +432,16 @@ const Home = () => {
         {/* Autoplay Card Carousel Section */}
         <section className="py-8 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center justify-center mb-6"> 
+            <div className="flex flex-col items-center justify-center mb-8">
                 <div className="flex items-center justify-center">
-                  <h2 className="text-2xl md:text-4xl font-bold mr-2"> 
+                  <h2 className="text-3xl md:text-4xl font-bold mr-4">
   <span className="text-white">Hot Deals</span>{' '}
   <span className="text-red-600">This Week</span>
 </h2>
 
-                  <Flame className="h-6 w-6 text-orange-500" /> 
+                  <Flame className="h-8 w-8 text-orange-500" />
                 </div>
-                <p className="text-sm text-white max-w-7xl mx-auto mt-2 text-center px-4"> 
+                <p className="text-xl text-white max-w-7xl mx-auto mt-2 text-center">
                   Special prices available only for a limited time,
                   Get exciting discounts on bike repairs and servicing.<br />
                   Save big with up to 10% off this week,
@@ -502,85 +493,84 @@ const Home = () => {
         {/* What Our Clients Say? Section */}
         <section className="bg-slate-800 text-Black py-2">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-             <h2 className="text-2xl md:text-4xl font-bold mb-2"> 
+            <div className="text-center mb-12">
+             <h2 className="text-3xl md:text-4xl font-bold mb-4">
   <span className="text-white">What Our</span>{' '}
   <span className="text-red-600">Clients Say?</span>
 </h2>
 
             </div>
-            {/* Switched to a 2-column layout on mobile, 3 on medium/desktop */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-center"> 
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               {/* Google Reviews */}
-              <div className="bg-sky-50 rounded-lg p-4 md:p-6 shadow-md"> 
+              <div className="bg-sky-50 rounded-lg p-6 shadow-md">
                 <img
                   src={googleReviewsImage}
                   alt="Google Reviews"
-                  className="mx-auto h-12 md:h-16 mb-2 md:mb-4" 
+                  className="mx-auto h-16 mb-4"
                 />
-                <div className="flex justify-center mb-1 md:mb-2"> 
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" /> 
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
+                <div className="flex justify-center mb-2">
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
                 </div>
-                <p className="text-black font-semibold mb-2 text-sm md:text-base">4.7/5 Rating</p> 
+                <p className="text-black font-semibold mb-4">4.7/5 Rating</p>
                 <a
                   href="https://www.google.com/search?q=your+business+on+google"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black font-semibold hover:underline text-xs md:text-base" 
+                  className="text-black font-semibold hover:underline"
                 >
                   view us on Google
                 </a>
               </div>
 
-              {/* Facebook Reviews (Hidden on small mobile to keep 2-column clean) */}
-              <div className="bg-sky-50 rounded-lg p-4 md:p-6 shadow-md hidden sm:block"> 
+              {/* Facebook Reviews */}
+              <div className="bg-sky-50 rounded-lg p-6 shadow-md">
                 <img
                   src={facebookReviewsImage}
                   alt="Facebook Reviews"
-                  className="mx-auto h-12 md:h-16 mb-2 md:mb-4"
+                  className="mx-auto h-16 mb-4"
                 />
-                <div className="flex justify-center mb-1 md:mb-2">
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
+                <div className="flex justify-center mb-2">
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
                 </div>
-                <p className="text-black font-semibold mb-2 text-sm md:text-base">4.7/5 Rating</p>
+                <p className="text-black font-semibold mb-4">4.7/5 Rating</p>
                 <a
                   href="https://www.facebook.com/yourbusiness"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black font-semibold hover:underline text-xs md:text-base"
+                  className="text-black font-semibold hover:underline"
                 >
                   view us on FaceBook
                 </a>
               </div>
 
               {/* JustDial Reviews */}
-              <div className="bg-sky-50 rounded-lg p-4 md:p-6 shadow-md"> 
+              <div className="bg-sky-50 rounded-lg p-6 shadow-md">
                 <img
                   src={justdialReviewsImage}
                   alt="JustDial Reviews"
-                  className="mx-auto h-12 md:h-16 mb-2 md:mb-4"
+                  className="mx-auto h-16 mb-4"
                 />
-                <div className="flex justify-center mb-1 md:mb-2">
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400 fill-current" />
+                <div className="flex justify-center mb-2">
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
                 </div>
-                <p className="text-black font-semibold mb-2 text-sm md:text-base">4.7/5 Rating</p>
+                <p className="text-black font-semibold mb-4">4.7/5 Rating</p>
                 <a
                   href="https://www.justdial.com/your-business"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black font-semibold hover:underline text-xs md:text-base"
+                  className="text-black font-semibold hover:underline"
                 >
                   view us on JustDial
                 </a>
@@ -592,37 +582,36 @@ const Home = () => {
         {/* At Home Service Price List Section (YOUR REQUIRED SECTION) */}
        <section className="py-2 bg-slate-900">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-2xl md:text-4xl font-bold mb-4"> 
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">
       <span className="text-white">At-Home Service</span>{' '}
       <span className="text-red-600">Price List</span>
     </h2>
 
-    <p className="text-sm text-white mb-6 max-w-3xl mx-auto px-2">
+    <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
   Curious about the cost of bike servicing? The price of bike or motorcycle service 
   depends on the type of service you select. Below, you can find an estimate of the 
   labour charges to help you plan your bike’s maintenance with ease.
 </p>
 
-{/* Changed to 1-column on mobile, 2 on medium/desktop */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-8 justify-items-center">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
   {servicePrices.map((service, index) => (
     <div
       key={index}
-      className="bg-orange-600 p-2 rounded-xl w-full max-w-sm md:max-w-md shadow-lg border border-gray-700"
+      className="bg-orange-600 p-2 rounded-xl w-full max-w-md shadow-lg border border-gray-700"
     >
       <div className="bg-sky-100 rounded-lg shadow-md p-4 w-full">
         <div className="flex flex-col items-start text-left mb-2">
-          <h3 className="text-lg font-bold text-black mb-1">{service.title}</h3> 
-          <p className="text-black font-semibold text-sm">{service.subtitle}</p>
-          <div className="text-xl font-bold mt-2"> 
+          <h3 className="text-xl font-bold text-black mb-1">{service.title}</h3>
+          <p className="text-black font-semibold">{service.subtitle}</p>
+          <div className="text-2xl font-bold mt-2">
             <span className="line-through text-red-500 mr-2">{service.originalPrice}</span>
             <span className="text-green-600">{service.discountedPrice}/-</span>
           </div>
         </div>
-        <ul className="list-none space-y-1 text-left text-gray-700 text-sm"> 
+        <ul className="list-none space-y-1 text-left text-gray-700">
           {service.features.map((feature, i) => (
             <li key={i} className="flex items-center">
-              <CheckCircle className="h-3 w-3 text-green-500 mr-2 flex-shrink-0" /> 
+              <CheckCircle className="h-2 w-2 text-green-500 mr-2 flex-shrink-0" />
               {feature}
             </li>
           ))}
@@ -630,7 +619,7 @@ const Home = () => {
         <div className="flex justify-end mt-2">
           <button
             onClick={() => handleSeeChecklist(service.title, service.subtitle)}
-            className="bg-red-600 text-white px-3 py-1 rounded-lg font-semibold text-sm hover:bg-red-700 transition-colors duration-200" 
+            className="bg-red-600 text-white px-2 py-1 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200"
           >
             See checklist
           </button>
@@ -645,7 +634,7 @@ const Home = () => {
   </div>
 </section>
         
-<section className="relative h-[400px] lg:h-[600px]"> 
+<section className="relative h-[500px] lg:h-[600px]">
   {/* Background Image */}
   <img
     src={mechanicImage}
@@ -657,41 +646,17 @@ const Home = () => {
 
   {/* Content */}
   <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-    {/* Switched order for mobile: CTA (Right) first, then Form (Left) */}
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full"> 
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
       
-      {/* Right Side (CTA) - NOW FIRST ON MOBILE */}
-     <div className="text-center lg:text-left text-white flex flex-col justify-center order-first lg:order-none"> 
-        <h4 className="text-white text-2xl font-semibold mb-2 underline decoration-red-600"> 
-          Book Service
-        </h4>
-        <h2 className="text-3xl md:text-4xl font-bold mb-3"> 
-          <span className="text-orange-600">Convenient Bike Service</span> and Repair at Your Home
-        </h2>
-        <p className="text-2xl font-bold text-blue-400 mb-6"> 
-          Certified Genuine Parts
-        </p>
-        <a
-          // FIX 8: Used CONTACT_PHONE constant
-          href={`tel:${CONTACT_PHONE}`}
-          className="w-full inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-2 max-w-md mx-auto" 
-        >
-          <Phone className="h-5 w-5" />
-          <span>Book on Call</span>
-        </a>
-      </div>
-      
-      {/* Left Side (Form) - NOW SECOND ON MOBILE */}
-      <div className="bg-sky-100 rounded-xl shadow-lg p-6 order-last lg:order-none"> 
-        <h3 className="text-xl font-bold text-gray-900 mb-4 text-center"> 
+      {/* Left Side */}
+      <div className="bg-sky-100 rounded-xl shadow-lg p-8">
+        <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
           Choose Your Vehicle
         </h3>
         <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setSelectedVehicle("Bike")}
-            // FIX 6: Added aria-pressed for accessibility
-            aria-pressed={selectedVehicle === "Bike"}
-            className={`px-5 py-2 rounded-lg font-semibold text-sm ${
+            className={`px-6 py-2 rounded-lg font-semibold ${
               selectedVehicle === "Bike"
                 ? "bg-red-600 text-white"
                 : "bg-gray-200 text-black"
@@ -701,9 +666,7 @@ const Home = () => {
           </button>
           <button
             onClick={() => setSelectedVehicle("Scooty")}
-            // FIX 6: Added aria-pressed for accessibility
-            aria-pressed={selectedVehicle === "Scooty"}
-            className={`px-5 py-2 rounded-lg font-semibold text-sm ${
+            className={`px-6 py-2 rounded-lg font-semibold ${
               selectedVehicle === "Scooty"
                 ? "bg-red-600 text-white"
                 : "bg-gray-200 text-black "
@@ -716,7 +679,7 @@ const Home = () => {
         <select
           value={selectedBrand}
           onChange={(e) => setSelectedBrand(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm" 
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
         >
           <option value="">Select Brand</option>
           {(selectedVehicle === "Bike" ? bikeBrands : scootyBrands).map(
@@ -729,22 +692,41 @@ const Home = () => {
         </select>
       </div>
 
+      {/* Right Side */}
+     <div className="text-center lg:text-left text-white flex flex-col justify-center">
+  <h4 className="text-white text-3xl font-semibold mb-2 underline decoration-red-600">
+  Book Service
+</h4>
+  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <span className="text-orange-600">Convenient Bike Service</span> and Repair at Your Home
+  </h2>
+  <p className="text-4xl font-bold text-blue-400 mb-6">
+    Certified Genuine Parts
+  </p>
+  <a
+    href="tel:9318478483"
+    className="w-full inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+  >
+    <Phone className="h-5 w-5" />
+    <span>Book on Call</span>
+  </a>
+</div>
     </div>
   </div>
 </section>
 {/* Bike Services at Home Section */}
 <section className="py-8 bg-slate-800">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-2xl md:text-4xl font-bold text-white mb-4"> 
+    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
       Expert Bike Care,  <span className="text-red-600"> Right at Your Doorstep</span>
     </h2>
-    <p className="text-sm text-white mb-8 max-w-3xl mx-auto px-2"> 
+    <p className="text-lg text-white mb-12 max-w-3xl mx-auto">
   Enjoy professional periodic bike servicing at your doorstep. Our services include engine repair, battery replacement, wheel and tyre maintenance, and much more—all conveniently handled at home. You can also avail bike insurance and other essential services, all at competitive prices.
 </p>
 
 
-    {/* Service Cards (Changed to 2-column on mobile, 3 on desktop) */}
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+    {/* Service Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {[
         { name: "Routine Service", img: routineService },
         { name: "Bike Insurance", img: bikeInsurance },
@@ -755,14 +737,14 @@ const Home = () => {
       ].map((service, index) => (
         <div
           key={index}
-          className="bg-sky-100 rounded-lg shadow-lg p-3 sm:p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-200" 
+          className="bg-sky-100 rounded-lg shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-200"
         >
           <img
             src={service.img}
             alt={service.name}
-            className="h-16 w-16 sm:h-28 sm:w-28 object-contain mb-2 sm:mb-4" 
+            className="h-28 w-28 object-contain mb-4"
           />
-          <h3 className="text-sm sm:text-lg font-semibold text-gray-900">{service.name}</h3> 
+          <h3 className="text-lg font-semibold text-gray-900">{service.name}</h3>
         </div>
       ))}
     </div>
@@ -771,91 +753,91 @@ const Home = () => {
 
 {/* GarageFixCare Benefits Section */}
 <section className="py-8 bg-slate-900 text-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"> 
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     
     {/* Left Content */}
     <div>
-      <p className="text-xs text-white mb-1">Get Rs.30 Off On First Service</p> 
-      <h2 className="text-2xl md:text-4xl font-bold mb-3"> 
+      <p className="text-sm text-white mb-2">Get Rs.30 Off On First Service</p>
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">
         GarageFixCare <span className="text-red-600">Service Warranty</span>
       </h2>
-      <p className="text-sm text-sky-100 mb-6"> 
+      <p className="text-lg text-sky-100 mb-6">
   GarageFixCare offers expert at-home bike repair services for motorcycles of all models and brands, including Harley-Davidson, Ducati, Benelli, Triumph, Indian, BMW, Aprilia, Yezdi, Husqvarna, and more.
 </p>
 
-      <div className="flex gap-4 justify-center lg:justify-start"> 
+      <div className="flex gap-4">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
           alt="Google Play"
-          className="h-10 sm:h-12" 
+          className="h-12"
         />
         <img
           src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
           alt="App Store"
-          className="h-10 sm:h-12" 
+          className="h-12"
         />
       </div>
     </div>
 
-    {/* Right Content (Benefit Cards) - Changed to 1-column on mobile, 2 on desktop */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4"> 
-      <div className="bg-sky-100 text-black rounded-lg p-4 shadow-md flex items-center space-x-3"> 
-        <img src={warrantyImg} alt="Warranty" className="h-10 w-10 object-contain" /> 
+    {/* Right Content (Benefit Cards) */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="bg-sky-100 text-black rounded-lg p-6 shadow-md flex items-center space-x-4">
+        <img src={warrantyImg} alt="Warranty" className="h-12 w-12 object-contain" />
         <div>
-          <h3 className="font-bold text-sm">Enjoy a 10-Day Free Service Guarantee</h3> 
-          <p className="text-xs text-gray-900 ">10-Day Hassle-Free Warranty</p> 
+          <h3 className="font-bold text-lg">Enjoy a 10-Day Free Service Guarantee</h3>
+          <p className="text-sm text-gray-900 ">10-Day Hassle-Free Warranty</p>
         </div>
       </div>
-      <div className="bg-sky-100 text-black rounded-lg p-4 shadow-md flex items-center space-x-3">
-        <img src={pickupImg} alt="Pickup Service" className="h-10 w-10 object-contain" />
+      <div className="bg-sky-100 text-black rounded-lg p-6 shadow-md flex items-center space-x-4">
+        <img src={pickupImg} alt="Pickup Service" className="h-12 w-12 object-contain" />
         <div>
-          <h3 className="font-bold text-sm">Enjoy Free Pickup and Drop at Your Convenience</h3>
-          <p className="text-xs text-gray-900">Free Pick & Drop Available</p>
+          <h3 className="font-bold text-lg">Enjoy Free Pickup and Drop at Your Convenience</h3>
+          <p className="text-sm text-gray-900">Free Pick & Drop Available</p>
         </div>
       </div>
-      <div className="bg-sky-100 text-black rounded-lg p-4 shadow-md flex items-center space-x-3">
-        <img src={transparentImg} alt="Transparent Pricing" className="h-10 w-10 object-contain" />
+      <div className="bg-sky-100 text-black rounded-lg p-6 shadow-md flex items-center space-x-4">
+        <img src={transparentImg} alt="Transparent Pricing" className="h-12 w-12 object-contain" />
         <div>
-          <h3 className="font-bold text-sm">Transparent Pricing, Competitive Rate</h3>
-          <p className="text-xs text-gray-900">Save up to 30% on your bike service</p>
+          <h3 className="font-bold text-lg">Transparent Pricing, Competitive Rate</h3>
+          <p className="text-sm text-gray-900">Save up to 30% on your bike service</p>
         </div>
       </div>
-      <div className="bg-sky-100 text-black rounded-lg p-4 shadow-md flex items-center space-x-3">
-        <img src={trainedImg} alt="Trained Mechanics" className="h-10 w-10 object-contain" />
+      <div className="bg-sky-100 text-black rounded-lg p-6 shadow-md flex items-center space-x-4">
+        <img src={trainedImg} alt="Trained Mechanics" className="h-12 w-12 object-contain" />
         <div>
-          <h3 className="font-bold text-sm">Skilled and Certified Mechanics</h3>
-          <p className="text-xs text-gray-900">Exclusively Certified Two-Wheeler Mechanics</p>
+          <h3 className="font-bold text-lg">Skilled and Certified Mechanics</h3>
+          <p className="text-sm text-gray-900">Exclusively Certified Two-Wheeler Mechanics</p>
         </div>
       </div>
     </div>
   </div>
 </section>
  {/* Why Choose GarageFixCare Section */}
-<section className="py-8 bg-slate-800 text-white"> 
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"> 
+<section className="py-16 bg-slate-800 text-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     
-    {/* Left Image (Order changed for mobile to be last) */}
-    <div className="flex justify-center order-last lg:order-none">
+    {/* Left Image */}
+    <div className="flex justify-center">
       <img
         src={handshakeImg}
         alt="Handshake"
-        className="rounded-xl shadow-2xl w-full max-w-sm sm:max-w-md" 
+        className="rounded-xl shadow-2xl w-full max-w-md"
       />
     </div>
 
     {/* Right Content */}
     <div>
-      <h2 className="text-2xl md:text-4xl font-bold mb-3"> 
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">
         Why Choose <span className="text-red-600">GarageFixCare?</span>
       </h2>
-      <p className="text-sm text-white mb-6"> 
+      <p className="text-lg text-white mb-6">
   At GarageFixCare, we understand how important your two-wheeler is, and we are committed 
   to delivering a service experience that exceeds expectations. Here are a few reasons why 
   GarageFixCare is the preferred choice for convenient, doorstep bike and scooter services:
 </p>
 
 
-      <ul className="space-y-2 text-left text-sm"> 
+      <ul className="space-y-3 text-left">
         {[
           "Hassle-Free Doorstep Service",
           "Certified and Skilled Technicians",
@@ -874,15 +856,15 @@ const Home = () => {
 </section>
 
 {/* Trusted by Top Brands Section */}
-<section className="py-8 bg-slate-900"> 
+<section className="py-16 bg-slate-900">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-xl md:text-3xl font-bold text-white mb-8"> 
+    <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
   Trusted by <span className="text-red-600">Leading Brands</span> and <span className="text-red-600">Over 100,000 Customers</span> Across <span className="text-red-600">India</span>
 </h2>
 
 
-    {/* Brand Logos (Changed to 3-column on mobile, 5 on desktop) */}
-    <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 gap-4 justify-items-center"> 
+    {/* Brand Logos */}
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 justify-items-center">
       {[
         { name: "WURTH", img: wurthImg },
         { name: "MOTUL", img: motulImg },
@@ -892,12 +874,12 @@ const Home = () => {
       ].map((brand, index) => (
         <div
           key={index}
-          className="bg-white rounded-lg shadow-md p-3 flex items-center justify-center w-24 h-12 sm:w-40 sm:h-20 hover:shadow-xl transition-shadow duration-200" 
+          className="bg-white rounded-lg shadow-md p-4 flex items-center justify-center w-40 h-20 hover:shadow-xl transition-shadow duration-200"
         >
           <img
             src={brand.img}
             alt={brand.name}
-            className="max-h-8 sm:max-h-12 object-contain" 
+            className="max-h-12 object-contain"
           />
         </div>
       ))}
@@ -905,22 +887,22 @@ const Home = () => {
   </div>
 </section>
 {/* How GarageFixCare Works Section */}
-<section className="bg-slate-800 text-white py-8"> 
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"> 
+<section className="bg-slate-800 text-white py-8">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     
     {/* Left Content */}
     <div>
-      <h2 className="text-2xl md:text-4xl font-bold mb-4"> 
+      <h2 className="text-3xl md:text-4xl font-bold mb-6">
         How <span className="text-red-600">GarageFixCare</span> Works?
       </h2>
-      <p className="text-sm text-white mb-6"> 
+      <p className="text-lg text-white mb-6">
   Welcome to GarageFixCare, where we transform the two-wheeler service experience by 
   bringing professional care directly to your doorstep. Our streamlined process ensures 
   a hassle-free, efficient service that saves you both time and effort. Here’s how 
   GarageFixCare works:
 </p>
 
-      <ul className="space-y-2 text-left text-sm"> 
+      <ul className="space-y-3 text-left">
         {[
           "Schedule Your Service",
           "Technician Sent to You",
@@ -936,26 +918,26 @@ const Home = () => {
       </ul>
     </div>
 
-    {/* Right Image (Order changed for mobile to be last) */}
-    <div className="flex justify-center order-last lg:order-none">
+    {/* Right Image */}
+    <div className="flex justify-center">
       <img
         src={howWorksImage}
         alt="How GarageFixCare Works"
-        className="rounded-xl shadow-2xl w-full max-w-sm sm:max-w-md" 
+        className="rounded-xl shadow-2xl w-full max-w-md"
       />
     </div>
   </div>
 </section>
 {/* We Provide Best Bike Service Section */}
-<section className="bg-slate-900 text-white py-8"> 
+<section className="bg-slate-900 text-white py-16">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-   <h2 className="text-2xl md:text-4xl font-bold mb-6"> 
+   <h2 className="text-3xl md:text-4xl font-bold mb-12">
   Professional <span className="text-red-600">Bike Service</span> at Your <span className="text-red-600">Home</span> by <span className="text-red-600">Certified Experts</span>
 </h2>
 
 
-    {/* City Cards (Changed to 2-column on mobile, 6 on desktop) */}
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-8 justify-items-center"> 
+    {/* City Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center">
       {[
         { name: "Bike Service in Delhi", img: delhiImg },
         { name: "Bike Service in Noida", img: noidaImg },
@@ -966,14 +948,14 @@ const Home = () => {
       ].map((city, index) => (
         <div
           key={index}
-          className="bg-sky-100 rounded-lg shadow-lg p-4 sm:p-6 w-full max-w-xs text-center hover:shadow-xl transition-shadow duration-200" 
+          className="bg-sky-100 rounded-lg shadow-lg p-6 w-full max-w-xs text-center hover:shadow-xl transition-shadow duration-200"
         >
           <img
             src={city.img}
             alt={city.name}
-            className="h-16 w-16 sm:h-24 sm:w-24 mx-auto rounded-full mb-2 sm:mb-4 object-cover" 
+            className="h-24 w-24 mx-auto rounded-full mb-4 object-cover"
           />
-          <h3 className="text-sm sm:text-lg font-semibold text-black"> 
+          <h3 className="text-lg font-semibold text-black">
             {city.name.split("in ")[0]} <span className="text-red-600">{city.name.split("in ")[1]}</span>
           </h3>
         </div>
@@ -982,13 +964,13 @@ const Home = () => {
   </div>
 </section>
 {/* Customers Speaks Section */}
-<section className="bg-slate-800 text-white py-8"> 
+<section className="bg-slate-800 text-white py-16">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-2xl md:text-4xl font-bold mb-3"> 
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">
   What <span className="text-red-600">Customers Say</span>
 </h2>
 
-    <p className="text-sm text-white mb-4"> 
+    <p className="text-lg text-white mb-6">
   Customer Testimonials on Google
 </p>
 
@@ -997,26 +979,26 @@ const Home = () => {
     {[...Array(5)].map((_, i) => (
       <Star
         key={i}
-        className="h-5 w-5 text-yellow-400 fill-current" 
+        className="h-6 w-6 text-yellow-400 fill-current"
       />
     ))}
   </span>
-  <span className="text-white font-semibold text-sm">4.7 Rating on Google</span> 
+  <span className="text-white font-semibold">4.7 Rating on Google</span>
 </div>
 
     <a
       href="https://www.google.com"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-red-600 px-4 py-2 rounded-lg font-semibold text-sm text-white hover:bg-red-700 transition-colors duration-200" 
+      className="bg-red-600 px-6 py-3 rounded-lg font-semibold text-white hover:bg-red-700 transition-colors duration-200"
     >
       Review us on Google
     </a>
   </div>
 
-  {/* Testimonials Grid (Changed to 2-column on mobile, 4 on desktop) */}
+  {/* Testimonials Grid */}
   
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 bg-slate-800"> 
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 bg-slate-800">
     {[
       {
         name: "Surendra Pratap Singh",
@@ -1045,47 +1027,47 @@ const Home = () => {
     ].map((t, i) => (
       <div
         key={i}
-        className="bg-sky-100 text-black rounded-lg p-4 shadow-md flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200" 
+        className="bg-sky-100 text-black rounded-lg p-6 shadow-md flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200"
       >
-        <img src={googleIcon} alt="Google" className="h-6 mb-3" /> 
-        <div className="flex justify-center mb-2"> 
+        <img src={googleIcon} alt="Google" className="h-8 mb-4" />
+        <div className="flex justify-center mb-3">
           {[...Array(5)].map((_, i) => (
-            <span key={i} className="text-yellow-400 text-lg">★</span> 
+            <span key={i} className="text-yellow-400 text-xl">★</span>
           ))}
         </div>
-        <p className="text-black mb-3 text-xs sm:text-sm">"{t.text}"</p> 
-        <img src={t.img} alt={t.name} className="h-10 w-10 rounded-full mb-2" /> 
-        <h3 className="font-semibold text-gray-900 text-sm">{t.name}</h3> 
-        <span className="text-xs text-black">{t.time}</span> 
+        <p className="text-black mb-4 text-sm">"{t.text}"</p>
+        <img src={t.img} alt={t.name} className="h-12 w-12 rounded-full mb-2" />
+        <h3 className="font-semibold text-gray-900">{t.name}</h3>
+        <span className="text-sm text-black">{t.time}</span>
       </div>
     ))}
   </div>
 </section>
 
 {/* Bike Brands We Service Section */}
-<section className="bg-slate-900 text-white py-8"> 
+<section className="bg-slate-900 text-white py-16">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-2xl md:text-4xl font-bold mb-6"> 
+    <h2 className="text-3xl md:text-4xl font-bold mb-8">
   Bike <span className="text-red-600">Brands</span> Serviced at <span className="text-red-600">Your Home</span> by <span className="text-red-600">Certified Experts</span>
 </h2>
 
 
-    <div className="bg-slate-800 rounded-lg shadow-lg inline-block px-4 py-3"> 
-      <p className="text-sm text-gray-300 leading-relaxed"> 
+    <div className="bg-slate-800 rounded-lg shadow-lg inline-block px-6 py-4">
+      <p className="text-lg text-gray-300 leading-relaxed">
         TVS / Bajaj / Royal Enfield / Yamaha / Honda / Hero / Suzuki / KTM / Jawa / Harley Davidson / Ducati / Kawasaki / Benelli / Triumph / Indian / BMW / Aprilia / Yezdi / Husqvarna
       </p>
     </div>
   </div>
 </section>
 {/* Latest Post Section */}
-<section className="bg-slate-800 text-white py-8"> 
+<section className="bg-slate-800 text-white py-16">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 className="text-2xl md:text-4xl font-bold mb-6"> 
+    <h2 className="text-3xl md:text-4xl font-bold mb-12">
       Latest <span className="text-red-600">Post</span>
     </h2>
 
-    {/* Post Cards (Changed to 1-column on mobile, 3 on desktop) */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6"> 
+    {/* Post Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {[
         {
           title: "How to Maintain the Gearbox on Your R15 V3?",
@@ -1113,14 +1095,14 @@ const Home = () => {
           <img
             src={post.img}
             alt={post.title}
-            className="w-full h-40 object-cover" 
+            className="w-full h-48 object-cover"
           />
-          <div className="p-4 text-left"> 
-            <h3 className="text-base font-bold mb-2">{post.title}</h3> 
-            <p className="text-gray-700 text-xs mb-3">{post.desc}</p> 
+          <div className="p-6 text-left">
+            <h3 className="text-lg font-bold mb-2">{post.title}</h3>
+            <p className="text-gray-700 text-sm mb-4">{post.desc}</p>
             <a
               href={post.link}
-              className="text-red-600 font-semibold text-sm hover:underline" 
+              className="text-red-600 font-semibold hover:underline"
             >
               read more...
             </a>
@@ -1133,13 +1115,13 @@ const Home = () => {
 {/* Frequently Asked Questions Section */}
 <section className="py-1 bg-slate-900 text-white">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-8"> 
-      <h2 className="text-2xl md:text-4xl font-bold mb-4"> 
+    <div className="text-center mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">
         Frequently Asked <span className="text-red-600">Questions</span>
       </h2>
     </div>
 
-    <div className="space-y-4"> 
+    <div className="space-y-6">
       {[
         {
           q: "Which types of two-wheelers do you provide service for?",
@@ -1224,7 +1206,7 @@ const Home = () => {
       ].map((faq, index) => (
         <div key={index} className="border border-gray-700 rounded-lg overflow-hidden">
           <button
-            className="flex justify-between items-center w-full p-3 text-left font-semibold text-sm text-white hover:bg-slate-800 focus:outline-none" 
+            className="flex justify-between items-center w-full p-4 text-left font-semibold text-white hover:bg-slate-800 focus:outline-none"
             onClick={() => {
               if (activeIndex === index) {
                 setActiveIndex(null);
@@ -1235,7 +1217,7 @@ const Home = () => {
           >
             <span className="text-red-600 mr-2">Ques {index + 1}.</span> {faq.q}
             <span className="transition-transform duration-300">
-              {activeIndex === index ? <X className="h-5 w-5 text-red-600" /> : <Plus className="h-5 w-5 text-red-600" />} 
+              {activeIndex === index ? <X className="h-6 w-6 text-red-600" /> : <Plus className="h-6 w-6 text-red-600" />}
             </span>
           </button>
           <div
@@ -1243,7 +1225,7 @@ const Home = () => {
               activeIndex === index ? 'max-h-96' : 'max-h-0'
             }`}
           >
-            <div className="p-3 bg-slate-800 text-gray-300 text-sm"> 
+            <div className="p-4 bg-slate-800 text-gray-300">
               {faq.a}
             </div>
           </div>
@@ -1256,70 +1238,67 @@ const Home = () => {
         {/* CTA Section */}
         <section className="py-8 bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4"> 
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Ready to Get Started?
             </h2>
-            <p className="text-base text-white mb-6 max-w-2xl mx-auto"> 
+            <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
               Book your service today and experience the convenience of professional
               automotive care at your location.
             </p>
             <Link
               to="/book"
-              className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-colors duration-200 inline-block" 
+              className="bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-orange-700 transition-colors duration-200 inline-block"
             >
               Book Your Service
             </Link>
           </div>
         </section>
       </div>
-        {/* Floating Buttons (Adjusted position and size for mobile) */}
-<div className="fixed bottom-6 right-4 flex flex-col space-y-4 z-50"> 
+        {/* Floating Buttons */}
+<div className="fixed top-1/2 right-6 -translate-y-1/2 flex flex-col space-y-6 z-50">
   {/* Phone Button */}
   <a
-    // FIX 8: Used CONTACT_PHONE constant
-    href={`tel:${CONTACT_PHONE}`}
-    className="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl transform transition-transform duration-300 hover:scale-110" 
+    href="tel:9318478483"
+    className="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
     aria-label="Call Us"
   >
-    <Phone size={24} /> 
+    <Phone size={28} />
   </a>
 
   {/* WhatsApp Button */}
   <a
-    // FIX 8: Used CONTACT_PHONE constant
-    href={`https://wa.me/${CONTACT_PHONE}`}
+    href="https://wa.me/9318478483"
     target="_blank"
     rel="noopener noreferrer"
-    className="w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-xl transform transition-transform duration-300 hover:scale-110" 
+    className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
     aria-label="Chat on WhatsApp"
   >
-    <FaWhatsapp size={28} /> 
+    <FaWhatsapp size={32} />
   </a>
 </div>
 
       {/* Checklist Modal (UPDATED WITH PHONE INPUT AND API CALL) */}
       {isModalOpen && selectedService && (
         <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-h-[90vh] w-full max-w-sm flex flex-col"> 
+          <div className="bg-white rounded-xl shadow-2xl max-h-[90vh] w-full max-w-md flex flex-col">
             
             {/* Modal Header */}
             <div className="p-4 border-b flex justify-between items-start">
                 <div>
-                    <h3 className="text-lg font-bold text-black">{selectedService.title}</h3> 
-                    <p className="text-xs text-gray-600">{selectedService.subtitle}</p> 
+                    <h3 className="text-xl font-bold text-black">{selectedService.title}</h3>
+                    <p className="text-sm text-gray-600">{selectedService.subtitle}</p>
                 </div>
                 <button onClick={closeModal} className="text-gray-400 hover:text-gray-900">
-                    <X className="h-5 w-5" /> 
+                    <X className="h-6 w-6" />
                 </button>
             </div>
             
             {/* Modal Body: Scrolling Checklist */}
             <div className="p-4 overflow-y-auto flex-1">
-                <h4 className="font-semibold text-gray-700 mb-3 text-sm">Full Checklist:</h4> 
-                <ul className="list-none space-y-2 text-left text-gray-700 text-sm"> 
+                <h4 className="font-semibold text-gray-700 mb-3">Full Checklist:</h4>
+                <ul className="list-none space-y-2 text-left text-gray-700">
                     {selectedService.checklist.map((item, i) => (
                         <li key={i} className="flex items-start">
-                            {/* FIX 2: Used 'Phone' since 'PhoneIcon' was removed */}
                             <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0 mt-1" />
                             {item}
                         </li>
@@ -1332,8 +1311,7 @@ const Home = () => {
                 
                 {/* NEW: Phone Number Input Field */}
                 <div className="w-full mb-3 relative">
-                    {/* FIX 2: Used 'Phone' since 'PhoneIcon' was removed */}
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <input
                         type="tel"
                         placeholder="Enter 10-digit Phone Number*"
@@ -1342,22 +1320,14 @@ const Home = () => {
                         maxLength={10}
                         value={modalPhoneNumber}
                         onChange={(e) => setModalPhoneNumber(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
-                        className="pl-10 pr-3 py-2 w-full rounded-lg text-black border border-gray-300 focus:outline-none focus:border-red-600 shadow-sm text-sm" 
+                        className="pl-10 pr-3 py-2 w-full rounded-lg text-black border border-gray-300 focus:outline-none focus:border-red-600 shadow-sm"
                     />
                 </div>
                 
                 {/* Terms and Conditions Checkbox (Updated with Tailwind classes) */}
                 <div className="flex items-center mb-4">
-                    <input 
-                        type="checkbox" 
-                        id="terms" 
-                        required 
-                        className="mr-2 h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500" 
-                        // FIX 4: Connected checkbox state
-                        checked={modalTermsAccepted} 
-                        onChange={(e) => setModalTermsAccepted(e.target.checked)}
-                    />
-                    <label htmlFor="terms" className="text-xs text-gray-700 select-none"> 
+                    <input type="checkbox" id="terms" required className="mr-2 h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500" />
+                    <label htmlFor="terms" className="text-sm text-gray-700 select-none">
                         Yes, I agree to the <span className='underline'>Terms of Service</span>
                     </label>
                 </div>
@@ -1365,7 +1335,7 @@ const Home = () => {
                 {/* Book Now Button (Updated to call handleModalBookNow) */}
                 <button
                     onClick={handleModalBookNow}
-                    className="bg-red-600 text-white w-full py-2 rounded-lg font-semibold text-sm hover:bg-red-700 transition-colors duration-200" 
+                    className="bg-red-600 text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200"
                 >
                     Book Now
                 </button>
