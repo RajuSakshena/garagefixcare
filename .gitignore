@@ -54,3 +54,5 @@ Thumbs.db
 # Temporary / Bolt files
 # -----------------------------
 .bolt/
+node_modules
+
