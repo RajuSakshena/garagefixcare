@@ -1,5 +1,5 @@
 {
-  "name": "garageoncall-backend",
+  "name": "garagefixcare-backend",
   "version": "1.0.0",
   "description": "Backend API for GarageOnCall mobile auto service",
   "main": "server.js",
@@ -19,6 +19,6 @@
     "mobile-service",
     "api"
   ],
-  "author": "GarageOnCall",
+  "author": "garagefixcare",
   "license": "MIT"
 }
