@@ -592,7 +592,7 @@ const Home = () => {
         </section>
         
         {/* At Home Service Price List Section (YOUR REQUIRED SECTION) */}
-       <section className="py-8 bg-slate-900">
+       <section className="py-16 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
@@ -651,7 +651,7 @@ const Home = () => {
         </div>
       </section>
         
-<section className="relative h-[400px] sm:h-[500px] lg:h-[600px]">
+<section className="relative h-[400px] sm:h-[500px] lg:h-[600px] mt-8 sm:mt-12">
   {/* Background Image */}
   <img
     src={mechanicImage}
@@ -734,7 +734,7 @@ const Home = () => {
   </div>
 </section>
 {/* Bike Services at Home Section */}
-<section className="py-8 bg-slate-800">
+<section className="py-16 bg-slate-800">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
      {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
