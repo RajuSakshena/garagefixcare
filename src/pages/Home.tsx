@@ -610,30 +610,23 @@ Prices vary by service type—check the estimated labour charges below to plan y
 </section>
 
        
-<section className="relative pt-24 pb-32 sm:py-32 lg:py-48">
-  {/* Background Image */}
+<section className="relative pt-12 pb-16 sm:py-20">
   <img
     src={mechanicImage}
     alt="Mechanic background"
     className="absolute inset-0 w-full h-full object-cover object-center"
   />
-  {/* Dark Overlay */}
   <div className="absolute inset-0 bg-black bg-opacity-50" />
-
-  {/* Content */}
-  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-    {/* Layout: Single column on mobile, 2 columns on large screens */}
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full">
-      
-      {/* Left Side: Vehicle Selection Form */}
-      <div className="bg-sky-100 rounded-xl shadow-2xl p-4 sm:p-6 lg:p-8 order-2 lg:order-1">
-        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">
+  <div className="relative max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full flex items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 w-full">
+      <div className="bg-sky-100 rounded-lg shadow-lg p-2 sm:p-4 order-2 lg:order-1">
+        <h3 className="text-base sm:text-xl font-bold text-gray-900 mb-2 text-center">
           Choose Your Vehicle
         </h3>
-        <div className="flex justify-center gap-2 mb-4">
+        <div className="flex justify-center gap-1 mb-2">
           <button
             onClick={() => setSelectedVehicle("Bike")}
-            className={`px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold text-sm sm:text-base transition-colors ${
+            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-md font-semibold text-xs sm:text-sm transition-colors ${
               selectedVehicle === "Bike"
                 ? "bg-red-600 text-white hover:bg-red-700"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
@@ -643,7 +636,7 @@ Prices vary by service type—check the estimated labour charges below to plan y
           </button>
           <button
             onClick={() => setSelectedVehicle("Scooty")}
-            className={`px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold text-sm sm:text-base transition-colors ${
+            className={`px-2 py-1 sm:px-4 sm:py-2 rounded-md font-semibold text-xs sm:text-sm transition-colors ${
               selectedVehicle === "Scooty"
                 ? "bg-red-600 text-white hover:bg-red-700"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
@@ -652,11 +645,10 @@ Prices vary by service type—check the estimated labour charges below to plan y
             Scooty
           </button>
         </div>
-
         <select
           value={selectedBrand}
           onChange={(e) => setSelectedBrand(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm sm:text-base"
+          className="w-full border border-gray-300 rounded-md px-2 py-1 sm:py-2 focus:outline-none focus:ring-2 focus:ring-red-500 text-xs sm:text-sm"
         >
           <option value="">Select Brand</option>
           {(selectedVehicle === "Bike" ? bikeBrands : scootyBrands).map(
@@ -668,31 +660,27 @@ Prices vary by service type—check the estimated labour charges below to plan y
           )}
         </select>
       </div>
-
-      {/* Right Side: Headline and Book on Call Button */}
       <div className="text-center lg:text-left text-white flex flex-col justify-center p-0 lg:p-0 order-1 lg:order-2">
-        <h4 className="text-white text-lg font-semibold mb-1 underline decoration-red-600">
+        <h4 className="text-white text-sm font-semibold mb-1 underline decoration-red-600">
           Book Service
         </h4>
-        <h2 className="text-3xl md:text-4xl font-bold mb-3">
+        <h2 className="text-xl sm:text-2xl font-bold mb-2">
           <span className="text-orange-500">Convenient Bike Service</span> and Repair at Your Home
         </h2>
-        <p className="text-xl sm:text-2xl font-bold text-blue-400 mb-6">
+        <p className="text-base sm:text-lg font-bold text-blue-400 mb-4">
           Certified Genuine Parts
         </p>
         <a
           href="tel:9318478483"
-          className="w-full lg:w-3/5 inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-2 shadow-xl mx-auto lg:mx-0"
+          className="w-full lg:w-2/3 inline-block bg-red-600 text-white px-4 py-2 rounded-md font-semibold text-sm hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-1 shadow-md mx-auto lg:mx-0"
         >
-          <Phone className="h-5 w-5" />
+          <Phone className="h-4 w-4" />
           <span>Book on Call</span>
         </a>
       </div>
     </div>
   </div>
 </section>
-
-
 {/* Bike Services at Home Section */}
 <section className="py-16 bg-slate-800">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
