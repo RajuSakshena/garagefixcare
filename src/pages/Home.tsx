@@ -320,7 +320,7 @@ const Home = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-<section className="bg-slate-800 text-white py-8 sm:py-8 lg:py-8">
+<section className="bg-slate-800 text-white py-1">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -331,13 +331,9 @@ const Home = () => {
           Professional Auto Repair
           <span className="text-orange-500"> At Your Doorstep</span>
         </h1>
-        <p className="font-poppins text-sm sm:text-base leading-relaxed text-white mb-4 sm:mb-6"> 
-          Experience the ultimate convenience of professional bike care at your doorstep. 
-          Our expert mechanics come directly to your location—whether at home, work, or on the go—
-          equipped with essential tools and quality parts. Save valuable time while ensuring your bike 
-          receives tailored maintenance for peak performance and safety. With our trusted and reliable 
-          service, you can enjoy hassle-free repairs and keep your bike in top condition without ever 
-          needing to visit a workshop.
+        <p className="font-poppins text-xl leading-relaxed text-white mb-4 sm:mb-6"> 
+         Enjoy professional bike care right at your doorstep.
+Our expert mechanics come to you with the right tools and parts, saving you time while keeping your bike in top condition—no workshop visit needed.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3">
