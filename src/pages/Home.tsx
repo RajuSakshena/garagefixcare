@@ -970,7 +970,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
     ].map((t, i) => (
       <div
         key={i}
-        className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-200"
+        className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-200 h-full"
       >
         <img src={googleIcon} alt="Google" className="h-5 sm:h-6 mb-2" />
         <div className="flex justify-center mb-2">
@@ -978,7 +978,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
             <span key={i} className="text-yellow-400 text-base">★</span>
           ))}
         </div>
-        <p className="text-black mb-2 text-xs sm:text-sm">"{t.text.slice(0, 80)}..."</p>
+        <p className="text-black mb-2 text-xs sm:text-sm line-clamp-3">{t.text}</p>
         <img src={t.img} alt={t.name} className="h-8 w-8 sm:h-10 sm:w-10 rounded-full mb-1" />
         <h3 className="font-semibold text-gray-900 text-xs sm:text-sm">{t.name}</h3>
         <span className="text-xs text-black">{t.time}</span>
