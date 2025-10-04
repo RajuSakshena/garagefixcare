@@ -331,7 +331,7 @@ const Home = () => {
           Professional Auto Repair
           <span className="text-orange-500"> At Your Doorstep</span>
         </h1>
-        <p className="font-poppins text-xl leading-relaxed text-white mb-4 sm:mb-6"> 
+        <p className="font-poppins text-sm leading-relaxed text-white mb-4 sm:mb-6"> 
          Enjoy professional bike care right at your doorstep.
 Our expert mechanics come to you with the right tools and parts, saving you time while keeping your bike in top condition—no workshop visit needed.
         </p>
