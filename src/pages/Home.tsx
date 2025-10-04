@@ -314,82 +314,79 @@ const Home = () => {
   return (
     <>
       <SEOHelmet
-        title="GarageFixCare - Professional Mobile Auto Repair Services"
-        description="Professional automotive services at your doorstep. Expert mechanics, quality parts, and convenient mobile repair services for all vehicle types."
+        title="GarageFixCare - Professional Auto Repair At Your Doorstep"
+        description="Experience the ultimate convenience of professional bike care at your doorstep. Our expert mechanics come directly to your location—whether at home, work, or on the go— equipped with essential tools and quality parts. Save valuable time while ensuring your bike receives tailored maintenance for peak performance and safety. With our trusted and reliable service, you can enjoy hassle-free repairs and keep your bike in top condition without ever needing to visit a workshop."
       />
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <section className="bg-slate-800 text-white py-12 sm:py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* UPDATED: Changed grid to stack on mobile (default col-1) and use 2 columns on large screens (lg:grid-cols-2) */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Main Text and Buttons */}
-              <div>
-                {/* UPDATED: Mobile text size is smaller (text-4xl) and scales up (md:text-6xl) */}
-                <h1 className="text-red-600 text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-                  Professional Auto Repair
-                  <span className="text-orange-500"> At Your Doorstep</span>
-                </h1>
-                {/* UPDATED: Adjusted font size and margin for mobile readability */}
-                <p className="font-poppins text-base sm:text-lg leading-relaxed text-white mb-6 sm:mb-8">
-                  Experience the ultimate convenience of professional bike care at your doorstep. 
-                  Our expert mechanics come directly to your location—whether at home, work, or on the go—
-                  equipped with essential tools and quality parts. Save valuable time while ensuring your bike 
-                  receives tailored maintenance for peak performance and safety. With our trusted and reliable 
-                  service, you can enjoy hassle-free repairs and keep your bike in top condition without ever 
-                  needing to visit a workshop.
-                </p>
+<section className="bg-slate-800 text-white py-8 sm:py-16 lg:py-20"> {/* DRASTICALLY REDUCED PADDING */}
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      
+      {/* Left Side: Main Text and Buttons */}
+      <div>
+        <h1 className="text-brandRed text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight"> {/* REDUCED FONT SIZE */}
+          Professional Auto Repair
+          <span className="text-orange-500"> At Your Doorstep</span>
+        </h1>
+        {/* REDUCED MARGIN on paragraph */}
+        <p className="font-poppins text-sm sm:text-base leading-relaxed text-white mb-4 sm:mb-6"> 
+          Experience the ultimate convenience of professional bike care at your doorstep. 
+          Our expert mechanics come directly to your location—whether at home, work, or on the go—
+          equipped with essential tools and quality parts. Save valuable time while ensuring your bike 
+          receives tailored maintenance for peak performance and safety. With our trusted and reliable 
+          service, you can enjoy hassle-free repairs and keep your bike in top condition without ever 
+          needing to visit a workshop.
+        </p>
 
-                {/* UPDATED: Buttons stack on small screens (flex-col) and become row on small screens (sm:flex-row) */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link
-                    to="/book"
-                    className="bg-orange-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-orange-700 transition-colors duration-200 text-center"
-                  >
-                    Book Service Now
-                  </Link>
-                  <a
-                    href="tel:9318478483"
-                    className="border-2 border-white text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-blue-900 transition-colors duration-200 text-center flex items-center justify-center gap-2"
-                  >
-                    <Phone className="h-5 w-5" />
-                    Call Now
-                  </a>
-                </div>
-              </div>
+        {/* Buttons - Adjusted padding to be smaller */}
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link
+            to="/book"
+            className="bg-orange-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-orange-700 transition-colors duration-200 text-center"
+          >
+            Book Service Now
+          </Link>
+          <a
+            href="tel:9318478483"
+            className="border-2 border-white text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 text-center flex items-center justify-center gap-2"
+          >
+            <Phone className="h-4 w-4" /> {/* REDUCED ICON SIZE */}
+            Call Now
+          </a>
+        </div>
+      </div>
 
-              {/* Combined Image and Reviews on the right */}
-             <div className="relative flex flex-col items-center lg:items-end gap-6 mt-8 lg:mt-0">
-                <img
-                  src={heroImage}
-                  alt="Professional mechanic working on bike"
-                  className="rounded-lg shadow-2xl w-full"
-                />
+      {/* Right Side: Combined Image and Reviews */}
+      <div className="relative flex flex-col items-center lg:items-end gap-4 mt-6 lg:mt-0"> {/* REDUCED MARGIN TOP */}
+        <img
+          src={heroImage}
+          alt="Professional mechanic working on bike"
+          className="rounded-lg shadow-2xl w-full"
+        />
 
-                {/* Dynamic Google Review & Happy Customers Section */}
-                {/* UPDATED: Stacks reviews on very small screens, row on medium screens (md:flex-row) */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-                  <div className="bg-sky-100 text-black p-4 rounded-lg shadow-lg flex-1 w-full sm:w-auto">
-                    {/* UPDATED: Font size adjusted for mobile */}
-                    <div className="flex items-center justify-center gap-2 text-xl sm:text-2xl font-bold">
-                      <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                      {reviewScore.toFixed(1)}/5
-                    </div>
-                    <div className="text-xs sm:text-sm font-semibold text-center">Google Review</div>
-                  </div>
-                  <div className="bg-sky-100 text-black p-4 rounded-lg shadow-lg flex-1 w-full sm:w-auto">
-                     {/* UPDATED: Font size adjusted for mobile */}
-                    <div className="text-xl sm:text-2xl font-bold text-center">
-                      {happyCustomersCount.toLocaleString()}+
-                    </div>
-                    <div className="text-xs sm:text-sm font-semibold text-center">Happy Customers</div>
-                  </div>
-                </div>
-              </div>
+        {/* Dynamic Google Review & Happy Customers Section - Now hidden on mobile for compactness */}
+        <div className="hidden sm:flex items-center justify-center gap-4 w-full"> {/* ADDED hidden sm:flex */}
+          <div className="bg-sky-100 text-black p-3 rounded-lg shadow-lg flex-1 w-full sm:w-auto"> {/* REDUCED PADDING */}
+            <div className="flex items-center justify-center gap-2 text-lg sm:text-xl font-bold">
+              <Star className="h-4 w-4 text-yellow-400 fill-current" />
+              {reviewScore.toFixed(1)}/5
             </div>
+            <div className="text-xs font-semibold text-center">Google Review</div>
           </div>
-        </section>
+          <div className="bg-sky-100 text-black p-3 rounded-lg shadow-lg flex-1 w-full sm:w-auto"> {/* REDUCED PADDING */}
+            <div className="text-lg sm:text-xl font-bold text-center">
+              {happyCustomersCount.toLocaleString()}+
+            </div>
+            <div className="text-xs font-semibold text-center">Happy Customers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {/* --- Insert this new section after the Hero section --- */}
 
 {/* Background color based on your Navbar: likely a light gray or white. 
