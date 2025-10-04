@@ -1147,7 +1147,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
       ].map((faq, index) => (
         <div key={index} className="border border-gray-700 rounded-md overflow-hidden">
           <button
-            className="flex justify-between items-center w-full p-2 sm:p-3 text-left font-semibold text-white hover:bg-slate-700 focus:outline-none text-sm sm:text-base"
+            className="flex justify-between items-start w-full p-2 sm:p-3 text-left font-semibold text-white hover:bg-slate-700 focus:outline-none text-sm sm:text-base"
             onClick={() => {
               if (activeIndex === index) {
                 setActiveIndex(null);
@@ -1156,7 +1156,8 @@ Enjoy convenient, affordable service—plus bike insurance and more.
               }
             }}
           >
-            <span className="text-red-600 mr-1">Ques {index + 1}.</span> {faq.q}
+            <span className="text-red-600 mr-1">Ques {index + 1}.</span>
+            <span className="flex-1 ml-2 text-left">{faq.q}</span>
             <span className="transition-transform duration-300">
               {activeIndex === index ? <X className="h-4 w-4 sm:h-5 sm:w-5 text-red-600" /> : <Plus className="h-4 w-4 sm:h-5 sm:w-5 text-red-600" />}
             </span>
