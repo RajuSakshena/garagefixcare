@@ -574,64 +574,54 @@ Hurry—these deals won’t last long!
 </section>
         
         {/* At Home Service Price List Section (YOUR REQUIRED SECTION) */}
-       <section className="py-16 bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-white">At-Home Service</span>{' '}
-            <span className="text-red-600">Price List</span>
-          </h2>
-
-          {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-xl) */}
-          <p className="text-base sm:text-xl text-white mb-8 max-w-3xl mx-auto">
-            Curious about the cost of bike servicing? The price of bike or motorcycle service 
-            depends on the type of service you select. Below, you can find an estimate of the 
-            labour charges to help you plan your bike’s maintenance with ease.
-          </p>
-
-          {/* UPDATED: Changed grid to stack on mobile (default col-1) and use 2 columns on tablet/desktop (md:grid-cols-2) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 justify-items-center">
-            {servicePrices.map((service, index) => (
-              <div
-                key={index}
-                className="bg-orange-600 p-2 rounded-xl w-full max-w-md shadow-lg border border-gray-700"
-              >
-                <div className="bg-sky-100 rounded-lg shadow-md p-4 w-full">
-                  <div className="flex flex-col items-start text-left mb-2">
-                    {/* UPDATED: Smaller title on mobile */}
-                    <h3 className="text-lg sm:text-xl font-bold text-black mb-1">{service.title}</h3>
-                    <p className="text-black text-sm sm:text-base font-semibold">{service.subtitle}</p>
-                     {/* UPDATED: Smaller price text on mobile */}
-                    <div className="text-xl sm:text-2xl font-bold mt-2">
-                      <span className="line-through text-red-500 mr-2">{service.originalPrice}</span>
-                      <span className="text-green-600">{service.discountedPrice}/-</span>
-                    </div>
-                  </div>
-                  <ul className="list-none space-y-1 text-left text-gray-700 text-sm"> {/* Added text-sm */}
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle className="h-3 w-3 text-green-500 mr-2 flex-shrink-0" /> {/* Smaller Icon */}
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex justify-end mt-2">
-                    <button
-                      onClick={() => handleSeeChecklist(service.title, service.subtitle)}
-                      className="bg-red-600 text-white px-3 py-1 text-sm rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200"
-                    >
-                      See checklist
-                    </button>
-                  </div>
-                </div>
+       <section className="py-12 bg-slate-900">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+      <span className="text-white">At-Home Service</span>{' '}
+      <span className="text-red-600">Price List</span>
+    </h2>
+    <p className="text-base sm:text-xl text-white mb-6 max-w-3xl mx-auto">
+      Wondering about bike service costs?
+Prices vary by service type—check the estimated labour charges below to plan your maintenance easily.
+    </p>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 justify-items-center">
+      {servicePrices.map((service, index) => (
+        <div
+          key={index}
+          className="bg-orange-600 p-2 rounded-lg w-full max-w-sm shadow-md border border-gray-700"
+        >
+          <div className="bg-sky-100 rounded-lg shadow-sm p-2 w-full">
+            <div className="flex flex-col items-start text-left mb-1">
+              <h3 className="text-base sm:text-lg font-bold text-black mb-1">{service.title}</h3>
+              <p className="text-black text-xs sm:text-sm font-semibold">{service.subtitle}</p>
+              <div className="text-lg sm:text-xl font-bold mt-1">
+                <span className="line-through text-red-500 mr-1">{service.originalPrice}</span>
+                <span className="text-green-600">{service.discountedPrice}/-</span>
               </div>
-            ))}
+            </div>
+            <ul className="list-none space-y-0.5 text-left text-gray-700 text-xs">
+              {service.features.map((feature, i) => (
+                <li key={i} className="flex items-center">
+                  <CheckCircle className="h-3 w-3 text-green-500 mr-1 flex-shrink-0" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <div className="flex justify-end mt-1">
+              <button
+                onClick={() => handleSeeChecklist(service.title, service.subtitle)}
+                className="bg-red-600 text-white px-2 py-1 text-xs rounded-md font-semibold hover:bg-red-700 transition-colors duration-200"
+              >
+                See checklist
+              </button>
+            </div>
           </div>
-
-
-
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
        
 <section className="relative pt-24 pb-32 sm:py-32 lg:py-48">
   {/* Background Image */}
