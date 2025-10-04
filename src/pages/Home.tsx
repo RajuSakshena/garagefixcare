@@ -574,7 +574,8 @@ Hurry—these deals won’t last long!
 </section>
         
         {/* At Home Service Price List Section (YOUR REQUIRED SECTION) */}
-       <section className="py-12 bg-slate-900">
+       
+<section className="py-12 bg-slate-900">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
       <span className="text-white">At-Home Service</span>{' '}
@@ -588,7 +589,7 @@ Prices vary by service type—check the estimated labour charges below to plan y
       {servicePrices.map((service, index) => (
         <div
           key={index}
-          className="bg-orange-600 p-2 rounded-lg w-full max-w-sm shadow-md border border-gray-700"
+          className="bg-brandRed p-1 rounded-lg w-full max-w-full shadow-md border border-gray-700"
         >
           <div className="bg-sky-100 rounded-lg shadow-sm p-2 w-full">
             <div className="flex flex-col items-start text-left mb-1">
