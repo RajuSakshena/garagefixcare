@@ -22,10 +22,10 @@ const Navbar = () => {
     <nav className="bg-sky-100 shadow-lg sticky top-0 z-50">
       <div className="relative">
 
-        {/* Top Header Bar (Now only for Socials) */}
+        {/* Top Header Bar (Socials only - Visible on all screen sizes) */}
         <div className="bg-slate-800 text-white py-1 px-4">
           <div className="max-w-7xl mx-auto flex justify-end items-center text-sm h-7">
-            {/* Social Icons - Aligned to the right */}
+            {/* Social Icons */}
             <div className="flex items-center space-x-3">
               <a href="#" className="hover:text-orange-300"><Facebook className="h-4 w-4" /></a>
               <a href="#" className="hover:text-orange-300"><Instagram className="h-4 w-4" /></a>
@@ -39,9 +39,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-sky-100">
           <div className="flex justify-between items-center h-20 relative">
 
-            {/* Logo - Retained the absolute positioning, now adjusted for better flow */}
-            {/* Using a regular div here instead of absolute for simpler layout, 
-                but keeping it similar to your previous design structure */}
+            {/* Logo (Absolute position on desktop/tablet, but its container is left-aligned on mobile) */}
             <Link to="/" className="z-20">
               <div className="w-32 h-20 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden absolute top-0 left-0">
                 <img 
@@ -52,8 +50,7 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* Contact Info - Placed immediately after the logo space */}
-            {/* Added pl-36 to reserve space for the logo (w-32 + margin) */}
+            {/* Contact Info - Visible only on MD/LG screens */}
             <div className="hidden md:flex items-center space-x-8 pl-36 text-gray-800 font-semibold">
               <a href="tel:9318478483" className="flex items-center space-x-1 text-base hover:text-red-600">
                 <Phone className="h-5 w-5 text-orange-600" />
@@ -65,7 +62,7 @@ const Navbar = () => {
               </a>
             </div>
 
-            {/* Desktop Menu - Pushed to the far right using justify-between on parent div */}
+            {/* Desktop Menu - Pushed to the far right. Hidden on mobile. */}
             <div className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
@@ -85,8 +82,8 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            {/* Mobile Menu Button - Pushed to the far right on mobile */}
+            <div className="md:hidden ml-auto"> 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-grey-700 hover:text-blue-800 p-2"
@@ -96,10 +93,11 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu - Content is now visible */}
           {isMenuOpen && (
             <div className="md:hidden bg-white border-t border-gray-200">
               <div className="px-2 pt-2 pb-3 space-y-1">
+                {/* Navigation Links */}
                 {navLinks.map((link) => (
                   <Link
                     key={link.path}
@@ -117,6 +115,26 @@ const Navbar = () => {
                     {link.label}
                   </Link>
                 ))}
+
+                {/* --- Mobile Contact Info (New Section) --- */}
+                <div className="pt-4 border-t border-gray-200 flex flex-col items-center space-y-3">
+                    <a 
+                        href="tel:9318478483" 
+                        onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center space-x-2 text-gray-800 font-bold hover:text-orange-600"
+                    >
+                        <Phone className="h-5 w-5 text-orange-600" />
+                        <span>93184-78483</span>
+                    </a>
+                    <a 
+                        href="mailto:garagefixcare@gmail.com" 
+                        onClick={() => setIsMenuOpen(false)}
+                        className="flex items-center space-x-2 text-gray-800 font-bold hover:text-orange-600"
+                    >
+                        <Mail className="h-5 w-5 text-orange-600" />
+                        <span>garagefixcare@gmail.com</span>
+                    </a>
+                </div>
               </div>
             </div>
           )}
