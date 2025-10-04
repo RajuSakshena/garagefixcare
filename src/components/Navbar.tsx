@@ -22,7 +22,7 @@ const Navbar = () => {
     <nav className="bg-sky-100 shadow-lg sticky top-0 z-50">
       <div className="relative">
 
-        {/* Top Header Bar (Socials only) */}
+        {/* Top Header Bar (Socials ONLY - Back to the original dark bar concept) */}
         <div className="bg-slate-800 text-white py-1 px-4">
           <div className="max-w-7xl mx-auto flex justify-end items-center text-sm h-7">
             {/* Social Icons */}
@@ -35,13 +35,13 @@ const Navbar = () => {
           </div>
         </div>
         
-        {/* Main Navbar & Logo Container */}
+        {/* Main Navbar (Logo, Contact Info, and Nav Links) */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-sky-100">
           <div className="flex justify-between items-center h-20 relative">
 
-            {/* Logo (Absolute position for desktop alignment) */}
-            <Link to="/" className="z-20">
-              <div className="w-32 h-20 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden absolute top-0 left-0">
+            {/* Logo (Now part of the flex flow with a vertical shift) */}
+            <Link to="/" className="z-20 -mt-8 mr-6"> {/* Added mr-6 for spacing */}
+              <div className="w-32 h-20 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden">
                 <img 
                   src={garageIcon} 
                   alt="GARAGEFIX CARE Logo" 
@@ -50,20 +50,20 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* Contact Info - Hidden on mobile (xs/sm) */}
-            <div className="hidden md:flex items-center space-x-8 pl-36 text-gray-800 font-semibold">
-              <a href="tel:9318478483" className="flex items-center space-x-1 text-base hover:text-red-600">
+            {/* Contact Info (NEW POSITION: Right of the Logo) - Hidden on mobile */}
+            <div className="hidden md:flex flex-col space-y-1 justify-center">
+              <a href="tel:9318478483" className="flex items-center space-x-1 text-base text-gray-800 font-semibold hover:text-red-600">
                 <Phone className="h-5 w-5 text-orange-600" />
                 <span>93184-78483</span>
               </a>
-              <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-1 text-base hover:text-red-600">
+              <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-1 text-base text-gray-800 font-semibold hover:text-red-600">
                 <Mail className="h-5 w-5 text-orange-600" />
                 <span>garagefixcare@gmail.com</span>
               </a>
             </div>
-
-            {/* Desktop Menu - Hidden on mobile (xs/sm) */}
-            <div className="hidden lg:flex items-center space-x-8">
+          
+            {/* Desktop Menu - Pushed to the far right using ml-auto to take up remaining space */}
+            <div className="hidden lg:flex items-center space-x-8 ml-auto">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -83,8 +83,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Button - Ensure visibility on the right on mobile */}
-            {/* Added a margin to ensure it clears the logo space on mobile */}
-            <div className="flex md:hidden w-full justify-end"> 
+            <div className="flex md:hidden w-full justify-end items-center h-full"> 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-grey-700 hover:text-blue-800 p-2 ml-auto"
@@ -117,7 +116,7 @@ const Navbar = () => {
                   </Link>
                 ))}
 
-                {/* --- Mobile Contact Info (This is where the email/number is) --- */}
+                {/* --- Mobile Contact Info (For mobile users who opened the menu) --- */}
                 <div className="pt-4 border-t border-gray-200 flex flex-col items-center space-y-3">
                     <a 
                         href="tel:9318478483" 
