@@ -22,49 +22,51 @@ const Navbar = () => {
     <nav className="bg-sky-100 shadow-lg sticky top-0 z-50">
       <div className="relative">
 
-        {/* Top Header Bar */}
-        <div className="bg-slate-800 text-white py-2 px-4">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-end items-center text-sm relative z-10">
-            
-            {/* Contact Info */}
-            <div className="flex flex-col md:flex-row items-center space-x-4 mb-2 sm:mb-0 ml-auto mr-0">
-              <a href="tel:9318478483" className="flex items-center space-x-1 text-base hover:text-yellow-400 mb-1 md:mb-0">
-                <Phone className="h-4 w-4" />
-                <span>93184-78483</span>
-              </a>
-              <a href="mailto:garagefixcare@gmail.com" className="flex items-center text-base space-x-1 hover:text-yellow-400">
-                <Mail className="h-4 w-4" />
-                <span>garagefixcare@gmail.com</span>
-              </a>
-            </div>
-
-            {/* Social Icons */}
-            <div className="flex items-center space-x-3 mt-2 sm:mt-0 md:ml-4">
-              <span className="font-semibold hidden sm:inline">Follow Us:</span>
-              <a href="#" className="hover:text-orange-300"><Facebook className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-orange-300"><Instagram className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-orange-300"><MessageCircle className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-orange-300"><Youtube className="h-5 w-5" /></a>
+        {/* Top Header Bar (Now only for Socials) */}
+        <div className="bg-slate-800 text-white py-1 px-4">
+          <div className="max-w-7xl mx-auto flex justify-end items-center text-sm h-7">
+            {/* Social Icons - Aligned to the right */}
+            <div className="flex items-center space-x-3">
+              <a href="#" className="hover:text-orange-300"><Facebook className="h-4 w-4" /></a>
+              <a href="#" className="hover:text-orange-300"><Instagram className="h-4 w-4" /></a>
+              <a href="#" className="hover:text-orange-300"><MessageCircle className="h-4 w-4" /></a>
+              <a href="#" className="hover:text-orange-300"><Youtube className="h-4 w-4" /></a>
             </div>
           </div>
         </div>
         
-        {/* Logo */}
-        <Link to="/" className="absolute top-0 left-4 z-50">
-          <div className="w-32 h-20 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden">
-            <img 
-              src={garageIcon} 
-              alt="GARAGEFIX CARE Logo" 
-              className="w-full h-full object-contain p-1"
-            />
-          </div>
-        </Link>
+        {/* Main Navbar & Logo Container */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-sky-100">
+          <div className="flex justify-between items-center h-20 relative">
 
-        {/* Main Navbar */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-sky-100" style={{ paddingTop: '1px' }}>
-          <div className="flex justify-end items-center h-16 pl-36">
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-8">
+            {/* Logo - Retained the absolute positioning, now adjusted for better flow */}
+            {/* Using a regular div here instead of absolute for simpler layout, 
+                but keeping it similar to your previous design structure */}
+            <Link to="/" className="z-20">
+              <div className="w-32 h-20 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden absolute top-0 left-0">
+                <img 
+                  src={garageIcon} 
+                  alt="GARAGEFIX CARE Logo" 
+                  className="w-full h-full object-contain p-1"
+                />
+              </div>
+            </Link>
+
+            {/* Contact Info - Placed immediately after the logo space */}
+            {/* Added pl-36 to reserve space for the logo (w-32 + margin) */}
+            <div className="hidden md:flex items-center space-x-8 pl-36 text-gray-800 font-semibold">
+              <a href="tel:9318478483" className="flex items-center space-x-1 text-base hover:text-red-600">
+                <Phone className="h-5 w-5 text-orange-600" />
+                <span>93184-78483</span>
+              </a>
+              <a href="mailto:garagefixcare@gmail.com" className="flex items-center text-base space-x-1 hover:text-red-600">
+                <Mail className="h-5 w-5 text-orange-600" />
+                <span>garagefixcare@gmail.com</span>
+              </a>
+            </div>
+
+            {/* Desktop Menu - Pushed to the far right using justify-between on parent div */}
+            <div className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
