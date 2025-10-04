@@ -650,8 +650,8 @@ const Home = () => {
 
         </div>
       </section>
-        
-<section className="relative h-[400px] sm:h-[500px] lg:h-[600px] mt-16 sm:mt-16">
+       
+<section className="relative pt-24 pb-32 sm:py-32 lg:py-48">
   {/* Background Image */}
   <img
     src={mechanicImage}
@@ -663,31 +663,31 @@ const Home = () => {
 
   {/* Content */}
   <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-    {/* UPDATED: Stacks columns on mobile (default col-1) and uses 2 columns on large screens (lg:grid-cols-2) */}
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
+    {/* Layout: Single column on mobile, 2 columns on large screens */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full">
       
-      {/* Left Side */}
-      <div className="bg-sky-100 rounded-xl shadow-lg p-1 sm:p-10 scale-95">
-        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
+      {/* Left Side: Vehicle Selection Form */}
+      <div className="bg-sky-100 rounded-xl shadow-2xl p-4 sm:p-6 lg:p-8 order-2 lg:order-1">
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 text-center">
           Choose Your Vehicle
         </h3>
         <div className="flex justify-center gap-2 mb-4">
           <button
             onClick={() => setSelectedVehicle("Bike")}
-            className={`px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold text-sm sm:text-base ${
+            className={`px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold text-sm sm:text-base transition-colors ${
               selectedVehicle === "Bike"
-                ? "bg-red-600 text-white"
-                : "bg-gray-200 text-black"
+                ? "bg-red-600 text-white hover:bg-red-700"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
           >
             Bike
           </button>
           <button
             onClick={() => setSelectedVehicle("Scooty")}
-            className={`px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold text-sm sm:text-base ${
+            className={`px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold text-sm sm:text-base transition-colors ${
               selectedVehicle === "Scooty"
-                ? "bg-red-600 text-white"
-                : "bg-gray-200 text-black "
+                ? "bg-red-600 text-white hover:bg-red-700"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
           >
             Scooty
@@ -710,29 +710,30 @@ const Home = () => {
         </select>
       </div>
 
-      {/* Right Side */}
-     <div className="text-center lg:text-left text-white flex flex-col justify-center bg-black bg-opacity-30 lg:bg-opacity-0 p-1 rounded-lg">
-        {/* Added background/padding for readability on mobile */}
-        <h4 className="text-white text-2xl font-semibold mb-2 underline decoration-red-600">
+      {/* Right Side: Headline and Book on Call Button */}
+      <div className="text-center lg:text-left text-white flex flex-col justify-center p-0 lg:p-0 order-1 lg:order-2">
+        <h4 className="text-white text-lg font-semibold mb-1 underline decoration-red-600">
           Book Service
         </h4>
-        <h2 className="text-2xl md:text-4xl font-bold mb-4">
-          <span className="text-orange-600">Convenient Bike Service</span> and Repair at Your Home
+        <h2 className="text-3xl md:text-4xl font-bold mb-3">
+          <span className="text-orange-500">Convenient Bike Service</span> and Repair at Your Home
         </h2>
-        <p className="text-2xl sm:text-4xl font-bold text-blue-400 mb-6">
+        <p className="text-xl sm:text-2xl font-bold text-blue-400 mb-6">
           Certified Genuine Parts
         </p>
         <a
           href="tel:9318478483"
-          className="w-full inline-block bg-red-600 text-white px-8 py-2 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+          className="w-full lg:w-3/5 inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-2 shadow-xl mx-auto lg:mx-0"
         >
-          <Phone className="h-3 w-5" />
+          <Phone className="h-5 w-5" />
           <span>Book on Call</span>
         </a>
       </div>
     </div>
   </div>
 </section>
+
+
 {/* Bike Services at Home Section */}
 <section className="py-16 bg-slate-800">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
