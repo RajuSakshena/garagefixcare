@@ -7,8 +7,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
-  // FIX: Removed ': string' type annotation to avoid the environment error
-  const isActive = (path) => location.pathname === path;
+  // FIX: Explicitly set type to 'any' to resolve the ts(7006) error
+  const isActive = (path: any) => location.pathname === path;
 
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -23,16 +23,17 @@ const Navbar = () => {
     <nav className="bg-sky-100 shadow-lg sticky top-0 z-50">
       <div className="relative">
 
-        {/* Top Header Bar */}
-        <div className="bg-slate-800 text-white py-2 px-4"> {/* Increased py-1 to py-2 for vertical spacing */}
+        {/* Top Header Bar - Improved spacing and reduced text/icon size for less congestion */}
+        <div className="bg-slate-800 text-white py-2 px-4">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-sm">
-            <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-1 mb-2 sm:mb-0 sm:justify-start"> {/* Replaced space-x-4 mb-2 sm:mb-0 pl-56 with more flexible spacing classes */}
-              <a href="tel:9318478483" className="flex items-center space-x-1 text-base hover:text-yellow-400"> {/* Adjusted text-lg to text-base for better fit */}
-                <Phone className="h-4 w-4" /> {/* Adjusted icon size */}
+            {/* Removed pl-56 and added flexible gap/wrap */}
+            <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-1 mb-2 sm:mb-0 sm:justify-start">
+              <a href="tel:9318478483" className="flex items-center space-x-1 text-base hover:text-yellow-400">
+                <Phone className="h-4 w-4" />
                 <span>93184-78483</span>
               </a>
-              <a href="mailto:garagefixcare@gmail.com" className="flex items-center text-base space-x-1 hover:text-yellow-400"> {/* Adjusted text-lg to text-base for better fit */}
-                <Mail className="h-4 w-4" /> {/* Adjusted icon size */}
+              <a href="mailto:garagefixcare@gmail.com" className="flex items-center text-base space-x-1 hover:text-yellow-400">
+                <Mail className="h-4 w-4" />
                 <span>garagefixcare@gmail.com</span>
               </a>
             </div>
@@ -46,11 +47,10 @@ const Navbar = () => {
           </div>
         </div>
         
-        {/* Logo */}
-        {/* Changed positioning to relative/non-absolute to allow other content to flow around it properly on desktop */}
+        {/* Logo and Main Nav Container - Used flex to align logo and links horizontally on desktop */}
         <div className="flex items-center max-w-7xl mx-auto pl-4 md:pl-0">
-          <Link to="/" className="z-50 -mt-8 mb-2"> {/* Used -mt-8 to pull it up into the header bar space */}
-            <div className="w-40 h-24 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden"> {/* Added shadow-lg for prominence */}
+          <Link to="/" className="z-50 -mt-8 mb-2"> {/* -mt-8 pulls the logo into the dark header bar */}
+            <div className="w-40 h-24 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden">
               <img 
                 src={garageIcon} 
                 alt="GARAGEFIX CARE Logo" 
@@ -59,11 +59,11 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Main Navbar - Moved content inside to better align with the logo on desktop */}
+          {/* Main Navbar Links - flex-1 pushes links to the right of the logo */}
           <div className="flex-1 px-4 sm:px-6 lg:px-8 bg-sky-100">
             <div className="flex justify-end items-center h-16">
               {/* Desktop Menu */}
-              <div className="hidden md:flex items-center space-x-10 lg:space-x-16"> {/* Reduced desktop space-x on md for better fit */}
+              <div className="hidden md:flex items-center space-x-10 lg:space-x-16">
                 {navLinks.map((link) => (
                   <Link
                     key={link.path}
@@ -95,9 +95,9 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu - Moved outside the flex container to span full width */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200 w-full"> {/* Added w-full */}
+          <div className="md:hidden bg-white border-t border-gray-200 w-full">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => (
                 <Link
@@ -123,5 +123,4 @@ const Navbar = () => {
     </nav>
   );
 };
-
 export default Navbar;
