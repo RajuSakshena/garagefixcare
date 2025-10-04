@@ -689,7 +689,6 @@ Prices vary by service type—check the estimated labour charges below to plan y
     </h2>
     <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
     
-
 Get professional bike servicing at your doorstep, including engine, battery, and tyre care.
 Enjoy convenient, affordable service—plus bike insurance and more.
     </p>
@@ -722,7 +721,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
 <section className="py-6 sm:py-8 bg-slate-900 text-white">
   <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
     <div>
-      <p className="text-xs text-white mb-1">Get Rs.30 Off On First Service</p>
+      <p className="text-xs text-white mb-1">Get Rs.10 Off On First Service</p>
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
         GarageFixCare <span className="text-red-600">Service Warranty</span>
       </h2>
@@ -775,34 +774,25 @@ Enjoy convenient, affordable service—plus bike insurance and more.
   </div>
 </section>
  {/* Why Choose GarageFixCare Section */}
-<section className="py-12 sm:py-16 bg-slate-800 text-white">
-  {/* UPDATED: Stacks columns on mobile (default col-1) and uses 2 columns on large screens (lg:grid-cols-2) */}
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-    
-    {/* Left Image */}
-    <div className="flex justify-center order-2 lg:order-1"> {/* Reversed order on desktop */}
+<section className="py-8 sm:py-12 bg-slate-800 text-white">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+    <div className="flex justify-center order-2 lg:order-1">
       <img
         src={handshakeImg}
         alt="Handshake"
-        className="rounded-xl shadow-2xl w-full max-w-sm sm:max-w-md"
+        className="rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm"
       />
     </div>
-
-    {/* Right Content */}
-    <div className="order-1 lg:order-2"> {/* Reversed order on desktop */}
-       {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+    <div className="order-1 lg:order-2">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
         Why Choose <span className="text-red-600">GarageFixCare?</span>
       </h2>
-       {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-lg) */}
-      <p className="text-base sm:text-lg text-white mb-6">
+      <p className="text-sm sm:text-base text-white mb-4">
         At GarageFixCare, we understand how important your two-wheeler is, and we are committed 
         to delivering a service experience that exceeds expectations. Here are a few reasons why 
         GarageFixCare is the preferred choice for convenient, doorstep bike and scooter services:
       </p>
-
-
-      <ul className="space-y-3 text-left">
+      <ul className="space-y-2 text-left">
         {[
           "Hassle-Free Doorstep Service",
           "Certified and Skilled Technicians",
@@ -811,8 +801,8 @@ Enjoy convenient, affordable service—plus bike insurance and more.
           "Your Satisfaction Guaranteed",
           "Fast and Professional Service",
         ].map((item, index) => (
-          <li key={index} className="flex items-center text-gray-200 text-base sm:text-lg">
-            <span className="text-red-500 text-lg mr-2">◆</span> {item}
+          <li key={index} className="flex items-center text-gray-200 text-sm sm:text-base">
+            <span className="text-red-500 text-base mr-1">◆</span> {item}
           </li>
         ))}
       </ul>
