@@ -29,7 +29,7 @@ import wheelCare from "../images/Wheel Care.png";
 import bikeBatteries from "../images/Bike Battery.png";
 import engineRepair from "../images/Engine Repair.png";
 import warrantyImg from "../images/warranty.webp";
-import pickupImg from "../images/Free Pickup.webp";
+import pickupImg from "../images/free pickup.webp";
 import transparentImg from "../images/Transparent.webp";
 import trainedImg from "../images/Trainie.webp";
 import handshakeImg from "../images/handshake.jpg";
