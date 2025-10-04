@@ -19,7 +19,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-sky-100 shadow-lg sticky top-0 z-50 w-full">
+    <nav className="bg-sky-100 shadow-lg sticky top-0 z-50">
       <div className="relative">
 
         {/* Top Header Bar (Social Icons) */}
@@ -35,14 +35,14 @@ const Navbar = () => {
         </div>
 
         {/* Main Navbar */}
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 bg-sky-100">
-          <div className="flex justify-between items-center h-16 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-sky-100">
+          <div className="flex justify-between items-center h-10 relative">
 
-            {/* Logo + Contact Info Combined */}
-            <div className="flex items-center space-x-4 sm:space-x-6">
+            {/* ✅ Logo + Contact Info Combined */}
+            <div className="flex items-center space-x-3 sm:space-x-6">
               {/* Logo */}
-              <Link to="/" className="flex-shrink-0">
-                <div className="w-24 sm:w-28 h-12 sm:h-16 bg-sky-100 rounded-b-2xl shadow-md flex items-center justify-center overflow-hidden">
+              <Link to="/" className="z-20 -mt-8 flex-shrink-0">
+                <div className="w-28 sm:w-32 h-16 sm:h-20 bg-sky-100 rounded-b-2xl shadow-md flex items-center justify-center overflow-hidden">
                   <img 
                     src={garageIcon} 
                     alt="GARAGEFIX CARE Logo" 
@@ -51,13 +51,13 @@ const Navbar = () => {
                 </div>
               </Link>
 
-              {/* Contact Info - inline beside logo */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 text-xs sm:text-sm text-gray-800 font-semibold">
-                <a href="tel:9318478483" className="flex items-center space-x-1 hover:text-red-600">
+              {/* Contact Info - now inline beside logo */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-xs sm:text-sm md:text-base leading-tight">
+                <a href="tel:9318478483" className="flex items-center space-x-1 text-gray-800 font-semibold hover:text-red-600">
                   <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
                   <span>93184-78483</span>
                 </a>
-                <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-1 hover:text-red-600">
+                <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-1 text-gray-800 font-semibold hover:text-red-600">
                   <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
                   <span>garagefixcare@gmail.com</span>
                 </a>
@@ -65,16 +65,16 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-6 ml-auto">
+            <div className="hidden lg:flex items-center space-x-8 ml-auto">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   className={`
-                    font-semibold text-sm transition-colors duration-200 px-2 py-1
+                    font-semibold text-sm transition-colors duration-200 px-2
                     ${link.isButton ? 
-                      'bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 shadow-md' : 
-                      'text-gray-900 hover:text-blue-800'}
+                        'bg-orange-600 text-white px-5 py-2 rounded-lg hover:bg-orange-700 shadow-md' : 
+                        'text-gray-900 hover:text-blue-800'}
                     ${isActive(link.path) && !link.isButton ? 'text-red-600 border-b-2 border-red-600' : ''}
                   `}
                 >
@@ -84,7 +84,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center">
+            <div className="flex lg:hidden justify-end items-center h-full"> 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-gray-700 hover:text-blue-800 p-2"
@@ -106,8 +106,8 @@ const Navbar = () => {
                     className={`
                       block w-full text-center px-3 py-2 rounded-md text-base font-medium transition-colors duration-200
                       ${link.isButton ? 
-                        'bg-orange-600 text-white hover:bg-orange-700' : 
-                        'text-gray-700 hover:text-blue-800'}
+                          'bg-orange-600 text-white hover:bg-orange-700' : 
+                          'text-gray-700 hover:text-blue-800'}
                       ${isActive(link.path) && !link.isButton ? 'text-red-600' : ''}
                     `}
                   >
