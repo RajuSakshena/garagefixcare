@@ -28,7 +28,7 @@ import doorstepService from "../images/Doorstep Service.png";
 import wheelCare from "../images/Wheel Care.png";
 import bikeBatteries from "../images/Bike Battery.png";
 import engineRepair from "../images/Engine Repair.png";
-import warrantyImg from "../images/Warranty.webp";
+import warrantyImg from "../images/warranty.webp";
 import pickupImg from "../images/Free Pickup.webp";
 import transparentImg from "../images/Transparent.webp";
 import trainedImg from "../images/Trainie.webp";
