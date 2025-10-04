@@ -1037,7 +1037,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
           <img
             src={post.img}
             alt={post.title}
-            className="w-full h-28 sm:h-32 object-cover"
+            className="w-full h-32 sm:h-40 object-cover"
           />
           <div className="p-2 sm:p-4 text-left">
             <h3 className="text-sm sm:text-base font-bold mb-1">{post.title}</h3>
