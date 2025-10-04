@@ -320,18 +320,17 @@ const Home = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-<section className="bg-slate-800 text-white py-8 sm:py-8 lg:py-8"> {/* DRASTICALLY REDUCED PADDING */}
+<section className="bg-slate-800 text-white py-8 sm:py-8 lg:py-8">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       
       {/* Left Side: Main Text and Buttons */}
       <div>
-        <h1 className="text-brandRed text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight"> {/* REDUCED FONT SIZE */}
+        <h1 className="text-brandRed text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
           Professional Auto Repair
           <span className="text-orange-500"> At Your Doorstep</span>
         </h1>
-        {/* REDUCED MARGIN on paragraph */}
         <p className="font-poppins text-sm sm:text-base leading-relaxed text-white mb-4 sm:mb-6"> 
           Experience the ultimate convenience of professional bike care at your doorstep. 
           Our expert mechanics come directly to your location—whether at home, work, or on the go—
@@ -341,7 +340,6 @@ const Home = () => {
           needing to visit a workshop.
         </p>
 
-        {/* Buttons - Adjusted padding to be smaller */}
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
             to="/book"
@@ -353,30 +351,29 @@ const Home = () => {
             href="tel:9318478483"
             className="border-2 border-white text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 text-center flex items-center justify-center gap-2"
           >
-            <Phone className="h-4 w-4" /> {/* REDUCED ICON SIZE */}
+            <Phone className="h-4 w-4" />
             Call Now
           </a>
         </div>
       </div>
 
       {/* Right Side: Combined Image and Reviews */}
-      <div className="relative flex flex-col items-center lg:items-end gap-4 mt-6 lg:mt-0"> {/* REDUCED MARGIN TOP */}
+      <div className="relative flex flex-col items-center lg:items-end gap-4 mt-6 lg:mt-0">
         <img
           src={heroImage}
           alt="Professional mechanic working on bike"
           className="rounded-lg shadow-2xl w-full"
         />
 
-        {/* Dynamic Google Review & Happy Customers Section - Now hidden on mobile for compactness */}
-        <div className="hidden sm:flex items-center justify-center gap-4 w-full"> {/* ADDED hidden sm:flex */}
-          <div className="bg-sky-100 text-black p-3 rounded-lg shadow-lg flex-1 w-full sm:w-auto"> {/* REDUCED PADDING */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+          <div className="bg-sky-100 text-black p-3 rounded-lg shadow-lg flex-1 w-full sm:w-auto">
             <div className="flex items-center justify-center gap-2 text-lg sm:text-xl font-bold">
               <Star className="h-4 w-4 text-yellow-400 fill-current" />
               {reviewScore.toFixed(1)}/5
             </div>
             <div className="text-xs font-semibold text-center">Google Review</div>
           </div>
-          <div className="bg-sky-100 text-black p-3 rounded-lg shadow-lg flex-1 w-full sm:w-auto"> {/* REDUCED PADDING */}
+          <div className="bg-sky-100 text-black p-3 rounded-lg shadow-lg flex-1 w-full sm:w-auto">
             <div className="text-lg sm:text-xl font-bold text-center">
               {happyCustomersCount.toLocaleString()}+
             </div>
