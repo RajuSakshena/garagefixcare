@@ -327,7 +327,7 @@ const Home = () => {
       
       {/* Left Side: Main Text and Buttons */}
       <div>
-        <h1 className="text-brandRed text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
+        <h1 className="text-brandRed text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
           Professional Auto Repair
           <span className="text-orange-500"> At Your Doorstep</span>
         </h1>
