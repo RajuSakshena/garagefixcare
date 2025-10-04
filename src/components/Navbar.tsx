@@ -22,7 +22,7 @@ const Navbar = () => {
     <nav className="bg-sky-100 shadow-lg sticky top-0 z-50">
       <div className="relative">
 
-        {/* Top Header Bar (Socials only - Visible on all screen sizes) */}
+        {/* Top Header Bar (Socials only) */}
         <div className="bg-slate-800 text-white py-1 px-4">
           <div className="max-w-7xl mx-auto flex justify-end items-center text-sm h-7">
             {/* Social Icons */}
@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-sky-100">
           <div className="flex justify-between items-center h-20 relative">
 
-            {/* Logo (Absolute position on desktop/tablet, but its container is left-aligned on mobile) */}
+            {/* Logo (Absolute position for desktop alignment) */}
             <Link to="/" className="z-20">
               <div className="w-32 h-20 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden absolute top-0 left-0">
                 <img 
@@ -50,19 +50,19 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* Contact Info - Visible only on MD/LG screens */}
+            {/* Contact Info - Hidden on mobile (xs/sm) */}
             <div className="hidden md:flex items-center space-x-8 pl-36 text-gray-800 font-semibold">
               <a href="tel:9318478483" className="flex items-center space-x-1 text-base hover:text-red-600">
                 <Phone className="h-5 w-5 text-orange-600" />
                 <span>93184-78483</span>
               </a>
-              <a href="mailto:garagefixcare@gmail.com" className="flex items-center text-base space-x-1 hover:text-red-600">
+              <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-1 text-base hover:text-red-600">
                 <Mail className="h-5 w-5 text-orange-600" />
                 <span>garagefixcare@gmail.com</span>
               </a>
             </div>
 
-            {/* Desktop Menu - Pushed to the far right. Hidden on mobile. */}
+            {/* Desktop Menu - Hidden on mobile (xs/sm) */}
             <div className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
@@ -82,18 +82,19 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button - Pushed to the far right on mobile */}
-            <div className="md:hidden ml-auto"> 
+            {/* Mobile Menu Button - Ensure visibility on the right on mobile */}
+            {/* Added a margin to ensure it clears the logo space on mobile */}
+            <div className="flex md:hidden w-full justify-end"> 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-grey-700 hover:text-blue-800 p-2"
+                className="text-grey-700 hover:text-blue-800 p-2 ml-auto"
               >
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
           </div>
 
-          {/* Mobile Menu - Content is now visible */}
+          {/* Mobile Menu - Content (Visible when isMenuOpen is true) */}
           {isMenuOpen && (
             <div className="md:hidden bg-white border-t border-gray-200">
               <div className="px-2 pt-2 pb-3 space-y-1">
@@ -116,7 +117,7 @@ const Navbar = () => {
                   </Link>
                 ))}
 
-                {/* --- Mobile Contact Info (New Section) --- */}
+                {/* --- Mobile Contact Info (This is where the email/number is) --- */}
                 <div className="pt-4 border-t border-gray-200 flex flex-col items-center space-y-3">
                     <a 
                         href="tel:9318478483" 
