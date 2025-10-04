@@ -1004,52 +1004,47 @@ Enjoy convenient, affordable service—plus bike insurance and more.
   </div>
 </section>
 {/* Latest Post Section */}
-<section className="bg-slate-800 text-white py-12 sm:py-16">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-     {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12">
+<section className="bg-slate-800 text-white py-8 sm:py-12">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
       Latest <span className="text-red-600">Post</span>
     </h2>
-
-    {/* Post Cards */}
-    {/* UPDATED: Uses 1 column on mobile (default col-1), 2 on tablet (md:grid-cols-2), and 3 on desktop (lg:grid-cols-3) */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
       {[
         {
           title: "How to Maintain the Gearbox on Your R15 V3?",
           img: maintainGearboxImg,
-          desc: "Proper maintenance of your R15 V3 gearbox is essential for smooth operation, extended transmission life, and optimal overall performance. Regular care helps prevent wear, ensures reliable gear shifts, and enhances the longevity of your motorcycle.",
-          link: "/blog", // placeholder for now
+          desc: "Proper maintenance of your R15 V3 gearbox is essential for smooth operation, extended transmission life, and optimal overall performance.",
+          link: "/blog",
         },
         {
           title: "What are the advantages of a four-valve engine in bikes?",
           img: fourValveEngineImg,
-          desc: "A four-valve engine, which features two intake valves and two exhaust valves per cylinder, offers numerous advantages over traditional two-valve engines in motorcycles.",
-          link: "/blog", // placeholder
+          desc: "A four-valve engine offers numerous advantages over traditional two-valve engines in motorcycles.",
+          link: "/blog",
         },
         {
           title: "How do I maintain the drive belt on my scooty?",
           img: driveBeltScootyImg,
-          desc: "Maintaining the drive belt on your scooty is essential for ensuring smooth and reliable performance. The drive belt transfers power efficiently from engine to wheel.",
-          link: "/blog", // placeholder
+          desc: "Maintaining the drive belt on your scooty is essential for ensuring smooth and reliable performance.",
+          link: "/blog",
         },
       ].map((post, i) => (
         <div
           key={i}
-          className="bg-sky-100 text-black rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
+          className="bg-sky-100 text-black rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
         >
           <img
             src={post.img}
             alt={post.title}
-            className="w-full h-40 sm:h-48 object-cover"
+            className="w-full h-28 sm:h-32 object-cover"
           />
-          <div className="p-4 sm:p-6 text-left">
-             {/* UPDATED: Reduced text size on mobile (text-base) */}
-            <h3 className="text-base sm:text-lg font-bold mb-2">{post.title}</h3>
-            <p className="text-gray-700 text-xs sm:text-sm mb-4">{post.desc}</p>
+          <div className="p-2 sm:p-4 text-left">
+            <h3 className="text-sm sm:text-base font-bold mb-1">{post.title}</h3>
+            <p className="text-gray-700 text-xs sm:text-sm mb-2">{post.desc}</p>
             <a
               href={post.link}
-              className="text-red-600 font-semibold hover:underline text-sm"
+              className="text-red-600 font-semibold hover:underline text-xs sm:text-sm"
             >
               read more...
             </a>
@@ -1060,16 +1055,14 @@ Enjoy convenient, affordable service—plus bike insurance and more.
   </div>
 </section>
 {/* Frequently Asked Questions Section */}
-<section className="py-12 bg-slate-900 text-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-8 sm:mb-12">
-       {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+<section className="bg-slate-900 text-white py-8 sm:py-12">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+    <div className="text-center mb-4 sm:mb-6">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
         Frequently Asked <span className="text-red-600">Questions</span>
       </h2>
     </div>
-
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-2 sm:space-y-3">
       {[
         {
           q: "Which types of two-wheelers do you provide service for?",
@@ -1152,9 +1145,9 @@ Enjoy convenient, affordable service—plus bike insurance and more.
           a: "Garage On Call welcomes feedback from customers and provides various channels for sharing your experiences, including online reviews and feedback forms."
         },
       ].map((faq, index) => (
-        <div key={index} className="border border-gray-700 rounded-lg overflow-hidden">
+        <div key={index} className="border border-gray-700 rounded-md overflow-hidden">
           <button
-            className="flex justify-between items-center w-full p-4 text-left font-semibold text-white hover:bg-slate-800 focus:outline-none text-base sm:text-lg"
+            className="flex justify-between items-center w-full p-2 sm:p-3 text-left font-semibold text-white hover:bg-slate-700 focus:outline-none text-sm sm:text-base"
             onClick={() => {
               if (activeIndex === index) {
                 setActiveIndex(null);
@@ -1163,17 +1156,17 @@ Enjoy convenient, affordable service—plus bike insurance and more.
               }
             }}
           >
-            <span className="text-red-600 mr-2">Ques {index + 1}.</span> {faq.q}
+            <span className="text-red-600 mr-1">Ques {index + 1}.</span> {faq.q}
             <span className="transition-transform duration-300">
-              {activeIndex === index ? <X className="h-5 w-5 sm:h-6 sm:w-6 text-red-600" /> : <Plus className="h-5 w-5 sm:h-6 sm:w-6 text-red-600" />}
+              {activeIndex === index ? <X className="h-4 w-4 sm:h-5 sm:w-5 text-red-600" /> : <Plus className="h-4 w-4 sm:h-5 sm:w-5 text-red-600" />}
             </span>
           </button>
           <div
             className={`transition-all duration-500 ease-in-out overflow-hidden ${
-              activeIndex === index ? 'max-h-screen' : 'max-h-0' // Changed max-h-96 to max-h-screen for dynamic content
+              activeIndex === index ? 'max-h-screen' : 'max-h-0'
             }`}
           >
-            <div className="p-4 bg-slate-800 text-gray-300 text-sm sm:text-base">
+            <div className="p-2 sm:p-3 bg-slate-700 text-gray-300 text-xs sm:text-sm">
               {faq.a}
             </div>
           </div>
@@ -1182,41 +1175,47 @@ Enjoy convenient, affordable service—plus bike insurance and more.
     </div>
   </div>
 </section>
-
         {/* CTA Section */}
-        <section className="py-8 sm:py-12 bg-slate-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-             {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-              Ready to Get Started?
-            </h2>
-             {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-xl) */}
-            <p className="text-base sm:text-xl text-white mb-6 sm:mb-8 max-w-2xl mx-auto">
-              Book your service today and experience the convenience of professional
-              automotive care at your location.
-            </p>
-            <Link
-              to="/book"
-              className="bg-orange-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-orange-700 transition-colors duration-200 inline-block"
-            >
-              Book Your Service
-            </Link>
-          </div>
-        </section>
+        <section className="py-6 sm:py-8 bg-slate-800">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
+      Ready to Get Started?
+    </h2>
+    <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
+      Book your service today and experience the convenience of professional
+      automotive care at your location.
+    </p>
+    <Link
+      to="/book"
+      className="bg-orange-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md font-semibold text-sm sm:text-base hover:bg-orange-700 transition-colors duration-200 inline-block"
+    >
+      Book Your Service
+    </Link>
+  </div>
+</section>
       </div>
         {/* Floating Buttons */}
-<div className="fixed bottom-6 right-6 flex flex-col space-y-4 z-50">
-    {/* Moved from top-1/2 right-6 to bottom-6 right-6 for less intrusion and better mobile accessibility */}
-  {/* Phone Button */}
+<div className="fixed top-1/2 right-6 flex flex-col space-y-4 z-50 transform -translate-y-1/2">
   <a
     href="tel:9318478483"
     className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
     aria-label="Call Us"
   >
-    <Phone size={24} className="sm:size-28" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6 sm:w-7 sm:h-7"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+      />
+    </svg>
   </a>
-
-  {/* WhatsApp Button */}
   <a
     href="https://wa.me/9318478483"
     target="_blank"
@@ -1286,7 +1285,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
                 {/* Book Now Button (Updated to call handleModalBookNow) */}
                 <button
                     onClick={handleModalBookNow}
-                    className="bg-red-600 text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 text-sm sm:text-base"
+                    className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 text-sm sm:text-base"
                 >
                     Book Now
                 </button>
