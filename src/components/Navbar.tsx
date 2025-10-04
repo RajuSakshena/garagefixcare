@@ -19,7 +19,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-sky-100 shadow-lg fixed top-0 z-50 w-full">
+    <nav className="bg-sky-100 shadow-lg sticky top-0 z-50 w-full">
       <div className="relative">
 
         {/* Top Header Bar (Social Icons) */}
@@ -121,7 +121,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-
 };
 
 export default Navbar;
