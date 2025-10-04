@@ -844,25 +844,19 @@ Enjoy convenient, affordable service—plus bike insurance and more.
   </div>
 </section>
 {/* How GarageFixCare Works Section */}
-<section className="bg-slate-800 text-white py-8 sm:py-12">
-   {/* UPDATED: Stacks columns on mobile (default col-1) and uses 2 columns on large screens (lg:grid-cols-2) */}
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-    
-    {/* Left Content */}
+<section className="bg-slate-800 text-white py-6 sm:py-8">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
     <div>
-       {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
         How <span className="text-red-600">GarageFixCare</span> Works?
       </h2>
-       {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-lg) */}
-      <p className="text-base sm:text-lg text-white mb-6">
+      <p className="text-sm sm:text-base text-white mb-4">
         Welcome to GarageFixCare, where we transform the two-wheeler service experience by 
         bringing professional care directly to your doorstep. Our streamlined process ensures 
         a hassle-free, efficient service that saves you both time and effort. Here’s how 
         GarageFixCare works:
       </p>
-
-      <ul className="space-y-3 text-left">
+      <ul className="space-y-2 text-left">
         {[
           "Schedule Your Service",
           "Technician Sent to You",
@@ -871,35 +865,28 @@ Enjoy convenient, affordable service—plus bike insurance and more.
           "Guaranteed Quality Service",
           "Easy Payment & Feedback",
         ].map((item, index) => (
-          <li key={index} className="flex items-center text-white text-base sm:text-lg">
-            <span className="text-red-500 text-lg mr-2">◆</span> {item}
+          <li key={index} className="flex items-center text-white text-sm sm:text-base">
+            <span className="text-red-500 text-base mr-1">◆</span> {item}
           </li>
         ))}
       </ul>
     </div>
-
-    {/* Right Image */}
     <div className="flex justify-center">
       <img
         src={howWorksImage}
         alt="How GarageFixCare Works"
-        className="rounded-xl shadow-2xl w-full max-w-sm sm:max-w-md"
+        className="rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm"
       />
     </div>
   </div>
 </section>
 {/* We Provide Best Bike Service Section */}
-<section className="bg-slate-900 text-white py-12 sm:py-16">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-     {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12">
-  Professional <span className="text-red-600">Bike Service</span> at Your <span className="text-red-600">Home</span> by <span className="text-red-600">Certified Experts</span>
-</h2>
-
-
-    {/* City Cards */}
-    {/* UPDATED: Uses 3 columns on mobile (sm:grid-cols-3) and 6 on desktop (lg:grid-cols-6) */}
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 justify-items-center">
+<section className="bg-slate-900 text-white py-8 sm:py-12">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
+      Professional <span className="text-red-600">Bike Service</span> at Your <span className="text-red-600">Home</span> by <span className="text-red-600">Certified Experts</span>
+    </h2>
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 justify-items-center">
       {[
         { name: "Bike Service in Delhi", img: delhiImg },
         { name: "Bike Service in Noida", img: noidaImg },
@@ -910,15 +897,14 @@ Enjoy convenient, affordable service—plus bike insurance and more.
       ].map((city, index) => (
         <div
           key={index}
-          className="bg-sky-100 rounded-lg shadow-lg p-4 sm:p-6 w-full max-w-xs text-center hover:shadow-xl transition-shadow duration-200"
+          className="bg-sky-100 rounded-lg shadow-md p-2 sm:p-4 w-full max-w-xs text-center hover:shadow-lg transition-shadow duration-200"
         >
           <img
             src={city.img}
             alt={city.name}
-            className="h-20 w-20 sm:h-24 sm:w-24 mx-auto rounded-full mb-4 object-cover"
+            className="h-16 w-16 sm:h-20 sm:w-20 mx-auto rounded-full mb-2 object-cover"
           />
-           {/* UPDATED: Reduced text size on mobile (text-base) */}
-          <h3 className="text-base sm:text-lg font-semibold text-black">
+          <h3 className="text-sm sm:text-base font-semibold text-black">
             {city.name.split("in ")[0]} <span className="text-red-600">{city.name.split("in ")[1]}</span>
           </h3>
         </div>
@@ -927,44 +913,35 @@ Enjoy convenient, affordable service—plus bike insurance and more.
   </div>
 </section>
 {/* Customers Speaks Section */}
-<section className="bg-slate-800 text-white py-12 sm:py-16">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-     {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+<section className="bg-slate-800 text-white py-8 sm:py-12">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
       What <span className="text-red-600">Customers Say</span>
     </h2>
-
-    {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-lg) */}
-    <p className="text-base sm:text-lg text-white mb-6">
+    <p className="text-sm sm:text-base text-white mb-2 sm:mb-4">
       Customer Testimonials on Google
     </p>
-
-   <div className="flex justify-center items-center gap-2 mb-6">
+    <div className="flex justify-center items-center gap-1 mb-2 sm:mb-4">
       <span className="flex">
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-400 fill-current"
+            className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current"
           />
         ))}
       </span>
-      <span className="text-white font-semibold text-base">4.7 Rating on Google</span>
+      <span className="text-white font-semibold text-sm">4.7 Rating on Google</span>
     </div>
-
     <a
       href="https://www.google.com"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-red-600 px-5 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-sm sm:text-base text-white hover:bg-red-700 transition-colors duration-200 inline-block"
+      className="bg-red-600 px-4 py-1 sm:px-5 sm:py-2 rounded-md font-semibold text-xs sm:text-sm text-white hover:bg-red-700 transition-colors duration-200 inline-block"
     >
       Review us on Google
     </a>
   </div>
-
-  {/* Testimonials Grid */}
-  
-  {/* UPDATED: Uses 2 columns on tablet (md:grid-cols-2) and 4 on desktop (lg:grid-cols-4) */}
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 bg-slate-800">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 mt-4 sm:mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 bg-slate-800">
     {[
       {
         name: "Surendra Pratap Singh",
@@ -993,24 +970,22 @@ Enjoy convenient, affordable service—plus bike insurance and more.
     ].map((t, i) => (
       <div
         key={i}
-        className="bg-sky-100 text-black rounded-lg p-5 sm:p-6 shadow-md flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200"
+        className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-200"
       >
-        <img src={googleIcon} alt="Google" className="h-6 sm:h-8 mb-4" />
-        <div className="flex justify-center mb-3">
+        <img src={googleIcon} alt="Google" className="h-5 sm:h-6 mb-2" />
+        <div className="flex justify-center mb-2">
           {[...Array(5)].map((_, i) => (
-            <span key={i} className="text-yellow-400 text-lg">★</span>
+            <span key={i} className="text-yellow-400 text-base">★</span>
           ))}
         </div>
-         {/* UPDATED: Smaller text size on mobile (text-xs) */}
-        <p className="text-black mb-4 text-xs sm:text-sm">"{t.text}"</p>
-        <img src={t.img} alt={t.name} className="h-10 w-10 sm:h-12 sm:w-12 rounded-full mb-2" />
-        <h3 className="font-semibold text-gray-900 text-sm">{t.name}</h3>
+        <p className="text-black mb-2 text-xs sm:text-sm">"{t.text.slice(0, 80)}..."</p>
+        <img src={t.img} alt={t.name} className="h-8 w-8 sm:h-10 sm:w-10 rounded-full mb-1" />
+        <h3 className="font-semibold text-gray-900 text-xs sm:text-sm">{t.name}</h3>
         <span className="text-xs text-black">{t.time}</span>
       </div>
     ))}
   </div>
 </section>
-
 {/* Bike Brands We Service Section */}
 <section className="bg-slate-900 text-white py-12 sm:py-16">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
