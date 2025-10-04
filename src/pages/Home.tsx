@@ -419,13 +419,9 @@ Our expert mechanics come to you with the right tools and parts, saving you time
         ))}
 
     </div>
-</div>
-        
+</div>  
     </div>
 </div>
-
-
-
 {/* --- Your "Hot Deals This Week" section follows here --- */}
         {/* Autoplay Card Carousel Section */}
         <section className="py-8 bg-slate-900">
@@ -490,95 +486,92 @@ Hurry—these deals won’t last long!
         </section>
 
         {/* What Our Clients Say? Section */}
-        <section className="bg-slate-800 text-Black py-8 sm:py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 sm:mb-12">
-             {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-              <span className="text-white">What Our</span>{' '}
-              <span className="text-red-600">Clients Say?</span>
-            </h2>
+        <section className="bg-slate-800 text-black py-4 sm:py-6">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+    <div className="text-center mb-4 sm:mb-6">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+        <span className="text-white">What Our</span>{' '}
+        <span className="text-red-600">Clients Say?</span>
+      </h2>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
+      {/* Google Reviews */}
+      <div className="bg-sky-50 rounded-lg p-3 shadow-sm">
+        <img
+          src={googleReviewsImage}
+          alt="Google Reviews"
+          className="mx-auto h-8 sm:h-10 mb-2"
+        />
+        <div className="flex justify-center mb-1">
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+        </div>
+        <p className="text-black font-semibold mb-1 text-sm">4.7/5 Rating</p>
+        <a
+          href="https://www.google.com/search?q=your+business+on+google"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 font-semibold hover:underline text-xs"
+        >
+          view us on Google
+        </a>
+      </div>
 
-            </div>
-            {/* UPDATED: Stacks columns on mobile (default col-1) and uses 3 columns on desktop (md:grid-cols-3) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
-              {/* Google Reviews */}
-              <div className="bg-sky-50 rounded-lg p-6 shadow-md">
-                <img
-                  src={googleReviewsImage}
-                  alt="Google Reviews"
-                  className="mx-auto h-12 sm:h-16 mb-4"
-                />
-                <div className="flex justify-center mb-2">
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                </div>
-                <p className="text-black font-semibold mb-4">4.7/5 Rating</p>
-                <a
-                  href="https://www.google.com/search?q=your+business+on+google"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black font-semibold hover:underline text-sm"
-                >
-                  view us on Google
-                </a>
-              </div>
+      {/* Facebook Reviews */}
+      <div className="bg-sky-50 rounded-lg p-3 shadow-sm">
+        <img
+          src={facebookReviewsImage}
+          alt="Facebook Reviews"
+          className="mx-auto h-8 sm:h-10 mb-2"
+        />
+        <div className="flex justify-center mb-1">
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+        </div>
+        <p className="text-black font-semibold mb-1 text-sm">4.7/5 Rating</p>
+        <a
+          href="https://www.facebook.com/yourbusiness"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 font-semibold hover:underline text-xs"
+        >
+          view us on FaceBook
+        </a>
+      </div>
 
-              {/* Facebook Reviews */}
-              <div className="bg-sky-50 rounded-lg p-6 shadow-md">
-                <img
-                  src={facebookReviewsImage}
-                  alt="Facebook Reviews"
-                  className="mx-auto h-12 sm:h-16 mb-4"
-                />
-                <div className="flex justify-center mb-2">
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                </div>
-                <p className="text-black font-semibold mb-4">4.7/5 Rating</p>
-                <a
-                  href="https://www.facebook.com/yourbusiness"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black font-semibold hover:underline text-sm"
-                >
-                  view us on FaceBook
-                </a>
-              </div>
-
-              {/* JustDial Reviews */}
-              <div className="bg-sky-50 rounded-lg p-6 shadow-md">
-                <img
-                  src={justdialReviewsImage}
-                  alt="JustDial Reviews"
-                  className="mx-auto h-12 sm:h-16 mb-4"
-                />
-                <div className="flex justify-center mb-2">
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                </div>
-                <p className="text-black font-semibold mb-4">4.7/5 Rating</p>
-                <a
-                  href="https://www.justdial.com/your-business"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black font-semibold hover:underline text-sm"
-                >
-                  view us on JustDial
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+      {/* JustDial Reviews */}
+      <div className="bg-sky-50 rounded-lg p-3 shadow-sm">
+        <img
+          src={justdialReviewsImage}
+          alt="JustDial Reviews"
+          className="mx-auto h-8 sm:h-10 mb-2"
+        />
+        <div className="flex justify-center mb-1">
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+        </div>
+        <p className="text-black font-semibold mb-1 text-sm">4.7/5 Rating</p>
+        <a
+          href="https://www.justdial.com/your-business"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 font-semibold hover:underline text-xs"
+        >
+          view us on JustDial
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
         
         {/* At Home Service Price List Section (YOUR REQUIRED SECTION) */}
        <section className="py-16 bg-slate-900">
