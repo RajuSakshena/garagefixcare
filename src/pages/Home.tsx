@@ -651,7 +651,7 @@ const Home = () => {
         </div>
       </section>
         
-<section className="relative h-[400px] sm:h-[500px] lg:h-[600px] mt-8 sm:mt-12">
+<section className="relative h-[400px] sm:h-[500px] lg:h-[600px] mt-16 sm:mt-16">
   {/* Background Image */}
   <img
     src={mechanicImage}
@@ -667,11 +667,11 @@ const Home = () => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
       
       {/* Left Side */}
-      <div className="bg-sky-100 rounded-xl shadow-lg p-6 sm:p-8">
+      <div className="bg-sky-100 rounded-xl shadow-lg p-1 sm:p-10 scale-95">
         <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center">
           Choose Your Vehicle
         </h3>
-        <div className="flex justify-center gap-4 mb-6">
+        <div className="flex justify-center gap-2 mb-4">
           <button
             onClick={() => setSelectedVehicle("Bike")}
             className={`px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold text-sm sm:text-base ${
@@ -711,22 +711,22 @@ const Home = () => {
       </div>
 
       {/* Right Side */}
-     <div className="text-center lg:text-left text-white flex flex-col justify-center bg-black bg-opacity-30 lg:bg-opacity-0 p-4 rounded-lg">
+     <div className="text-center lg:text-left text-white flex flex-col justify-center bg-black bg-opacity-30 lg:bg-opacity-0 p-1 rounded-lg">
         {/* Added background/padding for readability on mobile */}
         <h4 className="text-white text-2xl font-semibold mb-2 underline decoration-red-600">
           Book Service
         </h4>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-2xl md:text-4xl font-bold mb-4">
           <span className="text-orange-600">Convenient Bike Service</span> and Repair at Your Home
         </h2>
-        <p className="text-3xl sm:text-4xl font-bold text-blue-400 mb-6">
+        <p className="text-2xl sm:text-4xl font-bold text-blue-400 mb-6">
           Certified Genuine Parts
         </p>
         <a
           href="tel:9318478483"
-          className="w-full inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+          className="w-full inline-block bg-red-600 text-white px-8 py-2 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-2"
         >
-          <Phone className="h-5 w-5" />
+          <Phone className="h-3 w-5" />
           <span>Book on Call</span>
         </a>
       </div>
