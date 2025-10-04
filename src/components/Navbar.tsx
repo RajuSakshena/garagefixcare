@@ -33,34 +33,37 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Main Navbar */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-sky-100">
           <div className="flex justify-between items-center h-20 relative">
 
-            {/* Logo */}
-            <Link to="/" className="z-20 -mt-8 mr-6">
-              <div className="w-32 h-20 bg-sky-100 rounded-b-2xl shadow-lg flex items-center justify-center overflow-hidden">
-                <img 
-                  src={garageIcon} 
-                  alt="GARAGEFIX CARE Logo" 
-                  className="w-full h-full object-contain p-1"
-                />
-              </div>
-            </Link>
+            {/* ✅ Logo + Contact Info Combined */}
+            <div className="flex items-center space-x-3 sm:space-x-6">
+              {/* Logo */}
+              <Link to="/" className="z-20 -mt-8 flex-shrink-0">
+                <div className="w-28 sm:w-32 h-16 sm:h-20 bg-sky-100 rounded-b-2xl shadow-md flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={garageIcon} 
+                    alt="GARAGEFIX CARE Logo" 
+                    className="w-full h-full object-contain p-1"
+                  />
+                </div>
+              </Link>
 
-            {/* Contact Info (Desktop only) */}
-            <div className="hidden md:flex flex-col space-y-1 justify-center">
-              <a href="tel:9318478483" className="flex items-center space-x-1 text-base text-gray-800 font-semibold hover:text-red-600">
-                <Phone className="h-5 w-5 text-orange-600" />
-                <span>93184-78483</span>
-              </a>
-              <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-1 text-base text-gray-800 font-semibold hover:text-red-600">
-                <Mail className="h-5 w-5 text-orange-600" />
-                <span>garagefixcare@gmail.com</span>
-              </a>
+              {/* Contact Info - now inline beside logo */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-xs sm:text-sm md:text-base leading-tight">
+                <a href="tel:9318478483" className="flex items-center space-x-1 text-gray-800 font-semibold hover:text-red-600">
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
+                  <span>93184-78483</span>
+                </a>
+                <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-1 text-gray-800 font-semibold hover:text-red-600">
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
+                  <span>garagefixcare@gmail.com</span>
+                </a>
+              </div>
             </div>
-          
+
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-8 ml-auto">
               {navLinks.map((link) => (
@@ -81,31 +84,19 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="flex md:hidden w-full justify-end items-center h-full"> 
+            <div className="flex lg:hidden justify-end items-center h-full"> 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-700 hover:text-blue-800 p-2 ml-auto"
+                className="text-gray-700 hover:text-blue-800 p-2"
               >
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
           </div>
 
-          {/* ✅ Mobile Contact Info (Visible only on mobile, below the logo) */}
-          <div className="flex flex-col items-center md:hidden mt-2 space-y-1">
-            <a href="tel:9318478483" className="flex items-center space-x-2 text-gray-800 font-semibold hover:text-red-600">
-              <Phone className="h-5 w-5 text-orange-600" />
-              <span>93184-78483</span>
-            </a>
-            <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-2 text-gray-800 font-semibold hover:text-red-600">
-              <Mail className="h-5 w-5 text-orange-600" />
-              <span>garagefixcare@gmail.com</span>
-            </a>
-          </div>
-
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="lg:hidden bg-white border-t border-gray-200">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navLinks.map((link) => (
                   <Link
