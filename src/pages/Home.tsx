@@ -688,7 +688,7 @@ Prices vary by service type—check the estimated labour charges below to plan y
       Expert Bike Care,  <span className="text-red-600"> Right at Your Doorstep</span>
     </h2>
     <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
-      ChatGPT said:
+    
 
 Get professional bike servicing at your doorstep, including engine, battery, and tyre care.
 Enjoy convenient, affordable service—plus bike insurance and more.
@@ -719,68 +719,55 @@ Enjoy convenient, affordable service—plus bike insurance and more.
 </section>
 
 {/* GarageFixCare Benefits Section */}
-<section className="py-8 sm:py-12 bg-slate-900 text-white">
-  {/* UPDATED: Stacks columns on mobile (default col-1) and uses 2 columns on large screens (lg:grid-cols-2) */}
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-    
-    {/* Left Content */}
+<section className="py-6 sm:py-8 bg-slate-900 text-white">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
     <div>
-      <p className="text-sm text-white mb-2">Get Rs.30 Off On First Service</p>
-       {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+      <p className="text-xs text-white mb-1">Get Rs.30 Off On First Service</p>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
         GarageFixCare <span className="text-red-600">Service Warranty</span>
       </h2>
-       {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-lg) */}
-      <p className="text-base sm:text-lg text-sky-100 mb-6">
+      <p className="text-sm sm:text-base text-sky-100 mb-4">
         GarageFixCare offers expert at-home bike repair services for motorcycles of all models and brands, including Harley-Davidson, Ducati, Benelli, Triumph, Indian, BMW, Aprilia, Yezdi, Husqvarna, and more.
       </p>
-
-      <div className="flex gap-4">
+      <div className="flex gap-2">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
           alt="Google Play"
-          className="h-10 sm:h-12"
+          className="h-8 sm:h-10"
         />
         <img
           src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
           alt="App Store"
-          className="h-10 sm:h-12"
+          className="h-8 sm:h-10"
         />
       </div>
     </div>
-
-    {/* Right Content (Benefit Cards) */}
-     {/* UPDATED: Uses 2 columns on mobile (sm:grid-cols-2) */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-      <div className="bg-sky-100 text-black rounded-lg p-4 sm:p-6 shadow-md flex items-center space-x-3 sm:space-x-4">
-        <img src={warrantyImg} alt="Warranty" className="h-10 w-10 sm:h-12 sm:w-12 object-contain" />
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+      <div className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex items-center space-x-2 sm:space-x-3">
+        <img src={warrantyImg} alt="Warranty" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
         <div>
-           {/* UPDATED: Reduced text size on mobile (text-base) */}
-          <h3 className="font-bold text-base sm:text-lg">Enjoy a 10-Day Free Service Guarantee</h3>
-          <p className="text-xs sm:text-sm text-gray-900 ">10-Day Hassle-Free Warranty</p>
+          <h3 className="font-bold text-sm sm:text-base">Enjoy a 10-Day Free Service Guarantee</h3>
+          <p className="text-xs sm:text-sm text-gray-900">10-Day Hassle-Free Warranty</p>
         </div>
       </div>
-      <div className="bg-sky-100 text-black rounded-lg p-4 sm:p-6 shadow-md flex items-center space-x-3 sm:space-x-4">
-        <img src={pickupImg} alt="Pickup Service" className="h-10 w-10 sm:h-12 sm:w-12 object-contain" />
+      <div className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex items-center space-x-2 sm:space-x-3">
+        <img src={pickupImg} alt="Pickup Service" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
         <div>
-           {/* UPDATED: Reduced text size on mobile (text-base) */}
-          <h3 className="font-bold text-base sm:text-lg">Enjoy Free Pickup and Drop at Your Convenience</h3>
+          <h3 className="font-bold text-sm sm:text-base">Enjoy Free Pickup and Drop at Your Convenience</h3>
           <p className="text-xs sm:text-sm text-gray-900">Free Pick & Drop Available</p>
         </div>
       </div>
-      <div className="bg-sky-100 text-black rounded-lg p-4 sm:p-6 shadow-md flex items-center space-x-3 sm:space-x-4">
-        <img src={transparentImg} alt="Transparent Pricing" className="h-10 w-10 sm:h-12 sm:w-12 object-contain" />
+      <div className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex items-center space-x-2 sm:space-x-3">
+        <img src={transparentImg} alt="Transparent Pricing" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
         <div>
-           {/* UPDATED: Reduced text size on mobile (text-base) */}
-          <h3 className="font-bold text-base sm:text-lg">Transparent Pricing, Competitive Rate</h3>
+          <h3 className="font-bold text-sm sm:text-base">Transparent Pricing, Competitive Rate</h3>
           <p className="text-xs sm:text-sm text-gray-900">Save up to 30% on your bike service</p>
         </div>
       </div>
-      <div className="bg-sky-100 text-black rounded-lg p-4 sm:p-6 shadow-md flex items-center space-x-3 sm:space-x-4">
-        <img src={trainedImg} alt="Trained Mechanics" className="h-10 w-10 sm:h-12 sm:w-12 object-contain" />
+      <div className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex items-center space-x-2 sm:space-x-3">
+        <img src={trainedImg} alt="Trained Mechanics" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
         <div>
-           {/* UPDATED: Reduced text size on mobile (text-base) */}
-          <h3 className="font-bold text-base sm:text-lg">Skilled and Certified Mechanics</h3>
+          <h3 className="font-bold text-sm sm:text-base">Skilled and Certified Mechanics</h3>
           <p className="text-xs sm:text-sm text-gray-900">Exclusively Certified Two-Wheeler Mechanics</p>
         </div>
       </div>
