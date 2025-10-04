@@ -682,21 +682,18 @@ Prices vary by service type—check the estimated labour charges below to plan y
   </div>
 </section>
 {/* Bike Services at Home Section */}
-<section className="py-16 bg-slate-800">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-     {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
+<section className="py-12 bg-slate-800">
+  <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
       Expert Bike Care,  <span className="text-red-600"> Right at Your Doorstep</span>
     </h2>
-    {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-lg) */}
-    <p className="text-base sm:text-lg text-white mb-8 sm:mb-12 max-w-3xl mx-auto">
-  Enjoy professional periodic bike servicing at your doorstep. Our services include engine repair, battery replacement, wheel and tyre maintenance, and much more—all conveniently handled at home. You can also avail bike insurance and other essential services, all at competitive prices.
-</p>
+    <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
+      ChatGPT said:
 
-
-    {/* Service Cards */}
-     {/* UPDATED: Uses 2 columns on mobile (sm:grid-cols-2) and 3 on desktop (md:grid-cols-3) */}
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4 sm:gap-8">
+Get professional bike servicing at your doorstep, including engine, battery, and tyre care.
+Enjoy convenient, affordable service—plus bike insurance and more.
+    </p>
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2 sm:gap-4">
       {[
         { name: "Routine Service", img: routineService },
         { name: "Bike Insurance", img: bikeInsurance },
@@ -707,14 +704,14 @@ Prices vary by service type—check the estimated labour charges below to plan y
       ].map((service, index) => (
         <div
           key={index}
-          className="bg-sky-100 rounded-lg shadow-lg p-4 sm:p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-200"
+          className="bg-sky-100 rounded-lg shadow-md p-2 sm:p-4 flex flex-col items-center hover:shadow-lg transition-shadow duration-200"
         >
           <img
             src={service.img}
             alt={service.name}
-            className="h-20 w-20 sm:h-28 sm:w-28 object-contain mb-2 sm:mb-4"
+            className="h-16 w-16 sm:h-20 sm:w-20 object-contain mb-1 sm:mb-2"
           />
-          <h3 className="text-sm sm:text-lg font-semibold text-gray-900 text-center">{service.name}</h3>
+          <h3 className="text-xs sm:text-sm font-semibold text-gray-900 text-center">{service.name}</h3>
         </div>
       ))}
     </div>
