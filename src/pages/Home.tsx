@@ -442,10 +442,9 @@ Our expert mechanics come to you with the right tools and parts, saving you time
                 </div>
                 {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-xl) */}
                 <p className="text-base sm:text-lg text-white max-w-7xl mx-auto mt-2 text-center">
-                  Special prices available only for a limited time,
-                  Get exciting discounts on bike repairs and servicing.<br className="block sm:hidden" />
-                  Save big with up to 10% off this week,
-                  Hurry, these exclusive offers won’t last long!
+                 Limited-time offer!
+Get up to 10% off on bike repairs and servicing.
+Hurry—these deals won’t last long!
                 </p>
               </div>
           </div>
