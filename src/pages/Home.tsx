@@ -320,7 +320,7 @@ const Home = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-<section className="bg-slate-800 text-white py-8 sm:py-16 lg:py-20"> {/* DRASTICALLY REDUCED PADDING */}
+<section className="bg-slate-800 text-white py-8 sm:py-8 lg:py-8"> {/* DRASTICALLY REDUCED PADDING */}
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
