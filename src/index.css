@@ -6,3 +6,21 @@
 html, body {
   overflow-x: hidden;
 }
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Default speed for tablet/desktop */
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Faster speed on mobile */
+@media (max-width: 640px) {
+  .animate-marquee {
+    animation-duration: 8s; /* Adjust smaller = faster */
+  }
+}
