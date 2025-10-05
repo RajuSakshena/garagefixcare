@@ -320,6 +320,7 @@ const Home = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
+        <main className="pt-28">
 <section className="bg-slate-800 text-white py-2 sm:py-6 lg:py-6">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
@@ -380,6 +381,7 @@ Our expert mechanics come to you with the right tools and parts, saving you time
     </div>
   </div>
 </section>
+</main>
 {/* --- Insert this new section after the Hero section --- */}
 
 {/* Background color based on your Navbar: likely a light gray or white. 
