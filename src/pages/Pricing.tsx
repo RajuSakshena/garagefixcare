@@ -153,43 +153,48 @@ const Pricing: React.FC = () => {
 
       <div className="min-h-screen bg-slate-900">
         {/* ✅ Hero Section (kept) */}
-        <section className="bg-gradient-to-br from-slate-900 to-slate-900 text-white py-12">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-orange-500">Transparent</span>{" "}
-              <span className="text-green-600">Pricing</span>
-            </h1>
-            <p className="text-xl text-sky-100 max-w-3xl mx-auto">
-              No Hidden Fees, No Surprises. Just Honest, Upfront Pricing for Quality Automotive Service at Your Location.
-            </p>
-          </div>
-        </section>
+        <main className="bg-slate-900 pt-[60px] sm:pt-[90px] lg:pt-[120px]">
+  {/* Header Section */}
+  <section className="bg-gradient-to-br from-slate-900 to-slate-900 text-white py-8 sm:py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+        <span className="text-orange-500">Transparent</span>{" "}
+        <span className="text-green-600">Pricing</span>
+      </h1>
+      <p className="text-sm sm:text-base md:text-xl text-sky-100 max-w-3xl mx-auto leading-relaxed">
+        No Hidden Fees, No Surprises. Just Honest, Upfront Pricing for Quality Automotive Service at Your Location.
+      </p>
+    </div>
+  </section>
+</main>
 
-        {/* ✅ Price List Section with Left Column */}
-<section className="bg-slate-800 text-white py-16">
+{/* ✅ Price List Section */}
+<section className="bg-slate-800 text-white py-10 sm:py-16">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+    {/* Heading */}
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6">
       At-Home Service{" "}
-      <span className="font-bold" style={{ color: "#e50914" }}>
+      <span className="font-bold text-brandRed" style={{ color: "#e50914" }}>
         Price List
       </span>
     </h2>
-    <p className="text-center text-lg text-sky-100 max-w-3xl mx-auto mb-12">
-      Wondering how much does it cost to service a bike? Bike Repair or
-      Motorcycle service cost may depend upon the type of service you opt
-      for. Refer below to get the estimated labour of Bike Service.
+    <p className="text-center text-sm sm:text-base md:text-lg text-sky-100 max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed">
+      Wondering how much it costs to service your bike? Bike Repair or Motorcycle service cost may depend upon the type of service you choose. Refer below for estimated service pricing.
     </p>
 
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+    {/* Grid Layout */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 items-start">
+      
       {/* Left Column */}
-      <div className="flex flex-col justify-start space-y-6">
-        <h3 className="text-4xl font-extrabold leading-snug">
-          Save your <span style={{ color: "#e50914" }}>Time</span> and{" "}
+      <div className="flex flex-col justify-start space-y-4 sm:space-y-6 text-center md:text-left">
+        <h3 className="text-3xl sm:text-4xl font-extrabold leading-snug">
+          Save your{" "}
+          <span style={{ color: "#e50914" }}>Time</span> and{" "}
           <span style={{ color: "#e50914" }}>Money</span>
         </h3>
 
         <button
-          className="text-white px-6 py-3 rounded-lg font-semibold w-max transition-colors"
+          className="text-white px-5 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base w-max mx-auto md:mx-0 transition-colors"
           style={{ backgroundColor: "#e50914" }}
           onMouseOver={(e) =>
             (e.currentTarget.style.backgroundColor = "#b20710")
@@ -201,52 +206,59 @@ const Pricing: React.FC = () => {
           Service Charges →
         </button>
 
-        <div className="flex gap-4">
+        {/* App Buttons */}
+        <div className="flex justify-center md:justify-start gap-3 sm:gap-4">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
             alt="Google Play"
-            className="h-12"
+            className="h-10 sm:h-12 object-contain"
           />
           <img
             src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
             alt="App Store"
-            className="h-12"
+            className="h-10 sm:h-12 object-contain"
           />
         </div>
       </div>
 
-      {/* Right Column - Cards */}
-      <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Right Column - Service Cards */}
+      <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
         {services.map((service, index) => (
           <div
             key={index}
-            className="bg-sky-100 text-black rounded-lg shadow-lg p-6"
+            className="bg-sky-100 text-black rounded-lg shadow-lg p-5 sm:p-6 hover:shadow-xl transition-shadow duration-300"
           >
-            <h3 className="text-xl font-bold mb-1" style={{ color: "#e50914" }}>
+            <h3 className="text-lg sm:text-xl font-bold mb-1" style={{ color: "#e50914" }}>
               {service.title}
             </h3>
-            <p className="text-lg font-bold text-black mb-3">{service.cc}</p>
-            <div className="flex items-center space-x-3 mb-3">
-              <span className="line-through" style={{ color: "#e50914" }}>
+            <p className="text-base sm:text-lg font-bold text-black mb-2 sm:mb-3">{service.cc}</p>
+
+            {/* Prices */}
+            <div className="flex flex-wrap items-center justify-center sm:justify-start space-x-3 mb-3 sm:mb-4">
+              <span className="line-through text-sm sm:text-base" style={{ color: "#e50914" }}>
                 {service.oldPrice}
               </span>
-              <span className="text-green-600 font-bold text-xl">
+              <span className="text-green-600 font-bold text-lg sm:text-xl">
                 {service.newPrice}
               </span>
             </div>
-            <ul className="space-y-2 mb-4 text-lg">
+
+            {/* Features */}
+            <ul className="space-y-1 sm:space-y-2 mb-3 sm:mb-4 text-sm sm:text-base">
               {service.features.map((f, i) => (
-                <li key={i} className="flex items-center">
+                <li key={i} className="flex items-start text-left">
                   <span className="text-green-500 mr-2">✔</span> {f}
                 </li>
               ))}
             </ul>
+
+            {/* Button */}
             <button
               onClick={() => {
                 setActiveService(service);
                 setAgree(false);
               }}
-              className="text-white px-4 py-2 rounded-lg transition-colors"
+              className="text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-colors w-full sm:w-auto"
               style={{ backgroundColor: "#e50914" }}
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor = "#b20710")
@@ -255,7 +267,7 @@ const Pricing: React.FC = () => {
                 (e.currentTarget.style.backgroundColor = "#e50914")
               }
             >
-              See checklist
+              See Checklist
             </button>
           </div>
         ))}
