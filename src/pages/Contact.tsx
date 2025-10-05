@@ -30,9 +30,7 @@ const Contact = () => {
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
@@ -40,13 +38,7 @@ const Contact = () => {
 
       if (response.ok && data.success) {
         setShowSuccess(true);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        });
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
         setTimeout(() => setShowSuccess(false), 5000);
       } else {
         setErrorMsg(data.message || 'Failed to send message.');
@@ -68,78 +60,79 @@ const Contact = () => {
       
       <div className="min-h-screen">
         {/* Hero Section */}
-        <section className="bg-slate-900 text-white py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="text-blue-600">Contact</span> <span className="text-orange-600">Us</span>
-              </h1>
-
-              <p className="text-xl text-white max-w-3xl mx-auto">
-                Get in touch with our team for questions, quotes, or to schedule 
-                your mobile automotive service.
-              </p>
+        <main className="bg-slate-900 pt-[60px] sm:pt-[90px] lg:pt-[120px]">
+          <section className="bg-slate-900 text-white py-8 sm:py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+                  <span className="text-blue-600">Contact</span> <span className="text-orange-600">Us</span>
+                </h1>
+                <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto">
+                  Get in touch with our team for questions, quotes, or to schedule 
+                  your mobile automotive service.
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </main>
 
-        {/* Contact Content */}
-        <section className="py-8 bg-slate-800">
+        {/* Contact Section */}
+        <section className="py-8 sm:py-12 bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
               {/* Contact Info */}
-              <div className="lg:col-span-1">
-                <div className="bg-sky-100 p-6 rounded-lg">
-                  <h2 className="text-2xl font-bold text-brandRed mb-6">
+              <div className="lg:col-span-1 space-y-6">
+                <div className="bg-sky-100 p-5 sm:p-6 rounded-lg shadow-md">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-brandRed mb-4 sm:mb-6">
                     Get In <span className="text-orange-600">Touch</span>
                   </h2>
 
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <Phone className="h-6 w-6 text-orange-500 mt-1" />
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-orange-500 mt-1" />
                       <div>
                         <h3 className="font-semibold text-green-600 mb-1">Phone</h3>
-                        <p className="text-gray-900">+919318478483</p>
-                        <p className="text-sm text-gray-900">Available 24/7 for emergencies</p>
+                        <p className="text-gray-900 text-sm sm:text-base">+919318478483</p>
+                        <p className="text-gray-900 text-xs sm:text-sm">Available 24/7 for emergencies</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                      <Mail className="h-6 w-6 text-orange-500 mt-1" />
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-orange-500 mt-1" />
                       <div>
                         <h3 className="font-semibold text-green-600 mb-1">Email</h3>
-                        <p className="text-gray-900">garagefixcare@gmail.com</p>
-                        <p className="text-sm text-gray-900">Response within 10 Mins</p>
+                        <p className="text-gray-900 text-sm sm:text-base">garagefixcare@gmail.com</p>
+                        <p className="text-gray-900 text-xs sm:text-sm">Response within 10 Mins</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                      <MapPin className="h-6 w-6 text-orange-500 mt-1" />
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-orange-500 mt-1" />
                       <div>
                         <h3 className="font-semibold text-green-600 mb-1">Service Area</h3>
-                        <p className="text-gray-900">All Major Cities</p>
-                        <p className="text-sm text-gray-900">Within 25 mile radius</p>
+                        <p className="text-gray-900 text-sm sm:text-base">All Major Cities</p>
+                        <p className="text-gray-900 text-xs sm:text-sm">Within 25 mile radius</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                      <Clock className="h-6 w-6 text-orange-500 mt-1" />
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-orange-500 mt-1" />
                       <div>
                         <h3 className="font-semibold text-green-600 mb-1">Business Hours</h3>
-                        <p className="text-gray-900">Mon - Sunday: 7AM - 11PM</p>
-                        <p className="text-lg text-gray-900">Emergency service available 24/7</p>
+                        <p className="text-gray-900 text-sm sm:text-base">Mon - Sunday: 7AM - 11PM</p>
+                        <p className="text-gray-900 text-xs sm:text-sm">Emergency service available 24/7</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-8 p-6 bg-sky-100 rounded-lg">
-                    <h3 className="font-semibold text-brandRed mb-2">Emergency Service</h3>
-                    <p className="text-gray-900 text-sm mb-3">
+                  <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-sky-50 rounded-lg">
+                    <h3 className="font-semibold text-brandRed mb-2 text-sm sm:text-base">Emergency Service</h3>
+                    <p className="text-gray-900 text-xs sm:text-sm mb-2 sm:mb-3">
                       Need immediate assistance? Call our emergency line for 24/7 support.
                     </p>
                     <a
                       href="tel:+919318478483"
-                      className="bg-orange-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-orange-700 transition-colors duration-200 inline-block"
+                      className="bg-brandRed text-white px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg font-medium hover:bg-orange-700 transition-colors duration-200 inline-block text-xs sm:text-sm"
                     >
                       Call Emergency Line
                     </a>
@@ -149,29 +142,29 @@ const Contact = () => {
 
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <div className="bg-sky-100 p-8 rounded-lg shadow-lg">
-                  <h2 className="text-2xl font-bold mb-6">
+                <div className="bg-sky-100 p-6 sm:p-8 rounded-lg shadow-lg">
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
                     <span className="text-green-600">Send Us</span> <span className="text-orange-600">a Message</span>
                   </h2>
 
                   {showSuccess && (
-                    <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                      <p className="text-green-800 font-medium">
+                    <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-green-50 border border-green-200 rounded-lg">
+                      <p className="text-green-800 text-sm sm:text-base font-medium">
                         Thank you! Your message has been sent successfully. We'll get back to you soon.
                       </p>
                     </div>
                   )}
 
                   {errorMsg && (
-                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                      <p className="text-red-800 font-medium">{errorMsg}</p>
+                    <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-red-800 text-sm sm:text-base font-medium">{errorMsg}</p>
                     </div>
                   )}
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-2">
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-1 sm:mb-2">
                           Full Name *
                         </label>
                         <input
@@ -181,13 +174,13 @@ const Contact = () => {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                           placeholder="Your full name"
                         />
                       </div>
 
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1 sm:mb-2">
                           Email Address *
                         </label>
                         <input
@@ -197,15 +190,15 @@ const Contact = () => {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                           placeholder="your@email.com"
                         />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-900 mb-2">
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-900 mb-1 sm:mb-2">
                           Phone Number
                         </label>
                         <input
@@ -214,13 +207,13 @@ const Contact = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                           placeholder="+919318478483"
                         />
                       </div>
 
                       <div>
-                        <label htmlFor="subject" className="block text-sm font-medium text-gray-900 mb-2">
+                        <label htmlFor="subject" className="block text-sm font-medium text-gray-900 mb-1 sm:mb-2">
                           Subject *
                         </label>
                         <select
@@ -229,7 +222,7 @@ const Contact = () => {
                           required
                           value={formData.subject}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                         >
                           <option value="">Select a subject</option>
                           <option value="general-inquiry">General Inquiry</option>
@@ -242,17 +235,17 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-2">
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-1 sm:mb-2">
                         Message *
                       </label>
                       <textarea
                         id="message"
                         name="message"
                         required
-                        rows={6}
+                        rows={5}
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
                         placeholder="Tell us about your automotive service needs..."
                       />
                     </div>
@@ -260,11 +253,11 @@ const Contact = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-orange-600 text-white px-4 sm:px-6 py-3 sm:py-3 rounded-lg font-semibold hover:bg-orange-700 transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                     >
                       {isSubmitting ? (
                         <>
-                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                           Sending...
                         </>
                       ) : (
