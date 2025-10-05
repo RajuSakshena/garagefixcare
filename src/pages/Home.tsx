@@ -1044,12 +1044,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
           <div className="p-2 sm:p-4 text-left">
             <h3 className="text-sm sm:text-base font-bold mb-1">{post.title}</h3>
             <p className="text-gray-700 text-xs sm:text-sm mb-2">{post.desc}</p>
-            <a
-              href={post.link}
-              className="text-red-600 font-semibold hover:underline text-xs sm:text-sm"
-            >
-              read more...
-            </a>
+           
           </div>
         </div>
       ))}
