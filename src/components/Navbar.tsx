@@ -19,7 +19,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-sky-100 shadow-lg sticky top-0 z-50">
+    <nav className="bg-sky-100 shadow-lg fixed top-0 z-50">
       <div className="relative">
 
         {/* Top Header Bar (Social Icons) */}
