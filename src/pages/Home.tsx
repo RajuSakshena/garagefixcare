@@ -67,10 +67,7 @@ const Home = () => {
   const [reviewScore, setReviewScore] = useState(4.6);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  // OLD Modal State (Kept but modified)
-  const [modalServiceTitle, setModalServiceTitle] = useState('');
-  const [modalServiceSubtitle, setModalServiceSubtitle] = useState('');
-  
+
   // NEW Modal State for API booking
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [modalPhoneNumber, setModalPhoneNumber] = useState(''); // State for phone input in modal
@@ -300,6 +297,8 @@ const Home = () => {
       }
     ]
   };
+  const [showInput, setShowInput] = useState(false);
+
 
  const serviceCities = [
     // Using darker/more professional colors for clean visibility
@@ -320,33 +319,86 @@ const Home = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <main className="bg-slate-800 pt-[76px] sm:pt-[112px] lg:pt-[120px]">
-<section className=" text-white py-2 sm:py-6 lg:py-6">
+        <main className=" bg-slate-800 pt-[76px] sm:pt-[112px] lg:pt-[120px]">
+
+<section className="text-white py-2 sm:py-6 lg:py-6">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-      
-      {/* Left Side: Main Text and Buttons */}
+
+      {/* Left Side: Main Text and Input */}
       <div>
         <h1 className="text-brandRed text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
           Professional Auto Repair
           <span className="text-orange-500"> At Your Doorstep</span>
         </h1>
-        <p className="font-poppins text-sm leading-relaxed text-white mb-4 sm:mb-6"> 
-         Enjoy professional bike care right at your doorstep.
-Our expert mechanics come to you with the right tools and parts, saving you time while keeping your bike in top condition—no workshop visit needed.
+
+        <p className="font-poppins text-sm leading-relaxed text-white mb-4 sm:mb-6">
+          Enjoy professional bike care right at your doorstep.
+          Our expert mechanics come to you with the right tools and parts, saving you time while keeping your bike in top condition—no workshop visit needed.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Link
-            to="/book"
-            className="bg-orange-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-orange-700 transition-colors duration-200 text-center"
-          >
-            Book Service Now
-          </Link>
+        {/* Book + Call Buttons Row */}
+        <div className="flex flex-wrap items-center gap-3">
+          {!showInput ? (
+            <button
+              onClick={() => setShowInput(true)}
+              className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300"
+            >
+              Book Service Now
+            </button>
+          ) : (
+            <div
+              className={`flex flex-col sm:flex-row items-center gap-3 transition-all duration-500 ease-in-out ${
+                showInput ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+              }`}
+            >
+              <input
+                type="tel"
+                maxLength={10}
+                value={modalPhoneNumber}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, '');
+                  if (val.length <= 10) setModalPhoneNumber(val);
+                }}
+                placeholder="Enter 10-digit mobile number"
+                className="w-full sm:w-auto px-4 py-3 rounded-lg text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              <button
+                onClick={async () => {
+                  if (!modalPhoneNumber || modalPhoneNumber.length !== 10) {
+                    alert('Please enter a valid 10-digit phone number.');
+                    return;
+                  }
+                  try {
+                    await axios.post(`${import.meta.env.VITE_API_URL}/api/quick-book-service`, {
+                      phoneNumber: modalPhoneNumber,
+                      serviceType: "Doorstep Bike Service",
+                    });
+                    alert('✅ Booking received! Our team will contact you shortly.');
+                    setModalPhoneNumber('');
+                    setShowInput(false);
+                  } catch (err) {
+                    console.error('Booking failed:', err);
+                    alert('❌ Booking failed. Please try again.');
+                  }
+                }}
+                className="bg-green-600 text-white px-5 py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-green-700 transition-colors duration-200"
+              >
+                Confirm Booking
+              </button>
+              <button
+                onClick={() => setShowInput(false)}
+                className="text-gray-300 text-sm hover:text-white transition-colors duration-200"
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+
+          {/* Call Button */}
           <a
             href="tel:9318478483"
-            className="border-2 border-white text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 text-center flex items-center justify-center gap-2"
+            className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 inline-flex items-center justify-center gap-2"
           >
             <Phone className="h-4 w-4" />
             Call Now
@@ -354,7 +406,7 @@ Our expert mechanics come to you with the right tools and parts, saving you time
         </div>
       </div>
 
-      {/* Right Side: Combined Image and Reviews */}
+      {/* Right Side: Image + Reviews */}
       <div className="relative flex flex-col items-center lg:items-end gap-4 mt-6 lg:mt-0">
         <img
           src={heroImage}
@@ -381,6 +433,7 @@ Our expert mechanics come to you with the right tools and parts, saving you time
     </div>
   </div>
 </section>
+
 </main>
 {/* --- Insert this new section after the Hero section --- */}
 
@@ -1044,7 +1097,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
           <div className="p-2 sm:p-4 text-left">
             <h3 className="text-sm sm:text-base font-bold mb-1">{post.title}</h3>
             <p className="text-gray-700 text-xs sm:text-sm mb-2">{post.desc}</p>
-           
+          
           </div>
         </div>
       ))}
