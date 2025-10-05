@@ -320,8 +320,8 @@ const Home = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <main className="pt-[76px] sm:pt-[112px] lg:pt-[120px]">
-<section className="bg-slate-800 text-white py-2 sm:py-6 lg:py-6">
+        <main className="bg-slate-800 pt-[76px] sm:pt-[112px] lg:pt-[120px]">
+<section className=" text-white py-2 sm:py-6 lg:py-6">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
