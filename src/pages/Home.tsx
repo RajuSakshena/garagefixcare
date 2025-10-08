@@ -323,7 +323,7 @@ const Home = () => {
 
 <section className="text-white py-2 sm:py-2 lg:py-2">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 items-center">
 
       {/* Left Side: Main Text and Input */}
       <div>
