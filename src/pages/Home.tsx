@@ -323,7 +323,7 @@ const Home = () => {
 
 <section className="text-white py-2 sm:py-2 lg:py-2">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
 
       {/* Left Side: Main Text and Input */}
       <div>
@@ -407,14 +407,14 @@ const Home = () => {
       </div>
 
       {/* Right Side: Image + Reviews */}
-      <div className="relative flex flex-col items-center lg:items-end gap-2 mt-2 lg:mt-0">
+      <div className="relative flex flex-col items-center lg:items-end gap-1 mt-1 lg:mt-0">
         <img
           src={heroImage}
           alt="Professional mechanic working on bike"
           className="rounded-lg shadow-2xl w-full"
         />
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
           <div className="bg-sky-100 text-black p-1 rounded-lg shadow-lg flex-1 w-full sm:w-auto">
             <div className="flex items-center justify-center gap-2 text-lg sm:text-xl font-bold">
               <Star className="h-4 w-4 text-yellow-400 fill-current" />
