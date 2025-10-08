@@ -323,7 +323,7 @@ const Home = () => {
 
 <section className="text-white py-2 sm:py-2 lg:py-2">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
 
       {/* Left Side: Main Text and Input */}
       <div>
@@ -441,7 +441,7 @@ const Home = () => {
     Assuming the Navbar is bg-white or bg-gray-50 based on the screenshot. */}
 <div className="bg-sky-100 border-y border-gray-200 py-2 overflow-hidden">
   <div className="flex items-center text-sm sm:text-base font-semibold max-w-7xl mx-auto">
-    <div className="flex-shrink-0 px-2 sm:px-4 pr-2">
+    <div className="flex-shrink-0 px-2 sm:px-2 pr-2">
       <span className="text-red-600 mr-1 sm:mr-2 font-bold">Service Available in</span>
       <span className="text-orange-600 font-bold">Delhi NCR</span>
       <span className="text-brandRed font-bold hidden sm:inline"> (10% off)</span>
