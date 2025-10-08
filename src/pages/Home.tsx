@@ -440,7 +440,7 @@ const Home = () => {
 {/* Background color based on your Navbar: likely a light gray or white. 
     Assuming the Navbar is bg-white or bg-gray-50 based on the screenshot. */}
 <div className="bg-sky-100 border-y border-gray-200 py-2 overflow-hidden">
-  <div className="flex items-center text-xs sm:text-sm font-semibold max-w-7xl mx-auto">
+  <div className="flex items-center text-sm sm:text-sm font-semibold max-w-7xl mx-auto">
     <div className="flex-shrink-0 px-2 sm:px-2 pr-2">
       <span className="text-red-600 mr-1 sm:mr-2 font-bold">Service Available </span>
       <span className="text-brandRed font-bold sm:inline"> (10% off)</span>
@@ -452,7 +452,7 @@ const Home = () => {
           serviceCities.map((city, index) => (
            <span 
   key={`${repetitionIndex}-${index}`}
-  className={`ml-2 sm:ml-6 md:ml-12 tracking-wider flex-shrink-0 font-bold text-xs sm:text-sm ${city.color}`}
+  className={`ml-2 sm:ml-6 md:ml-12 tracking-wider flex-shrink-0 font-bold text-sm sm:text-sm ${city.color}`}
 >
   {city.name}
 </span>
