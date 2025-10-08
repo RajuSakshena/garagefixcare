@@ -302,7 +302,7 @@ const Home = () => {
 
  const serviceCities = [
     // Using darker/more professional colors for clean visibility
-    { name: "Delhi", color: "text-slate-700" },
+    { name: "Delhi", color: "text-slate-700",  },
     { name: "Noida", color: "text-red-700" }, // Using a dark brand color for emphasis
     { name: "Greater Noida", color: "text-teal-700" },
     { name: "Gurugram", color: "text-indigo-700" },
@@ -451,12 +451,13 @@ const Home = () => {
       <div className="flex items-center animate-marquee">
         {[...Array(3)].map((_, repetitionIndex) => (
           serviceCities.map((city, index) => (
-            <span 
-              key={`${repetitionIndex}-${index}`}
-              className={`ml-2 sm:ml-6 md:ml-12 tracking-wider flex-shrink-0 font-bold ${city.color}`}
-            >
-              {city.name}
-            </span>
+           <span 
+  key={`${repetitionIndex}-${index}`}
+  className={`ml-2 sm:ml-6 md:ml-12 tracking-wider flex-shrink-0 font-bold text-xs sm:text-sm ${city.color}`}
+>
+  {city.name}
+</span>
+
           ))
         ))}
       </div>
