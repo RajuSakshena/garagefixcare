@@ -407,7 +407,7 @@ const Home = () => {
       </div>
 
       {/* Right Side: Image + Reviews */}
-      <div className="relative flex flex-col items-center lg:items-end gap-4 mt-6 lg:mt-0">
+      <div className="relative flex flex-col items-center lg:items-end gap-2 mt-6 lg:mt-0">
         <img
           src={heroImage}
           alt="Professional mechanic working on bike"
