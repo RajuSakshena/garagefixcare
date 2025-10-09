@@ -73,7 +73,7 @@ const Services = () => {
                 Book Expert Mechanic to Fix your Bike at Your Home
               </p>
               <a
-                href="tel:9318478483"
+                href="tel:9540553759"
                 className="inline-flex items-center justify-center bg-brandRed hover:bg-red-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold shadow-lg mb-6 sm:mb-8 transition"
               >
                 Call For Offers & Booking
