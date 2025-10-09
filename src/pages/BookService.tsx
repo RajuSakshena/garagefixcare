@@ -166,7 +166,7 @@ const BookService = () => {
       </h3>
 
       <a
-        href="tel:9318478483"
+        href="tel:9540553759"
         className="inline-block mb-4 sm:mb-6 px-5 sm:px-6 py-2 sm:py-3 bg-brandRed hover:bg-red-700 rounded-full font-bold text-sm sm:text-base shadow-md transition"
       >
         📞 Book on Call
@@ -260,7 +260,7 @@ const BookService = () => {
         <div>
           <h3 className="font-bold text-sm sm:text-base">Call :</h3>
           <a href="tel:9318478483" className="text-gray-300 hover:text-red-500 text-sm sm:text-base">
-            9318478483
+            9540553759
           </a>
         </div>
       </div>
@@ -278,12 +278,12 @@ const BookService = () => {
         <div>
           <h3 className="font-bold text-sm sm:text-base">WhatsApp :</h3>
           <a
-            href="https://wa.me/919318478483"
+            href="https://wa.me/919540553759"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-red-500 text-sm sm:text-base"
           >
-            +91 9318478483
+            +91 9540553759
           </a>
         </div>
       </div>
