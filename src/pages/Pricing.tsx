@@ -281,7 +281,7 @@ const Pricing: React.FC = () => {
 <div className="fixed top-1/2 right-6 -translate-y-1/2 flex flex-col space-y-6 z-50">
   {/* Phone Button */}
   <a
-    href="tel:9318478483"
+    href="tel:9540553759"
     className="w-16 h-16 rounded-full bg-brandRed hover:bg-brandRedDark text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
     aria-label="Call Us"
   >
@@ -290,7 +290,7 @@ const Pricing: React.FC = () => {
 
   {/* WhatsApp Button */}
   <a
-    href="https://wa.me/9318478483"
+    href="https://wa.me/9540553759"
     target="_blank"
     rel="noopener noreferrer"
     className="w-16 h-16 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
