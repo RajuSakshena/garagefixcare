@@ -3,6 +3,8 @@ import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import mysql from 'mysql2/promise';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Load environment variables
 dotenv.config();
@@ -25,7 +27,7 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Test the database connection
+// Test MySQL connection
 pool.getConnection()
   .then(connection => {
     console.log('⚡️ MySQL database connected successfully!');
@@ -35,7 +37,7 @@ pool.getConnection()
     console.error('❌ Failed to connect to MySQL database:', err.stack);
   });
 
-// Create nodemailer transporter
+// Nodemailer transporter
 const createTransporter = () => {
   return nodemailer.createTransport({
     service: 'gmail',
@@ -46,7 +48,9 @@ const createTransporter = () => {
   });
 };
 
-// Book Service endpoint
+// ======================== API ENDPOINTS ========================
+
+// Book Service
 app.post('/api/book-service', async (req, res) => {
   try {
     const {
@@ -105,7 +109,7 @@ app.post('/api/book-service', async (req, res) => {
   }
 });
 
-// ✅ Quick Book Service (Minimal: Phone + ServiceType)
+// Quick Book
 app.post('/api/quick-book-service', async (req, res) => {
   let connection;
   try {
@@ -115,8 +119,6 @@ app.post('/api/quick-book-service', async (req, res) => {
     }
 
     connection = await pool.getConnection();
-
-    // Save to database
     const sql = `
       INSERT INTO quick_bookings (phone_number, service_type, submitted_at)
       VALUES (?, ?, NOW())
@@ -124,7 +126,6 @@ app.post('/api/quick-book-service', async (req, res) => {
     await connection.execute(sql, [phoneNumber, serviceType]);
     console.log(`✅ Quick booking saved: ${phoneNumber} - ${serviceType}`);
 
-    // Send email notification
     const transporter = createTransporter();
     const emailContent = `
       <h2>⚡ New Quick Booking</h2>
@@ -150,7 +151,7 @@ app.post('/api/quick-book-service', async (req, res) => {
   }
 });
 
-// Contact form endpoint (MySQL + Email)
+// Contact form
 app.post('/api/contact', async (req, res) => {
   let connection;
   try {
@@ -161,13 +162,12 @@ app.post('/api/contact', async (req, res) => {
     }
 
     connection = await pool.getConnection();
-
     const sql = `
       INSERT INTO contact_submissions (name, email, phone, subject, message, submitted_at)
       VALUES (?, ?, ?, ?, ?, NOW())
     `;
     await connection.execute(sql, [name, email, phone, subject, message]);
-    console.log(`✅ Contact form submitted by ${name} (${email}) saved to database.`);
+    console.log(`✅ Contact form submitted by ${name} (${email}) saved.`);
 
     const transporter = createTransporter();
     const emailContent = `
@@ -180,37 +180,31 @@ app.post('/api/contact', async (req, res) => {
         <li><strong>Subject:</strong> ${subject}</li>
       </ul>
       <h3>Message:</h3>
-      <p style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #007acc; margin: 15px 0;">
+      <p style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #007acc;">
         ${message}
       </p>
       <hr>
       <p><em>Submitted at: ${new Date().toLocaleString()}</em></p>
     `;
-
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: 'garagefixcare@gmail.com',
       subject: `📧 Contact Form: ${subject} - ${name}`,
       html: emailContent
     };
-
     await transporter.sendMail(mailOptions);
 
     res.json({ success: true, message: 'Message sent and saved successfully!' });
 
   } catch (error) {
     console.error('❌ Error processing contact form:', error);
-    console.error('Error code:', error.code);
-    console.error('SQL message:', error.sqlMessage);
-    console.error(error.stack);
     res.status(500).json({ success: false, message: 'Failed to send message or save to database' });
-
   } finally {
     if (connection) connection.release();
   }
 });
 
-// Join Us form endpoint (MySQL + Email)
+// Join Us
 app.post('/api/join-us', async (req, res) => {
   let connection;
   try {
@@ -222,47 +216,52 @@ app.post('/api/join-us', async (req, res) => {
     connection = await pool.getConnection();
     const sql = 'INSERT INTO join_us_submissions (phone_number, submitted_at) VALUES (?, NOW())';
     await connection.execute(sql, [phoneNumber]);
-    console.log(`✅ Join Us phone number ${phoneNumber} saved to database.`);
+    console.log(`✅ Join Us: ${phoneNumber} saved.`);
 
     const transporter = createTransporter();
     const emailContent = `
       <h2>📞 New Join Us Request</h2>
-      <h3>Customer Information:</h3>
-      <ul>
-        <li><strong>Phone Number:</strong> ${phoneNumber}</li>
-      </ul>
-      <hr>
+      <ul><li><strong>Phone:</strong> ${phoneNumber}</li></ul>
       <p><em>Submitted at: ${new Date().toLocaleString()}</em></p>
     `;
-
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: 'garagefixcare@gmail.com',
       subject: `📞 New Join Us Request from: ${phoneNumber}`,
       html: emailContent
     };
-
     await transporter.sendMail(mailOptions);
 
-    res.json({ success: true, message: 'Phone number submitted successfully! We will contact you soon.' });
+    res.json({ success: true, message: 'Join Us request submitted successfully!' });
 
   } catch (error) {
-    console.error('❌ Error processing Join Us form:', error);
-    if (connection) connection.release();
-    res.status(500).json({ success: false, message: 'Failed to process the request' });
-
+    console.error('❌ Error in join-us:', error);
+    res.status(500).json({ success: false, message: 'Failed to process request' });
   } finally {
     if (connection) connection.release();
   }
 });
 
-// Health check endpoint
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+// ======================== FRONTEND SERVE ========================
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// 👇 since dist is outside server folder
+app.use(express.static(path.join(__dirname, '../dist')));
+
+// React Router handler
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
+
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚗 GarageOnCall API server running on port ${PORT}`);
-  console.log(`📧 Email notifications will be sent to: garagefixcare@gmail.com`);
+  console.log(`🚗 GarageFixCare API running on port ${PORT}`);
+  console.log(`📧 Emails will be sent to: garagefixcare@gmail.com`);
 });
