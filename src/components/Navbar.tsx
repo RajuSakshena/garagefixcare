@@ -54,9 +54,9 @@ const Navbar = () => {
 
               {/* Contact Info - now inline beside logo */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-xs sm:text-sm md:text-base leading-tight">
-                <a href="tel:9318478483" className="flex items-center space-x-1 text-gray-800 font-semibold hover:text-red-600">
+                <a href="tel:9540553759" className="flex items-center space-x-1 text-gray-800 font-semibold hover:text-red-600">
                   <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
-                  <span>93184-78483</span>
+                  <span>954055-3759</span>
                 </a>
                 <a href="mailto:garagefixcare@gmail.com" className="flex items-center space-x-1 text-gray-800 font-semibold hover:text-red-600">
                   <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
