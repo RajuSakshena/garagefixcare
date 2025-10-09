@@ -55,7 +55,7 @@ const Contact = () => {
     <>
       <SEOHelmet 
         title="Contact Us - Get in Touch | GarageOnCall Mobile Auto Service"
-        description="Contact GarageOnCall for mobile auto repair services. Call (555) 123-4567 or send us a message. Available 24/7 for emergency automotive services."
+        description="Contact GarageFixCare for mobile auto repair services. Call +919540553759 or send us a message. Available 24/7 for emergency automotive services."
       />
       
       <div className="min-h-screen">
@@ -111,7 +111,7 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold text-green-600 mb-1">Service Area</h3>
                         <p className="text-gray-900 text-sm sm:text-base">All Major Cities</p>
-                        <p className="text-gray-900 text-xs sm:text-sm">Within 25 mile radius</p>
+                        <p className="text-gray-900 text-xs sm:text-sm">Within 80 km radius</p>
                       </div>
                     </div>
 
