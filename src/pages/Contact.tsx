@@ -92,7 +92,7 @@ const Contact = () => {
                       <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-orange-500 mt-1" />
                       <div>
                         <h3 className="font-semibold text-green-600 mb-1">Phone</h3>
-                        <p className="text-gray-900 text-sm sm:text-base">+919318478483</p>
+                        <p className="text-gray-900 text-sm sm:text-base">+919540553759</p>
                         <p className="text-gray-900 text-xs sm:text-sm">Available 24/7 for emergencies</p>
                       </div>
                     </div>
@@ -131,7 +131,7 @@ const Contact = () => {
                       Need immediate assistance? Call our emergency line for 24/7 support.
                     </p>
                     <a
-                      href="tel:+919318478483"
+                      href="tel:+919540553759"
                       className="bg-brandRed text-white px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg font-medium hover:bg-orange-700 transition-colors duration-200 inline-block text-xs sm:text-sm"
                     >
                       Call Emergency Line
@@ -208,7 +208,7 @@ const Contact = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
-                          placeholder="+919318478483"
+                          placeholder="+919540553759"
                         />
                       </div>
 
