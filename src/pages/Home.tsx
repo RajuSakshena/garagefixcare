@@ -397,7 +397,7 @@ const Home = () => {
 
           {/* Call Button */}
           <a
-            href="tel:9318478483"
+            href="tel:9540553759"
             className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 inline-flex items-center justify-center gap-2"
           >
             <Phone className="h-4 w-4" />
@@ -726,7 +726,7 @@ Prices vary by service type—check the estimated labour charges below to plan y
           Certified Genuine Parts
         </p>
         <a
-          href="tel:9318478483"
+          href="tel:9540553759"
           className="w-full lg:w-2/3 inline-block bg-red-600 text-white px-4 py-2 rounded-md font-semibold text-sm hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-1 shadow-md mx-auto lg:mx-0"
         >
           <Phone className="h-4 w-4" />
@@ -1249,7 +1249,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
         {/* Floating Buttons */}
 <div className="fixed top-1/2 right-6 flex flex-col space-y-4 z-50 transform -translate-y-1/2">
   <a
-    href="tel:9318478483"
+    href="tel:9540553759"
     className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
     aria-label="Call Us"
   >
@@ -1269,7 +1269,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
     </svg>
   </a>
   <a
-    href="https://wa.me/9318478483"
+    href="https://wa.me/9540553759"
     target="_blank"
     rel="noopener noreferrer"
     className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
