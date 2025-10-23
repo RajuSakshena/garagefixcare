@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Facebook, Instagram, Youtube, MessageCircle, Mail } from 'lucide-react';
-import garageIcon from '../images/logo44.svg';
+import garageIcon from '../images/logo99.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +47,7 @@ const Navbar = () => {
                   <img 
                     src={garageIcon} 
                     alt="GARAGEFIX CARE Logo" 
-                    className="w-full h-full object-contain p-1"
+                    className="w-32 sm:w-36 h-16 sm:h-20 bg-sky-100 rounded-b-2xl"
                   />
                 </div>
               </Link>
