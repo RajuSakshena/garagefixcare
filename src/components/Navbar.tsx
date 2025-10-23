@@ -47,7 +47,7 @@ const Navbar = () => {
                   <img 
                     src={garageIcon} 
                     alt="GARAGEFIX CARE Logo" 
-                    className="w-32 sm:w-36 h-16 sm:h-20 bg-sky-100 rounded-b-2xl"
+                    className="w-32 sm:w-36 h-16 sm:h-20 bg-sky-100 rounded-b-2xl p-1"
                   />
                 </div>
               </Link>
