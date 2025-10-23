@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Phone as PhoneIcon, Mail as MailIcon, MapPin, Facebook, Instagram, Linkedin, Youtube, Twitter } from 'lucide-react';
-import logo41 from "../images/logo44.svg";
+import logo41 from "../images/logo99.png";
 
 interface JoinUsResponse {
   success: boolean;
