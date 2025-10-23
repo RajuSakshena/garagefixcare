@@ -43,11 +43,11 @@ const Navbar = () => {
             <div className="flex items-center space-x-3 sm:space-x-6">
               {/* Logo */}
               <Link to="/" className="z-20 -mt-8 flex-shrink-0">
-                <div className="w-28 sm:w-28 h-16 sm:h-16 bg-sky-100 rounded-b-2xl shadow-md flex items-center justify-center overflow-hidden">
+                <div className="w-28 sm:w-24 h-16 sm:h-12 bg-sky-100 rounded-b-2xl shadow-md flex items-center justify-center overflow-hidden">
                   <img 
                     src={garageIcon} 
                     alt="GARAGEFIX CARE Logo" 
-                    className="w-32 sm:w-28 h-16 sm:h-16 bg-sky-100 rounded-b-2xl"
+                    className="w-32 sm:w-24 h-16 sm:h-12 bg-sky-100 rounded-b-2xl"
                   />
                 </div>
               </Link>
