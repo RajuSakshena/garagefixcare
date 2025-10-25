@@ -313,9 +313,10 @@ const Home = () => {
   return (
     <>
       <SEOHelmet
-        title="GarageFixCare - Professional Bikes & Cars Service At Your Doorstep"
-        description="Experience the ultimate convenience of professional bike care at your doorstep. Our expert mechanics come directly to your location—whether at home, work, or on the go— equipped with essential tools and quality parts. Save valuable time while ensuring your bike receives tailored maintenance for peak performance and safety. With our trusted and reliable service, you can enjoy hassle-free repairs and keep your bike in top condition without ever needing to visit a workshop."
-      />
+  title="GarageFixCare - Professional Bikes & Cars Service At Your Doorstep"
+  description="Get expert bike and car repair at your doorstep. Skilled mechanics, quality parts, and fast service—saving you time while keeping your vehicles in top condition."
+/>
+
 
       <div className="min-h-screen">
         {/* Hero Section */}
@@ -328,7 +329,7 @@ const Home = () => {
       {/* Left Side: Main Text and Input */}
       <div>
         <h1 className="text-brandRed text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
-          Professional Auto Repair
+          Professional Bikes & Cars Service
           <span className="text-orange-500"> At Your Doorstep</span>
         </h1>
 
