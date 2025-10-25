@@ -313,7 +313,7 @@ const Home = () => {
   return (
     <>
       <SEOHelmet
-        title="GarageFixCare - Professional Auto Repair At Your Doorstep"
+        title="GarageFixCare - Professional Bikes & Cars Service At Your Doorstep"
         description="Experience the ultimate convenience of professional bike care at your doorstep. Our expert mechanics come directly to your location—whether at home, work, or on the go— equipped with essential tools and quality parts. Save valuable time while ensuring your bike receives tailored maintenance for peak performance and safety. With our trusted and reliable service, you can enjoy hassle-free repairs and keep your bike in top condition without ever needing to visit a workshop."
       />
 
