@@ -1193,7 +1193,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
         },
         {
           q: "How can I provide feedback about my service experience?",
-          a: "Garage On Call welcomes feedback from customers and provides various channels for sharing your experiences, including online reviews and feedback forms."
+          a: "Garage Fix Care welcomes feedback from customers and provides various channels for sharing your experiences, including online reviews and feedback forms."
         },
       ].map((faq, index) => (
         <div key={index} className="border border-gray-700 rounded-md overflow-hidden">
