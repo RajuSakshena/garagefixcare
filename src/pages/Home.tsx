@@ -1169,7 +1169,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
         },
         {
           q: "Do you provide discounts or promotional offers for returning customers?",
-          a: "Garage On Call offers special discounts and promotions for loyal customers. Please inquire about current offers."
+          a: "Garage Fix Care offers special discounts and promotions for loyal customers. Please inquire about current offers."
         },
         {
           q: "Are your technicians certified and experienced?",
