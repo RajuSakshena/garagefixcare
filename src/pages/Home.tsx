@@ -1161,7 +1161,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
         },
         {
           q: "Can I track the status of my service appointment?",
-          a: "Customers can track their service appointment in real-time via the Garage On Call app or website."
+          a: "Customers can track their service appointment in real-time via the Garage Fix Care app or website."
         },
         {
           q: "What should I do if I’m not satisfied with the service provided?",
