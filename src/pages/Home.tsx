@@ -1177,7 +1177,7 @@ Enjoy convenient, affordable service—plus bike insurance and more.
         },
         {
           q: "What makes your doorstep service different from traditional garage visits?",
-          a: "Garage Fix Care’s doorstep service provides unmatched convenience, saving customers time by delivering expert service directly to their location."
+          a: "Garage Fix Care  doorstep service provides unmatched convenience, saving customers time by delivering expert service directly to their location."
         },
         {
           q: "Do you offer eco-friendly or green service options?",
