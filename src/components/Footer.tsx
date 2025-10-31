@@ -35,7 +35,7 @@ const Footer = () => {
             <img src={logo41} alt="Garage Fix Care" className="w-32 sm:w-36 h-16 sm:h-20 bg-sky-100 rounded-b-2xl" />
             <div className="text-left mt-2 sm:mt-0">
               <h3 className="text-lg sm:text-xl font-bold text-white">Corporate Office</h3>
-              <p className="text-sm sm:text-base">3rd Floor, Corenthum Tower, Sector 62, Noida, UP 201301</p>
+              <p className="text-sm sm:text-base">The Corenthum Tower-1, Block-A, Industrial Area, Sector 62, Noida, UP 201309</p>
             </div>
           </div>
         </div>
