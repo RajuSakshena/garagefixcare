@@ -63,7 +63,7 @@ const Footer = () => {
             <ul className="space-y-1 text-sm sm:text-base">
               <li className="flex items-center"><MailIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="mailto:garagefixcare@gmail.com" className="hover:text-red-600">garagefixcare@gmail.com</a></li>
               <li className="flex items-center"><PhoneIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="tel:+919540553759" className="hover:text-red-600">+91 9540553759</a></li>
-              <li className="flex items-center"><MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="https://garagefixcare.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">garagefixcare.com</a></li>
+              <li className="flex items-center"><MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="https://garagefixcare.in" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">garagefixcare.com</a></li>
             </ul>
           </div>
 
