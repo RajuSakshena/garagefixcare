@@ -578,7 +578,7 @@ Hurry—these deals won’t last long!
         </div>
         <p className="text-black font-semibold mb-1 text-sm">4.7/5 Rating</p>
         <a
-          href="https://www.facebook.com/yourbusiness"
+          href="https://www.instagram.com/p/DQVj8SmktgG/?igsh=cTRzNXd5dHZtOGxi"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-500 font-semibold hover:underline text-xs"
