@@ -27,10 +27,10 @@ const Navbar = () => {
         <div className="bg-slate-800 text-white py-1 px-4">
           <div className="max-w-7xl mx-auto flex justify-end items-center text-sm h-7">
             <div className="flex items-center space-x-3">
-              <a href="#" className="hover:text-orange-300"><Facebook className="h-4 w-4" /></a>
-              <a href="#" className="hover:text-orange-300"><Instagram className="h-4 w-4" /></a>
-              <a href="#" className="hover:text-orange-300"><MessageCircle className="h-4 w-4" /></a>
-              <a href="#" className="hover:text-orange-300"><Youtube className="h-4 w-4" /></a>
+              <a href="https://www.facebook.com/people/Garage-Fix-Care/61582606570830/" className="hover:text-orange-300"><Facebook className="h-4 w-4" /></a>
+              <a href="https://www.instagram.com/p/DQVj8SmktgG/?igsh=cTRzNXd5dHZtOGxi" className="hover:text-orange-300"><Instagram className="h-4 w-4" /></a>
+              
+              <a href="https://www.youtube.com" className="hover:text-orange-300"><Youtube className="h-4 w-4" /></a>
             </div>
           </div>
         </div>
