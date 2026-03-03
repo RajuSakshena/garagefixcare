@@ -63,7 +63,7 @@ const Footer = () => {
             <ul className="space-y-1 text-sm sm:text-base">
               <li className="flex items-center"><MailIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="mailto:garagefixcare@gmail.com" className="hover:text-red-600">garagefixcare@gmail.com</a></li>
               <li className="flex items-center"><PhoneIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="tel:+919540553759" className="hover:text-red-600">+91 9540553759</a></li>
-              <li className="flex items-center"><MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="https://garagefixcare.in" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">garagefixcare.com</a></li>
+              <li className="flex items-center"><MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="https://garagefixcare.in" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Garagefixcare.in</a></li>
             </ul>
           </div>
 
@@ -71,9 +71,9 @@ const Footer = () => {
           <div className="flex-1">
             <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Social Media</h3>
             <ul className="space-y-1 text-sm sm:text-base">
-              <li className="flex items-center"><Facebook className="h-4 w-4 mr-1" /><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Facebook</a></li>
+              <li className="flex items-center"><Facebook className="h-4 w-4 mr-1" /><a href="https://www.facebook.com/people/Garage-Fix-Care/61582606570830/" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Facebook</a></li>
               <li className="flex items-center"><Twitter className="h-4 w-4 mr-1" /><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Twitter</a></li>
-              <li className="flex items-center"><Instagram className="h-4 w-4 mr-1" /><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Instagram</a></li>
+              <li className="flex items-center"><Instagram className="h-4 w-4 mr-1" /><a href="https://www.instagram.com/p/DQVj8SmktgG/?igsh=cTRzNXd5dHZtOGxi" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Instagram</a></li>
               <li className="flex items-center"><Linkedin className="h-4 w-4 mr-1" /><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">LinkedIn</a></li>
               <li className="flex items-center"><Youtube className="h-4 w-4 mr-1" /><a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">YouTube</a></li>
             </ul>
