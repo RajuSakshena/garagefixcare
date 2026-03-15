@@ -553,7 +553,7 @@ Hurry—these deals won’t last long!
         </div>
         <p className="text-black font-semibold mb-1 text-sm">4.7/5 Rating</p>
         <a
-          href="https://www.google.com/search?q=your+business+on+google"
+          href="https://goo.gl/maps/dqmKivbhftEaVxK79"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-500 font-semibold hover:underline text-xs"
