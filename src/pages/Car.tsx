@@ -25,7 +25,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ImageGallery from "react-image-gallery";
-import "react-image-gallery/styles/css/image-gallery.css";
+import "react-image-gallery/styles/image-gallery.css";
 import axios from 'axios';
 import { FaWhatsapp } from "react-icons/fa";
 import SEOHelmet from '../components/SEOHelmet';
@@ -233,8 +233,8 @@ const Car = () => {
                   </div>
 
                   {/* === Select Your Vehicle Tile Section (UPDATED FOR CAR PAGE) === */}
-                  <div className="mt-8 bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-3xl p-3 sm:p-6 shadow-2xl">
-                    <h3 className="text-white text-sm sm:text-base font-semibold mb-4 text-center tracking-tight">Select Your Vehicle</h3>
+                  <div className="mt-8 bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-3xl p-5 sm:p-6 shadow-2xl">
+                    <h3 className="text-white text-lg font-semibold mb-4 text-center tracking-tight">Select Your Vehicle</h3>
                     
                     <div className="grid grid-cols-2 gap-3">
                       {/* Bike & Scooty - INACTIVE + Navigate to Home */}
@@ -359,95 +359,95 @@ const Car = () => {
           </div>
         </div>
 
-        {/* 1. SERVICES SECTION - bg-slate-900 - MOBILE FIRST GRID (EXACT FIX) */}
-        <section className="py-10 sm:py-16 bg-slate-900">
+        {/* 1. SERVICES SECTION - bg-slate-900 - MOBILE FIRST GRID */}
+        <section className="py-12 sm:py-16 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 sm:mb-10">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white">
                 Expert <span className="text-red-600">Car Services</span>
               </h2>
               <p className="text-white/70 mt-3 text-base sm:text-lg">Premium care. Delivered to your doorstep.</p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
-              <div className="group bg-sky-100 text-black rounded-3xl p-3 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <div className="h-10 w-10 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                  <Settings className="h-6 w-6" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <Settings className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">General Service</h3>
+                <h3 className="text-xl font-semibold mb-2">General Service</h3>
                 <p className="text-black text-sm leading-relaxed">Full routine maintenance including oil, filters, and 30-point inspection.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-3 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <div className="h-10 w-10 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                  <Wrench className="h-6 w-6" />
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <Wrench className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">Engine Repair</h3>
+                <h3 className="text-xl font-semibold mb-2">Engine Repair</h3>
                 <p className="text-black text-sm leading-relaxed">Expert diagnosis and repair of engine problems, from minor to major.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-3 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <div className="h-10 w-10 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                  <Droplet className="h-6 w-6" />
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <Droplet className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">Oil Change</h3>
+                <h3 className="text-xl font-semibold mb-2">Oil Change</h3>
                 <p className="text-black text-sm leading-relaxed">Premium synthetic oil + filter replacement for smooth performance.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-3 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <div className="h-10 w-10 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                  <Thermometer className="h-6 w-6" />
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <Thermometer className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">AC Service</h3>
+                <h3 className="text-xl font-semibold mb-2">AC Service</h3>
                 <p className="text-black text-sm leading-relaxed">Gas refill, deep cleaning, and full AC performance restoration.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-3 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <div className="h-10 w-10 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                  <ShieldCheck className="h-6 w-6" />
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <ShieldCheck className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">Brake Service</h3>
+                <h3 className="text-xl font-semibold mb-2">Brake Service</h3>
                 <p className="text-black text-sm leading-relaxed">Brake pads, discs, fluid, and complete safety inspection.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-3 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <div className="h-10 w-10 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                  <Battery className="h-6 w-6" />
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <Battery className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">Battery Replacement</h3>
+                <h3 className="text-xl font-semibold mb-2">Battery Replacement</h3>
                 <p className="text-black text-sm leading-relaxed">Instant testing and replacement with warranty-backed batteries.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-3 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <div className="h-10 w-10 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                  <ShowerHead className="h-6 w-6" />
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <ShowerHead className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">Car Wash</h3>
+                <h3 className="text-xl font-semibold mb-2">Car Wash</h3>
                 <p className="text-black text-sm leading-relaxed">Premium exterior + interior detailing and deep cleaning.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-3 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <div className="h-10 w-10 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                  <Hammer className="h-6 w-6" />
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                  <Hammer className="h-7 w-7" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">Denting &amp; Painting</h3>
+                <h3 className="text-xl font-semibold mb-2">Denting &amp; Painting</h3>
                 <p className="text-black text-sm leading-relaxed">Professional body repair and factory-finish painting.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 2. SERVICE CHECKLIST SECTION - bg-slate-800 + react-image-gallery (EXACT LAYOUT FIX) */}
-        <section className="py-10 sm:py-16 bg-slate-800">
+        {/* 2. SERVICE CHECKLIST SECTION - bg-slate-800 + react-image-gallery */}
+        <section className="py-12 sm:py-16 bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-              <div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <div className="lg:col-span-5">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
                   What’s Included in Every Service
                 </h2>
                 <p className="text-slate-100 text-base sm:text-lg">Our certified technicians follow a strict 40-point checklist so your car performs at its best.</p>
 
-                <div className="mt-6 sm:mt-10 space-y-4 sm:space-y-6">
+                <div className="mt-8 sm:mt-10 space-y-4 sm:space-y-6">
                   <div className="flex gap-4">
                     <CheckCircle className="h-6 w-6 text-emerald-500 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
@@ -494,7 +494,7 @@ const Car = () => {
               </div>
 
               {/* DYNAMIC MEDIA GALLERY - react-image-gallery */}
-              <div>
+              <div className="lg:col-span-7">
                 <div className="rounded-3xl overflow-hidden shadow-2xl">
                   <ImageGallery
                     items={galleryImages}
@@ -512,18 +512,18 @@ const Car = () => {
           </div>
         </section>
 
-        {/* 3. PRICING PREVIEW SECTION - bg-slate-900 (HORIZONTAL SCROLL FIX) */}
-        <section className="py-10 sm:py-16 bg-slate-900">
+        {/* 3. PRICING PREVIEW SECTION - bg-slate-900 */}
+        <section className="py-12 sm:py-16 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 sm:mb-10">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white">
                 Simple &amp; Transparent <span className="text-red-600">Pricing</span>
               </h2>
               <p className="text-white/70 mt-3">No hidden charges. Ever.</p>
             </div>
 
-            <div className="flex gap-4 overflow-x-auto pb-4 max-w-5xl mx-auto snap-x snap-mandatory">
-              <div className="min-w-[280px] flex-shrink-0 bg-sky-100 text-black border border-transparent rounded-3xl p-6 sm:p-8 hover:border-sky-200 transition-all">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+              <div className="bg-sky-100 text-black border border-transparent rounded-3xl p-6 sm:p-8 hover:border-sky-200 transition-all">
                 <div className="uppercase text-xs tracking-widest font-semibold mb-4 text-orange-400">Basic</div>
                 <div className="text-5xl font-bold mb-1">₹1,499</div>
                 <p className="text-slate-600 text-sm">Ideal for quick maintenance</p>
@@ -538,7 +538,7 @@ const Car = () => {
                 </button>
               </div>
 
-              <div className="min-w-[280px] flex-shrink-0 bg-sky-100 text-black rounded-3xl p-6 sm:p-8 shadow-2xl relative -mt-2 md:-mt-0 scale-105 ring-2 ring-orange-400">
+              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8 shadow-2xl relative -mt-2 md:-mt-0 scale-105 ring-2 ring-orange-400">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs font-bold px-8 py-1.5 rounded-3xl">MOST POPULAR</div>
                 <div className="uppercase text-xs tracking-widest font-semibold mb-4 text-orange-600">Standard</div>
                 <div className="text-5xl font-bold text-black mb-1">₹2,999</div>
@@ -555,7 +555,7 @@ const Car = () => {
                 </button>
               </div>
 
-              <div className="min-w-[280px] flex-shrink-0 bg-sky-100 text-black border border-transparent rounded-3xl p-6 sm:p-8 hover:border-sky-200 transition-all">
+              <div className="bg-sky-100 text-black border border-transparent rounded-3xl p-6 sm:p-8 hover:border-sky-200 transition-all">
                 <div className="uppercase text-xs tracking-widest font-semibold mb-4 text-orange-400">Premium</div>
                 <div className="text-5xl font-bold mb-1">₹4,999</div>
                 <p className="text-slate-600 text-sm">Full car rejuvenation</p>
@@ -574,10 +574,10 @@ const Car = () => {
         </section>
 
         {/* 4. PROCESS SECTION - bg-slate-800 */}
-        <section className="py-10 sm:py-16 bg-slate-800">
+        <section className="py-12 sm:py-16 bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 sm:mb-10">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">How GarageFixCare Works</h2>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white">How GarageFixCare Works</h2>
               <p className="text-slate-100 mt-3">4 simple steps to doorstep car care</p>
             </div>
 
@@ -622,10 +622,10 @@ const Car = () => {
         </section>
 
         {/* 5. TESTIMONIAL SECTION - bg-slate-900 */}
-        <section className="py-10 sm:py-16 bg-slate-900">
+        <section className="py-12 sm:py-16 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 sm:mb-10">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Real Owners. Real Stories.</h2>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white">Real Owners. Real Stories.</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -687,9 +687,9 @@ const Car = () => {
         </section>
 
         {/* CTA SECTION - MOBILE OPTIMIZED */}
-        <section className="py-10 sm:py-16 bg-slate-800 text-white">
+        <section className="py-12 sm:py-16 bg-slate-800 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-6 tracking-[-0.5px]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 tracking-[-0.5px]">
               Book Your Car Service Today
             </h2>
             <p className="max-w-md mx-auto text-lg sm:text-xl mb-10 opacity-90">
