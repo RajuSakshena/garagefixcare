@@ -369,69 +369,69 @@ const Car = () => {
               <p className="text-white/70 mt-3 text-base sm:text-lg">Premium care. Delivered to your doorstep.</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                 <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <Settings className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">General Service</h3>
-                <p className="text-black text-sm leading-relaxed">Full routine maintenance including oil, filters, and 30-point inspection.</p>
+                <p className="text-black text-sm leading-relaxed flex-1">Full routine maintenance including oil, filters, and 30-point inspection.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                 <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <Wrench className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Engine Repair</h3>
-                <p className="text-black text-sm leading-relaxed">Expert diagnosis and repair of engine problems, from minor to major.</p>
+                <p className="text-black text-sm leading-relaxed flex-1">Expert diagnosis and repair of engine problems, from minor to major.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                 <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <Droplet className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Oil Change</h3>
-                <p className="text-black text-sm leading-relaxed">Premium synthetic oil + filter replacement for smooth performance.</p>
+                <p className="text-black text-sm leading-relaxed flex-1">Premium synthetic oil + filter replacement for smooth performance.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                 <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <Thermometer className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">AC Service</h3>
-                <p className="text-black text-sm leading-relaxed">Gas refill, deep cleaning, and full AC performance restoration.</p>
+                <p className="text-black text-sm leading-relaxed flex-1">Gas refill, deep cleaning, and full AC performance restoration.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                 <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <ShieldCheck className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Brake Service</h3>
-                <p className="text-black text-sm leading-relaxed">Brake pads, discs, fluid, and complete safety inspection.</p>
+                <p className="text-black text-sm leading-relaxed flex-1">Brake pads, discs, fluid, and complete safety inspection.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                 <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <Battery className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Battery Replacement</h3>
-                <p className="text-black text-sm leading-relaxed">Instant testing and replacement with warranty-backed batteries.</p>
+                <p className="text-black text-sm leading-relaxed flex-1">Instant testing and replacement with warranty-backed batteries.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                 <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <ShowerHead className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Car Wash</h3>
-                <p className="text-black text-sm leading-relaxed">Premium exterior + interior detailing and deep cleaning.</p>
+                <p className="text-black text-sm leading-relaxed flex-1">Premium exterior + interior detailing and deep cleaning.</p>
               </div>
 
-              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="group bg-sky-100 text-black rounded-3xl p-4 sm:p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                 <div className="h-12 w-12 sm:h-14 sm:w-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
                   <Hammer className="h-7 w-7" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Denting &amp; Painting</h3>
-                <p className="text-black text-sm leading-relaxed">Professional body repair and factory-finish painting.</p>
+                <p className="text-black text-sm leading-relaxed flex-1">Professional body repair and factory-finish painting.</p>
               </div>
             </div>
           </div>
@@ -441,7 +441,8 @@ const Car = () => {
         <section className="py-12 sm:py-16 bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              <div className="lg:col-span-5">
+              {/* TEXT - ORDERED SECOND ON MOBILE */}
+              <div className="lg:col-span-5 order-2 lg:order-1">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
                   What’s Included in Every Service
                 </h2>
@@ -493,8 +494,8 @@ const Car = () => {
                 </div>
               </div>
 
-              {/* DYNAMIC MEDIA GALLERY - react-image-gallery */}
-              <div className="lg:col-span-7">
+              {/* DYNAMIC MEDIA GALLERY - ORDERED FIRST ON MOBILE */}
+              <div className="lg:col-span-7 order-1 lg:order-2">
                 <div className="rounded-3xl overflow-hidden shadow-2xl">
                   <ImageGallery
                     items={galleryImages}
@@ -522,50 +523,53 @@ const Car = () => {
               <p className="text-white/70 mt-3">No hidden charges. Ever.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
-              <div className="bg-sky-100 text-black border border-transparent rounded-3xl p-6 sm:p-8 hover:border-sky-200 transition-all">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+              {/* BASIC */}
+              <div className="bg-sky-100 text-black border border-transparent rounded-3xl p-6 sm:p-8 hover:border-sky-200 transition-all h-full flex flex-col">
                 <div className="uppercase text-xs tracking-widest font-semibold mb-4 text-orange-400">Basic</div>
                 <div className="text-5xl font-bold mb-1">₹1,499</div>
                 <p className="text-slate-600 text-sm">Ideal for quick maintenance</p>
-                <ul className="mt-8 space-y-4 text-sm">
+                <ul className="mt-8 space-y-4 text-sm flex-1">
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />30-point inspection</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Oil top-up</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Tyre pressure check</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Brake visual check</li>
                 </ul>
-                <button className="mt-10 w-full py-4 border border-slate-300 hover:bg-slate-100 rounded-2xl text-black font-semibold transition-colors">
+                <button className="mt-auto w-full py-4 border border-slate-300 hover:bg-slate-100 rounded-2xl text-black font-semibold transition-colors">
                   Choose Basic
                 </button>
               </div>
 
-              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8 shadow-2xl relative -mt-2 md:-mt-0 scale-105 ring-2 ring-orange-400">
+              {/* STANDARD - MOST POPULAR */}
+              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8 shadow-2xl relative -mt-2 md:-mt-0 scale-105 ring-2 ring-orange-400 h-full flex flex-col">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs font-bold px-8 py-1.5 rounded-3xl">MOST POPULAR</div>
                 <div className="uppercase text-xs tracking-widest font-semibold mb-4 text-orange-600">Standard</div>
                 <div className="text-5xl font-bold text-black mb-1">₹2,999</div>
                 <p className="text-slate-600 text-sm">Complete routine service</p>
-                <ul className="mt-8 space-y-4 text-black text-sm">
+                <ul className="mt-8 space-y-4 text-black text-sm flex-1">
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Everything in Basic</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Full engine tune-up</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />AC gas refill</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Battery health test</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />40-point checklist</li>
                 </ul>
-                <button className="mt-10 w-full py-4 bg-orange-600 text-white rounded-2xl font-semibold hover:bg-orange-700 transition-colors">
+                <button className="mt-auto w-full py-4 bg-orange-600 text-white rounded-2xl font-semibold hover:bg-orange-700 transition-colors">
                   Choose Standard
                 </button>
               </div>
 
-              <div className="bg-sky-100 text-black border border-transparent rounded-3xl p-6 sm:p-8 hover:border-sky-200 transition-all">
+              {/* PREMIUM */}
+              <div className="bg-sky-100 text-black border border-transparent rounded-3xl p-6 sm:p-8 hover:border-sky-200 transition-all h-full flex flex-col">
                 <div className="uppercase text-xs tracking-widest font-semibold mb-4 text-orange-400">Premium</div>
                 <div className="text-5xl font-bold mb-1">₹4,999</div>
                 <p className="text-slate-600 text-sm">Full car rejuvenation</p>
-                <ul className="mt-8 space-y-4 text-sm">
+                <ul className="mt-8 space-y-4 text-sm flex-1">
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Everything in Standard</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Deep engine service</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Interior detailing</li>
                   <li className="flex items-center gap-x-3"><CheckCircle className="h-4 w-4 text-emerald-400" />Denting touch-up</li>
                 </ul>
-                <button className="mt-10 w-full py-4 border border-slate-300 hover:bg-slate-100 rounded-2xl text-black font-semibold transition-colors">
+                <button className="mt-auto w-full py-4 border border-slate-300 hover:bg-slate-100 rounded-2xl text-black font-semibold transition-colors">
                   Choose Premium
                 </button>
               </div>
@@ -629,16 +633,16 @@ const Car = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8">
+              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8 h-full flex flex-col">
                 <div className="flex text-orange-400 mb-6">
                   {Array(5).fill(0).map((_, i) => (
                     <Star key={i} className="h-5 w-5 fill-current" />
                   ))}
                 </div>
-                <p className="text-black italic mb-8 leading-relaxed text-sm sm:text-base">
+                <p className="text-black italic mb-8 leading-relaxed text-sm sm:text-base flex-1">
                   “My Fortuner’s engine issue was fixed at my society gate in just 90 minutes. Transparent, professional, and genuine parts used!”
                 </p>
-                <div className="flex items-center gap-x-4">
+                <div className="flex items-center gap-x-4 mt-auto">
                   <div className="h-10 w-10 bg-slate-200 rounded-2xl"></div>
                   <div>
                     <p className="font-semibold text-black">Vikram Singh</p>
@@ -647,16 +651,16 @@ const Car = () => {
                 </div>
               </div>
 
-              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8">
+              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8 h-full flex flex-col">
                 <div className="flex text-orange-400 mb-6">
                   {Array(5).fill(0).map((_, i) => (
                     <Star key={i} className="h-5 w-5 fill-current" />
                   ))}
                 </div>
-                <p className="text-black italic mb-8 leading-relaxed text-sm sm:text-base">
+                <p className="text-black italic mb-8 leading-relaxed text-sm sm:text-base flex-1">
                   “AC service was done perfectly at my home. The mechanic even showed me before/after videos. Best decision ever!”
                 </p>
-                <div className="flex items-center gap-x-4">
+                <div className="flex items-center gap-x-4 mt-auto">
                   <div className="h-10 w-10 bg-slate-200 rounded-2xl"></div>
                   <div>
                     <p className="font-semibold text-black">Neha Kapoor</p>
@@ -665,16 +669,16 @@ const Car = () => {
                 </div>
               </div>
 
-              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8">
+              <div className="bg-sky-100 text-black rounded-3xl p-6 sm:p-8 h-full flex flex-col">
                 <div className="flex text-orange-400 mb-6">
                   {Array(5).fill(0).map((_, i) => (
                     <Star key={i} className="h-5 w-5 fill-current" />
                   ))}
                 </div>
-                <p className="text-black italic mb-8 leading-relaxed text-sm sm:text-base">
+                <p className="text-black italic mb-8 leading-relaxed text-sm sm:text-base flex-1">
                   “Brake service + oil change done in 45 mins. Saved me a full day at the workshop. Highly recommended!”
                 </p>
-                <div className="flex items-center gap-x-4">
+                <div className="flex items-center gap-x-4 mt-auto">
                   <div className="h-10 w-10 bg-slate-200 rounded-2xl"></div>
                   <div>
                     <p className="font-semibold text-black">Arjun Mehra</p>
