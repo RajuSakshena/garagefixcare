@@ -352,10 +352,10 @@ const serviceCities = [
 
       {/* Left Side: Main Text and Input */}
       <div>
-        <h1 className="text-brandRed text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
-          Professional Bikes & Cars Service
-          <span className="text-orange-500"> At Your Doorstep in Delhi, Noida & Gurugram</span>
-        </h1>
+      <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 leading-tight">
+  Professional Bikes & Cars Service
+  <span className="text-orange-500"> At Your Doorstep in Delhi, Noida & Gurugram</span>
+</h1>
 
         <p className="font-poppins text-sm leading-relaxed text-white mb-4 sm:mb-6">
           Enjoy professional bike & Car care right at your doorstep.
