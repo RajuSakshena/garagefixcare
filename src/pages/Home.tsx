@@ -354,11 +354,11 @@ const serviceCities = [
       <div>
         <h1 className="text-brandRed text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
           Professional Bikes & Cars Service
-          <span className="text-orange-500"> At Your Doorstep</span>
+          <span className="text-orange-500"> At Your Doorstep in Delhi, Noida & Gurugram</span>
         </h1>
 
         <p className="font-poppins text-sm leading-relaxed text-white mb-4 sm:mb-6">
-          Enjoy professional bike care right at your doorstep.
+          Enjoy professional bike & Car care right at your doorstep.
           Our expert mechanics come to you with the right tools and parts, saving you time while keeping your bike in top condition—no workshop visit needed.
         </p>
 
