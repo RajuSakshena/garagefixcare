@@ -336,9 +336,9 @@ const serviceCities = [
 ];
   return (
     <>
-      <SEOHelmet
-  title="GarageFixCare - Professional Bikes & Cars Service At Your Doorstep"
-  description="Get expert bike and car repair at your doorstep. Skilled mechanics, quality parts, and fast service—saving you time while keeping your vehicles in top condition."
+     <SEOHelmet
+  title="Bike & Car Service at Home in Delhi, Noida & Gurugram | Garage Fix Care"
+  description="Looking for bike or car service near you? Get doorstep bike & car repair in Delhi, Noida & Gurugram. Affordable, fast service by expert mechanics. Book now!"
 />
 
 
