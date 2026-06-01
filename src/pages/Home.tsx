@@ -306,16 +306,16 @@ const serviceCities = [
      <SEOHelmet
   title="Bike & Car Service in Noida ₹299 | Doorstep Repair Near Me"
   description="Bike & car service in Noida starting at just ₹299. Doorstep repair, oil change, battery replacement, puncture repair & trusted mechanics near you. Same-day service by Garage Fix Care."
-  canonical="https://www.garagefixcare.com/"
+  canonical="https://www.garagefixcare.in/"
   robots="index, follow"
   og={{
-    url: "https://www.garagefixcare.com/",
-    image: "https://www.garagefixcare.com/og-image.jpg",
+    url: "https://www.garagefixcare.in/",
+    image: "https://www.garagefixcare.in/og-banner.png",
     imageAlt: "Bike & car service at doorstep in Noida by Garage Fix Care",
     type: "website",
   }}
   twitter={{
-    image: "https://www.garagefixcare.com/og-image.jpg",
+    image: "https://www.garagefixcare.in/og-banner.png",
     imageAlt: "Doorstep bike and car service in Noida",
   }}
   structuredData={[
@@ -327,7 +327,7 @@ const serviceCities = [
       "url": "https://www.garagefixcare.com",
       "telephone": "+919540553759",
       "priceRange": "₹₹",
-      "image": "https://www.garagefixcare.com/og-image.jpg",
+      "image": "https://www.garagefixcare.in/og-banner.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Noida",
@@ -381,7 +381,7 @@ const serviceCities = [
       {/* Left Side: Main Text and Input */}
       <div>
       <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-  Bike &amp; Car Service in Noida
+  Bike &amp; Car Service in Noida, Delhi , Gurgaon
   <span className="text-orange-500"> at Your Doorstep</span>
 </h1>
 
