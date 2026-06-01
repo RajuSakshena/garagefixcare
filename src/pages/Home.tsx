@@ -91,18 +91,13 @@ const Home = () => {
     return () => clearInterval(t);
   }, []);
 
-  // Custom deals carousel — no react-slick
-  const [carouselIndex, setCarouselIndex] = useState(0);
+  // Marquee deals images (continuous scroll, no index needed)
   const carouselImages = [
     { src: bikeServiceOfferImage, alt: "Bike service offer in Noida" },
     { src: doorstepImage,         alt: "Doorstep bike service Noida" },
     { src: engineImage,           alt: "Bike engine repair at home Noida" },
     { src: roadsideImage,         alt: "Roadside bike assistance near Noida" },
   ];
-  useEffect(() => {
-    const t = setInterval(() => setCarouselIndex(i => (i + 1) % carouselImages.length), 3000);
-    return () => clearInterval(t);
-  }, []);
 
   // NEW: useNavigate hook for SPA navigation to Car page
   const navigate = useNavigate();
@@ -608,33 +603,39 @@ const serviceCities = [
                   </p>
                 </div>
             </div>
-            <div className="px-2 sm:px-2 lg:px-8">
-              {/* Custom Deals Carousel — no react-slick */}
-              <div className="relative max-w-2xl mx-auto">
-                <img
-                  src={carouselImages[carouselIndex].src}
-                  alt={carouselImages[carouselIndex].alt}
-                  className="rounded-lg shadow-md w-full transition-opacity duration-500"
-                />
-                <button
-                  onClick={() => setCarouselIndex(i => (i - 1 + carouselImages.length) % carouselImages.length)}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full z-10"
-                  aria-label="Previous"
-                ><ChevronLeft className="h-5 w-5" /></button>
-                <button
-                  onClick={() => setCarouselIndex(i => (i + 1) % carouselImages.length)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full z-10"
-                  aria-label="Next"
-                ><ChevronRight className="h-5 w-5" /></button>
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-                  {carouselImages.map((_, i) => (
-                    <button key={i} onClick={() => setCarouselIndex(i)}
-                      className={`w-2 h-2 rounded-full transition-all ${i === carouselIndex ? 'bg-white scale-125' : 'bg-white/50'}`}
+            {/* Marquee-style infinite scrolling image strip */}
+            <div className="overflow-hidden w-full">
+              <div
+                style={{
+                  display: 'flex',
+                  animation: 'marqueeScroll 18s linear infinite',
+                  width: 'max-content',
+                  gap: '16px',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+                onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+              >
+                {[...carouselImages, ...carouselImages].map((img, i) => (
+                  <div
+                    key={i}
+                    className="flex-shrink-0 rounded-lg overflow-hidden shadow-md"
+                    style={{ width: '480px' }}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full h-64 object-cover"
                     />
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
+            <style>{`
+              @keyframes marqueeScroll {
+                0%   { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+            `}</style>
           </section>
 
           {/* What Our Clients Say? Section */}
@@ -736,7 +737,7 @@ const serviceCities = [
       <p className="text-base sm:text-xl text-white mb-6 max-w-3xl mx-auto">
         Transparent pricing for doorstep bike and car service in Noida. Check the labour charges below based on your vehicle's engine size — no hidden fees, no surprises.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 justify-items-center">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-6 justify-items-center">
         {servicePrices.map((service, index) => (
           <div
             key={index}
@@ -1329,19 +1330,39 @@ const serviceCities = [
   </section>
         </div>
           {/* Floating Buttons */}
-  <div className="fixed top-1/2 right-6 flex flex-col space-y-4 z-50 transform -translate-y-1/2">
+  <style>{`
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      15%       { transform: rotate(-18deg); }
+      30%       { transform: rotate(18deg); }
+      45%       { transform: rotate(-14deg); }
+      60%       { transform: rotate(14deg); }
+      75%       { transform: rotate(-8deg); }
+      90%       { transform: rotate(8deg); }
+    }
+    .btn-shake {
+      animation: shake 1.8s ease-in-out infinite;
+    }
+    .btn-shake:hover {
+      animation: none;
+      transform: scale(1.12);
+    }
+  `}</style>
+  <div className="fixed top-1/2 right-4 sm:right-6 flex flex-col space-y-4 z-50 transform -translate-y-1/2">
+    {/* Call Button — blue color */}
     <a
       href="tel:9540553759"
-      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
+      className="btn-shake w-13 h-13 sm:w-15 sm:h-15 rounded-full text-white flex items-center justify-center shadow-2xl"
+      style={{ background: 'linear-gradient(135deg, #1d72b8, #145a9c)', width: '52px', height: '52px' }}
       aria-label="Call Us"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth="1.5"
+        strokeWidth="1.8"
         stroke="currentColor"
-        className="w-6 h-6 sm:w-7 sm:h-7"
+        style={{ width: '24px', height: '24px' }}
       >
         <path
           strokeLinecap="round"
@@ -1350,14 +1371,16 @@ const serviceCities = [
         />
       </svg>
     </a>
+    {/* WhatsApp Button — green */}
     <a
       href="https://wa.me/9540553759"
       target="_blank"
       rel="noopener noreferrer"
-      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110"
+      className="btn-shake text-white flex items-center justify-center shadow-2xl rounded-full"
+      style={{ background: 'linear-gradient(135deg, #25d366, #128c4e)', width: '52px', height: '52px' }}
       aria-label="Chat on WhatsApp"
     >
-      <FaWhatsapp size={28} className="sm:size-32" />
+      <FaWhatsapp size={26} />
     </a>
   </div>
 
