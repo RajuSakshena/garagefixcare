@@ -381,7 +381,7 @@ const serviceCities = [
       {/* Left Side: Main Text and Input */}
       <div>
       <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-  Bike &amp; Car Service in Noida, Delhi , Gurgaon
+  Bike &amp; Car Service in Noida, Delhi and Gurgaon
   <span className="text-orange-500"> at Your Doorstep</span>
 </h1>
 
