@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Car as CarIcon, 
@@ -21,9 +21,6 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/image-gallery.css";
 import axios from 'axios';
@@ -56,7 +53,15 @@ const Car = () => {
   const [reviewScore, setReviewScore] = useState(4.6);
   const [showInput, setShowInput] = useState(false);
   const [modalPhoneNumber, setModalPhoneNumber] = useState('');
-  const heroSliderRef = useRef<any>(null);
+  // Custom hero carousel — no react-slick
+  const [heroIndex, setHeroIndex] = useState(0);
+  const heroImages = [heroImage, fortunerImage, bigGarageCar, bigGarageBike];
+  const heroAlts = [
+    "Mechanic working",
+    "Fortuner repair",
+    "Car garage",
+    "Bike garage"
+  ];
 
   // Counter animations (exact copy from Home.tsx)
   useEffect(() => {
@@ -99,18 +104,13 @@ const Car = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Hero slider settings (exact copy)
-  const heroSliderSettings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    speed: 800,
-    fade: true,
-    arrows: false
-  };
+  useEffect(() => {
+    const t = setInterval(() => setHeroIndex(i => (i + 1) % heroImages.length), 2500);
+    return () => clearInterval(t);
+  }, []);
+
+  // Hero slider settings (kept for reference — not used)
+  // (react-slick removed)
 
   // NEW: MEDIA GALLERY (react-image-gallery format - ready for future video support)
   const galleryImages = [
@@ -262,49 +262,27 @@ const Car = () => {
                 {/* Right Side: Image + Reviews - MOBILE OPTIMIZED */}
                 <div className="relative flex flex-col items-center lg:items-end gap-6 mt-8 lg:mt-0">
                   <div className="relative w-full">
-                    <Slider ref={heroSliderRef} {...heroSliderSettings} className="w-full">
-                      <div>
-                        <img 
-                          src={heroImage} 
-                          alt="Mechanic working" 
-                          className="rounded-2xl shadow-2xl w-full aspect-video object-cover max-h-[260px] sm:max-h-[340px] lg:max-h-none" 
-                        />
-                      </div>
-                      <div>
-                        <img 
-                          src={fortunerImage} 
-                          alt="Fortuner repair" 
-                          className="rounded-2xl shadow-2xl w-full aspect-video object-cover max-h-[260px] sm:max-h-[340px] lg:max-h-none" 
-                        />
-                      </div>
-                      <div>
-                        <img 
-                          src={bigGarageCar} 
-                          alt="Car garage" 
-                          className="rounded-2xl shadow-2xl w-full aspect-video object-cover max-h-[260px] sm:max-h-[340px] lg:max-h-none" 
-                        />
-                      </div>
-                      <div>
-                        <img 
-                          src={bigGarageBike} 
-                          alt="Bike garage" 
-                          className="rounded-2xl shadow-2xl w-full aspect-video object-cover max-h-[260px] sm:max-h-[340px] lg:max-h-none" 
-                        />
-                      </div>
-                    </Slider>
+                    {/* Custom Hero Carousel — no react-slick */}
+                    <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl">
+                      <img
+                        src={heroImages[heroIndex]}
+                        alt={heroAlts[heroIndex]}
+                        className="w-full aspect-video object-cover max-h-[260px] sm:max-h-[340px] lg:max-h-none transition-opacity duration-700"
+                      />
+                    </div>
 
-                    {/* Custom Left Arrow Button - SMALLER ON MOBILE */}
+                    {/* Custom Left Arrow Button */}
                     <button
-                      onClick={() => heroSliderRef.current?.slickPrev()}
+                      onClick={() => setHeroIndex(i => (i - 1 + heroImages.length) % heroImages.length)}
                       className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2.5 sm:p-3 rounded-2xl shadow-lg transition-all duration-200 z-20 flex items-center justify-center"
                       aria-label="Previous slide"
                     >
                       <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
                     </button>
 
-                    {/* Custom Right Arrow Button - SMALLER ON MOBILE */}
+                    {/* Custom Right Arrow Button */}
                     <button
-                      onClick={() => heroSliderRef.current?.slickNext()}
+                      onClick={() => setHeroIndex(i => (i + 1) % heroImages.length)}
                       className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2.5 sm:p-3 rounded-2xl shadow-lg transition-all duration-200 z-20 flex items-center justify-center"
                       aria-label="Next slide"
                     >
