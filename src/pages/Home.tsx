@@ -325,20 +325,79 @@ const Home = () => {
 
 
 const serviceCities = [
-    // Using darker/more professional colors for clean visibility
-    { name: "Delhi", color: "text-slate-700",  },
-    { name: "Noida", color: "text-red-700" }, // Using a dark brand color for emphasis
+    { name: "Noida", color: "text-red-700" },
     { name: "Greater Noida", color: "text-teal-700" },
-    { name: "Gurugram", color: "text-indigo-700" },
     { name: "Ghaziabad", color: "text-gray-900" },
+    { name: "Delhi", color: "text-slate-700" },
+    { name: "Gurugram", color: "text-indigo-700" },
     { name: "Faridabad", color: "text-orange-700" },
-    { name: "Greater Noida", color: "text-slate-800" },
 ];
   return (
     <>
      <SEOHelmet
-  title="Bike & Car Service at Home in Delhi, Noida & Gurugram | Garage Fix Care"
-  description="Looking for bike or car service near you? Get doorstep bike & car repair in Delhi, Noida & Gurugram. Affordable, fast service by expert mechanics. Book now!"
+  title="Bike & Car Service in Noida ₹299 | Doorstep Repair Near Me"
+  description="Bike & car service in Noida starting at just ₹299. Doorstep repair, oil change, battery replacement, puncture repair & trusted mechanics near you. Same-day service by Garage Fix Care."
+  canonical="https://www.garagefixcare.com/"
+  robots="index, follow"
+  og={{
+    url: "https://www.garagefixcare.com/",
+    image: "https://www.garagefixcare.com/og-image.jpg",
+    imageAlt: "Bike & car service at doorstep in Noida by Garage Fix Care",
+    type: "website",
+  }}
+  twitter={{
+    image: "https://www.garagefixcare.com/og-image.jpg",
+    imageAlt: "Doorstep bike and car service in Noida",
+  }}
+  structuredData={[
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Garage Fix Care",
+      "description": "Doorstep bike and car service in Noida starting at ₹299. Same-day repair, oil change, battery & engine service by certified mechanics.",
+      "url": "https://www.garagefixcare.com",
+      "telephone": "+919540553759",
+      "priceRange": "₹₹",
+      "image": "https://www.garagefixcare.com/og-image.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Noida",
+        "addressRegion": "Uttar Pradesh",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "28.5355",
+        "longitude": "77.3910"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Noida" },
+        { "@type": "City", "name": "Greater Noida" },
+        { "@type": "City", "name": "Ghaziabad" }
+      ],
+      "serviceType": ["Bike Repair", "Car Repair", "Doorstep Bike Service", "Doorstep Car Service"],
+      "openingHours": "Mo-Su 08:00-20:00",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.7",
+        "reviewCount": "100000"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Doorstep Bike & Car Service in Noida",
+      "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
+      "areaServed": "Noida",
+      "description": "At-home bike and car servicing starting at ₹299. Oil change, engine repair, battery replacement, puncture fix — same-day doorstep service.",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "INR",
+        "price": "299",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ]}
 />
 
 
@@ -352,15 +411,26 @@ const serviceCities = [
 
       {/* Left Side: Main Text and Input */}
       <div>
-      <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 leading-tight">
-  Professional Bikes & Cars Service
-  <span className="text-orange-500"> At Your Doorstep in Delhi, Noida & Gurugram</span>
+      <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
+  Bike &amp; Car Service in Noida
+  <span className="text-orange-500"> at Your Doorstep</span>
 </h1>
 
-       <p className="font-poppins text-xs sm:text-sm leading-relaxed text-white/90 mb-4 sm:mb-6">
-  Enjoy professional bike & Car care right at your doorstep.
-  Our expert mechanics come to you with the right tools and parts, saving you time while keeping your bike in top condition—no workshop visit needed.
+       {/* Subheading */}
+       <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
+  Starting at just ₹299 &bull; Same-Day Bike &amp; Car Repair &bull; Trusted Mechanics Near You
 </p>
+
+       <p className="font-poppins text-xs sm:text-sm leading-relaxed text-white/90 mb-3 sm:mb-4">
+  Skip the garage queue. Our certified mechanics come to your home or office in Noida — handling everything from routine bike servicing and car oil changes to engine repairs and scooty fixes. Fast, transparent, and affordable.
+</p>
+
+{/* Trust points strip */}
+<div className="flex flex-wrap gap-x-3 gap-y-1 mb-4 sm:mb-5 text-xs text-white/80">
+  {["✔ Starting ₹299", "✔ Same-Day Service", "✔ Doorstep Mechanics", "✔ Trusted Technicians", "✔ No Hidden Charges"].map((point, i) => (
+    <span key={i} className="font-medium">{point}</span>
+  ))}
+</div>
 
         {/* Book + Call Buttons Row */}
         <div className="flex flex-wrap items-center gap-3">
@@ -462,16 +532,16 @@ const serviceCities = [
         <div className="relative w-full">
           <Slider ref={heroSliderRef} {...heroSliderSettings} className="w-full">
             <div>
-              <img src={heroImage} alt="Mechanic working" className="rounded-lg shadow-2xl w-full" />
+              <img src={heroImage} alt="Bike mechanic at customer doorstep in Noida" className="rounded-lg shadow-2xl w-full" />
             </div>
             <div>
-              <img src={fortunerImage} alt="Fortuner repair" className="rounded-lg shadow-2xl w-full" />
+              <img src={fortunerImage} alt="Car repair service at home" className="rounded-lg shadow-2xl w-full" />
             </div>
             <div>
-              <img src={bigGarageCar} alt="Car garage" className="rounded-lg shadow-2xl w-full" />
+              <img src={bigGarageCar} alt="Professional car service garage" className="rounded-lg shadow-2xl w-full" />
             </div>
             <div>
-              <img src={bigGarageBike} alt="Bike garage" className="rounded-lg shadow-2xl w-full" />
+              <img src={bigGarageBike} alt="Doorstep bike service in Noida" className="rounded-lg shadow-2xl w-full" />
             </div>
           </Slider>
 
@@ -559,8 +629,8 @@ const serviceCities = [
                   </div>
                   {/* UPDATED: Reduced text size on mobile (text-base) and scaled up (text-xl) */}
                   <p className="text-base sm:text-lg text-white max-w-7xl mx-auto mt-2 text-center">
-                  Limited-time offer!
-  Get up to 10% off on bike repairs and servicing.
+                  Limited-time offer for Noida customers!
+  Get up to 10% off on bike repairs and servicing at your doorstep.
   Hurry—these deals won’t last long!
                   </p>
                 </div>
@@ -570,35 +640,35 @@ const serviceCities = [
                 <div className="p-2">
                   <img
                     src={bikeServiceOfferImage}
-                    alt="Bike Service Offer"
+                    alt="Bike service offer in Noida"
                     className="rounded-lg shadow-md w-full"
                   />
                 </div>
                 <div className="p-2">
                   <img
                     src={doorstepImage}
-                    alt="Doorstep Service"
+                    alt="Doorstep bike service Noida"
                     className="rounded-lg shadow-md w-full"
                   />
                 </div>
                 <div className="p-2">
                   <img
                     src={engineImage}
-                    alt="Engine Repair"
+                    alt="Bike engine repair at home Noida"
                     className="rounded-lg shadow-md w-full"
                   />
                 </div>
                 <div className="p-2">
                   <img
                     src={roadsideImage}
-                    alt="Roadside Assistance"
+                    alt="Roadside bike assistance near Noida"
                     className="rounded-lg shadow-md w-full"
                   />
                 </div>
                 <div className="p-2">
                   <img
                     src={bikeServiceOfferImage}
-                    alt="Bike Service Offer"
+                    alt="Bike service offer in Noida"
                     className="rounded-lg shadow-md w-full"
                   />
                 </div>
@@ -703,8 +773,7 @@ const serviceCities = [
         <span className="text-red-600">Price List</span>
       </h2>
       <p className="text-base sm:text-xl text-white mb-6 max-w-3xl mx-auto">
-        Wondering about bike service costs?
-  Prices vary by service type—check the estimated labour charges below to plan your maintenance easily.
+        Transparent pricing for doorstep bike and car service in Noida. Check the labour charges below based on your vehicle's engine size — no hidden fees, no surprises.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 justify-items-center">
         {servicePrices.map((service, index) => (
@@ -800,7 +869,7 @@ const serviceCities = [
             Book Service
           </h4>
           <h2 className="text-xl sm:text-2xl font-bold mb-2">
-            <span className="text-orange-500">Convenient Bike Service</span> and Repair at Your Home
+            <span className="text-orange-500">Doorstep Bike &amp; Car Service</span> in Noida &amp; Nearby Areas
           </h2>
           <p className="text-base sm:text-lg font-bold text-blue-400 mb-4">
             Certified Genuine Parts
@@ -820,12 +889,10 @@ const serviceCities = [
   <section className="py-12 bg-slate-800">
     <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-        Expert Bike Care,  <span className="text-red-600"> Right at Your Doorstep</span>
+        Complete Bike &amp; Car Care, <span className="text-red-600"> Right at Your Door in Noida</span>
       </h2>
       <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
-      
-  Get professional bike servicing at your doorstep, including engine, battery, and tyre care.
-  Enjoy convenient, affordable service—plus bike insurance and more.
+        From routine oil changes to engine repair, scooty service to car AC checks — our mechanics in Noida handle it all at your location. No waiting, no hassle.
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2 sm:gap-4">
         {[
@@ -842,7 +909,7 @@ const serviceCities = [
           >
             <img
               src={service.img}
-              alt={service.name}
+              alt={`${service.name} in Noida`}
               className="h-16 w-16 sm:h-20 sm:w-20 object-contain mb-1 sm:mb-2"
             />
             <h3 className="text-xs sm:text-sm font-semibold text-gray-900 text-center">{service.name}</h3>
@@ -856,12 +923,12 @@ const serviceCities = [
   <section className="py-6 sm:py-8 bg-slate-900 text-white">
     <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
       <div>
-        <p className="text-xs text-white mb-1">Get Rs.10 Off On First Service</p>
+        <p className="text-xs text-white mb-1">Get Rs.10 Off On First Service in Noida</p>
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
           GarageFixCare <span className="text-red-600">Service Warranty</span>
         </h2>
         <p className="text-sm sm:text-base text-sky-100 mb-4">
-          GarageFixCare offers expert at-home bike repair services for motorcycles of all models and brands, including Harley-Davidson, Ducati, Benelli, Triumph, Indian, BMW, Aprilia, Yezdi, Husqvarna, and more.
+          Noida's trusted doorstep service for bikes and cars. We service all motorcycle and scooter brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — plus cars of all makes, right at your home or office.
         </p>
         <div className="flex gap-2">
           <img
@@ -923,9 +990,7 @@ const serviceCities = [
           Why Choose <span className="text-red-600">GarageFixCare?</span>
         </h2>
         <p className="text-sm sm:text-base text-white mb-4">
-          At GarageFixCare, we understand how important your two-wheeler is, and we are committed 
-          to delivering a service experience that exceeds expectations. Here are a few reasons why 
-          GarageFixCare is the preferred choice for convenient, doorstep bike and scooter services:
+          We know how much you rely on your two-wheeler every day. That's why GarageFixCare brings certified mechanics directly to Noida residents — with honest pricing, genuine parts, and zero hassle. Here's what makes us different:
         </p>
         <ul className="space-y-2 text-left">
           {[
@@ -950,7 +1015,7 @@ const serviceCities = [
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       {/* UPDATED: Reduced text size on mobile (text-xl) and scaled up (md:text-3xl) */}
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 sm:mb-10">
-        Trusted by <span className="text-red-600">Leading Brands</span> and <span className="text-red-600">Over 100,000 Customers</span> Across <span className="text-red-600">India</span>
+        Trusted by <span className="text-red-600">Leading Brands</span> and <span className="text-red-600">Over 100,000 Customers</span>
       </h2>
 
 
@@ -986,10 +1051,7 @@ const serviceCities = [
           How <span className="text-red-600">GarageFixCare</span> Works?
         </h2>
         <p className="text-sm sm:text-base text-white mb-4">
-          Welcome to GarageFixCare, where we transform the two-wheeler service experience by 
-          bringing professional care directly to your doorstep. Our streamlined process ensures 
-          a hassle-free, efficient service that saves you both time and effort. Here’s how 
-          GarageFixCare works:
+          Getting your bike serviced in Noida has never been simpler. Book online or call us, and a skilled mechanic arrives at your doorstep with everything needed to get your bike running at its best — all done on the spot.
         </p>
         <ul className="space-y-2 text-left">
           {[
@@ -1019,16 +1081,16 @@ const serviceCities = [
   <section className="bg-slate-900 text-white py-8 sm:py-12">
     <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
-        Professional <span className="text-red-600">Bike Service</span> at Your <span className="text-red-600">Home</span> by <span className="text-red-600">Certified Experts</span>
+        Doorstep <span className="text-red-600">Bike Service</span> by <span className="text-red-600">Certified Experts</span> Near You
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 justify-items-center">
         {[
-          { name: "Bike Service in Delhi", img: delhiImg },
           { name: "Bike Service in Noida", img: noidaImg },
           { name: "Bike Service in Greater Noida", img: greaterNoidaImg },
+          { name: "Bike Service in Ghaziabad", img: ghaziabadImg },
+          { name: "Bike Service in Delhi", img: delhiImg },
           { name: "Bike Service in Gurugram", img: gurugramImg },
           { name: "Bike Service in Faridabad", img: faridabadImg },
-          { name: "Bike Service in Ghaziabad", img: ghaziabadImg },
         ].map((city, index) => (
           <div
             key={index}
@@ -1126,7 +1188,7 @@ const serviceCities = [
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">
-        Bike <span className="text-red-600">Brands</span> Serviced at <span className="text-red-600">Your Home</span> by <span className="text-red-600">Certified Experts</span>
+        All Major Bike <span className="text-red-600">Brands</span> Serviced <span className="text-red-600">at Your Doorstep</span>
       </h2>
 
 
@@ -1189,90 +1251,70 @@ const serviceCities = [
     <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
       <div className="text-center mb-4 sm:mb-6">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
-          Frequently Asked <span className="text-red-600">Questions</span>
+          Bike Service in Noida — <span className="text-red-600">Common Questions</span>
         </h2>
       </div>
       <div className="space-y-2 sm:space-y-3">
         {[
           {
-            q: "Which types of two-wheelers do you provide service for?",
-            a: "Garage Fix Care services all types of two-wheelers, including bikes, scooters, mopeds, and more"
+            q: "Do you provide both bike and car service in Noida?",
+            a: "Yes, we offer doorstep service for both bikes and cars in Noida. Whether it's a routine bike service, scooty repair, or car oil change and maintenance — our certified mechanics come directly to your location."
           },
           {
-            q: "Which areas do you cover for doorstep service?",
-            a: "Garage Fix Care provides doorstep service across Noida, Greater Noida, Ghaziabad, Delhi, Faridabad, and Gurugram, ensuring customers can access services at their preferred location.."
+            q: "Which areas in Noida do you cover for doorstep service?",
+            a: "We cover all major sectors of Noida including Sector 18, 62, 63, 75, 76, 77, 78, as well as Greater Noida. We also serve parts of Ghaziabad on request."
           },
           {
-            q: "What services do you provide at the customer’s doorstep?",
-            a: "Garage Fix Care offers a full range of doorstep services, including regular maintenance, repairs, oil changes, tire replacement, battery checks, engine repairs, and more"
+            q: "What bike and car repair services do you offer at home?",
+            a: "Our Noida mechanics handle regular servicing, oil changes, engine repair, brake adjustment, tyre inflation, battery replacement, air filter cleaning, spark plug replacement, and full vehicle inspection — all at your doorstep."
           },
           {
-            q: "Do you provide emergency roadside assistance?",
-            a: "Garage Fix Care offers emergency assistance for breakdowns or issues, providing prompt support wherever you are."
+            q: "How much does a doorstep bike or car service in Noida cost?",
+            a: "Our at-home bike service starts from just ₹299 for 100–125cc bikes. Car service pricing varies by model and service type. All rates are transparent — no hidden charges."
           },
           {
-            q: "What is the typical duration for a service or repair?",
-            a: "The estimated duration of a service or repair helps customers plan their schedules accordingly"
+            q: "Do you offer Royal Enfield service in Noida?",
+            a: "Yes, we specialise in Royal Enfield servicing at your doorstep in Noida. Our mechanics are trained to handle Classic 350, Bullet, Meteor, Himalayan, and other RE models."
           },
           {
-            q: "What safety protocols do your technicians follow during home visits?",
-            a: "Garage Fix Care technicians follow strict safety protocols during home visits, including wearing protective gear and maintaining hygiene standards to ensure a safe service experience."
+            q: "How quickly can a mechanic reach my location in Noida?",
+            a: "In most cases, our mechanic will reach you within 2–4 hours of booking. For urgent same-day service, call us directly and we'll do our best to prioritise your request."
           },
           {
-            q: "What are your service charges, and are there any hidden fees?",
-            a: "Garage Fix Care offers transparent pricing with no hidden fees, so customers know exactly what to expect."
+            q: "Is your service pricing transparent with no hidden fees?",
+            a: "Absolutely. We share a detailed estimate before starting any work. What we quote is what you pay — no surprise charges at the end."
           },
           {
-            q: "Do you offer a warranty or guarantee for the services provided?",
-            a: "Garage Fix Care guarantees the quality of our work and provides warranties on the services offered."
+            q: "Do you provide a service warranty?",
+            a: "Yes, every service comes with a 10-day hassle-free service guarantee. If you face any issue related to the work done, we'll fix it at no extra cost."
           },
           {
-            q: "How can I schedule a service appointment at my preferred location?",
-            a: "Customers can schedule a service appointment easily via our website, WhatsApp, or by calling our customer service hotline."
+            q: "How do I book a mechanic near me in Noida?",
+            a: "You can book by calling us, messaging on WhatsApp, or using the booking form on this page. Share your location in Noida and preferred time, and we'll confirm your slot."
           },
           {
-            q: "Which payment methods do you accept?",
-            a: "Garage Fix Care accepts various payment methods for customer convenience, including cash and mobile wallets."
+            q: "What payment methods do you accept?",
+            a: "We accept cash, UPI (Google Pay, PhonePe, Paytm), and other mobile wallets for your convenience."
           },
           {
-            q: "Do I need to provide any tools or equipment for the service?",
-            a: "Garage Fix Care technicians arrive fully equipped with all the tools and equipment needed to perform the service at your doorstep"
+            q: "Do I need to arrange any tools or equipment for the mechanic?",
+            a: "Not at all. Our mechanics arrive fully equipped with all tools, oils, and parts needed. You just need to be present at your Noida address."
           },
           {
-            q: "Can I track the status of my service appointment?",
-            a: "Customers can track their service appointment in real-time via the Garage Fix Care app or website."
+            q: "Do you also service scooties like Activa, Jupiter, or Dio?",
+            a: "Yes, we provide complete scooty repair and service in Noida for all popular models including Honda Activa, TVS Jupiter, Hero Destini, Suzuki Access, and Yamaha Fascino."
           },
           {
-            q: "What should I do if I’m not satisfied with the service provided?",
-            a: "Garage Fix Care prioritizes customer satisfaction and promptly addresses any concerns to ensure a positive service experience."
+            q: "What safety standards do your mechanics follow during home visits?",
+            a: "Our technicians are trained, verified, and follow safety protocols including protective equipment usage and clean workspaces to ensure a professional experience at your home."
           },
           {
-            q: "Do you provide discounts or promotional offers for returning customers?",
-            a: "Garage Fix Care offers special discounts and promotions for loyal customers. Please inquire about current offers."
+            q: "Can I schedule service for multiple bikes at once?",
+            a: "Yes, you can book a single appointment for multiple two-wheelers. Just mention it while booking and we'll arrange accordingly."
           },
           {
-            q: "Are your technicians certified and experienced?",
-            a: "Garage Fix Care technicians are certified and highly experienced professionals skilled in servicing all types of two-wheelers."
-          },
-          {
-            q: "What makes your doorstep service different from traditional garage visits?",
-            a: "Garage Fix Care  doorstep service provides unmatched convenience, saving customers time by delivering expert service directly to their location."
-          },
-          {
-            q: "Do you offer eco-friendly or green service options?",
-            a: "Garage Fix Care is committed to sustainability and offers eco-friendly options, including green cleaning products and recycling of used parts."
-          },
-          {
-            q: "Can I schedule service for multiple two-wheelers at the same time?",
-            a: "Customers can schedule service for multiple two-wheelers in a single appointment for added convenience."
-          },
-          {
-            q: "How can I cancel or reschedule my service appointment?",
-            a: "Customers can easily cancel or reschedule appointments by contacting Garage Fix Care’s customer service."
-          },
-          {
-            q: "How can I provide feedback about my service experience?",
-            a: "Garage Fix Care welcomes feedback from customers and provides various channels for sharing your experiences, including online reviews and feedback forms."
+            q: "What makes GarageFixCare better than a regular bike workshop?",
+            a: "Unlike a traditional garage, we come to you — saving you travel time and waiting. We offer transparent pricing, trained mechanics, genuine parts, and a 10-day service warranty, making us the preferred choice for bike service in Noida."
           },
         ].map((faq, index) => (
           <div key={index} className="border border-gray-700 rounded-md overflow-hidden">
@@ -1311,11 +1353,10 @@ const serviceCities = [
           <section className="py-6 sm:py-8 bg-slate-800">
     <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-        Ready to Get Started?
+        Book Bike or Car Service in Noida Today
       </h2>
       <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
-        Book your service today and experience the convenience of professional
-        automotive care at your location.
+        Same-day doorstep service starting at ₹299. Our mechanic comes to you — no travel, no waiting, no hidden charges.
       </p>
       <Link
         to="/book"
