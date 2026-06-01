@@ -5,10 +5,7 @@ import { CheckCircle, Star, Flame, X ,Plus, Phone as PhoneIcon, ChevronLeft, Che
 import SEOHelmet from '../components/SEOHelmet';
 import axios from 'axios'; // <-- NEW: Import for API calls
 
-// Import react-slick and its styles
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// react-slick removed — using custom carousel instead
 import { FaWhatsapp } from "react-icons/fa";
 import { Phone } from "lucide-react";
 
@@ -80,12 +77,32 @@ const Home = () => {
   const [selectedBrand, setSelectedBrand] = useState('');
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  // HERO SLIDER REF (for manual arrow control)
-  const heroSliderRef = useRef<any>(null);
+  // Custom hero carousel — no react-slick
+  const [heroIndex, setHeroIndex] = useState(0);
+  const heroImages = [heroImage, fortunerImage, bigGarageCar, bigGarageBike];
+  const heroAlts = [
+    "Bike mechanic at customer doorstep in Noida",
+    "Car repair service at home",
+    "Professional car service garage",
+    "Doorstep bike service in Noida"
+  ];
+  useEffect(() => {
+    const t = setInterval(() => setHeroIndex(i => (i + 1) % heroImages.length), 2500);
+    return () => clearInterval(t);
+  }, []);
 
-  // Fix: defer Slider render until after DOM is mounted (prevents classList.add crash)
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => { setIsMounted(true); }, []);
+  // Custom deals carousel — no react-slick
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const carouselImages = [
+    { src: bikeServiceOfferImage, alt: "Bike service offer in Noida" },
+    { src: doorstepImage,         alt: "Doorstep bike service Noida" },
+    { src: engineImage,           alt: "Bike engine repair at home Noida" },
+    { src: roadsideImage,         alt: "Roadside bike assistance near Noida" },
+  ];
+  useEffect(() => {
+    const t = setInterval(() => setCarouselIndex(i => (i + 1) % carouselImages.length), 3000);
+    return () => clearInterval(t);
+  }, []);
 
   // NEW: useNavigate hook for SPA navigation to Car page
   const navigate = useNavigate();
@@ -277,53 +294,6 @@ const Home = () => {
   
   // --- END OF UPDATED HANDLERS ---
 
-
-  const carouselSettings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 5000,
-    autoplaySpeed: 5000,
-    cssEase: "linear",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      }
-    ]
-  };
-
-  // HERO SLIDER SETTINGS (added exactly as specified - only change)
-  const heroSliderSettings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    speed: 800,
-    cssEase: "ease-in-out",
-    arrows: false
-  };
 
   const [showInput, setShowInput] = useState(false);
 
@@ -533,41 +503,38 @@ const serviceCities = [
 
       {/* Right Side: Image + Reviews */}
       <div className="relative flex flex-col items-center lg:items-end gap-1 mt-1 lg:mt-0">
-        <div className="relative w-full">
-          {isMounted && (
-            <Slider ref={heroSliderRef} {...heroSliderSettings} className="w-full">
-              <div>
-                <img src={heroImage} alt="Bike mechanic at customer doorstep in Noida" className="rounded-lg shadow-2xl w-full" />
-              </div>
-              <div>
-                <img src={fortunerImage} alt="Car repair service at home" className="rounded-lg shadow-2xl w-full" />
-              </div>
-              <div>
-                <img src={bigGarageCar} alt="Professional car service garage" className="rounded-lg shadow-2xl w-full" />
-              </div>
-              <div>
-                <img src={bigGarageBike} alt="Doorstep bike service in Noida" className="rounded-lg shadow-2xl w-full" />
-              </div>
-            </Slider>
-          )}
-
-          {/* Custom Left Arrow Button */}
+        {/* Custom Hero Carousel — no react-slick */}
+        <div className="relative w-full rounded-lg overflow-hidden shadow-2xl">
+          <img
+            src={heroImages[heroIndex]}
+            alt={heroAlts[heroIndex]}
+            className="w-full rounded-lg transition-opacity duration-700"
+            style={{ minHeight: '200px', objectFit: 'cover' }}
+          />
+          {/* Left Arrow */}
           <button
-            onClick={() => heroSliderRef.current?.slickPrev()}
+            onClick={() => setHeroIndex(i => (i - 1 + heroImages.length) % heroImages.length)}
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-lg transition-all duration-200 z-20 flex items-center justify-center"
             aria-label="Previous slide"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
-
-          {/* Custom Right Arrow Button */}
+          {/* Right Arrow */}
           <button
-            onClick={() => heroSliderRef.current?.slickNext()}
+            onClick={() => setHeroIndex(i => (i + 1) % heroImages.length)}
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-lg transition-all duration-200 z-20 flex items-center justify-center"
             aria-label="Next slide"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
+          {/* Dots */}
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-20">
+            {heroImages.map((_, i) => (
+              <button key={i} onClick={() => setHeroIndex(i)}
+                className={`w-2 h-2 rounded-full transition-all ${i === heroIndex ? 'bg-white scale-125' : 'bg-white/50'}`}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
@@ -642,45 +609,31 @@ const serviceCities = [
                 </div>
             </div>
             <div className="px-2 sm:px-2 lg:px-8">
-              {isMounted && (
-                <Slider {...carouselSettings}>
-                  <div className="p-2">
-                    <img
-                      src={bikeServiceOfferImage}
-                      alt="Bike service offer in Noida"
-                      className="rounded-lg shadow-md w-full"
+              {/* Custom Deals Carousel — no react-slick */}
+              <div className="relative max-w-2xl mx-auto">
+                <img
+                  src={carouselImages[carouselIndex].src}
+                  alt={carouselImages[carouselIndex].alt}
+                  className="rounded-lg shadow-md w-full transition-opacity duration-500"
+                />
+                <button
+                  onClick={() => setCarouselIndex(i => (i - 1 + carouselImages.length) % carouselImages.length)}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full z-10"
+                  aria-label="Previous"
+                ><ChevronLeft className="h-5 w-5" /></button>
+                <button
+                  onClick={() => setCarouselIndex(i => (i + 1) % carouselImages.length)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full z-10"
+                  aria-label="Next"
+                ><ChevronRight className="h-5 w-5" /></button>
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+                  {carouselImages.map((_, i) => (
+                    <button key={i} onClick={() => setCarouselIndex(i)}
+                      className={`w-2 h-2 rounded-full transition-all ${i === carouselIndex ? 'bg-white scale-125' : 'bg-white/50'}`}
                     />
-                  </div>
-                  <div className="p-2">
-                    <img
-                      src={doorstepImage}
-                      alt="Doorstep bike service Noida"
-                      className="rounded-lg shadow-md w-full"
-                    />
-                  </div>
-                  <div className="p-2">
-                    <img
-                      src={engineImage}
-                      alt="Bike engine repair at home Noida"
-                      className="rounded-lg shadow-md w-full"
-                    />
-                  </div>
-                  <div className="p-2">
-                    <img
-                      src={roadsideImage}
-                      alt="Roadside bike assistance near Noida"
-                      className="rounded-lg shadow-md w-full"
-                    />
-                  </div>
-                  <div className="p-2">
-                    <img
-                      src={bikeServiceOfferImage}
-                      alt="Bike service offer in Noida"
-                      className="rounded-lg shadow-md w-full"
-                    />
-                  </div>
-                </Slider>
-              )}
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
 
