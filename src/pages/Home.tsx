@@ -317,7 +317,7 @@ const Home = () => {
     autoplay: true,
     autoplaySpeed: 2500,
     speed: 800,
-    fade: true,
+    cssEase: "ease-in-out",
     arrows: false
   };
 
