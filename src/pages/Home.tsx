@@ -83,6 +83,10 @@ const Home = () => {
   // HERO SLIDER REF (for manual arrow control)
   const heroSliderRef = useRef<any>(null);
 
+  // Fix: defer Slider render until after DOM is mounted (prevents classList.add crash)
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => { setIsMounted(true); }, []);
+
   // NEW: useNavigate hook for SPA navigation to Car page
   const navigate = useNavigate();
 
@@ -530,20 +534,22 @@ const serviceCities = [
       {/* Right Side: Image + Reviews */}
       <div className="relative flex flex-col items-center lg:items-end gap-1 mt-1 lg:mt-0">
         <div className="relative w-full">
-          <Slider ref={heroSliderRef} {...heroSliderSettings} className="w-full">
-            <div>
-              <img src={heroImage} alt="Bike mechanic at customer doorstep in Noida" className="rounded-lg shadow-2xl w-full" />
-            </div>
-            <div>
-              <img src={fortunerImage} alt="Car repair service at home" className="rounded-lg shadow-2xl w-full" />
-            </div>
-            <div>
-              <img src={bigGarageCar} alt="Professional car service garage" className="rounded-lg shadow-2xl w-full" />
-            </div>
-            <div>
-              <img src={bigGarageBike} alt="Doorstep bike service in Noida" className="rounded-lg shadow-2xl w-full" />
-            </div>
-          </Slider>
+          {isMounted && (
+            <Slider ref={heroSliderRef} {...heroSliderSettings} className="w-full">
+              <div>
+                <img src={heroImage} alt="Bike mechanic at customer doorstep in Noida" className="rounded-lg shadow-2xl w-full" />
+              </div>
+              <div>
+                <img src={fortunerImage} alt="Car repair service at home" className="rounded-lg shadow-2xl w-full" />
+              </div>
+              <div>
+                <img src={bigGarageCar} alt="Professional car service garage" className="rounded-lg shadow-2xl w-full" />
+              </div>
+              <div>
+                <img src={bigGarageBike} alt="Doorstep bike service in Noida" className="rounded-lg shadow-2xl w-full" />
+              </div>
+            </Slider>
+          )}
 
           {/* Custom Left Arrow Button */}
           <button
@@ -636,43 +642,45 @@ const serviceCities = [
                 </div>
             </div>
             <div className="px-2 sm:px-2 lg:px-8">
-              <Slider {...carouselSettings}>
-                <div className="p-2">
-                  <img
-                    src={bikeServiceOfferImage}
-                    alt="Bike service offer in Noida"
-                    className="rounded-lg shadow-md w-full"
-                  />
-                </div>
-                <div className="p-2">
-                  <img
-                    src={doorstepImage}
-                    alt="Doorstep bike service Noida"
-                    className="rounded-lg shadow-md w-full"
-                  />
-                </div>
-                <div className="p-2">
-                  <img
-                    src={engineImage}
-                    alt="Bike engine repair at home Noida"
-                    className="rounded-lg shadow-md w-full"
-                  />
-                </div>
-                <div className="p-2">
-                  <img
-                    src={roadsideImage}
-                    alt="Roadside bike assistance near Noida"
-                    className="rounded-lg shadow-md w-full"
-                  />
-                </div>
-                <div className="p-2">
-                  <img
-                    src={bikeServiceOfferImage}
-                    alt="Bike service offer in Noida"
-                    className="rounded-lg shadow-md w-full"
-                  />
-                </div>
-              </Slider>
+              {isMounted && (
+                <Slider {...carouselSettings}>
+                  <div className="p-2">
+                    <img
+                      src={bikeServiceOfferImage}
+                      alt="Bike service offer in Noida"
+                      className="rounded-lg shadow-md w-full"
+                    />
+                  </div>
+                  <div className="p-2">
+                    <img
+                      src={doorstepImage}
+                      alt="Doorstep bike service Noida"
+                      className="rounded-lg shadow-md w-full"
+                    />
+                  </div>
+                  <div className="p-2">
+                    <img
+                      src={engineImage}
+                      alt="Bike engine repair at home Noida"
+                      className="rounded-lg shadow-md w-full"
+                    />
+                  </div>
+                  <div className="p-2">
+                    <img
+                      src={roadsideImage}
+                      alt="Roadside bike assistance near Noida"
+                      className="rounded-lg shadow-md w-full"
+                    />
+                  </div>
+                  <div className="p-2">
+                    <img
+                      src={bikeServiceOfferImage}
+                      alt="Bike service offer in Noida"
+                      className="rounded-lg shadow-md w-full"
+                    />
+                  </div>
+                </Slider>
+              )}
             </div>
           </section>
 
