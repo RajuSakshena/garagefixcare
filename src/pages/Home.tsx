@@ -604,13 +604,13 @@ const serviceCities = [
                 </div>
             </div>
             {/* Marquee-style infinite scrolling image strip */}
-            <div className="overflow-hidden w-full">
+            <div className="overflow-hidden w-full px-2 sm:px-4">
               <div
                 style={{
                   display: 'flex',
-                  animation: 'marqueeScroll 18s linear infinite',
+                  animation: 'marqueeScroll 22s linear infinite',
                   width: 'max-content',
-                  gap: '16px',
+                  gap: '14px',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
                 onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
@@ -618,14 +618,25 @@ const serviceCities = [
                 {[...carouselImages, ...carouselImages].map((img, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 rounded-lg overflow-hidden shadow-md"
-                    style={{ width: '480px' }}
+                    className="flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-white/10"
+                    style={{ width: 'min(76vw, 400px)' }}
                   >
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      className="w-full h-64 object-cover"
-                    />
+                    <div className="relative">
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="w-full object-cover"
+                        style={{ height: '220px' }}
+                      />
+                      {/* City badge overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-2 flex flex-wrap gap-1">
+                        {['Noida', 'Delhi', 'Greater Noida', 'Ghaziabad', 'Gurugram', 'Faridabad'].slice(0, i % 2 === 0 ? 3 : 3).map((city, ci) => (
+                          <span key={ci} className="text-white text-xs font-semibold bg-red-600/80 px-2 py-0.5 rounded-full">
+                            {['Noida', 'Delhi', 'Greater Noida', 'Ghaziabad', 'Gurugram', 'Faridabad'][(i * 2 + ci) % 6]}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
