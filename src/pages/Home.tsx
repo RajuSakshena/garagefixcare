@@ -304,7 +304,7 @@ const serviceCities = [
   return (
     <>
      <SEOHelmet
-  title="Bike & Car Service in Noida ₹299 | Doorstep Repair Near Me"
+  title="Bike & Car Service in Noida, Delhi Ncr ₹299 | Doorstep Repair Near Me"
   description="Bike & car service in Noida starting at just ₹299. Doorstep repair, oil change, battery replacement, puncture repair & trusted mechanics near you. Same-day service by Garage Fix Care."
   canonical="https://www.garagefixcare.in/"
   robots="index, follow"
