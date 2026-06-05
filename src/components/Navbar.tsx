@@ -39,52 +39,40 @@ const Navbar = () => {
     <div className="fixed top-0 left-0 w-full z-50">
 
       {/* ── Premium Top Strip ── */}
+      {/* Mobile: ultra-thin decorative bar only. Desktop: full info strip */}
       <div
-        style={{ backgroundColor: '#0b132b', height: '34px' }}
-        className="w-full flex items-center"
+        style={{ backgroundColor: '#0b132b', height: '32px' }}
+        className="w-full hidden lg:flex items-center"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
-
-          {/* Left — shown on all screens */}
           <p
-            className="text-white text-xs font-medium tracking-wide truncate"
+            className="text-gray-300"
             style={{ fontSize: '11.5px', letterSpacing: '0.02em' }}
           >
-            {/* Mobile: short text, Desktop: full text */}
-            <span className="lg:hidden">🚗 Doorstep Bike &amp; Car Service Across NCR</span>
-            <span className="hidden lg:inline text-gray-300">
-              🚗 Bike &amp; Car Service in&nbsp;
-              <span className="text-white font-semibold">Noida</span>
-              <span className="text-gray-500 mx-1.5">•</span>
-              <span className="text-white font-semibold">Delhi</span>
-              <span className="text-gray-500 mx-1.5">•</span>
-              <span className="text-white font-semibold">Gurgaon</span>
-              <span className="text-gray-500 mx-1.5">•</span>
-              <span className="text-white font-semibold">Ghaziabad</span>
-            </span>
+            🚗 Bike &amp; Car Service in&nbsp;
+            <span className="text-white font-semibold">Noida</span>
+            <span className="text-gray-500 mx-1.5">•</span>
+            <span className="text-white font-semibold">Delhi</span>
+            <span className="text-gray-500 mx-1.5">•</span>
+            <span className="text-white font-semibold">Gurgaon</span>
+            <span className="text-gray-500 mx-1.5">•</span>
+            <span className="text-white font-semibold">Ghaziabad</span>
           </p>
-
-          {/* Right — desktop only */}
-          <div className="hidden lg:flex items-center gap-4">
-            <span
-              className="flex items-center gap-1 text-gray-300"
-              style={{ fontSize: '11.5px' }}
-            >
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1 text-gray-300" style={{ fontSize: '11.5px' }}>
               <span className="text-yellow-400 text-xs">⭐</span>
               <span>100,000+ Happy Customers</span>
             </span>
             <span className="text-gray-600 select-none">|</span>
-            <span
-              className="flex items-center gap-1 text-gray-300"
-              style={{ fontSize: '11.5px' }}
-            >
+            <span className="flex items-center gap-1 text-gray-300" style={{ fontSize: '11.5px' }}>
               <span className="text-yellow-400 text-xs">⭐</span>
               <span>Same-Day Service Available</span>
             </span>
           </div>
-
         </div>
       </div>
+      {/* Mobile: 3px accent line only — no text, no height wasted */}
+      <div className="lg:hidden w-full" style={{ backgroundColor: '#0b132b', height: '3px' }} />
 
       {/* ── Existing Navbar (UNCHANGED) ── */}
       <nav className="bg-sky-100 shadow-md w-full">
@@ -211,7 +199,7 @@ const Navbar = () => {
               <a href="tel:9540553759"
                 className="flex items-center gap-1 text-xs font-semibold text-gray-700 hover:text-red-600 transition-colors">
                 <Phone className="h-3.5 w-3.5 text-orange-600" />
-                <span className="hidden sm:inline">+91 954055-3759</span>
+                <span>+91 954055-3759</span>
               </a>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
