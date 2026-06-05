@@ -1,7 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────────────────────
 
 interface OpenGraphProps {
   title?: string;
@@ -20,121 +22,273 @@ interface TwitterProps {
   description?: string;
   image?: string;
   imageAlt?: string;
-  site?: string;    // Twitter @handle of website, e.g. "@garagefixcare"
-  creator?: string; // Twitter @handle of content creator
+  site?: string;
+  creator?: string;
 }
 
-// JSON-LD structured data — pass any valid Schema.org object
 type JsonLdObject = Record<string, unknown>;
 
 export interface SEOHelmetProps {
-  // Core
   title?: string;
   description?: string;
 
-  // Canonical & indexing
-  canonical?: string;  // Full URL, e.g. "https://garagefixcare.in/noida"
-  robots?: string;     // e.g. "index, follow" (default) or "noindex, nofollow"
+  keywords?: string;
+  author?: string;
 
-  // Open Graph (social sharing previews)
+  canonical?: string;
+  robots?: string;
+
   og?: OpenGraphProps;
-
-  // Twitter Card
   twitter?: TwitterProps;
 
-  // JSON-LD structured data (can pass multiple schemas as an array)
   structuredData?: JsonLdObject | JsonLdObject[];
 }
 
-// ─── Defaults ─────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// Defaults
+// ─────────────────────────────────────────────────────────────
 
-const DEFAULT_ROBOTS      = 'index, follow';
-const SITE_NAME           = 'Garage Fix Care';
-const SITE_TWITTER        = '@garagefixcare';
-const DEFAULT_CANONICAL   = 'https://garagefixcare.in/';
-const DEFAULT_OG_IMAGE    = 'https://garagefixcare.in/og-banner.png';
-const DEFAULT_OG_IMAGE_ALT = 'Garage Fix Care Bike & Car Service in Noida';
+const SITE_NAME = 'Garage Fix Care';
 
-const DEFAULT_TITLE = 'Bike & Car Service in Noida ₹299 | Doorstep Repair Near Me';
+const DEFAULT_TITLE =
+  'Bike & Car Service in Noida, Delhi, Gurgaon & Ghaziabad | Garage Fix Care';
+
 const DEFAULT_DESCRIPTION =
-  'Bike & car service in Noida starting at just ₹299. Doorstep repair, oil change, battery replacement, puncture repair & trusted mechanics near you. Same-day service by Garage Fix Care.';
+  'Doorstep bike and car service in Noida, Delhi, Gurgaon and Ghaziabad starting at ₹299. Same-day repair, oil change, battery replacement and trusted mechanics near you.';
 
-// ─── Component ────────────────────────────────────────────────────────────────
+const DEFAULT_KEYWORDS =
+  'bike service near me, car service near me, bike repair noida, bike repair delhi, bike repair gurgaon, bike repair ghaziabad, car service noida, car service delhi, car service gurgaon, car service ghaziabad, doorstep bike service, doorstep car service, mechanic near me, garage fix care';
+
+const DEFAULT_AUTHOR = 'Garage Fix Care';
+
+const DEFAULT_ROBOTS = 'index, follow';
+
+const DEFAULT_CANONICAL = 'https://garagefixcare.in/';
+
+const DEFAULT_OG_IMAGE =
+  'https://garagefixcare.in/og-banner.png';
+
+const DEFAULT_OG_IMAGE_ALT =
+  'Garage Fix Care Doorstep Bike & Car Service';
+
+const SITE_TWITTER = '@garagefixcare';
+
+// ─────────────────────────────────────────────────────────────
+// Component
+// ─────────────────────────────────────────────────────────────
 
 const SEOHelmet: React.FC<SEOHelmetProps> = ({
-  title       = DEFAULT_TITLE,
+  title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
+  keywords = DEFAULT_KEYWORDS,
+  author = DEFAULT_AUTHOR,
+
   canonical,
   robots = DEFAULT_ROBOTS,
+
   og = {},
   twitter = {},
+
   structuredData,
 }) => {
 
-  // Resolved canonical — prop takes priority, else site default
-  const resolvedCanonical = canonical ?? DEFAULT_CANONICAL;
+  const resolvedCanonical =
+    canonical ?? DEFAULT_CANONICAL;
 
-  // Merge OG defaults with provided values
-  const ogTitle       = og.title       ?? title;
-  const ogDescription = og.description ?? description;
-  const ogType        = og.type        ?? 'website';
-  const ogSiteName    = og.siteName    ?? SITE_NAME;
-  const ogLocale      = og.locale      ?? 'en_IN';
-  const ogImage       = og.image       ?? DEFAULT_OG_IMAGE;
-  const ogImageAlt    = og.imageAlt    ?? DEFAULT_OG_IMAGE_ALT;
+  const ogTitle =
+    og.title ?? title;
 
-  // Merge Twitter defaults
-  const twitterCard        = twitter.card        ?? 'summary_large_image';
-  const twitterTitle       = twitter.title       ?? title;
-  const twitterDescription = twitter.description ?? description;
-  const twitterSite        = twitter.site        ?? SITE_TWITTER;
-  const twitterImage       = twitter.image       ?? DEFAULT_OG_IMAGE;
-  const twitterImageAlt    = twitter.imageAlt    ?? DEFAULT_OG_IMAGE_ALT;
+  const ogDescription =
+    og.description ?? description;
 
-  // Normalise structured data to always be an array
-  const schemas: JsonLdObject[] = structuredData
-    ? Array.isArray(structuredData)
-      ? structuredData
-      : [structuredData]
-    : [];
+  const ogType =
+    og.type ?? 'website';
+
+  const ogSiteName =
+    og.siteName ?? SITE_NAME;
+
+  const ogLocale =
+    og.locale ?? 'en_IN';
+
+  const ogImage =
+    og.image ?? DEFAULT_OG_IMAGE;
+
+  const ogImageAlt =
+    og.imageAlt ?? DEFAULT_OG_IMAGE_ALT;
+
+  const twitterCard =
+    twitter.card ?? 'summary_large_image';
+
+  const twitterTitle =
+    twitter.title ?? title;
+
+  const twitterDescription =
+    twitter.description ?? description;
+
+  const twitterSite =
+    twitter.site ?? SITE_TWITTER;
+
+  const twitterImage =
+    twitter.image ?? DEFAULT_OG_IMAGE;
+
+  const twitterImageAlt =
+    twitter.imageAlt ?? DEFAULT_OG_IMAGE_ALT;
+
+  const schemas: JsonLdObject[] =
+    structuredData
+      ? Array.isArray(structuredData)
+        ? structuredData
+        : [structuredData]
+      : [];
 
   return (
     <Helmet>
-      {/* ── Primary ── */}
+
+      {/* Primary SEO */}
+
       <title>{title}</title>
-      <meta name="description" content={description} />
 
-      {/* ── Canonical ── */}
-      <link rel="canonical" href={resolvedCanonical} />
+      <meta
+        name="description"
+        content={description}
+      />
 
-      {/* ── Robots ── */}
-      <meta name="robots" content={robots} />
+      <meta
+        name="keywords"
+        content={keywords}
+      />
 
-      {/* ── Open Graph ── */}
-      <meta property="og:title"       content={ogTitle} />
-      <meta property="og:description" content={ogDescription} />
-      <meta property="og:type"        content={ogType} />
-      <meta property="og:site_name"   content={ogSiteName} />
-      <meta property="og:locale"      content={ogLocale} />
-      <meta property="og:url"         content={og.url ?? resolvedCanonical} />
-      <meta property="og:image"       content={ogImage} />
-      <meta property="og:image:alt"   content={ogImageAlt} />
+      <meta
+        name="author"
+        content={author}
+      />
 
-      {/* ── Twitter Card ── */}
-      <meta name="twitter:card"        content={twitterCard} />
-      <meta name="twitter:title"       content={twitterTitle} />
-      <meta name="twitter:description" content={twitterDescription} />
-      <meta name="twitter:site"        content={twitterSite} />
-      <meta name="twitter:image"       content={twitterImage} />
-      <meta name="twitter:image:alt"   content={twitterImageAlt} />
-      {twitter.creator && <meta name="twitter:creator" content={twitter.creator} />}
+      <meta
+        name="robots"
+        content={robots}
+      />
 
-      {/* ── JSON-LD Structured Data ── */}
-      {schemas.map((schema, i) => (
-        <script key={i} type="application/ld+json">
+      {/* Canonical */}
+
+      <link
+        rel="canonical"
+        href={resolvedCanonical}
+      />
+
+      {/* Local SEO */}
+
+      <meta
+        name="geo.region"
+        content="IN-UP"
+      />
+
+      <meta
+        name="geo.placename"
+        content="Noida, Delhi, Gurgaon, Ghaziabad"
+      />
+
+      <meta
+        name="distribution"
+        content="global"
+      />
+
+      <meta
+        name="language"
+        content="English"
+      />
+
+      {/* Open Graph */}
+
+      <meta
+        property="og:title"
+        content={ogTitle}
+      />
+
+      <meta
+        property="og:description"
+        content={ogDescription}
+      />
+
+      <meta
+        property="og:type"
+        content={ogType}
+      />
+
+      <meta
+        property="og:site_name"
+        content={ogSiteName}
+      />
+
+      <meta
+        property="og:locale"
+        content={ogLocale}
+      />
+
+      <meta
+        property="og:url"
+        content={og.url ?? resolvedCanonical}
+      />
+
+      <meta
+        property="og:image"
+        content={ogImage}
+      />
+
+      <meta
+        property="og:image:alt"
+        content={ogImageAlt}
+      />
+
+      {/* Twitter */}
+
+      <meta
+        name="twitter:card"
+        content={twitterCard}
+      />
+
+      <meta
+        name="twitter:title"
+        content={twitterTitle}
+      />
+
+      <meta
+        name="twitter:description"
+        content={twitterDescription}
+      />
+
+      <meta
+        name="twitter:site"
+        content={twitterSite}
+      />
+
+      <meta
+        name="twitter:image"
+        content={twitterImage}
+      />
+
+      <meta
+        name="twitter:image:alt"
+        content={twitterImageAlt}
+      />
+
+      {twitter.creator && (
+        <meta
+          name="twitter:creator"
+          content={twitter.creator}
+        />
+      )}
+
+      {/* Structured Data */}
+
+      {schemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+        >
           {JSON.stringify(schema)}
         </script>
       ))}
+
     </Helmet>
   );
 };
