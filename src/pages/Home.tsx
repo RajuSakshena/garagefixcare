@@ -372,7 +372,8 @@ const serviceCities = [
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <main className=" bg-slate-800 pt-[76px] sm:pt-[112px] lg:pt-[120px]">
+        {/* Mobile navbar = 3px accent + 56px nav = 59px. Desktop = 32px strip + 56px nav = 88px */}
+        <main className="bg-slate-800 pt-[59px] lg:pt-[88px]">
 
 <section className="text-white py-2 sm:py-2 lg:py-2">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
