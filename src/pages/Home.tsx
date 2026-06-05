@@ -1,5 +1,5 @@
 // Home.tsx (FULL UPDATED CODE - navigation added for Cars button using useNavigate)
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CheckCircle, Star, Flame, X ,Plus, Phone as PhoneIcon, ChevronLeft, ChevronRight, Bike, Car } from 'lucide-react'; // Added PhoneIcon
 import SEOHelmet from '../components/SEOHelmet';
@@ -630,7 +630,7 @@ const serviceCities = [
                       />
                       {/* City badge overlay */}
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-2 flex flex-wrap gap-1">
-                        {['Noida', 'Delhi', 'Greater Noida', 'Ghaziabad', 'Gurugram', 'Faridabad'].slice(0, i % 2 === 0 ? 3 : 3).map((city, ci) => (
+                        {['Noida', 'Delhi', 'Greater Noida', 'Ghaziabad', 'Gurugram', 'Faridabad'].slice(0, i % 2 === 0 ? 3 : 3).map((_city, ci) => (
                           <span key={ci} className="text-white text-xs font-semibold bg-red-600/80 px-2 py-0.5 rounded-full">
                             {['Noida', 'Delhi', 'Greater Noida', 'Ghaziabad', 'Gurugram', 'Faridabad'][(i * 2 + ci) % 6]}
                           </span>
@@ -1318,6 +1318,103 @@ const serviceCities = [
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Service Locations & Popular Pages (combined) ── */}
+  <section className="py-4 sm:py-5 bg-slate-800">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Section heading */}
+      <h2 className="text-lg sm:text-xl font-bold text-white mb-3">
+        Service Locations &amp; <span className="text-red-600">Popular Pages</span>
+      </h2>
+
+      {/* 2-column on md+, single column on mobile */}
+      <div className="flex flex-col md:flex-row md:gap-10">
+
+        {/* LEFT — Service Locations */}
+        <div className="md:w-auto md:flex-shrink-0 mb-3 md:mb-0">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Service Locations</p>
+
+          {/* Bike Service Row */}
+          <div className="flex flex-wrap items-baseline gap-x-1 gap-y-1 mb-1.5">
+            <span className="text-sm font-semibold text-orange-400 whitespace-nowrap mr-1">Bike:</span>
+            {[
+              { city: "Noida",      to: "/best-bike-service-noida" },
+              { city: "Delhi",      to: "/best-bike-service-delhi" },
+              { city: "Gurgaon",   to: "/best-bike-service-gurgaon" },
+              { city: "Ghaziabad", to: "/best-bike-service-ghaziabad" },
+            ].map((item, i, arr) => (
+              <span key={item.to} className="inline-flex items-center">
+                <Link
+                  to={item.to}
+                  className="text-sm text-gray-300 hover:text-orange-400 transition-colors duration-150"
+                >
+                  {item.city}
+                </Link>
+                {i < arr.length - 1 && (
+                  <span className="text-gray-600 mx-1.5 select-none">|</span>
+                )}
+              </span>
+            ))}
+          </div>
+
+          {/* Car Service Row */}
+          <div className="flex flex-wrap items-baseline gap-x-1 gap-y-1">
+            <span className="text-sm font-semibold text-orange-400 whitespace-nowrap mr-1">Car:</span>
+            {[
+              { city: "Noida",      to: "/best-car-service-noida" },
+              { city: "Delhi",      to: "/best-car-service-delhi" },
+              { city: "Gurgaon",   to: "/best-car-service-gurgaon" },
+              { city: "Ghaziabad", to: "/best-car-service-ghaziabad" },
+            ].map((item, i, arr) => (
+              <span key={item.to} className="inline-flex items-center">
+                <Link
+                  to={item.to}
+                  className="text-sm text-gray-300 hover:text-orange-400 transition-colors duration-150"
+                >
+                  {item.city}
+                </Link>
+                {i < arr.length - 1 && (
+                  <span className="text-gray-600 mx-1.5 select-none">|</span>
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Divider — vertical on desktop, horizontal on mobile */}
+        <div className="hidden md:block w-px bg-slate-700 self-stretch" />
+        <div className="block md:hidden h-px bg-slate-700 mb-3" />
+
+        {/* RIGHT — Popular Service Pages */}
+        <div className="flex-1">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Popular Pages</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
+            {[
+              { label: "Best Bike Service in Noida",      to: "/best-bike-service-noida" },
+              { label: "Best Bike Service in Delhi",      to: "/best-bike-service-delhi" },
+              { label: "Best Bike Service in Gurgaon",   to: "/best-bike-service-gurgaon" },
+              { label: "Best Bike Service in Ghaziabad", to: "/best-bike-service-ghaziabad" },
+              { label: "Best Car Service in Noida",      to: "/best-car-service-noida" },
+              { label: "Best Car Service in Delhi",      to: "/best-car-service-delhi" },
+              { label: "Best Car Service in Gurgaon",   to: "/best-car-service-gurgaon" },
+              { label: "Best Car Service in Ghaziabad", to: "/best-car-service-ghaziabad" },
+            ].map((item) => (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  className="text-sm text-gray-400 hover:text-orange-400 underline underline-offset-2 transition-colors duration-150"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
