@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -112,6 +111,31 @@ const Footer = () => {
                 Join
               </button>
             </form>
+          </div>
+        </div>
+
+        {/* HORIZONTAL LINE SEPARATOR */}
+        <div className="border-t border-gray-800 my-2 sm:my-4"></div>
+
+        {/* Popular Service Pages */}
+        <div className="flex flex-col md:flex-row justify-between space-y-4 md:space-y-0 md:space-x-4">
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Popular Bike Service Pages</h3>
+            <ul className="space-y-1 text-sm sm:text-base">
+              <li><Link to="/best-bike-service-noida" className="hover:text-red-600">Best Bike Service in Noida</Link></li>
+              <li><Link to="/best-bike-service-delhi" className="hover:text-red-600">Best Bike Service in Delhi</Link></li>
+              <li><Link to="/best-bike-service-gurgaon" className="hover:text-red-600">Best Bike Service in Gurgaon</Link></li>
+              <li><Link to="/best-bike-service-ghaziabad" className="hover:text-red-600">Best Bike Service in Ghaziabad</Link></li>
+            </ul>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Popular Car Service Pages</h3>
+            <ul className="space-y-1 text-sm sm:text-base">
+              <li><Link to="/best-car-service-noida" className="hover:text-red-600">Best Car Service in Noida</Link></li>
+              <li><Link to="/best-car-service-delhi" className="hover:text-red-600">Best Car Service in Delhi</Link></li>
+              <li><Link to="/best-car-service-gurgaon" className="hover:text-red-600">Best Car Service in Gurgaon</Link></li>
+              <li><Link to="/best-car-service-ghaziabad" className="hover:text-red-600">Best Car Service in Ghaziabad</Link></li>
+            </ul>
           </div>
         </div>
 
