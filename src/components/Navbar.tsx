@@ -201,6 +201,12 @@ const Navbar = () => {
                 <Phone className="h-3.5 w-3.5 text-orange-600" />
                 <span>+91 954055-3759</span>
               </a>
+              <span className="text-gray-300 select-none">|</span>
+              <a href="mailto:garagefixcare@gmail.com"
+                className="flex items-center gap-1 text-xs font-semibold text-gray-700 hover:text-red-600 transition-colors">
+                <Mail className="h-3.5 w-3.5 text-orange-600" />
+                <span>garagefixcare@gmail.com</span>
+              </a>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-gray-700 hover:text-blue-800 p-2"
