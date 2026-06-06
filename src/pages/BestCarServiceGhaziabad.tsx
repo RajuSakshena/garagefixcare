@@ -181,8 +181,8 @@ const BestCarServiceGhaziabad = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Car Service in Ghaziabad | Doorstep Car Repair | Garage Fix Care"
-        description="Looking for the best car service in Ghaziabad? Garage Fix Care provides doorstep car repair, AC service, battery replacement, periodic maintenance and more. Same-day service at your home in Ghaziabad."
+        title="Best Car Service in Ghaziabad | Doorstep Car Repair ₹299 | Garage Fix Care"
+        description="Book best car service in Ghaziabad starting at ₹299. Doorstep repair, oil change, battery replacement and maintenance."
         canonical="https://garagefixcare.in/best-car-service-ghaziabad"
         robots="index, follow"
         og={{
@@ -200,7 +200,7 @@ const BestCarServiceGhaziabad = () => {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
-            "description": "Best car service in Ghaziabad. Doorstep car repair, AC service, battery replacement, periodic maintenance starting at ₹499.",
+            "description": "Best car service in Ghaziabad. Doorstep car repair, AC service, battery replacement, periodic maintenance starting at ₹299.",
             "url": "https://garagefixcare.in/best-car-service-ghaziabad",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
@@ -212,7 +212,19 @@ const BestCarServiceGhaziabad = () => {
               "addressCountry": "IN"
             },
             "geo": { "@type": "GeoCoordinates", "latitude": "28.6692", "longitude": "77.4538" },
-            "areaServed": ["Ghaziabad", "Delhi", "Noida", "Gurgaon", "Faridabad", "Greater Noida"],
+            "areaServed": {
+              "@type": "City",
+              "name": "Ghaziabad",
+              "sameAs": "https://en.wikipedia.org/wiki/Ghaziabad"
+            },
+            "serviceArea": [
+              { "@type": "City", "name": "Ghaziabad" },
+              { "@type": "City", "name": "Delhi" },
+              { "@type": "City", "name": "Noida" },
+              { "@type": "City", "name": "Gurgaon" },
+              { "@type": "City", "name": "Faridabad" },
+              { "@type": "City", "name": "Greater Noida" }
+            ],
             "serviceType": ["Car Repair", "Doorstep Car Service", "AC Service", "Battery Replacement", "Brake Service", "Dent Paint", "Engine Diagnostics"],
             "openingHours": "Mo-Su 08:00-20:00",
             "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "100000" }
@@ -223,15 +235,18 @@ const BestCarServiceGhaziabad = () => {
             "name": "Doorstep Car Service in Ghaziabad",
             "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
             "areaServed": "Ghaziabad",
-            "description": "At-home car servicing starting at ₹499. Oil change, AC gas refill, battery replacement, brake repair — same-day doorstep service.",
-            "offers": { "@type": "Offer", "priceCurrency": "INR", "price": "499", "availability": "https://schema.org/InStock" }
+            "description": "At-home car servicing in Ghaziabad starting at ₹299. Oil change, AC gas refill, battery replacement, brake repair — same-day doorstep service.",
+            "offers": { "@type": "Offer", "priceCurrency": "INR", "price": "299", "availability": "https://schema.org/InStock" }
           },
           {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-              { "@type": "Question", "name": "What is the best car service in Ghaziabad?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers doorstep car service in Ghaziabad with certified mechanics, genuine parts, and same-day service." } },
-              { "@type": "Question", "name": "Do you provide doorstep car repair in Ghaziabad?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we come to your home or office in Ghaziabad for all car repairs and servicing." } }
+              { "@type": "Question", "name": "What is the best car service in Ghaziabad?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers the best doorstep car service in Ghaziabad starting at Rs. 299 with certified mechanics, genuine parts, and same-day service across Indirapuram, Vaishali, Raj Nagar Extension, Vasundhara, Crossings Republik, and Kaushambi." } },
+              { "@type": "Question", "name": "Do you provide doorstep car repair in Ghaziabad?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we come to your home or office anywhere in Ghaziabad for all car repairs and servicing." } },
+              { "@type": "Question", "name": "How much does car service cost in Ghaziabad?", "acceptedAnswer": { "@type": "Answer", "text": "Doorstep car service in Ghaziabad starts at just Rs. 299. Periodic petrol service from Rs. 1,999, diesel from Rs. 2,499, AC service from Rs. 1,299. All pricing is transparent with no hidden charges." } },
+              { "@type": "Question", "name": "Which areas in Ghaziabad do you cover?", "acceptedAnswer": { "@type": "Answer", "text": "We cover all major areas in Ghaziabad including Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi, Mohan Nagar, Govindpuram, and Loni." } },
+              { "@type": "Question", "name": "How quickly can a mechanic reach me in Ghaziabad?", "acceptedAnswer": { "@type": "Answer", "text": "Our mechanics typically reach your location in Ghaziabad within 2-4 hours of booking. For urgent same-day service, call us and we will prioritise your request." } }
             ]
           },
           {
@@ -254,17 +269,17 @@ const BestCarServiceGhaziabad = () => {
                 {/* Left Side */}
                 <div>
                   <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-                    Best Car Service in Ghaziabad, NCR
-                    <span className="text-orange-500"> at Your Doorstep</span>
+                    Best Car Service in Ghaziabad
+                    <span className="text-orange-500"> — Doorstep Car Repair</span>
                   </h1>
                   <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
-                    Starting at just ₹499 • Same-Day Car Repair • Certified Mechanics Near You
+                    Starting at just ₹299 in Ghaziabad • Same-Day Car Repair • Certified Mechanics Near You
                   </p>
                   <p className="font-poppins text-xs sm:text-sm leading-relaxed text-white/90 mb-3 sm:mb-4">
-                    Skip the garage queue. Our certified mechanics come to your home or office in Ghaziabad — handling everything from periodic car servicing and AC repair to battery replacement and dent painting. Fast, transparent, and affordable.
+                    Skip the garage queue. Our certified mechanics come to your home or office in Ghaziabad — handling everything from periodic car servicing and AC repair to battery replacement and dent painting. Fast, transparent, and affordable car repair in Ghaziabad.
                   </p>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 mb-4 sm:mb-5 text-xs text-white/80">
-                    {["✔ Starting ₹499", "✔ Same-Day Service", "✔ Doorstep Mechanics", "✔ Trusted Technicians", "✔ No Hidden Charges"].map((point, i) => (
+                    {["✔ Starting ₹299", "✔ Same-Day Service", "✔ Doorstep Mechanics", "✔ Trusted Technicians", "✔ No Hidden Charges"].map((point, i) => (
                       <span key={i} className="font-medium">{point}</span>
                     ))}
                   </div>
@@ -391,23 +406,26 @@ const BestCarServiceGhaziabad = () => {
           </div>
         </section>
 
-        {/* Comprehensive Car Service Content (1000+ words) */}
+            {/* Comprehensive Car Service Content */}
         <section className="py-10 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why Garage Fix Care is the <span className="text-red-600">Best Car Service in Ghaziabad</span></h2>
             <div className="space-y-4 text-gray-200 text-base leading-relaxed">
-              <p>Finding a reliable car service in Ghaziabad can be stressful. Most local garages overcharge, use duplicate parts, or keep your car for days. Garage Fix Care changes that. We bring certified mechanics to your home — whether you own a Maruti Suzuki, Hyundai, Honda, Tata, or any other brand. Our doorstep car service saves you time, money, and hassle.</p>
-              <p>We service all car brands including hatchbacks, sedans, SUVs, and luxury cars. Our mechanics are trained to handle everything from a simple oil change to complex engine diagnostics, AC gas refill, brake pad replacement, clutch adjustment, and even dent & paint repairs.</p>
+              <p>Finding a reliable car service in Ghaziabad can be stressful. Most local garages overcharge, use duplicate parts, or keep your car for days. Garage Fix Care changes that. We bring certified mechanics directly to your home in Ghaziabad — whether you own a Maruti Suzuki, Hyundai, Honda, Tata, or any other brand. Our doorstep car service in Ghaziabad saves you time, money, and hassle.</p>
+              <p>We service all car brands including hatchbacks, sedans, SUVs, and luxury vehicles. Our mechanics are trained to handle everything from a simple oil change to complex engine diagnostics, AC gas refill, brake pad replacement, clutch adjustment, and dent &amp; paint repairs — all at your doorstep in Ghaziabad.</p>
               <p>What makes us the best car repair in Ghaziabad? Transparent pricing. We share a detailed estimate before starting any work. No surprise charges. We use genuine engine oils, filters, and manufacturer-recommended parts. Plus, every service comes with a 10-day hassle-free warranty.</p>
-              <p>Our customers love our punctuality and professionalism. We’ve completed over 100,000 successful services across Ghaziabad, Delhi NCR, Noida, and Gurugram. For car owners, we provide periodic maintenance, AC cooling improvement, battery health check, brake inspection, and even minor body repair.</p>
-              <p>Don’t wait in garage queues. Book online or call us. A car mechanic near you will reach your Ghaziabad address within hours. Same-day service guaranteed for bookings before noon. Experience the best doorstep car service in Ghaziabad with Garage Fix Care.</p>
-              <p>Ghaziabad's growing population and traffic demand a well-maintained car. Regular servicing keeps your car performing optimally, improves fuel efficiency, and prevents breakdowns. Our mechanics use advanced diagnostic tools and genuine spare parts to ensure your car runs like new.</p>
-              <p>We also offer emergency roadside assistance in Ghaziabad. If your car breaks down in Indirapuram, Vaishali, or anywhere in Ghaziabad, call us and we'll dispatch a mechanic immediately. Our 24/7 support ensures you're never stranded.</p>
-              <p>Choose Garage Fix Care for affordable, reliable, and doorstep car service in Ghaziabad. Book your appointment today and experience the difference.</p>
+              <p>Our customers love our punctuality and professionalism. We have completed over 100,000 successful services across Ghaziabad, Delhi NCR, Noida, and Gurugram. For car owners in Ghaziabad, we provide periodic maintenance, AC cooling improvement, battery health check, brake inspection, and even minor body repair.</p>
+              <p>Do not wait in garage queues. Book online or call us. A car mechanic near you will reach your Ghaziabad address within hours. Same-day car service in Ghaziabad is guaranteed for bookings before noon.</p>
+
+              <h3 className="text-xl font-bold text-red-500 mt-6">Car Repair Ghaziabad — Serving the City of Industries</h3>
+              <p>Ghaziabad is one of the fastest-growing cities in the Delhi NCR region, with a population of over 25 lakh spread across Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, and Kaushambi. With dense traffic on NH-9, NH-58, and the Delhi-Meerut Expressway, cars in Ghaziabad endure heavy wear. Our car repair service in Ghaziabad is built to meet this demand — giving you fast, professional, and affordable maintenance without stepping out of your home.</p>
+              <p>Ghaziabad's extreme summer heat, dusty roads, and waterlogged monsoon streets take a serious toll on your car's engine, battery, tyres, and AC system. Our mechanics perform multi-point inspections tailored specifically to Ghaziabad's road and weather conditions — from coolant checks in peak summer to battery load tests before monsoon season.</p>
+              <p>We cover every locality in Ghaziabad — Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi, Mohan Nagar, Govindpuram, Loni, Sahibabad, and beyond. Car service in Ghaziabad has never been this easy or affordable. Starting at just ₹299, our plans are priced for every budget.</p>
+              <p>We also provide emergency roadside assistance in Ghaziabad. If your car breaks down on NH-9, the Delhi-Meerut Expressway, or anywhere in Ghaziabad, call us and we will dispatch a trained mechanic immediately. Our extended working hours ensure you are never stranded.</p>
+              <p>Choose Garage Fix Care for the most affordable, reliable, and doorstep car service in Ghaziabad. Book your appointment today starting at just ₹299 and experience the difference.</p>
             </div>
           </div>
         </section>
-
         {/* Benefits Section */}
         <section className="py-8 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6 items-center">
@@ -468,11 +486,11 @@ const BestCarServiceGhaziabad = () => {
             <h2 className="text-3xl font-bold text-white text-center mb-6">Car Service in Ghaziabad — <span className="text-red-600">Common Questions</span></h2>
             <div className="space-y-3">
               {[
-                { q: "What is the best car service in Ghaziabad?", a: "Garage Fix Care offers doorstep car service in Ghaziabad starting at ₹499 with certified mechanics, genuine parts, and same-day service across Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi and more." },
+                { q: "What is the best car service in Ghaziabad?", a: "Garage Fix Care offers doorstep car service in Ghaziabad starting at ₹299 with certified mechanics, genuine parts, and same-day service across Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi and more." },
                 { q: "Do you provide doorstep car repair in Ghaziabad?", a: "Yes, we come to your home or office in Ghaziabad for all car repairs and servicing. Just book online or call us." },
                 { q: "Which car brands do you service in Ghaziabad?", a: "We service all major brands: Maruti Suzuki, Hyundai, Honda, Tata, Mahindra, Toyota, Ford, Volkswagen, Renault, Nissan, MG, Kia, Skoda, BMW, Mercedes, Audi, and more." },
                 { q: "What car services do you offer at home in Ghaziabad?", a: "Periodic service, AC service & gas refill, brake repair, battery replacement, dent & paint, engine diagnostics, oil change, filter replacement, and full inspection." },
-                { q: "How much does a doorstep car service cost in Ghaziabad?", a: "Prices start from ₹499 for engine diagnostics, periodic service from ₹1,999, AC service from ₹1,299. Transparent pricing." },
+                { q: "How much does a doorstep car service cost in Ghaziabad?", a: "Prices start from ₹299 for engine diagnostics, periodic service from ₹1,999, AC service from ₹1,299. Transparent pricing." },
                 { q: "Do you provide car AC gas refill at home in Ghaziabad?", a: "Yes, we do complete AC service including gas refill, leak test, and cabin filter cleaning at your doorstep." },
                 { q: "How quickly can a car mechanic reach me in Ghaziabad?", a: "Typically within 2–4 hours. For urgent same-day service, call us and we'll prioritise." },
                 { q: "Is your car service pricing transparent?", a: "Absolutely. We share a detailed estimate before starting any work. No hidden charges." },
@@ -482,7 +500,12 @@ const BestCarServiceGhaziabad = () => {
                 { q: "Do I need to provide tools or equipment?", a: "No, our mechanics arrive fully equipped with all tools, diagnostic scanners, and parts." },
                 { q: "Do you service luxury cars like BMW, Mercedes in Ghaziabad?", a: "Yes, we have trained mechanics for luxury car service including basic maintenance and diagnostics." },
                 { q: "Can I book service for multiple cars?", a: "Yes, just mention it while booking and we'll arrange accordingly." },
-                { q: "What makes GarageFix Care better than a regular car workshop in Ghaziabad?", a: "We come to you, offer transparent pricing, trained mechanics, genuine parts, and a 10-day warranty — saving you time and hassle." }
+                { q: "What makes GarageFix Care better than a regular car workshop in Ghaziabad?", a: "We come to you, offer transparent pricing, trained mechanics, genuine parts, and a 10-day warranty — saving you time and hassle." },
+                { q: "How much does doorstep car service cost in Ghaziabad?", a: "Our doorstep car service in Ghaziabad starts at just ₹299 for engine diagnostics. Periodic petrol car service from ₹1,999, diesel from ₹2,499, and AC service from ₹1,299. All prices are fully transparent — no hidden charges." },
+                { q: "Do you cover all localities in Ghaziabad?", a: "Yes! We provide car service across all major areas in Ghaziabad including Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi, Mohan Nagar, Govindpuram, Loni, and Sahibabad." },
+                { q: "Is same-day car service available in Ghaziabad?", a: "Absolutely. For bookings made before noon, we guarantee same-day doorstep car service across Ghaziabad. Our mechanics reach you within 2–4 hours of booking." },
+                { q: "Why is regular car servicing important in Ghaziabad?", a: "Ghaziabad's heavy traffic on NH-9 and the Delhi-Meerut Expressway, combined with extreme summer heat and monsoon waterlogging, accelerates engine wear, battery drain, and tyre degradation. Regular servicing every 5,000–10,000 km keeps your car running efficiently and prevents costly breakdowns." },
+                { q: "Do you offer car battery replacement at home in Ghaziabad?", a: "Yes, we provide doorstep car battery replacement in Ghaziabad. Our mechanic will check battery health, recommend the right battery for your car model, and install it on the spot. Old battery disposal is handled by us." }
               ].map((faq, idx) => (
                 <div key={idx} className="border border-gray-700 rounded-md">
                   <button className="flex justify-between w-full p-3 text-left font-semibold text-white hover:bg-slate-700" onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}><span className="text-red-600">Q{idx+1}.</span><span className="ml-2">{faq.q}</span>{activeIndex === idx ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}</button>
@@ -496,7 +519,7 @@ const BestCarServiceGhaziabad = () => {
         {/* Final CTA */}
         <section className="py-8 bg-slate-800 text-center">
           <h2 className="text-3xl font-bold text-white mb-2">Book Car Service in Ghaziabad Today</h2>
-          <p className="text-white mb-4">Same-day doorstep car service starting at ₹499. No travel, no waiting, no hidden charges.</p>
+          <p className="text-white mb-4">Same-day doorstep car service starting at ₹299. No travel, no waiting, no hidden charges.</p>
           <Link to="/book" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</Link>
         </section>
 
