@@ -180,8 +180,8 @@ const BestCarServiceNoida = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Car Service in Noida | Doorstep Car Repair | Garage Fix Care"
-        description="Looking for the best car service in Noida? Garage Fix Care provides doorstep car repair, AC service, battery replacement, periodic maintenance and more. Same-day service at your home."
+        title="Best Car Service in Noida | Doorstep Car Repair ₹299 | Garage Fix Care"
+        description="Book doorstep car service in Noida starting at ₹299. Car repair, battery replacement, oil change and maintenance by certified mechanics."
         canonical="https://garagefixcare.in/best-car-service-noida"
         robots="index, follow"
         og={{
@@ -211,26 +211,37 @@ const BestCarServiceNoida = () => {
               "addressCountry": "IN"
             },
             "geo": { "@type": "GeoCoordinates", "latitude": "28.5355", "longitude": "77.3910" },
-            "areaServed": ["Noida", "Greater Noida", "Ghaziabad", "Delhi", "Gurugram", "Faridabad"],
-            "serviceType": ["Car Repair", "Doorstep Car Service", "AC Service", "Battery Replacement", "Brake Service", "Dent Paint", "Engine Diagnostics"],
+            "areaServed": [
+              { "@type": "City", "name": "Noida" },
+              { "@type": "City", "name": "Greater Noida" },
+              { "@type": "City", "name": "Ghaziabad" },
+              { "@type": "City", "name": "Delhi" },
+              { "@type": "City", "name": "Gurugram" },
+              { "@type": "City", "name": "Faridabad" }
+            ],
+            "hasMap": "https://goo.gl/maps/dqmKivbhftEaVxK79",
+            "serviceType": ["Best Car Service in Noida", "Car Service Noida", "Car Repair Noida", "Doorstep Car Service", "AC Service", "Battery Replacement", "Brake Service", "Dent Paint", "Engine Diagnostics"],
             "openingHours": "Mo-Su 08:00-20:00",
             "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "100000" }
           },
           {
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": "Doorstep Car Service in Noida",
+            "name": "Best Car Service in Noida",
             "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
-            "areaServed": "Noida",
-            "description": "At-home car servicing starting at ₹499. Oil change, AC gas refill, battery replacement, brake repair — same-day doorstep service.",
+            "areaServed": { "@type": "City", "name": "Noida" },
+            "description": "Best doorstep car service in Noida starting at ₹299. Oil change, AC gas refill, battery replacement, brake repair — same-day car repair across Noida including Sector 18, 62, 63, 75, 137, and Greater Noida.",
             "offers": { "@type": "Offer", "priceCurrency": "INR", "price": "499", "availability": "https://schema.org/InStock" }
           },
           {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-              { "@type": "Question", "name": "What is the best car service in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers doorstep car service in Noida with certified mechanics, genuine parts, and same-day service." } },
-              { "@type": "Question", "name": "Do you provide doorstep car repair in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we come to your home or office in Noida for all car repairs and servicing." } }
+              { "@type": "Question", "name": "What is the best car service in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care is the best car service in Noida, offering doorstep car repair and maintenance starting at ₹299 with certified mechanics, genuine parts, and same-day service across all Noida sectors and Greater Noida." } },
+              { "@type": "Question", "name": "Do you provide doorstep car repair in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Garage Fix Care provides doorstep car repair in Noida. Our certified mechanics come to your home or office in Noida fully equipped with tools, diagnostic scanners, and genuine parts." } },
+              { "@type": "Question", "name": "How much does car service cost in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Car service in Noida with Garage Fix Care starts at ₹299 for engine diagnostics, periodic service from ₹1,999, and AC service from ₹1,299. All pricing is transparent with no hidden charges." } },
+              { "@type": "Question", "name": "Which sectors in Noida do you cover for car service?", "acceptedAnswer": { "@type": "Answer", "text": "We cover all major sectors in Noida including Sector 18, 62, 63, 75, 76, 78, 137 and Greater Noida for doorstep car service and car repair." } },
+              { "@type": "Question", "name": "How fast can a car mechanic reach me in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Our car mechanics reach your location in Noida within 2–4 hours. For urgent same-day car repair in Noida, call us and we will prioritise your booking." } }
             ]
           },
           {
@@ -253,8 +264,8 @@ const BestCarServiceNoida = () => {
                 {/* Left Side */}
                 <div>
                   <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-                    Best Car Service in Noida, Delhi NCR
-                    <span className="text-orange-500"> at Your Doorstep</span>
+                    Best Car Service in Noida
+                    <span className="text-orange-500"> — Doorstep Car Repair ₹299</span>
                   </h1>
                   <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
                     Starting at just ₹499 • Same-Day Car Repair • Certified Mechanics Near You
@@ -390,23 +401,22 @@ const BestCarServiceNoida = () => {
           </div>
         </section>
 
-        {/* Comprehensive Car Service Content (1000+ words) */}
+        {/* Comprehensive Car Service Content — Unique Noida Section */}
         <section className="py-10 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why Garage Fix Care is the <span className="text-red-600">Best Car Service in Noida</span></h2>
             <div className="space-y-4 text-gray-200 text-base leading-relaxed">
-              <p>Finding a reliable car service in Noida can be stressful. Most local garages overcharge, use duplicate parts, or keep your car for days. Garage Fix Care changes that. We bring certified mechanics to your home — whether you own a Maruti Suzuki, Hyundai, Honda, Tata, or any other brand. Our doorstep car service saves you time, money, and hassle.</p>
-              <p>We service all car brands including hatchbacks, sedans, SUVs, and luxury cars. Our mechanics are trained to handle everything from a simple oil change to complex engine diagnostics, AC gas refill, brake pad replacement, clutch adjustment, and even dent & paint repairs.</p>
-              <p>What makes us the best car repair in Noida? Transparent pricing. We share a detailed estimate before starting any work. No surprise charges. We use genuine engine oils, filters, and manufacturer-recommended parts. Plus, every service comes with a 10-day hassle-free warranty.</p>
-              <p>Our customers love our punctuality and professionalism. We’ve completed over 100,000 successful services across Noida, Delhi NCR, Ghaziabad, and Gurugram. For car owners, we provide periodic maintenance, AC cooling improvement, battery health check, brake inspection, and even minor body repair.</p>
-              <p>Don’t wait in garage queues. Book online or call us. A car mechanic near you will reach your Noida address within hours. Same-day service guaranteed for bookings before noon. Experience the best doorstep car service in Noida with Garage Fix Care.</p>
-              <p>Noida's roads and weather demand a well-maintained car. Regular servicing keeps your car performing optimally, improves fuel efficiency, and prevents breakdowns. Our mechanics use advanced diagnostic tools and genuine spare parts to ensure your car runs like new.</p>
-              <p>We also offer emergency roadside assistance in Noida. If your car breaks down in Sector 62, 18, or anywhere in Noida, call us and we'll dispatch a mechanic immediately. Our 24/7 support ensures you're never stranded.</p>
-              <p>Choose Garage Fix Care for affordable, reliable, and doorstep car service in Noida. Book your appointment today and experience the difference.</p>
+              <p>Finding a trustworthy car service in Noida is harder than it should be. Most local workshops keep your car for days, use non-genuine parts, and hand over a bill filled with charges you never approved. Garage Fix Care eliminates all of that. We send fully certified, background-verified mechanics directly to your home or office in Noida — whether you live in Sector 18, Sector 62, Sector 75, Sector 137, or Greater Noida — and get your car back on the road the same day.</p>
+              <p>Noida is a high-density city with thousands of cars navigating the Expressway, Sector roads, and the DND Flyway every day. Constant stop-and-go traffic, summer heat that regularly crosses 45°C, and monsoon waterlogging all place severe stress on your vehicle's engine, cooling system, AC, brakes, and tyres. Regular, timely car service in Noida is therefore essential — not just for performance, but for your safety and peace of mind.</p>
+              <p>We service every car brand popular among Noida residents — Maruti Suzuki Swift, Hyundai Creta, Tata Nexon, Honda City, Kia Seltos, Mahindra XUV700, Toyota Fortuner, Volkswagen Polo, MG Hector, and luxury brands including BMW, Mercedes-Benz, and Audi. Our mechanics arrive fully equipped with OBD diagnostic scanners, genuine engine oils, filters, brake pads, and other parts, so your car repair in Noida is completed right at your doorstep without any delay.</p>
+              <p>What makes us the best car service in Noida is our absolute commitment to transparency. Before a single bolt is turned, we share a written cost estimate. Every rupee is explained. No surprise line items, no pressure to add unnecessary services. We use only Motul and Wurth engine oils and OEM-grade spare parts. Each completed service includes a 10-day hassle-free warranty — if the same issue returns within 10 days, we fix it at no additional cost.</p>
+              <p>Noida's climate demands special attention to your car's AC system. We offer complete AC service in Noida including refrigerant gas refill, cabin air filter replacement, condenser cleaning, and leak diagnostics — all done at your driveway. Our AC service keeps your cabin cool even during the peak summer months without you needing to visit a service centre.</p>
+              <p>Our 18-point inspection covers engine oil level, brake fluid, coolant, air filter, spark plugs, battery health, tyre tread depth, wiper blades, all lights and indicators, steering play, and more. You receive a complete report so you always know exactly what was done and what to watch for next. No guesswork, no vague verbal summaries.</p>
+              <p>We have successfully completed over 1,00,000 car and bike services across Noida, Delhi, Ghaziabad, and Gurugram. Our 4.7-star ratings on Google, Facebook, and JustDial speak to the trust Noida customers place in us. Book your appointment online, on WhatsApp, or by phone — a car mechanic will be at your Noida address within 2–4 hours.</p>
+              <p>Choose Garage Fix Care for affordable, transparent, and the best doorstep car service in Noida. Skip the garage queues and get your car serviced where it stands — at home, at the office, or wherever you need us.</p>
             </div>
           </div>
         </section>
-
         {/* Benefits Section */}
         <section className="py-8 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6 items-center">
@@ -461,27 +471,28 @@ const BestCarServiceNoida = () => {
           </div>
         </section>
 
-        {/* FAQs (15 items - Car specific) */}
+        {/* FAQs — Car Service Noida */}
         <section className="bg-slate-900 py-10">
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold text-white text-center mb-6">Car Service in Noida — <span className="text-red-600">Common Questions</span></h2>
+            <h2 className="text-3xl font-bold text-white text-center mb-2">Frequently Asked Questions — <span className="text-red-600">Car Service in Noida</span></h2>
+            <p className="text-center text-gray-400 mb-6">Everything you need to know about doorstep car repair and car service in Noida with Garage Fix Care.</p>
             <div className="space-y-3">
               {[
-                { q: "What is the best car service in Noida?", a: "Garage Fix Care offers doorstep car service in Noida starting at ₹499 with certified mechanics, genuine parts, and same-day service across all sectors." },
-                { q: "Do you provide doorstep car repair in Noida?", a: "Yes, we come to your home or office in Noida for all car repairs and servicing. Just book online or call us." },
-                { q: "Which car brands do you service?", a: "We service all major brands: Maruti Suzuki, Hyundai, Honda, Tata, Mahindra, Toyota, Ford, Volkswagen, Renault, Nissan, MG, Kia, Skoda, BMW, Mercedes, Audi, and more." },
-                { q: "What car services do you offer at home?", a: "Periodic service, AC service & gas refill, brake repair, battery replacement, dent & paint, engine diagnostics, oil change, filter replacement, and full inspection." },
-                { q: "How much does a doorstep car service cost in Noida?", a: "Prices start from ₹499 for engine diagnostics, periodic service from ₹1,999, AC service from ₹1,299. Transparent pricing." },
-                { q: "Do you provide car AC gas refill at home?", a: "Yes, we do complete AC service including gas refill, leak test, and cabin filter cleaning at your doorstep." },
-                { q: "How quickly can a car mechanic reach me in Noida?", a: "Typically within 2–4 hours. For urgent same-day service, call us and we'll prioritise." },
-                { q: "Is your car service pricing transparent?", a: "Absolutely. We share a detailed estimate before starting any work. No hidden charges." },
-                { q: "Do you offer a service warranty?", a: "Yes, every car service comes with a 10-day hassle-free service guarantee." },
-                { q: "How do I book a car mechanic near me in Noida?", a: "Call us, WhatsApp, or use the booking form on this page. Share your location in Noida and preferred time." },
-                { q: "What payment methods do you accept?", a: "Cash, UPI (Google Pay, PhonePe, Paytm), and other mobile wallets." },
-                { q: "Do I need to provide tools or equipment?", a: "No, our mechanics arrive fully equipped with all tools, diagnostic scanners, and parts." },
-                { q: "Do you service luxury cars like BMW, Mercedes?", a: "Yes, we have trained mechanics for luxury car service including basic maintenance and diagnostics." },
-                { q: "Can I book service for multiple cars?", a: "Yes, just mention it while booking and we'll arrange accordingly." },
-                { q: "What makes GarageFix Care better than a regular car workshop in Noida?", a: "We come to you, offer transparent pricing, trained mechanics, genuine parts, and a 10-day warranty — saving you time and hassle." }
+                { q: "What is the best car service in Noida?", a: "Garage Fix Care is the best car service in Noida, offering doorstep car repair and maintenance starting at ₹299 with certified mechanics, genuine parts, and same-day service across all Noida sectors including Sector 18, 62, 63, 75, 76, 78, 137, and Greater Noida." },
+                { q: "How do I book car service in Noida at home?", a: "Booking car service in Noida with Garage Fix Care is simple. Call us, WhatsApp, or use the booking form on this page. Share your Noida address and preferred time, and a certified mechanic will arrive at your doorstep within 2–4 hours." },
+                { q: "What is the cost of doorstep car service in Noida?", a: "Car service in Noida with Garage Fix Care starts at ₹299 for engine diagnostics. Periodic service starts at ₹1,999, AC service from ₹1,299, brake service from ₹999, and battery replacement from ₹4,499. All pricing is transparent — no hidden charges." },
+                { q: "Do you provide doorstep car repair in Noida?", a: "Yes, Garage Fix Care specialises in doorstep car repair in Noida. Our mechanics come to your home, office, or any Noida location fully equipped with tools, OBD scanners, genuine parts, and engine oils." },
+                { q: "Which car brands do you service in Noida?", a: "We service all major car brands in Noida including Maruti Suzuki, Hyundai, Tata, Honda, Kia, Mahindra, Toyota, Volkswagen, MG, Renault, Nissan, Ford, Skoda, and luxury brands like BMW, Mercedes-Benz, and Audi." },
+                { q: "Which sectors in Noida do you cover for car service?", a: "We cover all sectors in Noida for doorstep car service including Sector 18, 62, 63, 75, 76, 78, 137, Noida Extension, and Greater Noida. Our mechanics reach your location within 2–4 hours of booking." },
+                { q: "Do you provide car AC service at home in Noida?", a: "Yes, we provide complete car AC service in Noida at your doorstep — including AC gas refill, cabin filter cleaning, condenser check, and leak diagnostics. Same-day AC service available across Noida." },
+                { q: "Do you offer car battery replacement in Noida?", a: "Yes, we offer doorstep car battery replacement in Noida. Our mechanic performs a battery health test, installs a new genuine battery, and disposes of the old one — all at your home or office in Noida." },
+                { q: "Is your car service pricing transparent in Noida?", a: "Absolutely. We provide a written estimate before beginning any car repair or service in Noida. You will never face hidden charges, surprise fees, or upselling pressure." },
+                { q: "Do you offer a warranty on car service in Noida?", a: "Yes, every car service and car repair in Noida comes with a 10-day hassle-free service guarantee. If the same issue recurs within 10 days, we fix it at no extra cost." },
+                { q: "How quickly can a car mechanic reach me in Noida?", a: "Our car mechanics typically reach your Noida location within 2–4 hours. For urgent same-day car repair in Noida, call us directly and we will prioritise your booking." },
+                { q: "Do you service luxury cars in Noida?", a: "Yes, we have specially trained mechanics for luxury car service in Noida including BMW, Mercedes-Benz, Audi, and Skoda — covering periodic maintenance, diagnostics, AC service, and brake repair at your doorstep." },
+                { q: "What payment methods do you accept for car service in Noida?", a: "We accept cash, UPI payments (Google Pay, PhonePe, Paytm), and other mobile wallets for car service in Noida." },
+                { q: "Can I book car service for multiple cars in Noida?", a: "Yes, you can book doorstep service for multiple cars in Noida at the same time. Just mention the number of vehicles while booking and we will arrange mechanics accordingly." },
+                { q: "What makes GarageFixCare better than a regular car workshop in Noida?", a: "Unlike traditional Noida workshops, GarageFixCare comes to you, provides transparent pricing, uses genuine OEM parts, employs trained and verified mechanics, and backs every job with a 10-day warranty — saving you time, travel, and money." }
               ].map((faq, idx) => (
                 <div key={idx} className="border border-gray-700 rounded-md">
                   <button className="flex justify-between w-full p-3 text-left font-semibold text-white hover:bg-slate-700" onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}><span className="text-red-600">Q{idx+1}.</span><span className="ml-2">{faq.q}</span>{activeIndex === idx ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}</button>
@@ -491,7 +502,6 @@ const BestCarServiceNoida = () => {
             </div>
           </div>
         </section>
-
         {/* Final CTA */}
         <section className="py-8 bg-slate-800 text-center">
           <h2 className="text-3xl font-bold text-white mb-2">Book Car Service in Noida Today</h2>
