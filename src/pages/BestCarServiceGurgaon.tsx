@@ -183,8 +183,8 @@ const BestCarServiceGurgaon = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Car Service in Gurgaon | Doorstep Car Repair | Garage Fix Care"
-        description="Looking for the best car service in Gurgaon? Garage Fix Care provides doorstep car repair, AC service, battery replacement, periodic maintenance and more. Same-day service at your home in Gurgaon."
+        title="Best Car Service in Gurgaon | Doorstep Car Repair ₹299 | Garage Fix Care"
+        description="Trusted doorstep car service in Gurgaon starting ₹299. Same day repair, maintenance and certified mechanics at home."
         canonical="https://garagefixcare.in/best-car-service-gurgaon"
         robots="index, follow"
         og={{
@@ -214,7 +214,19 @@ const BestCarServiceGurgaon = () => {
               "addressCountry": "IN"
             },
             "geo": { "@type": "GeoCoordinates", "latitude": "28.4595", "longitude": "77.0266" },
-            "areaServed": ["Gurgaon", "Delhi", "Noida", "Ghaziabad", "Faridabad", "Greater Noida"],
+            "areaServed": {
+              "@type": "City",
+              "name": "Gurgaon",
+              "sameAs": "https://en.wikipedia.org/wiki/Gurugram"
+            },
+            "serviceArea": [
+              { "@type": "City", "name": "Gurgaon" },
+              { "@type": "City", "name": "Delhi" },
+              { "@type": "City", "name": "Noida" },
+              { "@type": "City", "name": "Ghaziabad" },
+              { "@type": "City", "name": "Faridabad" },
+              { "@type": "City", "name": "Greater Noida" }
+            ],
             "serviceType": ["Car Repair", "Doorstep Car Service", "AC Service", "Battery Replacement", "Brake Service", "Dent Paint", "Engine Diagnostics"],
             "openingHours": "Mo-Su 08:00-20:00",
             "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "100000" }
@@ -232,8 +244,11 @@ const BestCarServiceGurgaon = () => {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-              { "@type": "Question", "name": "What is the best car service in Gurgaon?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers doorstep car service in Gurgaon with certified mechanics, genuine parts, and same-day service." } },
-              { "@type": "Question", "name": "Do you provide doorstep car repair in Gurgaon?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we come to your home or office in Gurgaon for all car repairs and servicing." } }
+              { "@type": "Question", "name": "What is the best car service in Gurgaon?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers the best doorstep car service in Gurgaon starting at Rs. 299 with certified mechanics, genuine parts, and same-day service across all sectors and DLF phases." } },
+              { "@type": "Question", "name": "Do you provide doorstep car repair in Gurgaon?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we come to your home or office anywhere in Gurgaon for all car repairs and servicing." } },
+              { "@type": "Question", "name": "How much does car service cost in Gurgaon?", "acceptedAnswer": { "@type": "Answer", "text": "Doorstep car service in Gurgaon starts at just Rs. 299 for basic diagnostics. Periodic service starts from Rs. 1,999 and AC service from Rs. 1,299. All pricing is transparent with no hidden charges." } },
+              { "@type": "Question", "name": "Which areas in Gurgaon do you cover?", "acceptedAnswer": { "@type": "Answer", "text": "We cover all major areas in Gurgaon including DLF Phases 1-5, Golf Course Road, Sohna Road, Sector 14, 29, 56, 57, Palam Vihar, Udyog Vihar, Manesar, Sushant Lok and more." } },
+              { "@type": "Question", "name": "How quickly can a mechanic reach me in Gurgaon?", "acceptedAnswer": { "@type": "Answer", "text": "Our mechanics typically reach your location in Gurgaon within 2-4 hours of booking. For urgent same-day service, call us and we will prioritise your request." } }
             ]
           },
           {
@@ -256,17 +271,17 @@ const BestCarServiceGurgaon = () => {
                 {/* Left Side */}
                 <div>
                   <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-                    Best Car Service in Gurgaon, NCR
-                    <span className="text-orange-500"> at Your Doorstep</span>
+                    Best Car Service in Gurgaon
+                    <span className="text-orange-500"> — Doorstep Car Repair</span>
                   </h1>
                   <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
-                    Starting at just ₹499 • Same-Day Car Repair • Certified Mechanics Near You
+                    Starting at just ₹299 in Gurgaon • Same-Day Car Repair • Certified Mechanics Near You
                   </p>
                   <p className="font-poppins text-xs sm:text-sm leading-relaxed text-white/90 mb-3 sm:mb-4">
-                    Skip the garage queue. Our certified mechanics come to your home or office in Gurgaon — handling everything from periodic car servicing and AC repair to battery replacement and dent painting. Fast, transparent, and affordable.
+                    Skip the garage queue. Our certified mechanics come to your home or office in Gurgaon — handling everything from periodic car servicing and AC repair to battery replacement and dent painting. Fast, transparent, and affordable car repair in Gurgaon.
                   </p>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 mb-4 sm:mb-5 text-xs text-white/80">
-                    {["✔ Starting ₹499", "✔ Same-Day Service", "✔ Doorstep Mechanics", "✔ Trusted Technicians", "✔ No Hidden Charges"].map((point, i) => (
+                    {["✔ Starting ₹299", "✔ Same-Day Service", "✔ Doorstep Mechanics", "✔ Trusted Technicians", "✔ No Hidden Charges"].map((point, i) => (
                       <span key={i} className="font-medium">{point}</span>
                     ))}
                   </div>
@@ -393,23 +408,25 @@ const BestCarServiceGurgaon = () => {
           </div>
         </section>
 
-        {/* Comprehensive Car Service Content (1000+ words) */}
+            {/* Comprehensive Car Service Content */}
         <section className="py-10 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why Garage Fix Care is the <span className="text-red-600">Best Car Service in Gurgaon</span></h2>
             <div className="space-y-4 text-gray-200 text-base leading-relaxed">
-              <p>Finding a reliable car service in Gurgaon can be stressful. Most local garages overcharge, use duplicate parts, or keep your car for days. Garage Fix Care changes that. We bring certified mechanics to your home — whether you own a Maruti Suzuki, Hyundai, Honda, Tata, or any other brand. Our doorstep car service saves you time, money, and hassle.</p>
-              <p>We service all car brands including hatchbacks, sedans, SUVs, and luxury cars. Our mechanics are trained to handle everything from a simple oil change to complex engine diagnostics, AC gas refill, brake pad replacement, clutch adjustment, and even dent & paint repairs.</p>
+              <p>Finding a reliable car service in Gurgaon can be stressful. Most local garages overcharge, use duplicate parts, or keep your car for days. Garage Fix Care changes that. We bring certified mechanics to your home — whether you own a Maruti Suzuki, Hyundai, Honda, Tata, or any other brand. Our doorstep car service in Gurgaon saves you time, money, and hassle.</p>
+              <p>We service all car brands including hatchbacks, sedans, SUVs, and luxury cars. Our mechanics are trained to handle everything from a simple oil change to complex engine diagnostics, AC gas refill, brake pad replacement, clutch adjustment, and even dent &amp; paint repairs — all at your doorstep across Gurgaon.</p>
               <p>What makes us the best car repair in Gurgaon? Transparent pricing. We share a detailed estimate before starting any work. No surprise charges. We use genuine engine oils, filters, and manufacturer-recommended parts. Plus, every service comes with a 10-day hassle-free warranty.</p>
-              <p>Our customers love our punctuality and professionalism. We’ve completed over 100,000 successful services across Gurgaon, Delhi NCR, Noida, and Ghaziabad. For car owners, we provide periodic maintenance, AC cooling improvement, battery health check, brake inspection, and even minor body repair.</p>
-              <p>Don’t wait in garage queues. Book online or call us. A car mechanic near you will reach your Gurgaon address within hours. Same-day service guaranteed for bookings before noon. Experience the best doorstep car service in Gurgaon with Garage Fix Care.</p>
-              <p>Gurgaon's fast-paced lifestyle and weather demand a well-maintained car. Regular servicing keeps your car performing optimally, improves fuel efficiency, and prevents breakdowns. Our mechanics use advanced diagnostic tools and genuine spare parts to ensure your car runs like new.</p>
-              <p>We also offer emergency roadside assistance in Gurgaon. If your car breaks down on Golf Course Road, Sohna Road, or anywhere in Gurgaon, call us and we'll dispatch a mechanic immediately. Our 24/7 support ensures you're never stranded.</p>
-              <p>Choose Garage Fix Care for affordable, reliable, and doorstep car service in Gurgaon. Book your appointment today and experience the difference.</p>
+              <p>Our customers love our punctuality and professionalism. We have completed over 100,000 successful services across Gurgaon, Delhi NCR, Noida, and Ghaziabad. For car owners in Gurgaon, we provide periodic maintenance, AC cooling improvement, battery health check, brake inspection, and even minor body repair.</p>
+              <p>Do not wait in garage queues. Book online or call us. A car mechanic near you will reach your Gurgaon address within hours. Same-day car service in Gurgaon is guaranteed for bookings before noon.</p>
+              <h3 className="text-xl font-bold text-red-500 mt-6">Car Repair Gurgaon — Built for the Millennium City</h3>
+              <p>Gurgaon's fast-paced corporate lifestyle means your car is not just a vehicle — it is your daily lifeline. Whether you commute on NH-48, drive through Cyber City, or navigate the lanes of DLF Cyber Hub, a well-maintained car is non-negotiable. Our car repair service in Gurgaon is specifically designed to fit your busy schedule. We work around your calendar, not the other way around.</p>
+              <p>The heavy traffic and extreme seasonal temperatures in Gurgaon accelerate engine wear, clog air filters, and degrade brakes faster than in smaller cities. Our mechanics perform thorough multi-point inspections tailored to Gurgaon's driving conditions — checking coolant levels for scorching summers, battery performance during monsoons, and tyre pressure for Gurgaon's sector roads and highways.</p>
+              <p>We cover every corner of Gurgaon — from premium zones like Golf Course Road, DLF Phases 1–5, and Sushant Lok to residential areas like Palam Vihar, Sector 82, Sector 57, Udyog Vihar, and Manesar. Car service in Gurgaon has never been this accessible or affordable. Starting at just ₹299, there is no reason to delay essential maintenance.</p>
+              <p>We also offer emergency roadside assistance in Gurgaon. If your car breaks down on Sohna Road, Southern Peripheral Road, or anywhere in Gurgaon, call us and we will dispatch a mechanic immediately. Our extended hours ensure you are never stranded.</p>
+              <p>Choose Garage Fix Care for the most affordable, reliable, and doorstep car service in Gurgaon. Book your appointment today starting at just ₹299 and experience the difference.</p>
             </div>
           </div>
         </section>
-
         {/* Benefits Section */}
         <section className="py-8 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6 items-center">
@@ -470,11 +487,11 @@ const BestCarServiceGurgaon = () => {
             <h2 className="text-3xl font-bold text-white text-center mb-6">Car Service in Gurgaon — <span className="text-red-600">Common Questions</span></h2>
             <div className="space-y-3">
               {[
-                { q: "What is the best car service in Gurgaon?", a: "Garage Fix Care offers doorstep car service in Gurgaon starting at ₹499 with certified mechanics, genuine parts, and same-day service across all sectors and DLF phases." },
+                { q: "What is the best car service in Gurgaon?", a: "Garage Fix Care offers doorstep car service in Gurgaon starting at ₹299 with certified mechanics, genuine parts, and same-day service across all sectors and DLF phases." },
                 { q: "Do you provide doorstep car repair in Gurgaon?", a: "Yes, we come to your home or office in Gurgaon for all car repairs and servicing. Just book online or call us." },
                 { q: "Which car brands do you service in Gurgaon?", a: "We service all major brands: Maruti Suzuki, Hyundai, Honda, Tata, Mahindra, Toyota, Ford, Volkswagen, Renault, Nissan, MG, Kia, Skoda, BMW, Mercedes, Audi, and more." },
                 { q: "What car services do you offer at home in Gurgaon?", a: "Periodic service, AC service & gas refill, brake repair, battery replacement, dent & paint, engine diagnostics, oil change, filter replacement, and full inspection." },
-                { q: "How much does a doorstep car service cost in Gurgaon?", a: "Prices start from ₹499 for engine diagnostics, periodic service from ₹1,999, AC service from ₹1,299. Transparent pricing." },
+                { q: "How much does a doorstep car service cost in Gurgaon?", a: "Prices start from ₹299 for engine diagnostics, periodic service from ₹1,999, AC service from ₹1,299. Transparent pricing." },
                 { q: "Do you provide car AC gas refill at home in Gurgaon?", a: "Yes, we do complete AC service including gas refill, leak test, and cabin filter cleaning at your doorstep." },
                 { q: "How quickly can a car mechanic reach me in Gurgaon?", a: "Typically within 2–4 hours. For urgent same-day service, call us and we'll prioritise." },
                 { q: "Is your car service pricing transparent?", a: "Absolutely. We share a detailed estimate before starting any work. No hidden charges." },
@@ -484,7 +501,12 @@ const BestCarServiceGurgaon = () => {
                 { q: "Do I need to provide tools or equipment?", a: "No, our mechanics arrive fully equipped with all tools, diagnostic scanners, and parts." },
                 { q: "Do you service luxury cars like BMW, Mercedes in Gurgaon?", a: "Yes, we have trained mechanics for luxury car service including basic maintenance and diagnostics." },
                 { q: "Can I book service for multiple cars?", a: "Yes, just mention it while booking and we'll arrange accordingly." },
-                { q: "What makes GarageFix Care better than a regular car workshop in Gurgaon?", a: "We come to you, offer transparent pricing, trained mechanics, genuine parts, and a 10-day warranty — saving you time and hassle." }
+                { q: "What makes GarageFix Care better than a regular car workshop in Gurgaon?", a: "We come to you, offer transparent pricing, trained mechanics, genuine parts, and a 10-day warranty — saving you time and hassle." },
+                { q: "How much does a doorstep car service cost in Gurgaon?", a: "Our doorstep car service in Gurgaon starts at just ₹299 for basic diagnostics. Periodic petrol car service starts at ₹1,999, diesel from ₹2,499, and AC service from ₹1,299. All prices are fully transparent with no hidden charges." },
+                { q: "Do you cover all sectors and DLF phases in Gurgaon?", a: "Yes! We provide car service across all sectors and DLF phases in Gurgaon including DLF Phase 1-5, Sector 14, 29, 56, 57, Golf Course Road, Sohna Road, Palam Vihar, Udyog Vihar, Manesar, Sushant Lok, and more." },
+                { q: "Is same-day car service available in Gurgaon?", a: "Absolutely. For bookings made before noon, we guarantee same-day doorstep car service across Gurgaon. Call or book online and a certified mechanic will reach you within 2–4 hours." },
+                { q: "Do you offer car AC gas refill at home in Gurgaon?", a: "Yes, we offer complete AC service including gas refill, leak detection, cabin filter cleaning, and AC performance check — all at your doorstep in Gurgaon starting at ₹1,299." },
+                { q: "Why is regular car servicing important in Gurgaon?", a: "Gurgaon's heavy traffic, dust, extreme summers, and monsoon conditions accelerate vehicle wear. Regular car servicing in Gurgaon every 5,000–10,000 km keeps your engine healthy, improves fuel efficiency, and prevents costly breakdowns." }
               ].map((faq, idx) => (
                 <div key={idx} className="border border-gray-700 rounded-md">
                   <button className="flex justify-between w-full p-3 text-left font-semibold text-white hover:bg-slate-700" onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}><span className="text-red-600">Q{idx+1}.</span><span className="ml-2">{faq.q}</span>{activeIndex === idx ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}</button>
@@ -498,7 +520,7 @@ const BestCarServiceGurgaon = () => {
         {/* Final CTA */}
         <section className="py-8 bg-slate-800 text-center">
           <h2 className="text-3xl font-bold text-white mb-2">Book Car Service in Gurgaon Today</h2>
-          <p className="text-white mb-4">Same-day doorstep car service starting at ₹499. No travel, no waiting, no hidden charges.</p>
+          <p className="text-white mb-4">Same-day doorstep car service starting at ₹299. No travel, no waiting, no hidden charges.</p>
           <Link to="/book" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</Link>
         </section>
 
