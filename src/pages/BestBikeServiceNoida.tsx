@@ -152,6 +152,7 @@ const BestBikeServiceNoida = () => {
       });
       alert('Thanks for booking! We have received your request and will contact you in 5 minutes.');
       closeModal();
+      window.location.href = 'https://garagefixcare.in/bookservice';
     } catch (error) {
       alert('Booking failed. Please try again.');
       console.error('Error booking service:', error);
@@ -182,7 +183,7 @@ const BestBikeServiceNoida = () => {
     <>
       <SEOHelmet
         title="Best Bike Service in Noida | Doorstep Bike Repair ₹299 | Garage Fix Care"
-        description="Looking for the best bike service in Noida? Garage Fix Care provides doorstep bike repair, servicing, oil change, battery replacement and mechanic services starting at ₹299. Same-day service in all sectors."
+        description="Best Bike Service in Noida at your doorstep starting ₹299. Oil change, bike repair, battery replacement and certified mechanics near you. Same day bike service in Noida."
         canonical="https://garagefixcare.in/best-bike-service-noida"
         robots="index, follow"
         og={{
@@ -212,7 +213,14 @@ const BestBikeServiceNoida = () => {
               "addressCountry": "IN"
             },
             "geo": { "@type": "GeoCoordinates", "latitude": "28.5355", "longitude": "77.3910" },
-            "areaServed": ["Noida", "Greater Noida", "Ghaziabad", "Delhi", "Gurugram", "Faridabad"],
+            "areaServed": [
+                { "@type": "City", "name": "Noida", "sameAs": "https://en.wikipedia.org/wiki/Noida" },
+                { "@type": "City", "name": "Greater Noida" },
+                { "@type": "City", "name": "Ghaziabad" },
+                { "@type": "City", "name": "Delhi" },
+                { "@type": "City", "name": "Gurugram" },
+                { "@type": "City", "name": "Faridabad" }
+              ],
             "serviceType": ["Bike Repair", "Doorstep Bike Service", "Engine Repair", "Battery Replacement", "Brake Repair", "Tyre Service"],
             "openingHours": "Mo-Su 08:00-20:00",
             "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "100000" }
@@ -230,8 +238,10 @@ const BestBikeServiceNoida = () => {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-              { "@type": "Question", "name": "What is the best bike service in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers doorstep bike service in Noida starting at ₹299 with certified mechanics." } },
-              { "@type": "Question", "name": "Do you provide doorstep bike repair in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we come to your home or office in Noida for all bike repairs and servicing." } }
+              { "@type": "Question", "name": "How much does bike service cost in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Bike service in Noida at Garage Fix Care starts from ₹299 for 100–125cc bikes. Classic Service is ₹399, Premium ₹499, Royal ₹599, and Sports ₹999. All include labour with no hidden charges." } },
+              { "@type": "Question", "name": "Do you provide doorstep bike repair in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we provide complete doorstep bike repair across all sectors of Noida. Our certified mechanics arrive with all tools, oils, and parts — no garage visit needed." } },
+              { "@type": "Question", "name": "Which areas of Noida are covered?", "acceptedAnswer": { "@type": "Answer", "text": "We cover all major sectors of Noida: Sector 18, 62, 63, 75, 76, 78, 137, and all of Greater Noida." } },
+              { "@type": "Question", "name": "What is the best bike service in Noida?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers doorstep bike service in Noida starting at ₹299 with certified mechanics." } }
             ]
           },
           {
@@ -254,8 +264,8 @@ const BestBikeServiceNoida = () => {
                 {/* Left Side */}
                 <div>
                   <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-                    Best Bike Service in Noida, Delhi NCR
-                    <span className="text-orange-500"> at Your Doorstep</span>
+                    Best Bike Service in Noida
+                    <span className="text-orange-500"> — Doorstep Repair from ₹299</span>
                   </h1>
                   <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
                     Starting at just ₹299 • Same-Day Bike Repair • Certified Mechanics Near You
@@ -272,15 +282,15 @@ const BestBikeServiceNoida = () => {
                   {/* Book + Call Buttons */}
                   <div className="flex flex-wrap items-center gap-3">
                     {!showInput ? (
-                      <button onClick={() => setShowInput(true)} className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300">
+                      <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
                         Book Service Now
-                      </button>
+                      </a>
                     ) : (
                       <div className="flex flex-col sm:flex-row items-center gap-3 transition-all duration-500 ease-in-out">
                         <input type="tel" maxLength={10} value={modalPhoneNumber} onChange={(e) => { const val = e.target.value.replace(/\D/g, ''); if (val.length <= 10) setModalPhoneNumber(val); }} placeholder="Enter 10-digit mobile number" className="w-full sm:w-auto px-4 py-3 rounded-lg text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500" />
                         <button onClick={async () => {
                           if (!modalPhoneNumber || modalPhoneNumber.length !== 10) { alert('Please enter a valid 10-digit phone number.'); return; }
-                          try { await axios.post(`${import.meta.env.VITE_API_URL}/api/quick-book-service`, { phoneNumber: modalPhoneNumber, serviceType: "Doorstep Bike Service" }); alert('✅ Booking received! Our team will contact you shortly.'); setModalPhoneNumber(''); setShowInput(false); } catch (err) { alert('❌ Booking failed. Please try again.'); }
+                          try { await axios.post(`${import.meta.env.VITE_API_URL}/api/quick-book-service`, { phoneNumber: modalPhoneNumber, serviceType: "Doorstep Bike Service" }); alert('✅ Booking received! Our team will contact you shortly.'); setModalPhoneNumber(''); setShowInput(false); window.location.href = 'https://garagefixcare.in/bookservice'; } catch (err) { alert('❌ Booking failed. Please try again.'); }
                         }} className="bg-green-600 text-white px-5 py-3 rounded-lg font-semibold text-sm sm:text-base">Confirm Booking</button>
                         <button onClick={() => setShowInput(false)} className="text-gray-300 text-sm hover:text-white">Cancel</button>
                       </div>
@@ -396,7 +406,7 @@ const BestBikeServiceNoida = () => {
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why Garage Fix Care is the <span className="text-red-600">Best Bike Service in Noida</span></h2>
             <div className="space-y-4 text-gray-200 text-base leading-relaxed">
-              <p>Finding a reliable bike service in Noida can be challenging. Most local garages overcharge, use duplicate parts, or keep your bike for days. Garage Fix Care changes that. We bring certified mechanics to your home — whether you live in Sector 62, Sector 18, or Greater Noida. Our doorstep bike service saves you time, money, and hassle.</p>
+              <p>Finding a truly reliable bike service in Noida has always been a frustrating experience for most two-wheeler owners. Local garages in Noida often overcharge without explanation, use low-grade or duplicate spare parts, and keep your bike idle for days — sometimes even weeks. That ends with Garage Fix Care. We are Noida's most trusted doorstep bike service provider, bringing fully certified, background-verified mechanics directly to your home, your office, or wherever your bike is parked. Whether you live in Sector 18, Sector 62, Sector 63, Sector 75, Sector 137, or anywhere across Greater Noida, our bike repair professionals reach you within 2–4 hours of your booking. Our doorstep bike service in Noida starts at just ₹299, covering essential tasks like engine oil change, air filter cleaning, spark plug inspection, and brake adjustment — all completed on the spot without you needing to step out. We service every major brand available in Noida — Hero, Honda, Bajaj, TVS, Suzuki, Yamaha, Royal Enfield, KTM, and more. No matter whether you own a daily commuter, a sports bike, or a family scooty, our expert Noida mechanics handle it all. What truly sets us apart as the best bike service in Noida is our unwavering commitment to transparency: you receive a detailed cost estimate before any work begins, so there are absolutely zero hidden charges or surprise bills. We use only genuine engine oils from trusted brands like Motul and Wurth, paired with manufacturer-recommended spare parts. Every Garage Fix Care service in Noida is also backed by a 10-day hassle-free service guarantee — because we stand firmly behind the quality of our work.</p>
               <p>We service all bike brands including Hero, Honda, Bajaj, TVS, Suzuki, Yamaha, Royal Enfield, KTM, and more. Our mechanics are trained to handle everything from a simple oil change to complex engine overhauls. Need a battery replacement? Brake pad change? Clutch adjustment? We do it all on the spot.</p>
               <p>What makes us the best bike repair in Noida? Transparent pricing. We share a detailed estimate before starting any work. No surprise charges. We use genuine engine oils (Motul, Wurth) and manufacturer-recommended parts. Plus, every service comes with a 10-day hassle-free warranty.</p>
               <p>Our customers love our punctuality and professionalism. We’ve completed over 100,000 successful services across Noida, Delhi NCR, Ghaziabad, and Gurugram. For scooty owners, we provide Activa, Jupiter, Access, and Dio repairs at doorstep. Tyre puncture fixing, chain cleaning, air filter replacement — all done at your location.</p>
@@ -465,9 +475,10 @@ const BestBikeServiceNoida = () => {
             <h2 className="text-3xl font-bold text-white text-center mb-6">Bike Service in Noida — <span className="text-red-600">Common Questions</span></h2>
             <div className="space-y-3">
               {[
+                { q: "How much does bike service cost in Noida?", a: "Bike service in Noida at Garage Fix Care starts from just ₹299 for 100–125cc bikes (Regular Service). Classic Service (135–200 CC) is ₹399, Premium Service (220–300 CC) is ₹499, Royal Service (350–450 CC) is ₹599, and Sports Service (above 500 CC) is ₹999. All prices include labour charges with no hidden fees." },
+                { q: "Do you provide doorstep bike repair in Noida?", a: "Yes, we provide full doorstep bike repair across Noida. Our certified mechanics come to your home or office with all tools, oils, and parts. No need to visit a garage — we handle everything on the spot, from oil change to engine repair." },
+                { q: "Which areas of Noida are covered?", a: "We cover all major sectors of Noida including Sector 18, Sector 62, Sector 63, Sector 75, Sector 76, Sector 78, Sector 137, and all of Greater Noida. If you are unsure whether we cover your area, just call us and we will confirm instantly." },
                 { q: "What is the best bike service in Noida?", a: "Garage Fix Care offers doorstep bike service in Noida starting at ₹299 with certified mechanics, genuine parts, and same-day service." },
-                { q: "Do you provide doorstep bike repair in Noida?", a: "Yes, we come to your home or office in Noida for all bike repairs and servicing. Just book online or call us." },
-                { q: "Which areas in Noida do you cover for bike service?", a: "We cover Sector 18, 62, 63, 75, 76, 78, 137, and all of Greater Noida." },
                 { q: "How much does bike service cost at home in Noida?", a: "Our at-home bike service starts from just ₹299 for 100–125cc bikes. Prices vary by engine size and service type." },
                 { q: "Do you service Royal Enfield bikes in Noida?", a: "Absolutely. We specialise in Royal Enfield servicing including Classic 350, Bullet, Meteor, and Himalayan." },
                 { q: "How quickly can a mechanic reach me in Noida?", a: "Typically within 2–4 hours. For urgent same-day service, call us and we'll prioritise." },
@@ -494,7 +505,7 @@ const BestBikeServiceNoida = () => {
         <section className="py-8 bg-slate-800 text-center">
           <h2 className="text-3xl font-bold text-white mb-2">Book Bike Service in Noida Today</h2>
           <p className="text-white mb-4">Same-day doorstep service starting at ₹299. No travel, no waiting, no hidden charges.</p>
-          <Link to="/book" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</Link>
+          <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
         </section>
 
         {/* Floating Buttons */}
@@ -510,7 +521,7 @@ const BestBikeServiceNoida = () => {
             <div className="bg-white rounded-xl shadow-2xl max-h-[90vh] w-full max-w-md flex flex-col">
               <div className="p-4 border-b flex justify-between"><div><h3 className="text-xl font-bold text-black">{selectedService.title}</h3><p className="text-sm text-gray-600">{selectedService.subtitle}</p></div><button onClick={closeModal}><X className="h-6 w-6" /></button></div>
               <div className="p-4 overflow-y-auto"><h4 className="font-semibold mb-2">Full Checklist:</h4><ul className="space-y-2">{selectedService.checklist.map((item, i) => <li key={i} className="flex items-start"><CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5" />{item}</li>)}</ul></div>
-              <div className="p-4 border-t bg-gray-50"><div className="relative mb-3"><PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" /><input type="tel" placeholder="Enter 10-digit Phone Number*" maxLength={10} value={modalPhoneNumber} onChange={(e) => setModalPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))} className="pl-10 pr-3 py-2 w-full rounded-lg border border-gray-300" /></div><div className="flex items-center mb-4"><input type="checkbox" id="terms" className="mr-2" /><label htmlFor="terms" className="text-sm">Yes, I agree to the <span className='underline'>Terms of Service</span></label></div><button onClick={handleModalBookNow} className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700">Book Now</button></div>
+              <div className="p-4 border-t bg-gray-50"><div className="relative mb-3"><PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" /><input type="tel" placeholder="Enter 10-digit Phone Number*" maxLength={10} value={modalPhoneNumber} onChange={(e) => setModalPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))} className="pl-10 pr-3 py-2 w-full rounded-lg border border-gray-300" /></div><div className="flex items-center mb-4"><input type="checkbox" id="terms" className="mr-2" /><label htmlFor="terms" className="text-sm">Yes, I agree to the <span className='underline'>Terms of Service</span></label></div><button onClick={() => { handleModalBookNow(); window.location.href = "https://garagefixcare.in/bookservice"; }} className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700">Book Now</button></div>
             </div>
           </div>
         )}
