@@ -181,8 +181,8 @@ const BestCarServiceDelhi = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Car Service in Delhi | Doorstep Car Repair | Garage Fix Care"
-        description="Looking for the best car service in Delhi? Garage Fix Care provides doorstep car repair, AC service, battery replacement, periodic maintenance and more. Same-day service at your home in Delhi NCR."
+        title="Best Car Service in Delhi | Doorstep Car Repair ₹299 | Garage Fix Care"
+        description="Best car service in Delhi starting at ₹299. Doorstep repair, oil change, battery replacement and trusted mechanics near you."
         canonical="https://garagefixcare.in/best-car-service-delhi"
         robots="index, follow"
         og={{
@@ -212,26 +212,37 @@ const BestCarServiceDelhi = () => {
               "addressCountry": "IN"
             },
             "geo": { "@type": "GeoCoordinates", "latitude": "28.6139", "longitude": "77.2090" },
-            "areaServed": ["Delhi", "Noida", "Gurgaon", "Ghaziabad", "Faridabad", "Greater Noida"],
-            "serviceType": ["Car Repair", "Doorstep Car Service", "AC Service", "Battery Replacement", "Brake Service", "Dent Paint", "Engine Diagnostics"],
+            "areaServed": [
+              { "@type": "City", "name": "Delhi" },
+              { "@type": "City", "name": "Noida" },
+              { "@type": "City", "name": "Gurgaon" },
+              { "@type": "City", "name": "Ghaziabad" },
+              { "@type": "City", "name": "Faridabad" },
+              { "@type": "City", "name": "Greater Noida" }
+            ],
+            "hasMap": "https://goo.gl/maps/dqmKivbhftEaVxK79",
+            "serviceType": ["Best Car Service in Delhi", "Car Service Delhi", "Car Repair Delhi", "Doorstep Car Service", "AC Service", "Battery Replacement", "Brake Service", "Dent Paint", "Engine Diagnostics"],
             "openingHours": "Mo-Su 08:00-20:00",
             "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "100000" }
           },
           {
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": "Doorstep Car Service in Delhi",
+            "name": "Best Car Service in Delhi",
             "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
-            "areaServed": "Delhi",
-            "description": "At-home car servicing starting at ₹499. Oil change, AC gas refill, battery replacement, brake repair — same-day doorstep service.",
-            "offers": { "@type": "Offer", "priceCurrency": "INR", "price": "499", "availability": "https://schema.org/InStock" }
+            "areaServed": { "@type": "City", "name": "Delhi" },
+            "description": "Best doorstep car service in Delhi starting at ₹299. Oil change, AC gas refill, battery replacement, brake repair — same-day car repair across Delhi including South Delhi, North Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, and all NCR areas.",
+            "offers": { "@type": "Offer", "priceCurrency": "INR", "price": "299", "availability": "https://schema.org/InStock" }
           },
           {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-              { "@type": "Question", "name": "What is the best car service in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers doorstep car service in Delhi with certified mechanics, genuine parts, and same-day service." } },
-              { "@type": "Question", "name": "Do you provide doorstep car repair in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we come to your home or office in Delhi for all car repairs and servicing." } }
+              { "@type": "Question", "name": "What is the best car service in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care is the best car service in Delhi, offering doorstep car repair starting at ₹299 with certified mechanics, genuine parts, and same-day service across South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket and all NCR areas." } },
+              { "@type": "Question", "name": "Do you provide doorstep car repair in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Garage Fix Care provides doorstep car repair in Delhi. Our certified mechanics come to your home or office in Delhi fully equipped with tools, OBD diagnostic scanners, and genuine parts." } },
+              { "@type": "Question", "name": "How much does car service cost in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Car service in Delhi with Garage Fix Care starts at ₹299. Periodic service from ₹1,999, AC service from ₹1,299, brake service from ₹999, battery replacement from ₹4,499. All pricing is transparent with no hidden charges." } },
+              { "@type": "Question", "name": "Which areas in Delhi do you cover for car service?", "acceptedAnswer": { "@type": "Answer", "text": "We cover all major areas in Delhi for doorstep car service including South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Janakpuri, Pitampura, and surrounding NCR areas." } },
+              { "@type": "Question", "name": "How quickly can a car mechanic reach me in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Our car mechanics reach your Delhi location within 2–4 hours. For urgent same-day car repair in Delhi, call us directly and we will prioritise your booking." } }
             ]
           },
           {
@@ -254,8 +265,8 @@ const BestCarServiceDelhi = () => {
                 {/* Left Side */}
                 <div>
                   <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-                    Best Car Service in Delhi, NCR
-                    <span className="text-orange-500"> at Your Doorstep</span>
+                    Best Car Service in Delhi
+                    <span className="text-orange-500"> — Doorstep Car Repair ₹299</span>
                   </h1>
                   <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
                     Starting at just ₹499 • Same-Day Car Repair • Certified Mechanics Near You
@@ -391,23 +402,21 @@ const BestCarServiceDelhi = () => {
           </div>
         </section>
 
-        {/* Comprehensive Car Service Content (1000+ words) */}
+        {/* Comprehensive Car Service Content — Unique Delhi Section */}
         <section className="py-10 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why Garage Fix Care is the <span className="text-red-600">Best Car Service in Delhi</span></h2>
             <div className="space-y-4 text-gray-200 text-base leading-relaxed">
-              <p>Finding a reliable car service in Delhi can be stressful. Most local garages overcharge, use duplicate parts, or keep your car for days. Garage Fix Care changes that. We bring certified mechanics to your home — whether you own a Maruti Suzuki, Hyundai, Honda, Tata, or any other brand. Our doorstep car service saves you time, money, and hassle.</p>
-              <p>We service all car brands including hatchbacks, sedans, SUVs, and luxury cars. Our mechanics are trained to handle everything from a simple oil change to complex engine diagnostics, AC gas refill, brake pad replacement, clutch adjustment, and even dent & paint repairs.</p>
-              <p>What makes us the best car repair in Delhi? Transparent pricing. We share a detailed estimate before starting any work. No surprise charges. We use genuine engine oils, filters, and manufacturer-recommended parts. Plus, every service comes with a 10-day hassle-free warranty.</p>
-              <p>Our customers love our punctuality and professionalism. We’ve completed over 100,000 successful services across Delhi, Noida, Gurugram, and Ghaziabad. For car owners, we provide periodic maintenance, AC cooling improvement, battery health check, brake inspection, and even minor body repair.</p>
-              <p>Don’t wait in garage queues. Book online or call us. A car mechanic near you will reach your Delhi address within hours. Same-day service guaranteed for bookings before noon. Experience the best doorstep car service in Delhi with Garage Fix Care.</p>
-              <p>Delhi's traffic and weather demand a well-maintained car. Regular servicing keeps your car performing optimally, improves fuel efficiency, and prevents breakdowns. Our mechanics use advanced diagnostic tools and genuine spare parts to ensure your car runs like new.</p>
-              <p>We also offer emergency roadside assistance in Delhi. If your car breaks down in South Delhi, Dwarka, Rohini, or anywhere in Delhi, call us and we'll dispatch a mechanic immediately. Our 24/7 support ensures you're never stranded.</p>
-              <p>Choose Garage Fix Care for affordable, reliable, and doorstep car service in Delhi. Book your appointment today and experience the difference.</p>
+              <p>Delhi car owners face a unique challenge — the city has thousands of workshops, yet finding one that is honest, punctual, and uses genuine parts feels almost impossible. Most local garages in Delhi hold your car for days, hand you a bloated bill, and return it with half the reported problems still unresolved. Garage Fix Care was built to change that. We send fully certified, background-verified mechanics directly to your home or office across all parts of Delhi — South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Janakpuri, Pitampura, Laxmi Nagar, and Saket — so your car gets serviced where it stands.</p>
+              <p>Delhi's roads are among the busiest in the country. Ring Road, NH-48, Outer Ring Road, and the hundreds of colony lanes in between put enormous stress on your car every single day. Add to that Delhi's extreme climate — temperatures above 45°C in summer that strain your AC and cooling system, dense winter fog that strains your battery and wipers, and monsoon waterlogging that corrodes brake components and undercarriage — and you begin to understand why regular car service in Delhi is not a luxury but a necessity.</p>
+              <p>We service every car make popular among Delhi drivers — Maruti Suzuki Alto, Swift, Baleno, Hyundai i20, Creta, Verna, Tata Nexon, Punch, Honda City, Kia Seltos, Mahindra XUV700, Toyota Fortuner, Volkswagen Vento, MG Hector, and luxury brands including BMW, Mercedes-Benz, Audi, and Skoda. Our mechanics carry OBD diagnostic scanners, genuine engine oils (Motul, Wurth), and all common spare parts on every visit, ensuring your car repair in Delhi is completed at your doorstep without a return trip.</p>
+              <p>What consistently sets us apart as the best car service in Delhi is transparent pricing. Before work begins you receive a written estimate — no surprise line items, no upselling, no hidden labour charges. Every service is backed by a 10-day hassle-free warranty. If the same issue returns within 10 days, we fix it free of charge.</p>
+              <p>Delhi summers demand special attention to your car's AC. We offer full AC service in Delhi at your doorstep — refrigerant gas refill, cabin filter replacement, condenser cleaning, and leak testing — keeping your cabin cool through peak summer. Our 18-point inspection also covers engine oil, brake fluid, coolant, battery health, tyre tread, spark plugs, all lights, and wiper blades so nothing gets missed.</p>
+              <p>We have completed over 1,00,000 car and bike services across Delhi, Noida, Gurgaon, and Ghaziabad. Our 4.7-star average on Google, Facebook, and JustDial reflects the trust Delhi car owners place in us. Book online, on WhatsApp, or by phone — a mechanic will reach your Delhi address within 2–4 hours.</p>
+              <p>Choose Garage Fix Care for affordable, reliable, and the best doorstep car service in Delhi. Skip the garage queue — your driveway is our workshop.</p>
             </div>
           </div>
         </section>
-
         {/* Benefits Section */}
         <section className="py-8 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6 items-center">
@@ -462,27 +471,28 @@ const BestCarServiceDelhi = () => {
           </div>
         </section>
 
-        {/* FAQs (15 items - Car specific for Delhi) */}
+        {/* FAQs — Car Service Delhi */}
         <section className="bg-slate-900 py-10">
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold text-white text-center mb-6">Car Service in Delhi — <span className="text-red-600">Common Questions</span></h2>
+            <h2 className="text-3xl font-bold text-white text-center mb-2">Frequently Asked Questions — <span className="text-red-600">Car Service in Delhi</span></h2>
+            <p className="text-center text-gray-400 mb-6">Everything you need to know about doorstep car repair and car service in Delhi with Garage Fix Care.</p>
             <div className="space-y-3">
               {[
-                { q: "What is the best car service in Delhi?", a: "Garage Fix Care offers doorstep car service in Delhi starting at ₹499 with certified mechanics, genuine parts, and same-day service across all areas." },
-                { q: "Do you provide doorstep car repair in Delhi?", a: "Yes, we come to your home or office in Delhi for all car repairs and servicing. Just book online or call us." },
-                { q: "Which car brands do you service in Delhi?", a: "We service all major brands: Maruti Suzuki, Hyundai, Honda, Tata, Mahindra, Toyota, Ford, Volkswagen, Renault, Nissan, MG, Kia, Skoda, BMW, Mercedes, Audi, and more." },
-                { q: "What car services do you offer at home in Delhi?", a: "Periodic service, AC service & gas refill, brake repair, battery replacement, dent & paint, engine diagnostics, oil change, filter replacement, and full inspection." },
-                { q: "How much does a doorstep car service cost in Delhi?", a: "Prices start from ₹499 for engine diagnostics, periodic service from ₹1,999, AC service from ₹1,299. Transparent pricing." },
-                { q: "Do you provide car AC gas refill at home in Delhi?", a: "Yes, we do complete AC service including gas refill, leak test, and cabin filter cleaning at your doorstep." },
-                { q: "How quickly can a car mechanic reach me in Delhi?", a: "Typically within 2–4 hours. For urgent same-day service, call us and we'll prioritise." },
-                { q: "Is your car service pricing transparent?", a: "Absolutely. We share a detailed estimate before starting any work. No hidden charges." },
-                { q: "Do you offer a service warranty?", a: "Yes, every car service comes with a 10-day hassle-free service guarantee." },
-                { q: "How do I book a car mechanic near me in Delhi?", a: "Call us, WhatsApp, or use the booking form on this page. Share your location in Delhi and preferred time." },
-                { q: "What payment methods do you accept?", a: "Cash, UPI (Google Pay, PhonePe, Paytm), and other mobile wallets." },
-                { q: "Do I need to provide tools or equipment?", a: "No, our mechanics arrive fully equipped with all tools, diagnostic scanners, and parts." },
-                { q: "Do you service luxury cars like BMW, Mercedes in Delhi?", a: "Yes, we have trained mechanics for luxury car service including basic maintenance and diagnostics." },
-                { q: "Can I book service for multiple cars?", a: "Yes, just mention it while booking and we'll arrange accordingly." },
-                { q: "What makes GarageFix Care better than a regular car workshop in Delhi?", a: "We come to you, offer transparent pricing, trained mechanics, genuine parts, and a 10-day warranty — saving you time and hassle." }
+                { q: "What is the best car service in Delhi?", a: "Garage Fix Care is the best car service in Delhi, offering doorstep car repair starting at ₹299 with certified mechanics, genuine parts, and same-day service across South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Janakpuri, Pitampura and all Delhi NCR areas." },
+                { q: "How do I book a car service in Delhi at home?", a: "Booking car service in Delhi with Garage Fix Care is easy. Call us, WhatsApp us, or fill the booking form on this page. Share your Delhi address and preferred slot, and a certified mechanic will arrive at your doorstep within 2–4 hours." },
+                { q: "What is the cost of doorstep car service in Delhi?", a: "Car service in Delhi with Garage Fix Care starts at ₹299 for engine diagnostics. Periodic service from ₹1,999, AC service from ₹1,299, brake service from ₹999, and battery replacement from ₹4,499. All pricing is fully transparent — no hidden charges." },
+                { q: "Do you provide doorstep car repair in Delhi?", a: "Yes, Garage Fix Care specialises in doorstep car repair in Delhi. Our mechanics come to your home, office, or any Delhi location fully equipped with tools, OBD scanners, genuine oils, and spare parts." },
+                { q: "Which car brands do you service in Delhi?", a: "We service all major car brands in Delhi including Maruti Suzuki, Hyundai, Tata, Honda, Kia, Mahindra, Toyota, Volkswagen, MG, Renault, Nissan, Skoda, Ford, and luxury brands like BMW, Mercedes-Benz, and Audi." },
+                { q: "Which areas in Delhi do you cover for car service?", a: "We cover all major areas in Delhi for doorstep car service including South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Janakpuri, Pitampura, Mayur Vihar, Vasant Kunj, and surrounding NCR areas." },
+                { q: "Do you offer car AC service at home in Delhi?", a: "Yes, we provide complete car AC service in Delhi at your doorstep — including AC gas refill, cabin filter cleaning, condenser check, and leak diagnostics. Same-day AC service available across Delhi." },
+                { q: "Do you offer car battery replacement in Delhi?", a: "Yes, we offer doorstep car battery replacement in Delhi. Our mechanic performs a battery health test, installs a genuine new battery, and disposes of the old one — all at your home or office in Delhi." },
+                { q: "Is your car service pricing transparent in Delhi?", a: "Absolutely. We provide a written cost estimate before beginning any car repair or service in Delhi. You will never face hidden charges, surprise fees, or pressure upselling." },
+                { q: "Do you offer a warranty on car service in Delhi?", a: "Yes, every car service and car repair in Delhi comes with a 10-day hassle-free warranty. If the same issue recurs within 10 days, we fix it at no extra cost to you." },
+                { q: "How quickly can a mechanic reach me in Delhi?", a: "Our car mechanics typically reach your Delhi location within 2–4 hours of booking. For urgent same-day car repair in Delhi, call us directly and we will prioritise your request." },
+                { q: "Do you service luxury cars in Delhi?", a: "Yes, we have specially trained mechanics for luxury car service in Delhi including BMW, Mercedes-Benz, Audi, and Skoda — covering periodic maintenance, diagnostics, AC service, and brake repair at your doorstep." },
+                { q: "What payment methods do you accept for car service in Delhi?", a: "We accept cash, UPI payments (Google Pay, PhonePe, Paytm), and all major mobile wallets for car service in Delhi." },
+                { q: "Can I book car service for multiple cars in Delhi?", a: "Yes, you can book doorstep service for multiple cars in Delhi in one booking. Just mention the number of vehicles and we will arrange certified mechanics accordingly." },
+                { q: "What makes GarageFixCare the best car service in Delhi compared to local garages?", a: "Unlike traditional Delhi workshops, GarageFixCare comes to you, provides transparent written estimates, uses genuine OEM parts, employs trained and verified mechanics, and backs every service with a 10-day warranty — saving you time, travel, and money." }
               ].map((faq, idx) => (
                 <div key={idx} className="border border-gray-700 rounded-md">
                   <button className="flex justify-between w-full p-3 text-left font-semibold text-white hover:bg-slate-700" onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}><span className="text-red-600">Q{idx+1}.</span><span className="ml-2">{faq.q}</span>{activeIndex === idx ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}</button>
@@ -492,7 +502,6 @@ const BestCarServiceDelhi = () => {
             </div>
           </div>
         </section>
-
         {/* Final CTA */}
         <section className="py-8 bg-slate-800 text-center">
           <h2 className="text-3xl font-bold text-white mb-2">Book Car Service in Delhi Today</h2>
