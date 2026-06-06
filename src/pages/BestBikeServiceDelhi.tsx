@@ -48,7 +48,6 @@ const BestBikeServiceDelhi = () => {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [modalPhoneNumber, setModalPhoneNumber] = useState('');
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [showInput, setShowInput] = useState(false);
   const navigate = useNavigate();
 
   // Hero carousel
@@ -184,7 +183,7 @@ const BestBikeServiceDelhi = () => {
     <>
       <SEOHelmet
         title="Best Bike Service in Delhi | Doorstep Bike Repair ₹299 | Garage Fix Care"
-        description="Looking for the best bike service in Delhi? Garage Fix Care provides doorstep bike repair, servicing, oil change, battery replacement and maintenance at home starting at ₹299. Same-day service across Delhi NCR."
+        description="Book best bike service in Delhi starting at ₹299. Doorstep bike repair, oil change, battery replacement and trusted mechanics across Delhi NCR."
         canonical="https://garagefixcare.in/best-bike-service-delhi"
         robots="index, follow"
         og={{
@@ -214,7 +213,14 @@ const BestBikeServiceDelhi = () => {
               "addressCountry": "IN"
             },
             "geo": { "@type": "GeoCoordinates", "latitude": "28.6139", "longitude": "77.2090" },
-            "areaServed": ["Delhi", "Noida", "Ghaziabad", "Gurugram", "Faridabad", "Greater Noida"],
+            "areaServed": [
+                { "@type": "City", "name": "Delhi", "sameAs": "https://en.wikipedia.org/wiki/Delhi" },
+                { "@type": "City", "name": "Noida" },
+                { "@type": "City", "name": "Ghaziabad" },
+                { "@type": "City", "name": "Gurugram" },
+                { "@type": "City", "name": "Faridabad" },
+                { "@type": "City", "name": "Greater Noida" }
+              ],
             "serviceType": ["Bike Repair", "Doorstep Bike Service", "Engine Repair", "Battery Replacement", "Brake Repair", "Tyre Service"],
             "openingHours": "Mo-Su 08:00-20:00",
             "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "100000" }
@@ -232,8 +238,10 @@ const BestBikeServiceDelhi = () => {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-              { "@type": "Question", "name": "What is the best bike service in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Garage Fix Care offers doorstep bike service in Delhi starting at ₹299 with certified mechanics." } },
-              { "@type": "Question", "name": "Do you provide doorstep bike repair in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we come to your home or office in Delhi for all bike repairs and servicing." } }
+              { "@type": "Question", "name": "How much does bike service cost in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Bike service in Delhi starts from ₹299 for 100–125cc bikes. Classic Service is ₹399, Premium ₹499, Royal ₹599, and Sports ₹999. All include labour with no hidden charges." } },
+              { "@type": "Question", "name": "Do you provide doorstep bike repair in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we provide complete doorstep bike repair across all major areas of Delhi. Certified mechanics come to your home fully equipped — no garage visit needed." } },
+              { "@type": "Question", "name": "Which areas of Delhi are covered?", "acceptedAnswer": { "@type": "Answer", "text": "We cover South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Pitampura, Janakpuri, Mayur Vihar, Vasant Kunj and all surrounding localities." } },
+              { "@type": "Question", "name": "Do you handle emergency bike breakdown in Delhi?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. If your bike breaks down anywhere in Delhi, call us immediately and we dispatch a mechanic to your location for on-spot repair or recovery." } }
             ]
           },
           {
@@ -256,8 +264,8 @@ const BestBikeServiceDelhi = () => {
                 {/* Left Side */}
                 <div>
                   <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-                    Best Bike Service in Delhi, NCR
-                    <span className="text-orange-500"> at Your Doorstep</span>
+                    Best Bike Service in Delhi
+                    <span className="text-orange-500"> — Doorstep Repair from ₹299</span>
                   </h1>
                   <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
                     Starting at just ₹299 • Same-Day Bike Repair • Certified Mechanics Near You
@@ -273,20 +281,9 @@ const BestBikeServiceDelhi = () => {
 
                   {/* Book + Call Buttons */}
                   <div className="flex flex-wrap items-center gap-3">
-                    {!showInput ? (
-                      <button onClick={() => setShowInput(true)} className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300">
-                        Book Service Now
-                      </button>
-                    ) : (
-                      <div className="flex flex-col sm:flex-row items-center gap-3 transition-all duration-500 ease-in-out">
-                        <input type="tel" maxLength={10} value={modalPhoneNumber} onChange={(e) => { const val = e.target.value.replace(/\D/g, ''); if (val.length <= 10) setModalPhoneNumber(val); }} placeholder="Enter 10-digit mobile number" className="w-full sm:w-auto px-4 py-3 rounded-lg text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                        <button onClick={async () => {
-                          if (!modalPhoneNumber || modalPhoneNumber.length !== 10) { alert('Please enter a valid 10-digit phone number.'); return; }
-                          try { await axios.post(`${import.meta.env.VITE_API_URL}/api/quick-book-service`, { phoneNumber: modalPhoneNumber, serviceType: "Doorstep Bike Service" }); alert('✅ Booking received! Our team will contact you shortly.'); setModalPhoneNumber(''); setShowInput(false); } catch (err) { alert('❌ Booking failed. Please try again.'); }
-                        }} className="bg-green-600 text-white px-5 py-3 rounded-lg font-semibold text-sm sm:text-base">Confirm Booking</button>
-                        <button onClick={() => setShowInput(false)} className="text-gray-300 text-sm hover:text-white">Cancel</button>
-                      </div>
-                    )}
+                    <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
+                      Book Service Now
+                    </a>
                     <a href="tel:9540553759" className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 inline-flex items-center justify-center gap-2"><Phone className="h-4 w-4" /> Call Now</a>
                   </div>
 
@@ -398,14 +395,8 @@ const BestBikeServiceDelhi = () => {
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why Garage Fix Care is the <span className="text-red-600">Best Bike Service in Delhi</span></h2>
             <div className="space-y-4 text-gray-200 text-base leading-relaxed">
-              <p>Finding a reliable bike service in Delhi can be challenging. Most local garages overcharge, use duplicate parts, or keep your bike for days. Garage Fix Care changes that. We bring certified mechanics to your home — whether you live in South Delhi, Dwarka, Rohini, or Laxmi Nagar. Our doorstep bike service saves you time, money, and hassle.</p>
-              <p>We service all bike brands including Hero, Honda, Bajaj, TVS, Suzuki, Yamaha, Royal Enfield, KTM, and more. Our mechanics are trained to handle everything from a simple oil change to complex engine overhauls. Need a battery replacement? Brake pad change? Clutch adjustment? We do it all on the spot.</p>
-              <p>What makes us the best bike repair in Delhi? Transparent pricing. We share a detailed estimate before starting any work. No surprise charges. We use genuine engine oils (Motul, Wurth) and manufacturer-recommended parts. Plus, every service comes with a 10-day hassle-free warranty.</p>
-              <p>Our customers love our punctuality and professionalism. We’ve completed over 100,000 successful services across Delhi NCR, Noida, Ghaziabad, and Gurugram. For scooty owners, we provide Activa, Jupiter, Access, and Dio repairs at doorstep. Tyre puncture fixing, chain cleaning, air filter replacement — all done at your location.</p>
-              <p>Don’t wait in garage queues. Book online or call us. A bike mechanic near you will reach your Delhi address within hours. Same-day service guaranteed for bookings before noon. Experience the best doorstep bike service in Delhi with Garage Fix Care.</p>
-              <p>Delhi's traffic and heat demand a reliable bike. Regular servicing keeps your bike performing optimally and extends its life. Our mechanics use advanced diagnostic tools and genuine spare parts to ensure your bike runs like new. Whether it's a Royal Enfield Bullet or a Honda Activa, we treat every vehicle with care.</p>
-              <p>We also offer emergency roadside assistance in Delhi. If your bike breaks down in the middle of the road, call us and we'll dispatch a mechanic immediately. Our 24/7 support ensures you're never stranded. From puncture repair to electrical fault diagnosis, we've got you covered.</p>
-              <p>Choose Garage Fix Care for affordable, reliable, and doorstep bike service in Delhi. Book your appointment today and experience the difference.</p>
+              <p>Getting a trustworthy bike service in Delhi has always been harder than it should be. Across the city — from the crowded lanes of Laxmi Nagar to the wide avenues of Dwarka, from busy Rohini to upscale South Delhi — two-wheeler owners routinely face overcharging, unclear billing, and mechanics who keep bikes for days without updates. Garage Fix Care was built specifically to solve this. We are Delhi's most trusted doorstep bike service, sending certified and background-verified mechanics directly to your home or office. Our doorstep bike repair in Delhi starts at just ₹299, and we cover every major locality across the city — North Delhi, South Delhi, East Delhi, West Delhi, Dwarka, Rohini, Saket, Laxmi Nagar, Pitampura, Janakpuri, Mayur Vihar, and Vasant Kunj. Our mechanics arrive fully equipped with tools, genuine engine oils, and spare parts, so your bike gets serviced on the spot without you stepping out. Whether you ride a Hero Splendor, Honda Activa, Bajaj Pulsar, Royal Enfield Classic 350, KTM Duke, or any other brand, our expert Delhi mechanics handle everything from routine oil changes to full engine overhauls. What makes us the best bike service in Delhi is simple: complete pricing transparency. You receive a detailed cost estimate before a single bolt is turned — zero surprise charges, guaranteed. We use only certified engine oils from Motul and Wurth with manufacturer-recommended parts, and every service is backed by our 10-day hassle-free guarantee.</p>
+              <p>Delhi's extreme heat, heavy traffic, and dusty roads put serious stress on your bike's engine, air filter, brakes, and tyres. Regular professional servicing is not a luxury — it is essential for safety and performance on Delhi roads. Our mechanics use diagnostic tools to catch issues early before they become expensive problems, significantly extending the life of your vehicle. Beyond scheduled servicing, we also handle emergency breakdown situations in Delhi. If your bike stops working mid-route anywhere in the city, call us and we dispatch a mechanic to your exact location as quickly as possible. From battery replacement and brake pad changes to clutch cable adjustment and tyre puncture repair, we do it all on the spot. We have successfully completed over 1,00,000 services across Delhi NCR, and our customers consistently rate us 4.7 stars on Google for punctuality, honesty, and professionalism. <a href="https://garagefixcare.in/bookservice" className="text-orange-400 hover:text-orange-300 underline">Book your bike service in Delhi</a> today through our website, WhatsApp, or phone — and experience the difference that genuine doorstep care makes.</p>
             </div>
           </div>
         </section>
@@ -449,8 +440,15 @@ const BestBikeServiceDelhi = () => {
         {/* City Coverage & Internal Links */}
         <section className="py-10 bg-slate-900 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">Also Serving in <span className="text-red-600">Nearby Cities</span></h2>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
             {cityPages.map(city => <Link key={city.name} to={city.path} className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition">{city.name}</Link>)}
+          </div>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link to="/" className="text-gray-300 hover:text-white text-sm underline underline-offset-2">← Back to Home</Link>
+            <span className="text-gray-500">|</span>
+            <Link to="/contact" className="text-gray-300 hover:text-white text-sm underline underline-offset-2">Contact Us</Link>
+            <span className="text-gray-500">|</span>
+            <a href="https://garagefixcare.in/bookservice" className="text-orange-400 hover:text-orange-300 text-sm font-semibold underline underline-offset-2">Book Service Now →</a>
           </div>
         </section>
 
@@ -470,21 +468,21 @@ const BestBikeServiceDelhi = () => {
             <h2 className="text-3xl font-bold text-white text-center mb-6">Bike Service in Delhi — <span className="text-red-600">Common Questions</span></h2>
             <div className="space-y-3">
               {[
-                { q: "What is the best bike service in Delhi?", a: "Garage Fix Care offers doorstep bike service in Delhi starting at ₹299 with certified mechanics, genuine parts, and same-day service across all major areas." },
-                { q: "Do you provide doorstep bike repair in Delhi?", a: "Yes, we come to your home or office in Delhi for all bike repairs and servicing. Just book online or call us." },
-                { q: "Which areas in Delhi do you cover for bike service?", a: "We cover South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, and all major localities." },
-                { q: "How much does bike service cost at home in Delhi?", a: "Our at-home bike service starts from just ₹299 for 100–125cc bikes. Prices vary by engine size and service type." },
-                { q: "Do you service Royal Enfield bikes in Delhi?", a: "Absolutely. We specialise in Royal Enfield servicing including Classic 350, Bullet, Meteor, and Himalayan." },
-                { q: "How quickly can a mechanic reach me in Delhi?", a: "Typically within 2–4 hours. For urgent same-day service, call us and we'll prioritise." },
-                { q: "Is your bike service pricing transparent?", a: "Yes, we provide a detailed estimate before work begins. No hidden charges." },
-                { q: "Do you offer a service warranty?", a: "Every service includes a 10-day hassle-free service guarantee." },
-                { q: "How do I book a bike mechanic near me in Delhi?", a: "Call us, WhatsApp, or use the booking form on this page. Share your location in Delhi and preferred time." },
-                { q: "What payment methods do you accept?", a: "Cash, UPI (Google Pay, PhonePe, Paytm), and other mobile wallets." },
-                { q: "Do I need to provide tools or equipment?", a: "No, our mechanics arrive fully equipped with all tools, oils, and parts." },
-                { q: "Do you service scooties like Activa or Jupiter in Delhi?", a: "Yes, we provide complete scooty repair and service for Honda Activa, TVS Jupiter, Suzuki Access, and more across Delhi." },
-                { q: "Are your mechanics certified?", a: "Yes, all our mechanics are trained, verified, and follow safety protocols." },
-                { q: "Can I book service for multiple bikes?", a: "Yes, just mention it while booking and we'll arrange accordingly." },
-                { q: "What makes GarageFix Care better than a regular Delhi workshop?", a: "We come to you, offer transparent pricing, trained mechanics, genuine parts, and a 10-day warranty — saving you time and hassle." }
+                { q: "How much does bike service cost in Delhi?", a: "Bike service in Delhi at Garage Fix Care starts from ₹299 for 100–125cc bikes (Regular Service). Classic Service (135–200 CC) is ₹399, Premium Service (220–300 CC) is ₹499, Royal Service (350–450 CC) is ₹599, and Sports Service (above 500 CC) is ₹999. All prices cover labour with zero hidden charges." },
+                { q: "Do you provide doorstep bike repair in Delhi?", a: "Yes, we provide complete doorstep bike repair across all major areas of Delhi. Our certified mechanics come to your home or office fully equipped with tools, oils, and parts. You never need to visit a garage." },
+                { q: "Which areas of Delhi are covered for bike service?", a: "We cover South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Pitampura, Janakpuri, Mayur Vihar, Vasant Kunj, and all surrounding Delhi NCR localities." },
+                { q: "What is the best bike service in Delhi?", a: "Garage Fix Care is Delhi's highest-rated doorstep bike service, starting at ₹299 with certified mechanics, transparent pricing, genuine parts, and a 10-day service guarantee." },
+                { q: "Do you service Royal Enfield bikes in Delhi?", a: "Yes. We specialise in Royal Enfield servicing across Delhi — Classic 350, Bullet 350, Meteor 350, Himalayan, and Thunderbird — all serviced at your doorstep." },
+                { q: "How quickly can a mechanic reach me in Delhi?", a: "Our mechanics typically reach your location in Delhi within 2–4 hours of booking. For urgent requests, call us and we will prioritise your slot." },
+                { q: "Is your bike service pricing transparent in Delhi?", a: "Absolutely. We provide a full cost estimate before starting any work. No surprise bills — what you see is exactly what you pay." },
+                { q: "Do you service scooties in Delhi?", a: "Yes. We repair and service all scooties across Delhi — Honda Activa, TVS Jupiter, Suzuki Access 125, Honda Dio, Hero Maestro — all at your doorstep." },
+                { q: "Do you offer a warranty on bike service in Delhi?", a: "Every service by Garage Fix Care in Delhi includes a 10-day hassle-free service guarantee. If any issue arises post-service, we address it at no extra cost." },
+                { q: "How do I book a bike mechanic near me in Delhi?", a: "You can book via our website, WhatsApp us on 9540553759, or call directly. Share your Delhi area and preferred time slot — we handle the rest." },
+                { q: "What payment methods are accepted in Delhi?", a: "We accept cash, UPI (Google Pay, PhonePe, Paytm), and all major mobile wallets. Payment is collected only after the service is complete." },
+                { q: "Do I need to arrange any tools or oils?", a: "No. Our Delhi mechanics arrive fully equipped — tools, genuine Motul/Wurth engine oils, and all required spare parts are brought by the mechanic." },
+                { q: "Can I book service for multiple bikes in Delhi?", a: "Yes, simply mention the number of bikes while booking and we will arrange the right team for your location." },
+                { q: "What makes Garage Fix Care better than a local Delhi workshop?", a: "We come to you, save your travel time, offer transparent itemised billing, use genuine parts, and provide a 10-day warranty — something most local Delhi workshops cannot match." },
+                { q: "Do you handle emergency bike breakdown in Delhi?", a: "Yes. If your bike breaks down anywhere in Delhi, call us immediately. We dispatch a mechanic to your location for on-spot repair or recovery assistance." }
               ].map((faq, idx) => (
                 <div key={idx} className="border border-gray-700 rounded-md">
                   <button className="flex justify-between w-full p-3 text-left font-semibold text-white hover:bg-slate-700" onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}><span className="text-red-600">Q{idx+1}.</span><span className="ml-2">{faq.q}</span>{activeIndex === idx ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}</button>
@@ -499,7 +497,11 @@ const BestBikeServiceDelhi = () => {
         <section className="py-8 bg-slate-800 text-center">
           <h2 className="text-3xl font-bold text-white mb-2">Book Bike Service in Delhi Today</h2>
           <p className="text-white mb-4">Same-day doorstep service starting at ₹299. No travel, no waiting, no hidden charges.</p>
-          <Link to="/book" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</Link>
+          <div className="flex flex-wrap justify-center gap-4 mt-4">
+            <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
+            <Link to="/" className="bg-slate-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-slate-600 inline-block">Home</Link>
+            <Link to="/contact" className="bg-slate-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-slate-600 inline-block">Contact Us</Link>
+          </div>
         </section>
 
         {/* Floating Buttons */}
@@ -515,7 +517,7 @@ const BestBikeServiceDelhi = () => {
             <div className="bg-white rounded-xl shadow-2xl max-h-[90vh] w-full max-w-md flex flex-col">
               <div className="p-4 border-b flex justify-between"><div><h3 className="text-xl font-bold text-black">{selectedService.title}</h3><p className="text-sm text-gray-600">{selectedService.subtitle}</p></div><button onClick={closeModal}><X className="h-6 w-6" /></button></div>
               <div className="p-4 overflow-y-auto"><h4 className="font-semibold mb-2">Full Checklist:</h4><ul className="space-y-2">{selectedService.checklist.map((item, i) => <li key={i} className="flex items-start"><CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5" />{item}</li>)}</ul></div>
-              <div className="p-4 border-t bg-gray-50"><div className="relative mb-3"><PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" /><input type="tel" placeholder="Enter 10-digit Phone Number*" maxLength={10} value={modalPhoneNumber} onChange={(e) => setModalPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))} className="pl-10 pr-3 py-2 w-full rounded-lg border border-gray-300" /></div><div className="flex items-center mb-4"><input type="checkbox" id="terms" className="mr-2" /><label htmlFor="terms" className="text-sm">Yes, I agree to the <span className='underline'>Terms of Service</span></label></div><button onClick={handleModalBookNow} className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700">Book Now</button></div>
+              <div className="p-4 border-t bg-gray-50"><div className="relative mb-3"><PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" /><input type="tel" placeholder="Enter 10-digit Phone Number*" maxLength={10} value={modalPhoneNumber} onChange={(e) => setModalPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))} className="pl-10 pr-3 py-2 w-full rounded-lg border border-gray-300" /></div><div className="flex items-center mb-4"><input type="checkbox" id="terms" className="mr-2" /><label htmlFor="terms" className="text-sm">Yes, I agree to the <span className='underline'>Terms of Service</span></label></div><button onClick={() => { handleModalBookNow(); }} className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700">Book Now</button></div>
             </div>
           </div>
         )}
