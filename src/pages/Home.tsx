@@ -1,13 +1,23 @@
 // Home.tsx (FULL UPDATED CODE - navigation added for Cars button using useNavigate)
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CheckCircle, Star, Flame, X ,Plus, Phone as PhoneIcon, ChevronLeft, ChevronRight, Bike, Car } from 'lucide-react'; // Added PhoneIcon
+import {
+  CheckCircle,
+  Star,
+  Flame,
+  X,
+  Plus,
+  Phone,
+  ChevronLeft,
+  ChevronRight,
+  Bike,
+  Car,
+} from 'lucide-react';
 import SEOHelmet from '../components/SEOHelmet';
-import axios from 'axios'; // <-- NEW: Import for API calls
+import axios from 'axios'; // Used for the quick-book API calls
 
-// react-slick removed — using custom carousel instead
-import { FaWhatsapp } from "react-icons/fa";
-import { Phone } from "lucide-react";
+// react-slick removed — using a custom lightweight carousel instead
+import { FaWhatsapp } from 'react-icons/fa';
 
 
 //last section 
@@ -375,7 +385,7 @@ const serviceCities = [
         {/* Mobile navbar = 3px accent + 56px nav = 59px. Desktop = 32px strip + 56px nav = 88px */}
         <main className="bg-slate-800 pt-[59px] lg:pt-[88px]">
 
-<section className="text-white py-2 sm:py-2 lg:py-2">
+<section className="text-white py-8 sm:py-10 lg:py-12">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
 
@@ -407,7 +417,7 @@ const serviceCities = [
           {!showInput ? (
             <button
               onClick={() => setShowInput(true)}
-              className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300"
+              className="bg-orange-600 text-white px-6 py-3 rounded-xl font-semibold text-base shadow-lg hover:bg-orange-700 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:translate-y-0 transition-all duration-300"
             >
               Book Service Now
             </button>
@@ -426,7 +436,7 @@ const serviceCities = [
                   if (val.length <= 10) setModalPhoneNumber(val);
                 }}
                 placeholder="Enter 10-digit mobile number"
-                className="w-full sm:w-auto px-4 py-3 rounded-lg text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full sm:w-auto px-4 py-3 rounded-xl text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               <button
                 onClick={async () => {
@@ -447,7 +457,7 @@ const serviceCities = [
                     alert('❌ Booking failed. Please try again.');
                   }
                 }}
-                className="bg-green-600 text-white px-5 py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-green-700 transition-colors duration-200"
+                className="bg-green-600 text-white px-5 py-3 rounded-xl font-semibold text-sm sm:text-base shadow-lg hover:bg-green-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200"
               >
                 Confirm Booking
               </button>
@@ -463,7 +473,7 @@ const serviceCities = [
           {/* Call Button */}
           <a
             href="tel:9540553759"
-            className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 inline-flex items-center justify-center gap-2"
+            className="border-2 border-white text-white px-6 py-3 rounded-xl font-semibold text-base hover:bg-white hover:text-blue-900 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 inline-flex items-center justify-center gap-2"
           >
             <Phone className="h-4 w-4" />
             Call Now
@@ -477,7 +487,9 @@ const serviceCities = [
           <div className="grid grid-cols-2 gap-3">
             {/* Bike & Scooty - Default Active (compact height matching Book/Call buttons) */}
             <button
-              className="flex items-center justify-center gap-3 bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-2xl font-semibold text-base transition-all duration-300 shadow-inner active:scale-95"
+              type="button"
+              aria-pressed="true"
+              className="flex items-center justify-center gap-3 bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-2xl font-semibold text-base shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
             >
               <Bike className="h-6 w-6" />
               <span>Bike &amp; Scooty</span>
@@ -485,8 +497,9 @@ const serviceCities = [
 
             {/* Cars - Navigates to /car using useNavigate (SPA - no reload) */}
             <button
+              type="button"
               onClick={() => navigate('/car')}
-              className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 border border-slate-600 hover:border-slate-400 text-white py-3 rounded-2xl font-semibold text-base transition-all duration-300 active:scale-95"
+              className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 border border-slate-600 hover:border-slate-400 text-white py-3 rounded-2xl font-semibold text-base focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
             >
               <Car className="h-6 w-6" />
               <span>Cars</span>
@@ -500,12 +513,14 @@ const serviceCities = [
       {/* Right Side: Image + Reviews */}
       <div className="relative flex flex-col items-center lg:items-end gap-1 mt-1 lg:mt-0">
         {/* Custom Hero Carousel — no react-slick */}
-        <div className="relative w-full rounded-lg overflow-hidden shadow-2xl">
+        <div className="relative w-full rounded-xl overflow-hidden shadow-2xl">
           <img
             src={heroImages[heroIndex]}
             alt={heroAlts[heroIndex]}
-            className="w-full rounded-lg transition-opacity duration-700"
+            className="w-full rounded-xl transition-opacity duration-700"
             style={{ minHeight: '200px', objectFit: 'cover' }}
+            loading="eager"
+            fetchPriority="high"
           />
           {/* Left Arrow */}
           <button
@@ -534,14 +549,14 @@ const serviceCities = [
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
-          <div className="bg-sky-100 text-black p-1 rounded-lg shadow-lg flex-1 w-full sm:w-auto">
+          <div className="bg-sky-100 text-black p-1 rounded-xl shadow-lg flex-1 w-full sm:w-auto">
             <div className="flex items-center justify-center gap-2 text-lg sm:text-xl font-bold">
               <Star className="h-4 w-4 text-yellow-400 fill-current" />
               {reviewScore.toFixed(1)}/5
             </div>
             <div className="text-xs font-semibold text-center">Google Review</div>
           </div>
-          <div className="bg-sky-100 text-black p-1 rounded-lg shadow-lg flex-1 w-full sm:w-auto">
+          <div className="bg-sky-100 text-black p-1 rounded-xl shadow-lg flex-1 w-full sm:w-auto">
             <div className="text-lg sm:text-xl font-bold text-center">
               {happyCustomersCount.toLocaleString()}+
             </div>
@@ -605,7 +620,7 @@ const serviceCities = [
                 </div>
             </div>
             {/* Marquee-style infinite scrolling image strip */}
-            <div className="overflow-hidden w-full px-2 sm:px-4">
+            <div className="overflow-hidden w-full px-4 sm:px-6">
               <div
                 style={{
                   display: 'flex',
@@ -628,7 +643,9 @@ const serviceCities = [
                         alt={img.alt}
                         className="w-full object-cover"
                         style={{ height: '220px' }}
-                      />
+              loading="lazy"
+              decoding="async"
+            />
                       {/* City badge overlay */}
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-2 flex flex-wrap gap-1">
                         {['Noida', 'Delhi', 'Greater Noida', 'Ghaziabad', 'Gurugram', 'Faridabad'].slice(0, i % 2 === 0 ? 3 : 3).map((_city, ci) => (
@@ -651,8 +668,8 @@ const serviceCities = [
           </section>
 
           {/* What Our Clients Say? Section */}
-          <section className="bg-slate-800 text-black py-4 sm:py-6">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+          <section className="bg-slate-800 text-black py-10 sm:py-14">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-4 sm:mb-6">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
           <span className="text-white">What Our</span>{' '}
@@ -661,12 +678,14 @@ const serviceCities = [
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
         {/* Google Reviews */}
-        <div className="bg-sky-50 rounded-lg p-3 shadow-sm">
+        <div className="bg-sky-50 rounded-xl p-3 shadow-sm">
           <img
             src={googleReviewsImage}
             alt="Google Reviews"
             className="mx-auto h-8 sm:h-10 mb-2"
-          />
+              loading="lazy"
+              decoding="async"
+            />
           <div className="flex justify-center mb-1">
             <Star className="h-4 w-4 text-yellow-400 fill-current" />
             <Star className="h-4 w-4 text-yellow-400 fill-current" />
@@ -686,12 +705,14 @@ const serviceCities = [
         </div>
 
         {/* Facebook Reviews */}
-        <div className="bg-sky-50 rounded-lg p-3 shadow-sm">
+        <div className="bg-sky-50 rounded-xl p-3 shadow-sm">
           <img
             src={facebookReviewsImage}
             alt="Facebook Reviews"
             className="mx-auto h-8 sm:h-10 mb-2"
-          />
+              loading="lazy"
+              decoding="async"
+            />
           <div className="flex justify-center mb-1">
             <Star className="h-4 w-4 text-yellow-400 fill-current" />
             <Star className="h-4 w-4 text-yellow-400 fill-current" />
@@ -711,12 +732,14 @@ const serviceCities = [
         </div>
 
         {/* JustDial Reviews */}
-        <div className="bg-sky-50 rounded-lg p-3 shadow-sm">
+        <div className="bg-sky-50 rounded-xl p-3 shadow-sm">
           <img
             src={justdialReviewsImage}
             alt="JustDial Reviews"
             className="mx-auto h-8 sm:h-10 mb-2"
-          />
+              loading="lazy"
+              decoding="async"
+            />
           <div className="flex justify-center mb-1">
             <Star className="h-4 w-4 text-yellow-400 fill-current" />
             <Star className="h-4 w-4 text-yellow-400 fill-current" />
@@ -749,13 +772,13 @@ const serviceCities = [
       <p className="text-base sm:text-xl text-white mb-6 max-w-3xl mx-auto">
         Transparent pricing for doorstep bike and car service in Noida. Check the labour charges below based on your vehicle's engine size — no hidden fees, no surprises.
       </p>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-6 justify-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 justify-items-center">
         {servicePrices.map((service, index) => (
           <div
             key={index}
-            className="bg-brandRed p-1 rounded-lg w-full max-w-full shadow-md border border-gray-700"
+            className="bg-brandRed p-1.5 rounded-xl w-full max-w-full shadow-lg border border-gray-700 hover:shadow-xl transition-shadow duration-200"
           >
-            <div className="bg-sky-100 rounded-lg shadow-sm p-2 w-full">
+            <div className="bg-sky-100 rounded-xl shadow-sm p-3 sm:p-4 w-full h-full">
               <div className="flex flex-col items-start text-left mb-1">
                 <h3 className="text-base sm:text-lg font-bold text-black mb-1">{service.title}</h3>
                 <p className="text-black text-xs sm:text-sm font-semibold">{service.subtitle}</p>
@@ -775,7 +798,8 @@ const serviceCities = [
               <div className="flex justify-end mt-1">
                 <button
                   onClick={() => handleSeeChecklist(service.title, service.subtitle)}
-                  className="bg-red-600 text-white px-2 py-1 text-xs rounded-md font-semibold hover:bg-red-700 transition-colors duration-200"
+                  className="bg-red-600 text-white px-3 py-1.5 text-xs rounded-lg font-semibold hover:bg-red-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 transition-all duration-200"
+                  aria-label={`See full checklist for ${service.title}`}
                 >
                   See checklist
                 </button>
@@ -793,11 +817,13 @@ const serviceCities = [
       src={mechanicImage}
       alt="Mechanic background"
       className="absolute inset-0 w-full h-full object-cover object-center"
-    />
+              loading="lazy"
+              decoding="async"
+            />
     <div className="absolute inset-0 bg-black bg-opacity-50" />
-    <div className="relative max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full flex items-center">
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 w-full">
-        <div className="bg-sky-100 rounded-lg shadow-lg p-2 sm:p-4 order-2 lg:order-1">
+        <div className="bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 order-2 lg:order-1">
           <h3 className="text-base sm:text-xl font-bold text-gray-900 mb-2 text-center">
             Choose Your Vehicle
           </h3>
@@ -839,9 +865,9 @@ const serviceCities = [
           </select>
         </div>
         <div className="text-center lg:text-left text-white flex flex-col justify-center p-0 lg:p-0 order-1 lg:order-2">
-          <h4 className="text-white text-sm font-semibold mb-1 underline decoration-red-600">
+          <p className="text-white text-sm font-semibold mb-1 underline decoration-red-600">
             Book Service
-          </h4>
+          </p>
           <h2 className="text-xl sm:text-2xl font-bold mb-2">
             <span className="text-orange-500">Doorstep Bike &amp; Car Service</span> in Noida &amp; Nearby Areas
           </h2>
@@ -850,18 +876,28 @@ const serviceCities = [
           </p>
           <a
             href="tel:9540553759"
-            className="w-full lg:w-2/3 inline-block bg-red-600 text-white px-4 py-2 rounded-md font-semibold text-sm hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-1 shadow-md mx-auto lg:mx-0"
+            className="w-full lg:w-2/3 inline-block bg-red-600 text-white px-4 py-3 rounded-xl font-semibold text-sm hover:bg-red-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-200 flex items-center justify-center space-x-1 shadow-lg mx-auto lg:mx-0"
           >
             <Phone className="h-4 w-4" />
             <span>Book on Call</span>
           </a>
+          <p className="text-xs sm:text-sm text-gray-300 mt-3">
+            Prefer to book online instead?{' '}
+            <Link to="/book" className="text-orange-400 underline underline-offset-2 hover:text-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400 rounded">
+              Book your service here
+            </Link>
+            , or see our{' '}
+            <Link to="/car" className="text-orange-400 underline underline-offset-2 hover:text-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400 rounded">
+              dedicated car service page
+            </Link>.
+          </p>
         </div>
       </div>
     </div>
   </section>
   {/* Bike Services at Home Section */}
   <section className="py-12 bg-slate-800">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
         Complete Bike &amp; Car Care, <span className="text-red-600"> Right at Your Door in Noida</span>
       </h2>
@@ -879,12 +915,14 @@ const serviceCities = [
         ].map((service, index) => (
           <div
             key={index}
-            className="bg-sky-100 rounded-lg shadow-md p-2 sm:p-4 flex flex-col items-center hover:shadow-lg transition-shadow duration-200"
+            className="bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-200"
           >
             <img
               src={service.img}
               alt={`${service.name} in Noida`}
               className="h-16 w-16 sm:h-20 sm:w-20 object-contain mb-1 sm:mb-2"
+              loading="lazy"
+              decoding="async"
             />
             <h3 className="text-xs sm:text-sm font-semibold text-gray-900 text-center">{service.name}</h3>
           </div>
@@ -894,8 +932,8 @@ const serviceCities = [
   </section>
 
   {/* GarageFixCare Benefits Section */}
-  <section className="py-6 sm:py-8 bg-slate-900 text-white">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+  <section className="py-10 sm:py-14 bg-slate-900 text-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
       <div>
         <p className="text-xs text-white mb-1">Get Rs.10 Off On First Service in Noida</p>
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
@@ -909,38 +947,54 @@ const serviceCities = [
             src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
             alt="Google Play"
             className="h-8 sm:h-10"
-          />
+              loading="lazy"
+              decoding="async"
+            />
           <img
             src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
             alt="App Store"
             className="h-8 sm:h-10"
-          />
+              loading="lazy"
+              decoding="async"
+            />
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-        <div className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex items-center space-x-2 sm:space-x-3">
-          <img src={warrantyImg} alt="Warranty" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
+        <div className="bg-sky-100 text-black rounded-xl p-4 sm:p-6 shadow-lg flex items-center space-x-2 sm:space-x-3">
+          <img src={warrantyImg} alt="Warranty" className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+              loading="lazy"
+              decoding="async"
+            />
           <div>
             <h3 className="font-bold text-sm sm:text-base">Enjoy a 10-Day Free Service Guarantee</h3>
             <p className="text-xs sm:text-sm text-gray-900">10-Day Hassle-Free Warranty</p>
           </div>
         </div>
-        <div className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex items-center space-x-2 sm:space-x-3">
-          <img src={pickupImg} alt="Pickup Service" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
+        <div className="bg-sky-100 text-black rounded-xl p-4 sm:p-6 shadow-lg flex items-center space-x-2 sm:space-x-3">
+          <img src={pickupImg} alt="Pickup Service" className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+              loading="lazy"
+              decoding="async"
+            />
           <div>
             <h3 className="font-bold text-sm sm:text-base">Enjoy Free Pickup and Drop at Your Convenience</h3>
             <p className="text-xs sm:text-sm text-gray-900">Free Pick & Drop Available</p>
           </div>
         </div>
-        <div className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex items-center space-x-2 sm:space-x-3">
-          <img src={transparentImg} alt="Transparent Pricing" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
+        <div className="bg-sky-100 text-black rounded-xl p-4 sm:p-6 shadow-lg flex items-center space-x-2 sm:space-x-3">
+          <img src={transparentImg} alt="Transparent Pricing" className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+              loading="lazy"
+              decoding="async"
+            />
           <div>
             <h3 className="font-bold text-sm sm:text-base">Transparent Pricing, Competitive Rate</h3>
             <p className="text-xs sm:text-sm text-gray-900">Save up to 30% on your bike service</p>
           </div>
         </div>
-        <div className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex items-center space-x-2 sm:space-x-3">
-          <img src={trainedImg} alt="Trained Mechanics" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
+        <div className="bg-sky-100 text-black rounded-xl p-4 sm:p-6 shadow-lg flex items-center space-x-2 sm:space-x-3">
+          <img src={trainedImg} alt="Trained Mechanics" className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+              loading="lazy"
+              decoding="async"
+            />
           <div>
             <h3 className="font-bold text-sm sm:text-base">Skilled and Certified Mechanics</h3>
             <p className="text-xs sm:text-sm text-gray-900">Exclusively Certified Two-Wheeler Mechanics</p>
@@ -950,14 +1004,16 @@ const serviceCities = [
     </div>
   </section>
   {/* Why Choose GarageFixCare Section */}
-  <section className="py-8 sm:py-12 bg-slate-800 text-white">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+  <section className="py-12 sm:py-16 bg-slate-800 text-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
       <div className="flex justify-center order-2 lg:order-1">
         <img
           src={handshakeImg}
           alt="Handshake"
-          className="rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm"
-        />
+          className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm"
+              loading="lazy"
+              decoding="async"
+            />
       </div>
       <div className="order-1 lg:order-2">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
@@ -1005,12 +1061,14 @@ const serviceCities = [
         ].map((brand, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-md p-3 sm:p-4 flex items-center justify-center w-full max-w-[150px] h-16 sm:w-40 sm:h-20 hover:shadow-xl transition-shadow duration-200"
+            className="bg-white rounded-xl shadow-lg p-3 sm:p-4 flex items-center justify-center w-full max-w-[150px] h-16 sm:w-40 sm:h-20 hover:shadow-xl transition-shadow duration-200"
           >
             <img
               src={brand.img}
               alt={brand.name}
               className="max-h-10 sm:max-h-12 object-contain"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         ))}
@@ -1018,8 +1076,8 @@ const serviceCities = [
     </div>
   </section>
   {/* How GarageFixCare Works Section */}
-  <section className="bg-slate-800 text-white py-6 sm:py-8">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+  <section className="bg-slate-800 text-white py-10 sm:py-14">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
       <div>
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
           How <span className="text-red-600">GarageFixCare</span> Works?
@@ -1046,14 +1104,16 @@ const serviceCities = [
         <img
           src={howWorksImage}
           alt="How GarageFixCare Works"
-          className="rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm"
-        />
+          className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm"
+              loading="lazy"
+              decoding="async"
+            />
       </div>
     </div>
   </section>
   {/* We Provide Best Bike Service Section */}
-  <section className="bg-slate-900 text-white py-8 sm:py-12">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+  <section className="bg-slate-900 text-white py-12 sm:py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
         Doorstep <span className="text-red-600">Bike Service</span> by <span className="text-red-600">Certified Experts</span> Near You
       </h2>
@@ -1068,12 +1128,14 @@ const serviceCities = [
         ].map((city, index) => (
           <div
             key={index}
-            className="bg-sky-100 rounded-lg shadow-md p-2 sm:p-4 w-full max-w-xs text-center hover:shadow-lg transition-shadow duration-200"
+            className="bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-xs text-center hover:shadow-xl transition-shadow duration-200"
           >
             <img
               src={city.img}
               alt={city.name}
               className="h-16 w-16 sm:h-20 sm:w-20 mx-auto rounded-full mb-2 object-cover"
+              loading="lazy"
+              decoding="async"
             />
             <h3 className="text-sm sm:text-base font-semibold text-black">
               {city.name.split("in ")[0]} <span className="text-red-600">{city.name.split("in ")[1]}</span>
@@ -1084,8 +1146,8 @@ const serviceCities = [
     </div>
   </section>
   {/* Customers Speaks Section */}
-  <section className="bg-slate-800 text-white py-8 sm:py-12">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+  <section className="bg-slate-800 text-white py-12 sm:py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
         What <span className="text-red-600">Customers Say</span>
       </h2>
@@ -1112,7 +1174,7 @@ const serviceCities = [
         Review us on Google
       </a>
     </div>
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 mt-4 sm:mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 bg-slate-800">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 bg-slate-800">
       {[
         {
           name: "Surendra Pratap Singh",
@@ -1141,16 +1203,22 @@ const serviceCities = [
       ].map((t, i) => (
         <div
           key={i}
-          className="bg-sky-100 text-black rounded-lg p-2 sm:p-4 shadow-md flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-200 h-full"
+          className="bg-sky-100 text-black rounded-xl p-4 sm:p-6 shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200 h-full"
         >
-          <img src={googleIcon} alt="Google" className="h-5 sm:h-6 mb-2" />
+          <img src={googleIcon} alt="Google" className="h-5 sm:h-6 mb-2"
+              loading="lazy"
+              decoding="async"
+            />
           <div className="flex justify-center mb-2">
             {[...Array(5)].map((_, i) => (
               <span key={i} className="text-yellow-400 text-base">★</span>
             ))}
           </div>
           <p className="text-black mb-2 text-xs sm:text-sm line-clamp-3">{t.text}</p>
-          <img src={t.img} alt={t.name} className="h-8 w-8 sm:h-10 sm:w-10 rounded-full mb-1" />
+          <img src={t.img} alt={t.name} className="h-8 w-8 sm:h-10 sm:w-10 rounded-full mb-1"
+              loading="lazy"
+              decoding="async"
+            />
           <h3 className="font-semibold text-gray-900 text-xs sm:text-sm">{t.name}</h3>
           <span className="text-xs text-black">{t.time}</span>
         </div>
@@ -1166,7 +1234,7 @@ const serviceCities = [
       </h2>
 
 
-      <div className="bg-slate-800 rounded-lg shadow-lg inline-block px-4 py-3 sm:px-6 sm:py-4">
+      <div className="bg-slate-800 rounded-xl shadow-lg inline-block px-4 py-3 sm:px-6 sm:py-4">
         {/* UPDATED: Reduced text size on mobile (text-sm) and scaled up (text-lg) */}
         <p className="text-sm sm:text-lg text-gray-300 leading-relaxed">
           TVS / Bajaj / Royal Enfield / Yamaha / Honda / Hero / Suzuki / KTM / Jawa / Harley Davidson / Ducati / Kawasaki / Benelli / Triumph / Indian / BMW / Aprilia / Yezdi / Husqvarna
@@ -1175,8 +1243,8 @@ const serviceCities = [
     </div>
   </section>
   {/* Latest Post Section */}
-  <section className="bg-slate-800 text-white py-8 sm:py-12">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+  <section className="bg-slate-800 text-white py-12 sm:py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
         Latest <span className="text-red-600">Post</span>
       </h2>
@@ -1203,14 +1271,16 @@ const serviceCities = [
         ].map((post, i) => (
           <div
             key={i}
-            className="bg-sky-100 text-black rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
+            className="bg-sky-100 text-black rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
           >
             <img
               src={post.img}
               alt={post.title}
               className="w-full h-32 sm:h-40 object-cover"
+              loading="lazy"
+              decoding="async"
             />
-            <div className="p-2 sm:p-4 text-left">
+            <div className="p-4 sm:p-6 text-left">
               <h3 className="text-sm sm:text-base font-bold mb-1">{post.title}</h3>
               <p className="text-gray-700 text-xs sm:text-sm mb-2">{post.desc}</p>
             
@@ -1221,8 +1291,8 @@ const serviceCities = [
     </div>
   </section>
   {/* Frequently Asked Questions Section */}
-  <section className="bg-slate-900 text-white py-8 sm:py-12">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+  <section className="bg-slate-900 text-white py-12 sm:py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-4 sm:mb-6">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
           Bike Service in Noida — <span className="text-red-600">Common Questions</span>
@@ -1324,7 +1394,7 @@ const serviceCities = [
   </section>
 
   {/* ── Service Locations & Popular Pages (combined) ── */}
-  <section className="py-4 sm:py-5 bg-slate-800">
+  <section className="py-8 sm:py-10 bg-slate-800">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       {/* Section heading */}
@@ -1440,8 +1510,8 @@ const serviceCities = [
   </section>
 
           {/* CTA Section */}
-          <section className="py-6 sm:py-8 bg-slate-800">
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 text-center">
+          <section className="py-10 sm:py-14 bg-slate-800">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
         Book Bike or Car Service in Noida Today
       </h2>
@@ -1450,7 +1520,7 @@ const serviceCities = [
       </p>
       <Link
         to="/book"
-        className="bg-orange-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-md font-semibold text-sm sm:text-base hover:bg-orange-700 transition-colors duration-200 inline-block"
+        className="bg-orange-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold text-sm sm:text-base shadow-lg hover:bg-orange-700 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:translate-y-0 transition-all duration-200 inline-block"
       >
         Book Your Service
       </Link>
@@ -1546,7 +1616,7 @@ const serviceCities = [
                   
                   {/* NEW: Phone Number Input Field */}
                   <div className="w-full mb-3 relative">
-                      <PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                       <input
                           type="tel"
                           placeholder="Enter 10-digit Phone Number*"
@@ -1555,7 +1625,7 @@ const serviceCities = [
                           maxLength={10}
                           value={modalPhoneNumber}
                           onChange={(e) => setModalPhoneNumber(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
-                          className="pl-10 pr-3 py-2 w-full rounded-lg text-black border border-gray-300 focus:outline-none focus:border-red-600 shadow-sm text-sm"
+                          className="pl-10 pr-3 py-2 w-full rounded-xl text-black border border-gray-300 focus:outline-none focus:border-red-600 shadow-sm text-sm"
                       />
                   </div>
                   
@@ -1570,7 +1640,7 @@ const serviceCities = [
                   {/* Book Now Button (Updated to call handleModalBookNow) */}
                   <button
                       onClick={handleModalBookNow}
-                      className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 text-sm sm:text-base"
+                      className="bg-brandRed text-white w-full py-3 rounded-xl font-semibold shadow-md hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 transition-all duration-200 text-sm sm:text-base"
                   >
                       Book Now
                   </button>
