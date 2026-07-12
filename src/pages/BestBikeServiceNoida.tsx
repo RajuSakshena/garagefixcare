@@ -152,7 +152,7 @@ const BestBikeServiceNoida = () => {
       });
       alert('Thanks for booking! We have received your request and will contact you in 5 minutes.');
       closeModal();
-      window.location.href = 'https://garagefixcare.in/bookservice';
+      window.location.href = 'https://www.garagefixcare.in/bookservice';
     } catch (error) {
       alert('Booking failed. Please try again.');
       console.error('Error booking service:', error);
@@ -184,10 +184,10 @@ const BestBikeServiceNoida = () => {
       <SEOHelmet
         title="Best Bike Service in Noida | Doorstep Bike Repair ₹299 | Garage Fix Care"
         description="Best Bike Service in Noida at your doorstep starting ₹299. Oil change, bike repair, battery replacement and certified mechanics near you. Same day bike service in Noida."
-        canonical="https://garagefixcare.in/best-bike-service-noida"
+        canonical="https://www.garagefixcare.in/best-bike-service-noida"
         robots="index, follow"
         og={{
-          url: "https://garagefixcare.in/best-bike-service-noida",
+          url: "https://www.garagefixcare.in/best-bike-service-noida",
           image: "https://www.garagefixcare.in/og-banner.png",
           imageAlt: "Best bike service in Noida at doorstep by Garage Fix Care",
           type: "website",
@@ -202,7 +202,7 @@ const BestBikeServiceNoida = () => {
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
             "description": "Best bike service in Noida. Doorstep bike repair, servicing, oil change, battery replacement starting at ₹299.",
-            "url": "https://garagefixcare.in/best-bike-service-noida",
+            "url": "https://www.garagefixcare.in/best-bike-service-noida",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
             "image": "https://www.garagefixcare.in/og-banner.png",
@@ -248,8 +248,8 @@ const BestBikeServiceNoida = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Best Bike Service in Noida", "item": "https://garagefixcare.in/best-bike-service-noida" }
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Best Bike Service in Noida", "item": "https://www.garagefixcare.in/best-bike-service-noida" }
             ]
           }
         ]}
@@ -282,7 +282,7 @@ const BestBikeServiceNoida = () => {
                   {/* Book + Call Buttons */}
                   <div className="flex flex-wrap items-center gap-3">
                     {!showInput ? (
-                      <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
+                      <a href="https://www.garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
                         Book Service Now
                       </a>
                     ) : (
@@ -290,7 +290,7 @@ const BestBikeServiceNoida = () => {
                         <input type="tel" maxLength={10} value={modalPhoneNumber} onChange={(e) => { const val = e.target.value.replace(/\D/g, ''); if (val.length <= 10) setModalPhoneNumber(val); }} placeholder="Enter 10-digit mobile number" className="w-full sm:w-auto px-4 py-3 rounded-lg text-black text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500" />
                         <button onClick={async () => {
                           if (!modalPhoneNumber || modalPhoneNumber.length !== 10) { alert('Please enter a valid 10-digit phone number.'); return; }
-                          try { await axios.post(`${import.meta.env.VITE_API_URL}/api/quick-book-service`, { phoneNumber: modalPhoneNumber, serviceType: "Doorstep Bike Service" }); alert('✅ Booking received! Our team will contact you shortly.'); setModalPhoneNumber(''); setShowInput(false); window.location.href = 'https://garagefixcare.in/bookservice'; } catch (err) { alert('❌ Booking failed. Please try again.'); }
+                          try { await axios.post(`${import.meta.env.VITE_API_URL}/api/quick-book-service`, { phoneNumber: modalPhoneNumber, serviceType: "Doorstep Bike Service" }); alert('✅ Booking received! Our team will contact you shortly.'); setModalPhoneNumber(''); setShowInput(false); window.location.href = 'https://www.garagefixcare.in/bookservice'; } catch (err) { alert('❌ Booking failed. Please try again.'); }
                         }} className="bg-green-600 text-white px-5 py-3 rounded-lg font-semibold text-sm sm:text-base">Confirm Booking</button>
                         <button onClick={() => setShowInput(false)} className="text-gray-300 text-sm hover:text-white">Cancel</button>
                       </div>
@@ -505,7 +505,7 @@ const BestBikeServiceNoida = () => {
         <section className="py-8 bg-slate-800 text-center">
           <h2 className="text-3xl font-bold text-white mb-2">Book Bike Service in Noida Today</h2>
           <p className="text-white mb-4">Same-day doorstep service starting at ₹299. No travel, no waiting, no hidden charges.</p>
-          <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
+          <a href="https://www.garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
         </section>
 
         {/* Floating Buttons */}
@@ -521,7 +521,7 @@ const BestBikeServiceNoida = () => {
             <div className="bg-white rounded-xl shadow-2xl max-h-[90vh] w-full max-w-md flex flex-col">
               <div className="p-4 border-b flex justify-between"><div><h3 className="text-xl font-bold text-black">{selectedService.title}</h3><p className="text-sm text-gray-600">{selectedService.subtitle}</p></div><button onClick={closeModal}><X className="h-6 w-6" /></button></div>
               <div className="p-4 overflow-y-auto"><h4 className="font-semibold mb-2">Full Checklist:</h4><ul className="space-y-2">{selectedService.checklist.map((item, i) => <li key={i} className="flex items-start"><CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5" />{item}</li>)}</ul></div>
-              <div className="p-4 border-t bg-gray-50"><div className="relative mb-3"><PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" /><input type="tel" placeholder="Enter 10-digit Phone Number*" maxLength={10} value={modalPhoneNumber} onChange={(e) => setModalPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))} className="pl-10 pr-3 py-2 w-full rounded-lg border border-gray-300" /></div><div className="flex items-center mb-4"><input type="checkbox" id="terms" className="mr-2" /><label htmlFor="terms" className="text-sm">Yes, I agree to the <span className='underline'>Terms of Service</span></label></div><button onClick={() => { handleModalBookNow(); window.location.href = "https://garagefixcare.in/bookservice"; }} className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700">Book Now</button></div>
+              <div className="p-4 border-t bg-gray-50"><div className="relative mb-3"><PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" /><input type="tel" placeholder="Enter 10-digit Phone Number*" maxLength={10} value={modalPhoneNumber} onChange={(e) => setModalPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))} className="pl-10 pr-3 py-2 w-full rounded-lg border border-gray-300" /></div><div className="flex items-center mb-4"><input type="checkbox" id="terms" className="mr-2" /><label htmlFor="terms" className="text-sm">Yes, I agree to the <span className='underline'>Terms of Service</span></label></div><button onClick={() => { handleModalBookNow(); window.location.href = "https://www.garagefixcare.in/bookservice"; }} className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700">Book Now</button></div>
             </div>
           </div>
         )}

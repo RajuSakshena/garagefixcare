@@ -54,8 +54,49 @@ const Contact = () => {
   return (
     <>
       <SEOHelmet 
-        title="Contact Us - Get in Touch | GarageOnCall Mobile Auto Service"
-        description="Contact GarageFixCare for mobile auto repair services. Call +919540553759 or send us a message. Available 24/7 for emergency automotive services."
+        title="Contact Garage Fix Care | Doorstep Bike & Car Service"
+        description="Contact Garage Fix Care for doorstep bike and car repair in Noida, Delhi, Gurgaon and Ghaziabad. Call, WhatsApp or send a message — we reply fast."
+        keywords="contact garage fix care, bike mechanic contact, car mechanic contact, doorstep service booking, garage fix care phone number, garage fix care email"
+        canonical="https://www.garagefixcare.in/contact"
+        robots="index, follow"
+        og={{
+          title: "Contact Garage Fix Care | Doorstep Bike & Car Service",
+          description: "Reach Garage Fix Care for doorstep bike and car servicing across Noida, Delhi, Gurgaon and Ghaziabad.",
+          url: "https://www.garagefixcare.in/contact",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Contact Garage Fix Care for doorstep bike and car service",
+          type: "website",
+        }}
+        twitter={{
+          title: "Contact Garage Fix Care | Doorstep Bike & Car Service",
+          description: "Call, WhatsApp or message Garage Fix Care for doorstep bike and car repair in Delhi NCR.",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Contact Garage Fix Care",
+        }}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact Garage Fix Care",
+            "url": "https://www.garagefixcare.in/contact",
+            "about": {
+              "@type": "LocalBusiness",
+              "name": "Garage Fix Care",
+              "telephone": "+919540553759",
+              "email": "garagefixcare@gmail.com",
+              "areaServed": ["Noida", "Delhi", "Gurugram", "Ghaziabad"],
+              "openingHours": "Mo-Su 07:00-23:00"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.garagefixcare.in/contact" }
+            ]
+          }
+        ]}
       />
       
       <div className="min-h-screen">

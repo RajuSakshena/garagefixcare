@@ -186,10 +186,10 @@ const BestBikeServiceGhaziabad = () => {
       <SEOHelmet
         title="Best Bike Service in Ghaziabad | Doorstep Bike Repair ₹299 | Garage Fix Care"
         description="Best doorstep bike service in Ghaziabad starting at ₹299. Trusted mechanics for bike repair, maintenance, oil change and battery replacement."
-        canonical="https://garagefixcare.in/best-bike-service-ghaziabad"
+        canonical="https://www.garagefixcare.in/best-bike-service-ghaziabad"
         robots="index, follow"
         og={{
-          url: "https://garagefixcare.in/best-bike-service-ghaziabad",
+          url: "https://www.garagefixcare.in/best-bike-service-ghaziabad",
           image: "https://www.garagefixcare.in/og-banner.png",
           imageAlt: "Best bike service in Ghaziabad at doorstep by Garage Fix Care",
           type: "website",
@@ -204,7 +204,7 @@ const BestBikeServiceGhaziabad = () => {
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
             "description": "Best bike service in Ghaziabad. Doorstep bike repair, maintenance, oil change, and battery replacement starting at ₹299.",
-            "url": "https://garagefixcare.in/best-bike-service-ghaziabad",
+            "url": "https://www.garagefixcare.in/best-bike-service-ghaziabad",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
             "image": "https://www.garagefixcare.in/og-banner.png",
@@ -275,8 +275,8 @@ const BestBikeServiceGhaziabad = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Best Bike Service in Ghaziabad", "item": "https://garagefixcare.in/best-bike-service-ghaziabad" }
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Best Bike Service in Ghaziabad", "item": "https://www.garagefixcare.in/best-bike-service-ghaziabad" }
             ]
           }
         ]}

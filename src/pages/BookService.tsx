@@ -66,8 +66,44 @@ const BookService = () => {
   return (
     <>
       <SEOHelmet 
-        title="Book Service - Schedule Mobile Auto Repair | GarageFixCare"
-        description="Book professional mobile auto repair service online. Choose your preferred time and location for oil changes, brake service, diagnostics, and more."
+        title="Book a Bike or Car Service Online | Garage Fix Care"
+        description="Book doorstep bike and car service online in Noida, Delhi, Gurgaon and Ghaziabad. Pick your time and vehicle — a certified mechanic comes to you."
+        keywords="book bike service, book car service, schedule doorstep repair, online booking garage fix care, bike service appointment, car service appointment"
+        canonical="https://www.garagefixcare.in/book"
+        robots="index, follow"
+        og={{
+          title: "Book a Bike or Car Service Online | Garage Fix Care",
+          description: "Schedule doorstep bike and car repair online — pick your vehicle and time, and a certified mechanic comes to you.",
+          url: "https://www.garagefixcare.in/book",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Book doorstep bike and car service online with Garage Fix Care",
+          type: "website",
+        }}
+        twitter={{
+          title: "Book a Bike or Car Service Online | Garage Fix Care",
+          description: "Schedule doorstep bike and car repair online across Noida, Delhi, Gurgaon and Ghaziabad.",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Book a doorstep bike or car service",
+        }}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Book Doorstep Bike & Car Service",
+            "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
+            "areaServed": ["Noida", "Delhi", "Gurugram", "Ghaziabad", "Greater Noida"],
+            "description": "Online booking for doorstep bike and car servicing — oil change, brake service, battery replacement and more.",
+            "url": "https://www.garagefixcare.in/book"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Book Service", "item": "https://www.garagefixcare.in/book" }
+            ]
+          }
+        ]}
       />
       
       <div className="min-h-screen bg-gray-50">

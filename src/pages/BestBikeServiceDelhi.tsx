@@ -184,10 +184,10 @@ const BestBikeServiceDelhi = () => {
       <SEOHelmet
         title="Best Bike Service in Delhi | Doorstep Bike Repair ₹299 | Garage Fix Care"
         description="Book best bike service in Delhi starting at ₹299. Doorstep bike repair, oil change, battery replacement and trusted mechanics across Delhi NCR."
-        canonical="https://garagefixcare.in/best-bike-service-delhi"
+        canonical="https://www.garagefixcare.in/best-bike-service-delhi"
         robots="index, follow"
         og={{
-          url: "https://garagefixcare.in/best-bike-service-delhi",
+          url: "https://www.garagefixcare.in/best-bike-service-delhi",
           image: "https://www.garagefixcare.in/og-banner.png",
           imageAlt: "Best bike service in Delhi at doorstep by Garage Fix Care",
           type: "website",
@@ -202,7 +202,7 @@ const BestBikeServiceDelhi = () => {
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
             "description": "Best bike service in Delhi. Doorstep bike repair, servicing, oil change, battery replacement starting at ₹299.",
-            "url": "https://garagefixcare.in/best-bike-service-delhi",
+            "url": "https://www.garagefixcare.in/best-bike-service-delhi",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
             "image": "https://www.garagefixcare.in/og-banner.png",
@@ -248,8 +248,8 @@ const BestBikeServiceDelhi = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Best Bike Service in Delhi", "item": "https://garagefixcare.in/best-bike-service-delhi" }
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Best Bike Service in Delhi", "item": "https://www.garagefixcare.in/best-bike-service-delhi" }
             ]
           }
         ]}
@@ -281,7 +281,7 @@ const BestBikeServiceDelhi = () => {
 
                   {/* Book + Call Buttons */}
                   <div className="flex flex-wrap items-center gap-3">
-                    <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
+                    <a href="https://www.garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
                       Book Service Now
                     </a>
                     <a href="tel:9540553759" className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 inline-flex items-center justify-center gap-2"><Phone className="h-4 w-4" /> Call Now</a>
@@ -396,7 +396,7 @@ const BestBikeServiceDelhi = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why Garage Fix Care is the <span className="text-red-600">Best Bike Service in Delhi</span></h2>
             <div className="space-y-4 text-gray-200 text-base leading-relaxed">
               <p>Getting a trustworthy bike service in Delhi has always been harder than it should be. Across the city — from the crowded lanes of Laxmi Nagar to the wide avenues of Dwarka, from busy Rohini to upscale South Delhi — two-wheeler owners routinely face overcharging, unclear billing, and mechanics who keep bikes for days without updates. Garage Fix Care was built specifically to solve this. We are Delhi's most trusted doorstep bike service, sending certified and background-verified mechanics directly to your home or office. Our doorstep bike repair in Delhi starts at just ₹299, and we cover every major locality across the city — North Delhi, South Delhi, East Delhi, West Delhi, Dwarka, Rohini, Saket, Laxmi Nagar, Pitampura, Janakpuri, Mayur Vihar, and Vasant Kunj. Our mechanics arrive fully equipped with tools, genuine engine oils, and spare parts, so your bike gets serviced on the spot without you stepping out. Whether you ride a Hero Splendor, Honda Activa, Bajaj Pulsar, Royal Enfield Classic 350, KTM Duke, or any other brand, our expert Delhi mechanics handle everything from routine oil changes to full engine overhauls. What makes us the best bike service in Delhi is simple: complete pricing transparency. You receive a detailed cost estimate before a single bolt is turned — zero surprise charges, guaranteed. We use only certified engine oils from Motul and Wurth with manufacturer-recommended parts, and every service is backed by our 10-day hassle-free guarantee.</p>
-              <p>Delhi's extreme heat, heavy traffic, and dusty roads put serious stress on your bike's engine, air filter, brakes, and tyres. Regular professional servicing is not a luxury — it is essential for safety and performance on Delhi roads. Our mechanics use diagnostic tools to catch issues early before they become expensive problems, significantly extending the life of your vehicle. Beyond scheduled servicing, we also handle emergency breakdown situations in Delhi. If your bike stops working mid-route anywhere in the city, call us and we dispatch a mechanic to your exact location as quickly as possible. From battery replacement and brake pad changes to clutch cable adjustment and tyre puncture repair, we do it all on the spot. We have successfully completed over 1,00,000 services across Delhi NCR, and our customers consistently rate us 4.7 stars on Google for punctuality, honesty, and professionalism. <a href="https://garagefixcare.in/bookservice" className="text-orange-400 hover:text-orange-300 underline">Book your bike service in Delhi</a> today through our website, WhatsApp, or phone — and experience the difference that genuine doorstep care makes.</p>
+              <p>Delhi's extreme heat, heavy traffic, and dusty roads put serious stress on your bike's engine, air filter, brakes, and tyres. Regular professional servicing is not a luxury — it is essential for safety and performance on Delhi roads. Our mechanics use diagnostic tools to catch issues early before they become expensive problems, significantly extending the life of your vehicle. Beyond scheduled servicing, we also handle emergency breakdown situations in Delhi. If your bike stops working mid-route anywhere in the city, call us and we dispatch a mechanic to your exact location as quickly as possible. From battery replacement and brake pad changes to clutch cable adjustment and tyre puncture repair, we do it all on the spot. We have successfully completed over 1,00,000 services across Delhi NCR, and our customers consistently rate us 4.7 stars on Google for punctuality, honesty, and professionalism. <a href="https://www.garagefixcare.in/bookservice" className="text-orange-400 hover:text-orange-300 underline">Book your bike service in Delhi</a> today through our website, WhatsApp, or phone — and experience the difference that genuine doorstep care makes.</p>
             </div>
           </div>
         </section>
@@ -448,7 +448,7 @@ const BestBikeServiceDelhi = () => {
             <span className="text-gray-500">|</span>
             <Link to="/contact" className="text-gray-300 hover:text-white text-sm underline underline-offset-2">Contact Us</Link>
             <span className="text-gray-500">|</span>
-            <a href="https://garagefixcare.in/bookservice" className="text-orange-400 hover:text-orange-300 text-sm font-semibold underline underline-offset-2">Book Service Now →</a>
+            <a href="https://www.garagefixcare.in/bookservice" className="text-orange-400 hover:text-orange-300 text-sm font-semibold underline underline-offset-2">Book Service Now →</a>
           </div>
         </section>
 
@@ -498,7 +498,7 @@ const BestBikeServiceDelhi = () => {
           <h2 className="text-3xl font-bold text-white mb-2">Book Bike Service in Delhi Today</h2>
           <p className="text-white mb-4">Same-day doorstep service starting at ₹299. No travel, no waiting, no hidden charges.</p>
           <div className="flex flex-wrap justify-center gap-4 mt-4">
-            <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
+            <a href="https://www.garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
             <Link to="/" className="bg-slate-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-slate-600 inline-block">Home</Link>
             <Link to="/contact" className="bg-slate-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-slate-600 inline-block">Contact Us</Link>
           </div>

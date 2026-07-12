@@ -17,6 +17,25 @@ const Navbar = () => {
     { path: '/best-bike-service-delhi',     label: 'Best Bike Service in Delhi' },
     { path: '/best-bike-service-gurgaon',   label: 'Best Bike Service in Gurgaon' },
     { path: '/best-bike-service-ghaziabad', label: 'Best Bike Service in Ghaziabad' },
+    { path: '/best-bike-service-dwarka',              label: 'Best Bike Service in Dwarka' },
+    { path: '/best-bike-service-greater-kailash',      label: 'Best Bike Service in Greater Kailash' },
+    { path: '/best-bike-service-defence-colony',       label: 'Best Bike Service in Defence Colony' },
+    { path: '/best-bike-service-hauz-khas',            label: 'Best Bike Service in Hauz Khas' },
+    { path: '/best-bike-service-saket',                label: 'Best Bike Service in Saket' },
+    { path: '/best-bike-service-connaught-place',      label: 'Best Bike Service in Connaught Place' },
+    { path: '/best-bike-service-uttam-nagar',          label: 'Best Bike Service in Uttam Nagar' },
+    { path: '/best-bike-service-new-delhi',            label: 'Best Bike Service in New Delhi' },
+    { path: '/best-bike-service-chanakyapuri',         label: 'Best Bike Service in Chanakyapuri' },
+    { path: '/best-bike-service-paharganj',            label: 'Best Bike Service in Paharganj' },
+    { path: '/best-bike-service-palam',                label: 'Best Bike Service in Palam' },
+    { path: '/best-bike-service-delhi-cantt',          label: 'Best Bike Service in Delhi Cantt' },
+    { path: '/best-bike-service-udyog-vihar',          label: 'Best Bike Service in Udyog Vihar' },
+    { path: '/best-bike-service-sushant-lok-phase-1',  label: 'Best Bike Service in Sushant Lok Phase 1' },
+    { path: '/best-bike-service-sector-56-gurugram',   label: 'Best Bike Service in Sector 56 Gurugram' },
+    { path: '/best-bike-service-sikanderpur-ghosi',    label: 'Best Bike Service in Sikanderpur Ghosi' },
+    { path: '/best-bike-service-indirapuram',          label: 'Best Bike Service in Indirapuram' },
+    { path: '/best-bike-service-vaishali',             label: 'Best Bike Service in Vaishali' },
+    { path: '/best-bike-service-greater-noida-west',   label: 'Best Bike Service in Greater Noida West' },
   ];
 
   const carLinks = [
@@ -82,19 +101,21 @@ const Navbar = () => {
 
                 {isServicesOpen && (
                   <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white rounded-xl shadow-xl border border-gray-100 py-4 px-5 w-[420px] z-50 grid grid-cols-2 gap-x-6"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white rounded-xl shadow-xl border border-gray-100 py-4 px-5 w-[520px] z-50 grid grid-cols-2 gap-x-6"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500 mb-2">🏍 Bike Services</p>
-                      {bikeLinks.map(link => (
-                        <Link key={link.path} to={link.path}
-                          className={`block py-1.5 text-sm transition-colors duration-150
-                            ${isActive(link.path) ? 'text-red-600 font-semibold' : 'text-gray-700 hover:text-blue-800'}`}>
-                          {link.label}
-                        </Link>
-                      ))}
+                      <div className="max-h-64 overflow-y-auto pr-1">
+                        {bikeLinks.map(link => (
+                          <Link key={link.path} to={link.path}
+                            className={`block py-1.5 text-sm transition-colors duration-150
+                              ${isActive(link.path) ? 'text-red-600 font-semibold' : 'text-gray-700 hover:text-blue-800'}`}>
+                            {link.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500 mb-2">🚗 Car Services</p>
@@ -205,12 +226,14 @@ const Navbar = () => {
                 {isMobileServicesOpen && (
                   <div className="mt-1 ml-3 border-l-2 border-orange-200 pl-3 space-y-0.5">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500 pt-1 pb-0.5">Bike Services</p>
-                    {bikeLinks.map(link => (
-                      <Link key={link.path} to={link.path} onClick={() => setIsMenuOpen(false)}
-                        className={`block py-1.5 text-sm transition-colors ${isActive(link.path) ? 'text-red-600 font-semibold' : 'text-gray-600 hover:text-blue-800'}`}>
-                        {link.label}
-                      </Link>
-                    ))}
+                    <div className="max-h-56 overflow-y-auto pr-1">
+                      {bikeLinks.map(link => (
+                        <Link key={link.path} to={link.path} onClick={() => setIsMenuOpen(false)}
+                          className={`block py-1.5 text-sm transition-colors ${isActive(link.path) ? 'text-red-600 font-semibold' : 'text-gray-600 hover:text-blue-800'}`}>
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500 pt-2 pb-0.5">Car Services</p>
                     {carLinks.map(link => (
                       <Link key={link.path} to={link.path} onClick={() => setIsMenuOpen(false)}

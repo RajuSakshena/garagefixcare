@@ -63,10 +63,16 @@ const DEFAULT_AUTHOR = 'Garage Fix Care';
 
 const DEFAULT_ROBOTS = 'index, follow';
 
-const DEFAULT_CANONICAL = 'https://garagefixcare.in/';
+const SITE_ORIGIN = 'https://www.garagefixcare.in';
+
+// Only used as a last-resort fallback (e.g. during SSR/build where `window`
+// is unavailable). In the browser we always derive the canonical from the
+// current path so a page can never silently inherit the homepage's
+// canonical just because it forgot to pass one in explicitly.
+const DEFAULT_CANONICAL = `${SITE_ORIGIN}/`;
 
 const DEFAULT_OG_IMAGE =
-  'https://garagefixcare.in/og-banner.png';
+  'https://www.garagefixcare.in/og-banner.png';
 
 const DEFAULT_OG_IMAGE_ALT =
   'Garage Fix Care Doorstep Bike & Car Service';
@@ -92,8 +98,16 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
   structuredData,
 }) => {
 
+  // IMPORTANT: every page should pass its own `canonical` prop explicitly.
+  // This fallback exists purely as a safety net — it derives the canonical
+  // from the page's actual current path (not a hardcoded homepage URL), so
+  // a landing page that forgets to pass `canonical` still points to itself
+  // rather than incorrectly pointing to "/".
   const resolvedCanonical =
-    canonical ?? DEFAULT_CANONICAL;
+    canonical ??
+    (typeof window !== 'undefined'
+      ? `${SITE_ORIGIN}${window.location.pathname}`
+      : DEFAULT_CANONICAL);
 
   const ogTitle =
     og.title ?? title;

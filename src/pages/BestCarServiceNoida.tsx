@@ -182,10 +182,10 @@ const BestCarServiceNoida = () => {
       <SEOHelmet
         title="Best Car Service in Noida | Doorstep Car Repair ₹299 | Garage Fix Care"
         description="Book doorstep car service in Noida starting at ₹299. Car repair, battery replacement, oil change and maintenance by certified mechanics."
-        canonical="https://garagefixcare.in/best-car-service-noida"
+        canonical="https://www.garagefixcare.in/best-car-service-noida"
         robots="index, follow"
         og={{
-          url: "https://garagefixcare.in/best-car-service-noida",
+          url: "https://www.garagefixcare.in/best-car-service-noida",
           image: "https://www.garagefixcare.in/og-banner.png",
           imageAlt: "Best car service in Noida at doorstep by Garage Fix Care",
           type: "website",
@@ -200,7 +200,7 @@ const BestCarServiceNoida = () => {
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
             "description": "Best car service in Noida. Doorstep car repair, AC service, battery replacement, periodic maintenance starting at ₹499.",
-            "url": "https://garagefixcare.in/best-car-service-noida",
+            "url": "https://www.garagefixcare.in/best-car-service-noida",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
             "image": "https://www.garagefixcare.in/og-banner.png",
@@ -248,8 +248,8 @@ const BestCarServiceNoida = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Best Car Service in Noida", "item": "https://garagefixcare.in/best-car-service-noida" }
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Best Car Service in Noida", "item": "https://www.garagefixcare.in/best-car-service-noida" }
             ]
           }
         ]}

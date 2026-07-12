@@ -183,10 +183,10 @@ const BestCarServiceGhaziabad = () => {
       <SEOHelmet
         title="Best Car Service in Ghaziabad | Doorstep Car Repair ₹299 | Garage Fix Care"
         description="Book best car service in Ghaziabad starting at ₹299. Doorstep repair, oil change, battery replacement and maintenance."
-        canonical="https://garagefixcare.in/best-car-service-ghaziabad"
+        canonical="https://www.garagefixcare.in/best-car-service-ghaziabad"
         robots="index, follow"
         og={{
-          url: "https://garagefixcare.in/best-car-service-ghaziabad",
+          url: "https://www.garagefixcare.in/best-car-service-ghaziabad",
           image: "https://www.garagefixcare.in/og-banner.png",
           imageAlt: "Best car service in Ghaziabad at doorstep by Garage Fix Care",
           type: "website",
@@ -201,7 +201,7 @@ const BestCarServiceGhaziabad = () => {
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
             "description": "Best car service in Ghaziabad. Doorstep car repair, AC service, battery replacement, periodic maintenance starting at ₹299.",
-            "url": "https://garagefixcare.in/best-car-service-ghaziabad",
+            "url": "https://www.garagefixcare.in/best-car-service-ghaziabad",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
             "image": "https://www.garagefixcare.in/og-banner.png",
@@ -253,8 +253,8 @@ const BestCarServiceGhaziabad = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Best Car Service in Ghaziabad", "item": "https://garagefixcare.in/best-car-service-ghaziabad" }
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Best Car Service in Ghaziabad", "item": "https://www.garagefixcare.in/best-car-service-ghaziabad" }
             ]
           }
         ]}

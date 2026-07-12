@@ -147,8 +147,51 @@ const Pricing: React.FC = () => {
   return (
     <>
       <SEOHelmet 
-        title="Pricing - Transparent Mobile Auto Service Rates | GarageFixCare"
-        description="View our transparent pricing for mobile auto services. No hidden fees, upfront pricing for oil changes, brake service, diagnostics, and more. Get a quote today."
+        title="Bike & Car Service Pricing in Delhi NCR | Garage Fix Care"
+        description="Transparent doorstep bike and car service pricing in Noida, Delhi, Gurgaon and Ghaziabad. No hidden fees — upfront rates starting at just ₹299."
+        keywords="bike service price, car service price, doorstep service cost, bike repair rates, car repair rates, service pricing noida delhi gurgaon ghaziabad"
+        canonical="https://www.garagefixcare.in/pricing"
+        robots="index, follow"
+        og={{
+          title: "Bike & Car Service Pricing in Delhi NCR | Garage Fix Care",
+          description: "Transparent, upfront doorstep bike and car service pricing in Noida, Delhi, Gurgaon and Ghaziabad — starting at just ₹299.",
+          url: "https://www.garagefixcare.in/pricing",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Garage Fix Care transparent bike and car service pricing",
+          type: "website",
+        }}
+        twitter={{
+          title: "Bike & Car Service Pricing in Delhi NCR | Garage Fix Care",
+          description: "No hidden fees — transparent doorstep bike and car service pricing starting at ₹299.",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Doorstep bike and car service pricing",
+        }}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Garage Fix Care Pricing",
+            "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
+            "areaServed": ["Noida", "Delhi", "Gurugram", "Ghaziabad"],
+            "description": "Transparent doorstep bike service pricing starting at ₹299 for regular service, up to ₹999 for sports bike service, with no hidden fees.",
+            "url": "https://www.garagefixcare.in/pricing",
+            "offers": [
+              { "@type": "Offer", "name": "At-Home Regular Service", "priceCurrency": "INR", "price": "299", "availability": "https://schema.org/InStock" },
+              { "@type": "Offer", "name": "At-Home Classic Service", "priceCurrency": "INR", "price": "399", "availability": "https://schema.org/InStock" },
+              { "@type": "Offer", "name": "At-Home Premium Service", "priceCurrency": "INR", "price": "499", "availability": "https://schema.org/InStock" },
+              { "@type": "Offer", "name": "At-Home Royal Service", "priceCurrency": "INR", "price": "599", "availability": "https://schema.org/InStock" },
+              { "@type": "Offer", "name": "At-Home Sports Service", "priceCurrency": "INR", "price": "999", "availability": "https://schema.org/InStock" }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://www.garagefixcare.in/pricing" }
+            ]
+          }
+        ]}
       />
 
       <div className="min-h-screen bg-slate-900">

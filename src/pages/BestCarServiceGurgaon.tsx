@@ -185,10 +185,10 @@ const BestCarServiceGurgaon = () => {
       <SEOHelmet
         title="Best Car Service in Gurgaon | Doorstep Car Repair ₹299 | Garage Fix Care"
         description="Trusted doorstep car service in Gurgaon starting ₹299. Same day repair, maintenance and certified mechanics at home."
-        canonical="https://garagefixcare.in/best-car-service-gurgaon"
+        canonical="https://www.garagefixcare.in/best-car-service-gurgaon"
         robots="index, follow"
         og={{
-          url: "https://garagefixcare.in/best-car-service-gurgaon",
+          url: "https://www.garagefixcare.in/best-car-service-gurgaon",
           image: "https://www.garagefixcare.in/og-banner.png",
           imageAlt: "Best car service in Gurgaon at doorstep by Garage Fix Care",
           type: "website",
@@ -203,7 +203,7 @@ const BestCarServiceGurgaon = () => {
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
             "description": "Best car service in Gurgaon. Doorstep car repair, AC service, battery replacement, periodic maintenance starting at ₹499.",
-            "url": "https://garagefixcare.in/best-car-service-gurgaon",
+            "url": "https://www.garagefixcare.in/best-car-service-gurgaon",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
             "image": "https://www.garagefixcare.in/og-banner.png",
@@ -255,8 +255,8 @@ const BestCarServiceGurgaon = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Best Car Service in Gurgaon", "item": "https://garagefixcare.in/best-car-service-gurgaon" }
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Best Car Service in Gurgaon", "item": "https://www.garagefixcare.in/best-car-service-gurgaon" }
             ]
           }
         ]}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEOHelmet from '../components/SEOHelmet';
 import bikeMaintenanceImage from '../images/extend1.avif';
 import engineOilImage from '../images/engine_oil.jpg';
 import brakeCheckImage from '../images/brakes.jpg';
@@ -25,7 +26,63 @@ const Blog = () => {
   };
 
   return (
-    <main className="bg-slate-900 pt-[60px] sm:pt-[90px] lg:pt-[120px] min-h-screen">
+    <>
+      <SEOHelmet
+        title="Bike & Car Maintenance Tips Blog | Garage Fix Care"
+        description="Practical bike and car maintenance tips from Garage Fix Care's mechanics — engine oil, brake checks and doorstep repair advice for Delhi NCR riders."
+        keywords="bike maintenance tips, car maintenance tips, engine oil change guide, brake check guide, bike care blog, car care blog, garage fix care blog"
+        canonical="https://www.garagefixcare.in/blog"
+        robots="index, follow"
+        og={{
+          title: "Bike & Car Maintenance Tips Blog | Garage Fix Care",
+          description: "Practical bike and car maintenance advice from Garage Fix Care's certified mechanics — oil changes, brake checks, and more.",
+          url: "https://www.garagefixcare.in/blog",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Garage Fix Care bike and car maintenance blog",
+          type: "website",
+        }}
+        twitter={{
+          title: "Bike & Car Maintenance Tips Blog | Garage Fix Care",
+          description: "Engine oil, brake checks and doorstep repair tips for Delhi NCR riders, from Garage Fix Care.",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Bike and car maintenance tips blog",
+        }}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Garage Fix Care Blog",
+            "url": "https://www.garagefixcare.in/blog",
+            "publisher": { "@type": "Organization", "name": "Garage Fix Care" },
+            "blogPost": [
+              {
+                "@type": "BlogPosting",
+                "headline": "How to Extend Your Bike's Life",
+                "description": "Simple maintenance tips to keep your bike in top condition for years to come."
+              },
+              {
+                "@type": "BlogPosting",
+                "headline": "Engine Oil: Your Bike's Lifeline",
+                "description": "Why routine oil changes matter for engine health and performance."
+              },
+              {
+                "@type": "BlogPosting",
+                "headline": "The Importance of Brake Checks",
+                "description": "How regular brake inspections keep you safe on the road."
+              }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.garagefixcare.in/blog" }
+            ]
+          }
+        ]}
+      />
+      <main className="bg-slate-900 pt-[60px] sm:pt-[90px] lg:pt-[120px] min-h-screen">
       <div className="px-4 sm:px-6 lg:px-8 py-8 bg-slate-800">
         {/* Title section with green lines */}
         <div className="flex flex-col items-center mb-12">
@@ -129,6 +186,7 @@ const Blog = () => {
         </div>
       </div>
     </main>
+    </>
   );
 };
 

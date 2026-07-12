@@ -110,8 +110,56 @@ const Car = () => {
   return (
     <>
       <SEOHelmet
-        title="GarageFixCare - Professional Car Service At Your Doorstep"
-        description="Expert car repair, servicing &amp; maintenance at your doorstep. Certified mechanics, genuine parts, AC service, brakes, engine repair &amp; more in Delhi NCR."
+        title="Doorstep Car Service in Delhi NCR | Garage Fix Care"
+        description="Professional car repair and servicing at your doorstep in Noida, Delhi, Gurgaon and Ghaziabad. Certified mechanics, genuine parts, AC and brake service."
+        keywords="car service near me, doorstep car service, car repair delhi ncr, car ac service, car battery replacement, car engine repair, garage fix care car"
+        canonical="https://www.garagefixcare.in/car"
+        robots="index, follow"
+        og={{
+          title: "Doorstep Car Service in Delhi NCR | Garage Fix Care",
+          description: "Expert car repair, servicing and maintenance at your doorstep across Delhi NCR — AC service, brakes, engine repair and more.",
+          url: "https://www.garagefixcare.in/car",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Doorstep car service and repair in Delhi NCR by Garage Fix Care",
+          type: "website",
+        }}
+        twitter={{
+          title: "Doorstep Car Service in Delhi NCR | Garage Fix Care",
+          description: "Certified mechanics, genuine parts, and doorstep car service across Delhi NCR.",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Doorstep car repair and servicing in Delhi NCR",
+        }}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "AutoRepair",
+            "name": "Garage Fix Care",
+            "description": "Doorstep car repair and servicing across Delhi NCR — AC service, battery replacement, brake repair and engine diagnostics.",
+            "url": "https://www.garagefixcare.in/car",
+            "telephone": "+919540553759",
+            "priceRange": "₹₹",
+            "image": "https://www.garagefixcare.in/og-banner.png",
+            "areaServed": [
+              { "@type": "City", "name": "Noida" },
+              { "@type": "City", "name": "Delhi" },
+              { "@type": "City", "name": "Gurugram" },
+              { "@type": "City", "name": "Ghaziabad" },
+              { "@type": "City", "name": "Greater Noida" },
+              { "@type": "City", "name": "Faridabad" }
+            ],
+            "serviceType": ["Car Repair", "Doorstep Car Service", "AC Service", "Battery Replacement", "Brake Repair", "Engine Diagnostics"],
+            "openingHours": "Mo-Su 08:00-20:00",
+            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "100000" }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Car Service", "item": "https://www.garagefixcare.in/car" }
+            ]
+          }
+        ]}
       />
 
       <div className="min-h-screen">

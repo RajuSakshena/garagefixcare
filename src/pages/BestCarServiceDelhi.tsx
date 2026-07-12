@@ -183,10 +183,10 @@ const BestCarServiceDelhi = () => {
       <SEOHelmet
         title="Best Car Service in Delhi | Doorstep Car Repair ₹299 | Garage Fix Care"
         description="Best car service in Delhi starting at ₹299. Doorstep repair, oil change, battery replacement and trusted mechanics near you."
-        canonical="https://garagefixcare.in/best-car-service-delhi"
+        canonical="https://www.garagefixcare.in/best-car-service-delhi"
         robots="index, follow"
         og={{
-          url: "https://garagefixcare.in/best-car-service-delhi",
+          url: "https://www.garagefixcare.in/best-car-service-delhi",
           image: "https://www.garagefixcare.in/og-banner.png",
           imageAlt: "Best car service in Delhi at doorstep by Garage Fix Care",
           type: "website",
@@ -201,7 +201,7 @@ const BestCarServiceDelhi = () => {
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
             "description": "Best car service in Delhi. Doorstep car repair, AC service, battery replacement, periodic maintenance starting at ₹499.",
-            "url": "https://garagefixcare.in/best-car-service-delhi",
+            "url": "https://www.garagefixcare.in/best-car-service-delhi",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
             "image": "https://www.garagefixcare.in/og-banner.png",
@@ -249,8 +249,8 @@ const BestCarServiceDelhi = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Best Car Service in Delhi", "item": "https://garagefixcare.in/best-car-service-delhi" }
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Best Car Service in Delhi", "item": "https://www.garagefixcare.in/best-car-service-delhi" }
             ]
           }
         ]}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Phone as PhoneIcon, Mail as MailIcon, MapPin, Facebook, Instagram, Linkedin, Youtube, Twitter } from 'lucide-react';
+import { Phone as PhoneIcon, Mail as MailIcon, MapPin, Facebook, Instagram, Linkedin, Youtube, Twitter, ChevronDown } from 'lucide-react';
 import logo41 from "../images/logo2.jpg";
 
 interface JoinUsResponse {
@@ -11,6 +11,29 @@ interface JoinUsResponse {
 
 const Footer = () => {
   const [joinUsPhoneNumber, setJoinUsPhoneNumber] = useState('');
+  const [isLocationsOpen, setIsLocationsOpen] = useState(false);
+
+  const moreBikeLocations = [
+    { path: '/best-bike-service-dwarka',              label: 'Best Bike Service in Dwarka' },
+    { path: '/best-bike-service-greater-kailash',      label: 'Best Bike Service in Greater Kailash' },
+    { path: '/best-bike-service-defence-colony',       label: 'Best Bike Service in Defence Colony' },
+    { path: '/best-bike-service-hauz-khas',            label: 'Best Bike Service in Hauz Khas' },
+    { path: '/best-bike-service-saket',                label: 'Best Bike Service in Saket' },
+    { path: '/best-bike-service-connaught-place',      label: 'Best Bike Service in Connaught Place' },
+    { path: '/best-bike-service-uttam-nagar',          label: 'Best Bike Service in Uttam Nagar' },
+    { path: '/best-bike-service-new-delhi',            label: 'Best Bike Service in New Delhi' },
+    { path: '/best-bike-service-chanakyapuri',         label: 'Best Bike Service in Chanakyapuri' },
+    { path: '/best-bike-service-paharganj',            label: 'Best Bike Service in Paharganj' },
+    { path: '/best-bike-service-palam',                label: 'Best Bike Service in Palam' },
+    { path: '/best-bike-service-delhi-cantt',          label: 'Best Bike Service in Delhi Cantt' },
+    { path: '/best-bike-service-udyog-vihar',          label: 'Best Bike Service in Udyog Vihar' },
+    { path: '/best-bike-service-sushant-lok-phase-1',  label: 'Best Bike Service in Sushant Lok Phase 1' },
+    { path: '/best-bike-service-sector-56-gurugram',   label: 'Best Bike Service in Sector 56 Gurugram' },
+    { path: '/best-bike-service-sikanderpur-ghosi',    label: 'Best Bike Service in Sikanderpur Ghosi' },
+    { path: '/best-bike-service-indirapuram',          label: 'Best Bike Service in Indirapuram' },
+    { path: '/best-bike-service-vaishali',             label: 'Best Bike Service in Vaishali' },
+    { path: '/best-bike-service-greater-noida-west',   label: 'Best Bike Service in Greater Noida West' },
+  ];
 
   const handleJoinUsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,6 +158,38 @@ const Footer = () => {
               <li><Link to="/best-car-service-delhi" className="hover:text-red-600">Best Car Service in Delhi</Link></li>
               <li><Link to="/best-car-service-gurgaon" className="hover:text-red-600">Best Car Service in Gurgaon</Link></li>
               <li><Link to="/best-car-service-ghaziabad" className="hover:text-red-600">Best Car Service in Ghaziabad</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* HORIZONTAL LINE SEPARATOR */}
+        <div className="border-t border-gray-800 my-2 sm:my-4"></div>
+
+        {/* Collapsible: More Service Locations */}
+        <div>
+          <button
+            type="button"
+            onClick={() => setIsLocationsOpen(!isLocationsOpen)}
+            aria-expanded={isLocationsOpen}
+            aria-controls="footer-service-locations"
+            className="flex items-center justify-between w-full text-left text-lg sm:text-xl font-bold text-white py-1 focus:outline-none focus:ring-2 focus:ring-red-600 rounded"
+          >
+            <span>📍 Service Locations</span>
+            <ChevronDown
+              className={`h-5 w-5 text-red-600 transition-transform duration-300 ${isLocationsOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+
+          <div
+            id="footer-service-locations"
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${isLocationsOpen ? 'max-h-[1000px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}
+          >
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-1.5 text-sm sm:text-base pb-2">
+              {moreBikeLocations.map(link => (
+                <li key={link.path}>
+                  <Link to={link.path} className="hover:text-red-600">{link.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

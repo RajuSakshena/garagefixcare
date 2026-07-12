@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://garagefixcare.in/sitemap.xml
+Sitemap: https://www.garagefixcare.in/sitemap.xml

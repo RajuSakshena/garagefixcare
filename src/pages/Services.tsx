@@ -38,8 +38,56 @@ const Services = () => {
   return (
     <>
       <SEOHelmet
-        title="Our Services - Mobile Auto Repair & Maintenance | GarageFixCare"
-        description="Complete mobile automotive services including oil changes, brake repair, diagnostics, and more. Professional mechanics come to your location with quality parts and tools."
+        title="Bike & Car Repair Services in Delhi NCR | Garage Fix Care"
+        description="Doorstep bike and car repair across Noida, Delhi, Gurgaon and Ghaziabad. Oil change, engine repair, battery replacement and more by certified mechanics."
+        keywords="bike repair services, car repair services, doorstep bike service, doorstep car service, engine repair, battery replacement, oil change, mechanic near me noida delhi gurgaon ghaziabad"
+        canonical="https://www.garagefixcare.in/services"
+        robots="index, follow"
+        og={{
+          title: "Bike & Car Repair Services in Delhi NCR | Garage Fix Care",
+          description: "Doorstep bike and car repair across Noida, Delhi, Gurgaon and Ghaziabad. Oil change, engine repair, battery replacement and more.",
+          url: "https://www.garagefixcare.in/services",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Doorstep bike and car repair services by Garage Fix Care",
+          type: "website",
+        }}
+        twitter={{
+          title: "Bike & Car Repair Services in Delhi NCR | Garage Fix Care",
+          description: "Doorstep bike and car repair across Noida, Delhi, Gurgaon and Ghaziabad, delivered by certified mechanics.",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Full list of doorstep bike and car services",
+        }}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Doorstep Bike & Car Repair Services",
+            "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
+            "areaServed": ["Noida", "Delhi", "Gurugram", "Ghaziabad", "Greater Noida"],
+            "description": "Complete list of doorstep bike and car services offered by Garage Fix Care, including regular servicing, breakdown assistance, engine diagnostics, battery replacement, tyre replacement and oil change.",
+            "url": "https://www.garagefixcare.in/services",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Garage Fix Care Services",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Regular Servicing" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Breakdown Assistance" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Engine Diagnostics" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Battery Replacement" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tire and Tube Replacement" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Oil Change" } }
+              ]
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.garagefixcare.in/services" }
+            ]
+          }
+        ]}
       />
 
       <div className="min-h-screen">

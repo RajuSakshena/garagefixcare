@@ -186,10 +186,10 @@ const BestBikeServiceGurgaon = () => {
       <SEOHelmet
         title="Best Bike Service in Gurgaon | Doorstep Bike Repair ₹299 | Garage Fix Care"
         description="Trusted doorstep bike service in Gurgaon starting at ₹299. Same day bike repair, engine service, battery replacement and maintenance at home."
-        canonical="https://garagefixcare.in/best-bike-service-gurgaon"
+        canonical="https://www.garagefixcare.in/best-bike-service-gurgaon"
         robots="index, follow"
         og={{
-          url: "https://garagefixcare.in/best-bike-service-gurgaon",
+          url: "https://www.garagefixcare.in/best-bike-service-gurgaon",
           image: "https://www.garagefixcare.in/og-banner.png",
           imageAlt: "Best bike service in Gurgaon at doorstep by Garage Fix Care",
           type: "website",
@@ -204,7 +204,7 @@ const BestBikeServiceGurgaon = () => {
             "@type": "LocalBusiness",
             "name": "Garage Fix Care",
             "description": "Best bike service in Gurgaon. Doorstep bike repair, servicing, oil change, battery replacement starting at ₹299.",
-            "url": "https://garagefixcare.in/best-bike-service-gurgaon",
+            "url": "https://www.garagefixcare.in/best-bike-service-gurgaon",
             "telephone": "+919540553759",
             "priceRange": "₹₹",
             "image": "https://www.garagefixcare.in/og-banner.png",
@@ -250,8 +250,8 @@ const BestBikeServiceGurgaon = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Best Bike Service in Gurgaon", "item": "https://garagefixcare.in/best-bike-service-gurgaon" }
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Best Bike Service in Gurgaon", "item": "https://www.garagefixcare.in/best-bike-service-gurgaon" }
             ]
           }
         ]}
@@ -283,7 +283,7 @@ const BestBikeServiceGurgaon = () => {
 
                   {/* Book + Call Buttons */}
                   <div className="flex flex-wrap items-center gap-3">
-                    <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
+                    <a href="https://www.garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
                       Book Service Now
                     </a>
                     <a href="tel:9540553759" className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 inline-flex items-center justify-center gap-2"><Phone className="h-4 w-4" /> Call Now</a>
@@ -492,7 +492,7 @@ const BestBikeServiceGurgaon = () => {
         <section className="py-8 bg-slate-800 text-center">
           <h2 className="text-3xl font-bold text-white mb-2">Book Bike Service in Gurgaon Today</h2>
           <p className="text-white mb-4">Same-day doorstep service starting at ₹299. No travel, no waiting, no hidden charges.</p>
-          <a href="https://garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
+          <a href="https://www.garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
         </section>
 
         {/* Floating Buttons */}
