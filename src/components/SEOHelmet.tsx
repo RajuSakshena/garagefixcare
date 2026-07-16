@@ -51,13 +51,13 @@ export interface SEOHelmetProps {
 const SITE_NAME = 'Garage Fix Care';
 
 const DEFAULT_TITLE =
-  'Bike & Car Service in Noida, Delhi, Gurgaon & Ghaziabad | Garage Fix Care';
+  'Bike & Car Service in Noida, Gurgaon & Delhi NCR ₹299 | Garage Fix Care';
 
 const DEFAULT_DESCRIPTION =
-  'Doorstep bike and car service in Noida, Delhi, Gurgaon and Ghaziabad starting at ₹299. Same-day repair, oil change, battery replacement and trusted mechanics near you.';
+  'Doorstep bike service and doorstep car service across Noida, Greater Noida, Delhi, New Delhi, Gurgaon, Gurugram, Ghaziabad, Faridabad and Delhi NCR, starting from ₹299. Same-day service from trusted mechanics who come straight to your doorstep.';
 
 const DEFAULT_KEYWORDS =
-  'bike service near me, car service near me, bike repair noida, bike repair delhi, bike repair gurgaon, bike repair ghaziabad, car service noida, car service delhi, car service gurgaon, car service ghaziabad, doorstep bike service, doorstep car service, mechanic near me, garage fix care';
+  'bike service near me, car service near me, bike repair noida, bike repair delhi, bike repair gurgaon, bike repair ghaziabad, car service noida, car service delhi, car service gurgaon, car service ghaziabad, doorstep bike service, doorstep car service, mechanic near me, garage fix care, greater noida, faridabad, delhi ncr, bike repair delhi ncr, bike service delhi ncr, doorstep mechanic delhi ncr, bike repair greater noida, bike repair faridabad, car service greater noida, car service faridabad';
 
 const DEFAULT_AUTHOR = 'Garage Fix Care';
 
@@ -198,7 +198,7 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
 
       <meta
         name="geo.placename"
-        content="Noida, Delhi, Gurgaon, Ghaziabad"
+        content="Noida, Greater Noida, Delhi, New Delhi, Gurgaon, Gurugram, Ghaziabad, Faridabad, Delhi NCR"
       />
 
       <meta
