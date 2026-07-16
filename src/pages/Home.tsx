@@ -10,6 +10,8 @@ import {
   Phone,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
+  MapPin,
   Bike,
   Car,
 } from 'lucide-react';
@@ -22,10 +24,11 @@ import { FaWhatsapp } from 'react-icons/fa';
 
 //last section 
 // Import your local images
-import bikeServiceOfferImage from '../images/offer11.jpg';
-import doorstepImage from '../images/offer22.jpg';
-import engineImage from '../images/offer33.jpg';
-import roadsideImage from '../images/offer44.jpg';
+import hotDealsImage1 from '../images/hotdeals1.png';
+import hotDealsImage2 from '../images/hotdeals2.png';
+import hotDealsImage3 from '../images/hotdeals3.png';
+import hotDealsImage4 from '../images/hotdeals4.png';
+import hotDealsImage5 from '../images/hotdeals5.png';
 import googleReviewsImage from '../images/google1.png';
 import facebookReviewsImage from '../images/facebook1.png';
 import justdialReviewsImage from '../images/justdial1.png';
@@ -40,13 +43,13 @@ import warrantyImg from "../images/warranty.webp";
 import pickupImg from "../images/free pickup.webp";
 import transparentImg from "../images/transparent.webp";
 import trainedImg from "../images/trainie.webp";
-import handshakeImg from "../images/handshake.jpg";
+import whyChooseImg from "../images/whychoose.png";
 import wurthImg from "../images/WURTH.png";
 import motulImg from "../images/Motul.jpeg";
 import turtlemintImg from "../images/Turtlemint.png";
 import buniyadImg from "../images/Buniyad.png";
 import dunzoImg from "../images/Dunzo.png";
-import howWorksImage from "../images/How-works.jpg";
+import bmw310Image from "../images/bmw310.png";
 import delhiImg from "../images/Delhi.jpeg";
 import noidaImg from "../images/Noida.jpg";
 import greaterNoidaImg from "../images/Greater-Noida.jpg";
@@ -103,10 +106,11 @@ const Home = () => {
 
   // Marquee deals images (continuous scroll, no index needed)
   const carouselImages = [
-    { src: bikeServiceOfferImage, alt: "Bike service offer in Noida" },
-    { src: doorstepImage,         alt: "Doorstep bike service Noida" },
-    { src: engineImage,           alt: "Bike engine repair at home Noida" },
-    { src: roadsideImage,         alt: "Roadside bike assistance near Noida" },
+    { src: hotDealsImage1, alt: "Hot deal offer 1 - bike service in Noida" },
+    { src: hotDealsImage2, alt: "Hot deal offer 2 - bike service in Noida" },
+    { src: hotDealsImage3, alt: "Hot deal offer 3 - bike service in Noida" },
+    { src: hotDealsImage4, alt: "Hot deal offer 4 - bike service in Noida" },
+    { src: hotDealsImage5, alt: "Hot deal offer 5 - bike service in Noida" },
   ];
 
   // NEW: useNavigate hook for SPA navigation to Car page
@@ -301,6 +305,178 @@ const Home = () => {
 
 
   const [showInput, setShowInput] = useState(false);
+  // Location authority accordions (Delhi / Noida / Greater Noida / Gurgaon / Ghaziabad / Faridabad)
+  // Only one open at a time, collapsed by default so the homepage stays clean and scannable.
+  const [openAreaAccordion, setOpenAreaAccordion] = useState<string | null>(null);
+  const toggleAreaAccordion = (city: string) =>
+    setOpenAreaAccordion((prev) => (prev === city ? null : city));
+
+  // Popular Pages accordion — collapsed by default for UI cleanliness.
+  // All links stay rendered in the initial HTML for SEO/crawlability; only the
+  // visual height is collapsed via CSS, so nothing is lazy-rendered or removed.
+  const [isPopularPagesOpen, setIsPopularPagesOpen] = useState(false);
+
+  // Primary Delhi NCR cities — each links to its existing dedicated landing page.
+  // Internal links only, so Noida's existing rankings/internal linking are untouched
+  // and are in fact reinforced by extra contextual internal links below.
+  const ncrServiceAreas = [
+    { name: "Noida", bikeTo: "/best-bike-service-noida", carTo: "/best-car-service-noida" },
+    { name: "Delhi", bikeTo: "/best-bike-service-delhi", carTo: "/best-car-service-delhi" },
+    { name: "New Delhi", bikeTo: "/best-bike-service-new-delhi", carTo: "/best-car-service-delhi" },
+    { name: "Greater Noida", bikeTo: "/best-bike-service-greater-noida-west", carTo: "/best-car-service-noida" },
+    { name: "Gurgaon / Gurugram", bikeTo: "/best-bike-service-gurgaon", carTo: "/best-car-service-gurgaon" },
+    { name: "Ghaziabad", bikeTo: "/best-bike-service-ghaziabad", carTo: "/best-car-service-ghaziabad" },
+    // NOTE: add/verify these two routes in the router — see chat notes.
+    { name: "Faridabad", bikeTo: "/best-bike-service-faridabad", carTo: "/best-car-service-faridabad" },
+  ];
+
+  // Locality-level location tags, grouped by city, for the "Explore All Service Areas"
+  // accordions. A locality links to its own dedicated landing page ONLY when one is
+  // confirmed to exist (see the *_DEDICATED maps below). Every other locality is shown
+  // as a plain (non-clickable) location chip — this keeps the hub topically comprehensive
+  // for Delhi NCR without ever generating a broken or fake URL. Each accordion also carries
+  // one clear "hub" link so users can always reach a real bike/car service page for that city.
+  interface LocalityArea { name: string; to?: string }
+  interface AreaGroup {
+    key: string;
+    title: string;
+    hub: { bikeTo: string; carTo: string };
+    areas: LocalityArea[];
+  }
+
+  // Confirmed dedicated landing pages — only these get a real link.
+  const DELHI_DEDICATED: Record<string, string> = {
+    "Connaught Place": "/best-bike-service-connaught-place",
+    "Karol Bagh": "/best-bike-service-karol-bagh",
+    "Dwarka": "/best-bike-service-dwarka",
+    "Rajouri Garden": "/best-bike-service-rajouri-garden",
+    "Uttam Nagar": "/best-bike-service-uttam-nagar",
+    "Pitampura": "/best-bike-service-pitampura",
+    "Rohini": "/best-bike-service-rohini",
+    "Vasant Kunj": "/best-bike-service-vasant-kunj",
+    "Greater Kailash": "/best-bike-service-greater-kailash",
+    "Lajpat Nagar": "/best-bike-service-lajpat-nagar",
+    "Defence Colony": "/best-bike-service-defence-colony",
+    "Hauz Khas": "/best-bike-service-hauz-khas",
+    "Saket": "/best-bike-service-saket",
+    "Nehru Place": "/best-bike-service-nehru-place",
+    "Chanakyapuri": "/best-bike-service-chanakyapuri",
+    "Paharganj": "/best-bike-service-paharganj",
+    "Palam": "/best-bike-service-palam",
+    "Delhi Cantt": "/best-bike-service-delhi-cantt",
+    "New Delhi": "/best-bike-service-new-delhi",
+  };
+  const GURGAON_DEDICATED: Record<string, string> = {
+    "Udyog Vihar": "/best-bike-service-udyog-vihar",
+    "Sushant Lok 1": "/best-bike-service-sushant-lok-phase-1",
+    "Sector 56": "/best-bike-service-sector-56-gurugram",
+    "Sikanderpur Ghosi": "/best-bike-service-sikanderpur-ghosi",
+  };
+  const GHAZIABAD_DEDICATED: Record<string, string> = {
+    "Indirapuram": "/best-bike-service-indirapuram",
+    "Vaishali": "/best-bike-service-vaishali",
+  };
+  const GREATER_NOIDA_DEDICATED: Record<string, string> = {
+    "Greater Noida West": "/best-bike-service-greater-noida-west",
+    "West Greater Noida": "/best-bike-service-greater-noida-west",
+  };
+
+  const buildAreas = (names: string[], dedicated: Record<string, string> = {}): LocalityArea[] =>
+    names.map((name) => ({ name, to: dedicated[name] }));
+
+  const areaGroups: AreaGroup[] = [
+    {
+      key: "delhi",
+      title: "Delhi Areas",
+      hub: { bikeTo: "/best-bike-service-delhi", carTo: "/best-car-service-delhi" },
+      areas: buildAreas([
+        "Connaught Place", "Karol Bagh", "Janakpuri", "Dwarka", "Palam", "Rajouri Garden",
+        "Tilak Nagar", "Hari Nagar", "Uttam Nagar", "Mayapuri", "Naraina", "Patel Nagar",
+        "Kirti Nagar", "Punjabi Bagh", "Paschim Vihar", "Peeragarhi", "Pitampura", "Rohini",
+        "Shalimar Bagh", "Ashok Vihar", "Civil Lines", "Model Town", "Mukherjee Nagar",
+        "Burari", "Narela", "Bawana", "Najafgarh", "Mahipalpur", "IGI Airport", "Aerocity",
+        "Chanakyapuri", "RK Puram", "Vasant Kunj", "Vasant Vihar", "Greater Kailash",
+        "Lajpat Nagar", "Defence Colony", "Green Park", "AIIMS", "INA", "Saket",
+        "Malviya Nagar", "Hauz Khas", "Mehrauli", "Chattarpur", "Kalkaji", "Govindpuri",
+        "Nehru Place", "Okhla", "Jasola", "Sarita Vihar", "Badarpur", "Laxmi Nagar",
+        "Preet Vihar", "Mayur Vihar", "IP Extension", "Anand Vihar", "Shahdara",
+        "Dilshad Garden", "Krishna Nagar", "Geeta Colony", "Seelampur", "Yamuna Vihar",
+        "New Delhi", "Paharganj", "Delhi Cantt",
+      ], DELHI_DEDICATED),
+    },
+    {
+      key: "noida",
+      title: "Noida Areas",
+      hub: { bikeTo: "/best-bike-service-noida", carTo: "/best-car-service-noida" },
+      areas: buildAreas([
+        "Sector 1", "Sector 2", "Sector 3", "Sector 4", "Sector 5", "Sector 6", "Sector 7",
+        "Sector 8", "Sector 9", "Sector 10", "Sector 11", "Sector 12", "Sector 15",
+        "Sector 16", "Sector 18", "Sector 19", "Sector 22", "Sector 27", "Sector 29",
+        "Sector 31", "Sector 34", "Sector 37", "Sector 41", "Sector 44", "Sector 45",
+        "Sector 46", "Sector 47", "Sector 49", "Sector 50", "Sector 51", "Sector 52",
+        "Sector 55", "Sector 56", "Sector 57", "Sector 61", "Sector 62", "Sector 63",
+        "Sector 71", "Sector 72", "Sector 73", "Sector 74", "Sector 75", "Sector 76",
+        "Sector 77", "Sector 78", "Sector 79", "Sector 82", "Sector 93", "Sector 100",
+        "Sector 104", "Sector 105", "Sector 107", "Sector 110", "Sector 117", "Sector 119",
+        "Sector 121", "Sector 122", "Sector 128", "Sector 132", "Sector 135", "Sector 137",
+        "Sector 142", "Sector 143", "Sector 144", "Sector 150",
+      ]),
+    },
+    {
+      key: "greater-noida",
+      title: "Greater Noida Areas",
+      hub: { bikeTo: "/best-bike-service-greater-noida-west", carTo: "/best-car-service-noida" },
+      areas: buildAreas([
+        "Pari Chowk", "Alpha 1", "Alpha 2", "Beta 1", "Beta 2", "Gamma 1", "Gamma 2",
+        "Delta 1", "Delta 2", "Omicron 1", "Omicron 2", "Sigma 1", "Sigma 2", "Sigma 3",
+        "Chi 1", "Chi 2", "Pi 1", "Pi 2", "Knowledge Park 1", "Knowledge Park 2",
+        "Knowledge Park 3", "Knowledge Park 4", "Jagat Farm", "Surajpur", "Kasna",
+        "Ecotech", "Techzone", "West Greater Noida", "Gaur City", "Noida Extension",
+      ], GREATER_NOIDA_DEDICATED),
+    },
+    {
+      key: "gurgaon",
+      title: "Gurgaon / Gurugram Areas",
+      hub: { bikeTo: "/best-bike-service-gurgaon", carTo: "/best-car-service-gurgaon" },
+      areas: buildAreas([
+        "Sector 4", "Sector 5", "Sector 7", "Sector 9", "Sector 10", "Sector 12",
+        "Sector 14", "Sector 15", "Sector 17", "Sector 21", "Sector 22", "Sector 23",
+        "Sector 24", "Sector 25", "Sector 27", "Sector 28", "Sector 29", "Sector 30",
+        "Sector 31", "Sector 38", "Sector 39", "Sector 40", "Sector 43", "Sector 45",
+        "Sector 46", "Sector 47", "Sector 48", "Sector 49", "Sector 50", "Sector 51",
+        "Sector 52", "Sector 54", "Sector 55", "Sector 56", "Sector 57", "Sector 58",
+        "Sector 65", "Sector 67", "Sector 69", "Sector 70", "DLF Phase 1", "DLF Phase 2",
+        "DLF Phase 3", "DLF Phase 4", "DLF Phase 5", "Sushant Lok 1", "Sushant Lok 2",
+        "Golf Course Road", "Golf Course Extension Road", "MG Road", "Cyber City",
+        "Udyog Vihar", "Sohna Road", "Palam Vihar", "New Colony", "South City 1",
+        "South City 2", "Nirvana Country", "Sikanderpur Ghosi",
+      ], GURGAON_DEDICATED),
+    },
+    {
+      key: "ghaziabad",
+      title: "Ghaziabad Areas",
+      hub: { bikeTo: "/best-bike-service-ghaziabad", carTo: "/best-car-service-ghaziabad" },
+      areas: buildAreas([
+        "Indirapuram", "Vaishali", "Vasundhara", "Kaushambi", "Raj Nagar",
+        "Raj Nagar Extension", "Crossings Republik", "Sahibabad", "Mohan Nagar",
+        "Shalimar Garden", "Nehru Nagar", "Govindpuram", "Kavi Nagar", "Patel Nagar",
+        "Loni", "Wave City", "Vijay Nagar", "Modinagar", "Muradnagar",
+      ], GHAZIABAD_DEDICATED),
+    },
+    {
+      key: "faridabad",
+      title: "Faridabad Areas",
+      hub: { bikeTo: "/best-bike-service-faridabad", carTo: "/best-car-service-faridabad" },
+      areas: buildAreas([
+        "NIT Faridabad", "Old Faridabad", "Ballabhgarh", "Greenfield Colony", "Sector 3",
+        "Sector 7", "Sector 9", "Sector 10", "Sector 11", "Sector 14", "Sector 15",
+        "Sector 16", "Sector 17", "Sector 19", "Sector 21", "Sector 22", "Sector 23",
+        "Sector 28", "Sector 29", "Sector 31", "Sector 35", "Sector 37", "Sector 46",
+        "Sector 49", "Sector 55", "Sector 75", "Sector 76", "Sector 77", "Sector 81",
+        "Sector 82", "Sector 85", "Sector 86", "Sector 87", "Sector 88", "Sector 89",
+      ]),
+    },
+  ];
 
 
 const serviceCities = [
@@ -314,26 +490,27 @@ const serviceCities = [
   return (
     <>
      <SEOHelmet
-  title="Bike & Car Service in Noida, Delhi Ncr ₹299 | Doorstep Repair Near Me"
-  description="Bike & car service in Noida starting at just ₹299. Doorstep repair, oil change, battery replacement, puncture repair & trusted mechanics near you. Same-day service by Garage Fix Care."
+  title="Bike Service & Repair Noida, Gurgaon, Delhi NCR ₹299 | Garage Fix Care"
+  description="Doorstep bike & car service across Noida, Delhi, Gurgaon, Ghaziabad, Greater Noida & Faridabad — Delhi NCR. Same-Day Service, Trusted Mechanics, from just ₹299."
+  keywords="bike service near me, bike repair near me, doorstep mechanic, doorstep bike service delhi ncr, bike service noida, bike repair noida, bike service delhi, bike repair delhi, bike service gurgaon, bike repair gurgaon, mechanic near me gurgaon, bike service ghaziabad, bike service faridabad, bike service greater noida, car service noida, car service delhi, car service gurgaon, car service ghaziabad, same day bike service, doorstep service delhi ncr, trusted mechanics delhi ncr, garage fix care"
   canonical="https://www.garagefixcare.in/"
   robots="index, follow"
   og={{
     url: "https://www.garagefixcare.in/",
     image: "https://www.garagefixcare.in/og-banner.png",
-    imageAlt: "Bike & car service at doorstep in Noida by Garage Fix Care",
+    imageAlt: "Doorstep bike & car service across Noida, Gurgaon and Delhi NCR by Garage Fix Care",
     type: "website",
   }}
   twitter={{
     image: "https://www.garagefixcare.in/og-banner.png",
-    imageAlt: "Doorstep bike and car service in Noida",
+    imageAlt: "Doorstep bike and car service across Delhi NCR",
   }}
   structuredData={[
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Garage Fix Care",
-      "description": "Doorstep bike and car service in Noida starting at ₹299. Same-day repair, oil change, battery & engine service by certified mechanics.",
+      "description": "Doorstep bike and car service across Delhi NCR — Noida, Greater Noida, Delhi, New Delhi, Gurgaon, Ghaziabad and Faridabad — starting at ₹299. Same-day repair, oil change, battery & engine service by certified mechanics.",
       "url": "https://www.garagefixcare.in",
       "telephone": "+919540553759",
       "priceRange": "₹₹",
@@ -352,7 +529,13 @@ const serviceCities = [
       "areaServed": [
         { "@type": "City", "name": "Noida" },
         { "@type": "City", "name": "Greater Noida" },
-        { "@type": "City", "name": "Ghaziabad" }
+        { "@type": "City", "name": "Ghaziabad" },
+        { "@type": "City", "name": "Delhi" },
+        { "@type": "City", "name": "New Delhi" },
+        { "@type": "City", "name": "Gurgaon" },
+        { "@type": "City", "name": "Gurugram" },
+        { "@type": "City", "name": "Faridabad" },
+        { "@type": "AdministrativeArea", "name": "Delhi NCR" }
       ],
       "serviceType": ["Bike Repair", "Car Repair", "Doorstep Bike Service", "Doorstep Car Service"],
       "openingHours": "Mo-Su 08:00-20:00",
@@ -365,16 +548,36 @@ const serviceCities = [
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "Doorstep Bike & Car Service in Noida",
+      "name": "Doorstep Bike & Car Service in Noida & Delhi NCR",
       "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
-      "areaServed": "Noida",
-      "description": "At-home bike and car servicing starting at ₹299. Oil change, engine repair, battery replacement, puncture fix — same-day doorstep service.",
+      "areaServed": [
+        { "@type": "City", "name": "Noida" },
+        { "@type": "City", "name": "Greater Noida" },
+        { "@type": "City", "name": "Delhi" },
+        { "@type": "City", "name": "New Delhi" },
+        { "@type": "City", "name": "Gurgaon" },
+        { "@type": "City", "name": "Ghaziabad" },
+        { "@type": "City", "name": "Faridabad" }
+      ],
+      "description": "At-home bike and car servicing across Noida, Delhi, Gurgaon, Ghaziabad and Faridabad starting at ₹299. Oil change, engine repair, battery replacement, puncture fix — same-day doorstep service.",
       "offers": {
         "@type": "Offer",
         "priceCurrency": "INR",
         "price": "299",
         "availability": "https://schema.org/InStock"
       }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.garagefixcare.in/"
+        }
+      ]
     }
   ]}
 />
@@ -392,17 +595,17 @@ const serviceCities = [
       {/* Left Side: Main Text and Input */}
       <div>
       <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-  Bike &amp; Car Service in Noida, Delhi and Gurgaon
+  Bike &amp; Car Service in Noida, Gurgaon &amp; Delhi NCR
   <span className="text-orange-500"> at Your Doorstep</span>
 </h1>
 
        {/* Subheading */}
        <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
-  Starting at just ₹299 &bull; Same-Day Bike &amp; Car Repair &bull; Trusted Mechanics Near You
+  Starting at just ₹299 &bull; Same-Day Bike &amp; Car Repair &bull; Trusted Mechanics Across Delhi NCR
 </p>
 
        <p className="font-poppins text-xs sm:text-sm leading-relaxed text-white/90 mb-3 sm:mb-4">
-  Skip the garage queue. Our certified mechanics come to your home or office in Noida — handling everything from routine bike servicing and car oil changes to engine repairs and scooty fixes. Fast, transparent, and affordable.
+  Skip the garage queue. Our certified mechanics come to your home or office across Noida, Gurgaon, Delhi and the rest of Delhi NCR — handling everything from routine bike servicing and car oil changes to engine repairs and scooty fixes. Fast, transparent, and affordable.
 </p>
 
 {/* Trust points strip */}
@@ -620,14 +823,9 @@ const serviceCities = [
                 </div>
             </div>
             {/* Marquee-style infinite scrolling image strip */}
-            <div className="overflow-hidden w-full px-4 sm:px-6">
+            <div className="hotdeals-marquee-viewport overflow-hidden w-full px-6 sm:px-12 lg:px-20">
               <div
-                style={{
-                  display: 'flex',
-                  animation: 'marqueeScroll 22s linear infinite',
-                  width: 'max-content',
-                  gap: '14px',
-                }}
+                className="hotdeals-marquee-track"
                 onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
                 onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
               >
@@ -641,7 +839,7 @@ const serviceCities = [
                       <img
                         src={img.src}
                         alt={img.alt}
-                        className="w-full object-cover"
+                        className="w-full h-full object-contain bg-slate-800"
                         style={{ height: '220px' }}
               loading="lazy"
               decoding="async"
@@ -663,6 +861,16 @@ const serviceCities = [
               @keyframes marqueeScroll {
                 0%   { transform: translateX(0); }
                 100% { transform: translateX(-50%); }
+              }
+              .hotdeals-marquee-viewport {
+                -webkit-mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
+                mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
+              }
+              .hotdeals-marquee-track {
+                display: flex;
+                width: max-content;
+                gap: 14px;
+                animation: marqueeScroll 22s linear infinite;
               }
             `}</style>
           </section>
@@ -1008,8 +1216,8 @@ const serviceCities = [
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
       <div className="flex justify-center order-2 lg:order-1">
         <img
-          src={handshakeImg}
-          alt="Handshake"
+          src={whyChooseImg}
+          alt="Why Choose GarageFixCare"
           className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm"
               loading="lazy"
               decoding="async"
@@ -1102,7 +1310,7 @@ const serviceCities = [
       </div>
       <div className="flex justify-center">
         <img
-          src={howWorksImage}
+          src={bmw310Image}
           alt="How GarageFixCare Works"
           className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm"
               loading="lazy"
@@ -1119,16 +1327,17 @@ const serviceCities = [
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 justify-items-center">
         {[
-          { name: "Bike Service in Noida", img: noidaImg },
-          { name: "Bike Service in Greater Noida", img: greaterNoidaImg },
-          { name: "Bike Service in Ghaziabad", img: ghaziabadImg },
-          { name: "Bike Service in Delhi", img: delhiImg },
-          { name: "Bike Service in Gurugram", img: gurugramImg },
-          { name: "Bike Service in Faridabad", img: faridabadImg },
+          { name: "Bike Service in Noida", img: noidaImg, to: "/best-bike-service-noida" },
+          { name: "Bike Service in Greater Noida", img: greaterNoidaImg, to: "/best-bike-service-greater-noida-west" },
+          { name: "Bike Service in Ghaziabad", img: ghaziabadImg, to: "/best-bike-service-ghaziabad" },
+          { name: "Bike Service in Delhi", img: delhiImg, to: "/best-bike-service-delhi" },
+          { name: "Bike Service in Gurugram", img: gurugramImg, to: "/best-bike-service-gurgaon" },
+          { name: "Bike Service in Faridabad", img: faridabadImg, to: "/best-bike-service-gurgaon" },
         ].map((city, index) => (
-          <div
+          <Link
             key={index}
-            className="bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-xs text-center hover:shadow-xl transition-shadow duration-200"
+            to={city.to}
+            className="block bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-xs text-center hover:shadow-xl transition-shadow duration-200"
           >
             <img
               src={city.img}
@@ -1140,7 +1349,7 @@ const serviceCities = [
             <h3 className="text-sm sm:text-base font-semibold text-black">
               {city.name.split("in ")[0]} <span className="text-red-600">{city.name.split("in ")[1]}</span>
             </h3>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
@@ -1273,13 +1482,15 @@ const serviceCities = [
             key={i}
             className="bg-sky-100 text-black rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
           >
-            <img
-              src={post.img}
-              alt={post.title}
-              className="w-full h-32 sm:h-40 object-cover"
-              loading="lazy"
-              decoding="async"
-            />
+            <div className="w-full h-40 sm:h-48 bg-slate-200 flex items-center justify-center overflow-hidden">
+              <img
+                src={post.img}
+                alt={post.title}
+                className="w-full h-full object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <div className="p-4 sm:p-6 text-left">
               <h3 className="text-sm sm:text-base font-bold mb-1">{post.title}</h3>
               <p className="text-gray-700 text-xs sm:text-sm mb-2">{post.desc}</p>
@@ -1460,10 +1671,30 @@ const serviceCities = [
         <div className="hidden md:block w-px bg-slate-700 self-stretch" />
         <div className="block md:hidden h-px bg-slate-700 mb-3" />
 
-        {/* RIGHT — Popular Service Pages */}
+        {/* RIGHT — Popular Service Pages (accordion, collapsed by default) */}
         <div className="flex-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Popular Pages</p>
-          <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
+          <button
+            type="button"
+            onClick={() => setIsPopularPagesOpen((prev) => !prev)}
+            className="w-full flex items-center justify-between mb-2 focus:outline-none focus:ring-2 focus:ring-orange-500/50 rounded"
+            aria-expanded={isPopularPagesOpen}
+            aria-controls="popular-pages-panel"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Popular Pages</p>
+            <ChevronDown
+              className={`h-4 w-4 text-orange-400 flex-shrink-0 transition-transform duration-300 ${
+                isPopularPagesOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+          <div
+            id="popular-pages-panel"
+            className={`grid transition-all duration-300 ease-in-out ${
+              isPopularPagesOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+            }`}
+          >
+          <div className="overflow-hidden">
+          <ul className="flex flex-wrap gap-x-5 gap-y-1.5 pt-1">
             {[
               { label: "Best Bike Service in Noida",      to: "/best-bike-service-noida" },
               { label: "Best Bike Service in Delhi",      to: "/best-bike-service-delhi" },
@@ -1503,8 +1734,95 @@ const serviceCities = [
               </li>
             ))}
           </ul>
+          </div>
+          </div>
         </div>
 
+      </div>
+
+      {/* ── Explore All Service Areas — collapsed-by-default Location Hub ── */}
+      <div className="mt-6 pt-6 border-t border-slate-700">
+        <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">
+          Explore All Service Areas
+        </p>
+        <div className="space-y-2">
+          {areaGroups.map((group) => {
+            const isOpen = openAreaAccordion === group.key;
+            return (
+              <div
+                key={group.key}
+                className="border border-slate-700 rounded-lg overflow-hidden bg-slate-900/40"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleAreaAccordion(group.key)}
+                  className="w-full flex items-center justify-between px-4 py-3 text-left focus:outline-none focus:ring-2 focus:ring-orange-500/50"
+                  aria-expanded={isOpen}
+                  aria-controls={`area-panel-${group.key}`}
+                >
+                  <span className="flex items-center gap-2 text-sm sm:text-base font-semibold text-white">
+                    <MapPin className="h-4 w-4 text-orange-400 flex-shrink-0" />
+                    {group.title}
+                  </span>
+                  <ChevronDown
+                    className={`h-4 w-4 text-orange-400 flex-shrink-0 transition-transform duration-300 ${
+                      isOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                <div
+                  id={`area-panel-${group.key}`}
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-4 pb-4">
+                      {/* Hub links — always real, always crawlable */}
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        <Link
+                          to={group.hub.bikeTo}
+                          className="text-xs font-medium px-3 py-1.5 rounded-full bg-orange-600/15 text-orange-400 hover:bg-orange-600/25 transition-colors duration-150"
+                        >
+                          Bike Service in {group.title.replace(' Areas', '')} →
+                        </Link>
+                        <Link
+                          to={group.hub.carTo}
+                          className="text-xs font-medium px-3 py-1.5 rounded-full bg-orange-600/15 text-orange-400 hover:bg-orange-600/25 transition-colors duration-150"
+                        >
+                          Car Service in {group.title.replace(' Areas', '')} →
+                        </Link>
+                      </div>
+
+                      {/* Locality chips — linked only where a real page exists, plain text otherwise */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {group.areas.map((area) =>
+                          area.to ? (
+                            <Link
+                              key={area.name}
+                              to={area.to}
+                              className="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-gray-300 underline underline-offset-2 hover:text-orange-400 hover:bg-slate-700 transition-colors duration-150"
+                            >
+                              {area.name}
+                            </Link>
+                          ) : (
+                            <span
+                              key={area.name}
+                              className="text-xs px-2.5 py-1 rounded-md bg-slate-800/50 text-gray-500"
+                            >
+                              {area.name}
+                            </span>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   </section>
@@ -1530,57 +1848,88 @@ const serviceCities = [
           {/* Floating Buttons */}
   <style>{`
     @keyframes shake {
-      0%, 100% { transform: rotate(0deg); }
-      15%       { transform: rotate(-18deg); }
-      30%       { transform: rotate(18deg); }
-      45%       { transform: rotate(-14deg); }
-      60%       { transform: rotate(14deg); }
-      75%       { transform: rotate(-8deg); }
-      90%       { transform: rotate(8deg); }
+      0%, 100%      { transform: rotate(0deg) scale(1); }
+      2%            { transform: rotate(-16deg) scale(1.06); }
+      4%            { transform: rotate(16deg) scale(1.06); }
+      6%            { transform: rotate(-12deg) scale(1.06); }
+      8%            { transform: rotate(12deg) scale(1.06); }
+      10%           { transform: rotate(-6deg) scale(1.03); }
+      12%           { transform: rotate(6deg) scale(1.03); }
+      14%, 100%     { transform: rotate(0deg) scale(1); }
+    }
+    @keyframes pulseRing {
+      0%   { transform: scale(0.85); opacity: 0.55; }
+      70%  { transform: scale(1.7);  opacity: 0; }
+      100% { transform: scale(1.7);  opacity: 0; }
+    }
+    @keyframes floatIn {
+      0%   { transform: translateX(60px); opacity: 0; }
+      100% { transform: translateX(0);     opacity: 1; }
+    }
+    .btn-float-wrap {
+      position: relative;
+      animation: floatIn 0.6s ease-out both;
+    }
+    .btn-float-wrap:nth-child(2) { animation-delay: 0.12s; }
+    .btn-pulse-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      animation: pulseRing 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      pointer-events: none;
     }
     .btn-shake {
-      animation: shake 1.8s ease-in-out infinite;
+      animation: shake 4s ease-in-out infinite;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn-shake:hover {
       animation: none;
-      transform: scale(1.12);
+      transform: scale(1.14);
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.12), 0 12px 28px rgba(0,0,0,0.45);
     }
   `}</style>
   <div className="fixed top-1/2 right-4 sm:right-6 flex flex-col space-y-4 z-50 transform -translate-y-1/2">
     {/* Call Button — blue color */}
-    <a
-      href="tel:9540553759"
-      className="btn-shake w-13 h-13 sm:w-15 sm:h-15 rounded-full text-white flex items-center justify-center shadow-2xl"
-      style={{ background: 'linear-gradient(135deg, #1d72b8, #145a9c)', width: '52px', height: '52px' }}
-      aria-label="Call Us"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.8"
-        stroke="currentColor"
-        style={{ width: '24px', height: '24px' }}
+    <div className="btn-float-wrap">
+      <span className="btn-pulse-ring" style={{ background: '#1d72b8' }} />
+      <a
+        href="tel:9540553759"
+        className="btn-shake w-13 h-13 sm:w-15 sm:h-15 rounded-full text-white flex items-center justify-center shadow-2xl relative"
+        style={{ background: 'linear-gradient(135deg, #1d72b8, #145a9c)', width: '52px', height: '52px' }}
+        aria-label="Call Us"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-        />
-      </svg>
-    </a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.8"
+          stroke="currentColor"
+          style={{ width: '24px', height: '24px' }}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+          />
+        </svg>
+      </a>
+    </div>
     {/* WhatsApp Button — green */}
-    <a
-      href="https://wa.me/9540553759"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="btn-shake text-white flex items-center justify-center shadow-2xl rounded-full"
-      style={{ background: 'linear-gradient(135deg, #25d366, #128c4e)', width: '52px', height: '52px' }}
-      aria-label="Chat on WhatsApp"
-    >
-      <FaWhatsapp size={26} />
-    </a>
+    <div className="btn-float-wrap">
+      <span className="btn-pulse-ring" style={{ background: '#25d366', animationDelay: '0.4s' }} />
+      <a
+        href="https://wa.me/9540553759"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-shake text-white flex items-center justify-center shadow-2xl rounded-full relative"
+        style={{ background: 'linear-gradient(135deg, #25d366, #128c4e)', width: '52px', height: '52px' }}
+        aria-label="Chat on WhatsApp"
+      >
+        <FaWhatsapp size={26} />
+      </a>
+    </div>
   </div>
+
 
         {/* Checklist Modal (UPDATED WITH PHONE INPUT AND API CALL) */}
         {isModalOpen && selectedService && (
