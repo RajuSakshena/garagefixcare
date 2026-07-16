@@ -286,8 +286,7 @@ const BookService = () => {
         <div>
           <h3 className="font-bold text-sm sm:text-base">Location :</h3>
           <p className="text-gray-300 text-sm sm:text-base">
-            3rd Floor, Ocean Complex, 313, <br />
-            Sector 18, Noida, Uttar Pradesh 201301
+            3The Corenthum Tower-1, Block-A, Industrial Area, Sector 62, Noida, UP 201309
           </p>
         </div>
       </div>
