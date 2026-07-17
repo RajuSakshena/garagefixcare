@@ -490,7 +490,7 @@ const serviceCities = [
   return (
     <>
      <SEOHelmet
-  title=" Bike & Car Service in Noida, Gurgaon & Delhi NCR At Home | Starting ₹299"
+  title=" Doorstep Bike & Car Service in Noida, Gurgaon & Delhi NCR | ₹299 Onwards"
   description="Doorstep bike & car service across Noida, Delhi, Gurgaon, Ghaziabad, Greater Noida & Faridabad — Delhi NCR. Same-Day Service, Trusted Mechanics, from just ₹299."
   keywords="bike service near me, bike repair near me, doorstep mechanic, doorstep bike service delhi ncr, bike service noida, bike repair noida, bike service delhi, bike repair delhi, bike service gurgaon, bike repair gurgaon, mechanic near me gurgaon, bike service ghaziabad, bike service faridabad, bike service greater noida, car service noida, car service delhi, car service gurgaon, car service ghaziabad, same day bike service, doorstep service delhi ncr, trusted mechanics delhi ncr, garage fix care"
   canonical="https://www.garagefixcare.in/"
