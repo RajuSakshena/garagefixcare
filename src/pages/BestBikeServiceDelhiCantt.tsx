@@ -1,6 +1,6 @@
 // BestBikeServiceDelhiCantt.tsx
 // Delhi Cantt specific SEO/content + Home.tsx design system (video hero, Framer Motion, marquees)
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
@@ -33,13 +33,13 @@ import warrantyImg from '../images/warranty.webp';
 import pickupImg from '../images/free pickup.webp';
 import transparentImg from '../images/transparent.webp';
 import trainedImg from '../images/trainie.webp';
-import handshakeImg from '../images/handshake.jpg';
+import whyChooseImg from '../images/whychoose.png';
 import wurthImg from '../images/WURTH.png';
 import motulImg from '../images/Motul.jpeg';
 import turtlemintImg from '../images/Turtlemint.png';
 import buniyadImg from '../images/Buniyad.png';
 import dunzoImg from '../images/Dunzo.png';
-import howWorksImage from '../images/How-works.jpg';
+import bmw310Image from '../images/bmw310.png';
 import googleIcon from '../images/Testimonial1.png';
 import testimonial1 from '../images/Testimonial1.jpeg';
 import testimonial2 from '../images/Testimonial2.jpeg';
@@ -106,6 +106,37 @@ const BestBikeServiceDelhiCantt = () => {
   // Subtle top-of-page scroll progress indicator (same as Home.tsx)
   const { scrollYProgress } = useScroll();
   const scrollProgressScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  // ================= Navbar-flush hero offset =================
+  // Instead of guessing the fixed navbar's height with hardcoded pt-[..px] values (which can
+  // drift out of sync with the real navbar and leave a dark gap above the video), measure the
+  // actual rendered navbar height at runtime and use that exact value as the hero's top offset.
+  // This guarantees the hero video always starts immediately below the navbar with 0px gap,
+  // on every breakpoint, even if the navbar's height changes.
+  const [heroTopOffset, setHeroTopOffset] = useState(88);
+  useLayoutEffect(() => {
+    const navEl = (document.querySelector('header[class*="fixed"]') ||
+      document.querySelector('nav[class*="fixed"]') ||
+      document.querySelector('header') ||
+      document.querySelector('nav')) as HTMLElement | null;
+    if (!navEl) return;
+
+    const measure = () => {
+      const height = Math.round(navEl.getBoundingClientRect().height);
+      if (height > 0) setHeroTopOffset(height);
+    };
+
+    measure();
+
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(navEl);
+    window.addEventListener('resize', measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
 
   // ================= Hero video sequence (same two-slot crossfade system as Home.tsx) =================
   // inside.mp4 -> outside.mp4 -> inside.mp4 -> ... loops forever, no hard cut, no blank frame.
@@ -411,7 +442,7 @@ const BestBikeServiceDelhiCantt = () => {
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <main className="bg-slate-800 pt-[76px] sm:pt-[112px] lg:pt-[120px]">
+        <main className="bg-slate-800" style={{ paddingTop: `${heroTopOffset}px` }}>
           <section className="relative text-white overflow-hidden min-h-[700px] sm:min-h-[600px] lg:min-h-[680px]">
             {/* Cinematic background video: inside.mp4 <-> outside.mp4, continuous crossfade loop */}
             <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
@@ -1109,7 +1140,7 @@ const BestBikeServiceDelhiCantt = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              <img src={handshakeImg} alt="Why Choose GarageFixCare in Delhi Cantt" className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm" loading="lazy" decoding="async" />
+              <img src={whyChooseImg} alt="Why Choose GarageFixCare in Delhi Cantt" className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm" loading="lazy" decoding="async" />
             </motion.div>
             <motion.div className="order-1 lg:order-2" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
@@ -1186,7 +1217,7 @@ const BestBikeServiceDelhiCantt = () => {
               </ul>
             </motion.div>
             <motion.div className="flex justify-center" variants={scaleIn} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-              <img src={howWorksImage} alt="How GarageFixCare Works in Delhi Cantt" className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm" loading="lazy" decoding="async" />
+              <img src={bmw310Image} alt="How GarageFixCare Works in Delhi Cantt" className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm" loading="lazy" decoding="async" />
             </motion.div>
           </div>
         </section>
