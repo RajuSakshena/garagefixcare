@@ -1312,7 +1312,7 @@ const serviceCities = [
           
           {/* At Home Service Price List Section (YOUR REQUIRED SECTION) */}
         
-  <section className="py-12 bg-slate-900">
+  <section className="py-12 sm:py-16 bg-slate-900">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <motion.div
         variants={fadeUp}
@@ -1324,54 +1324,142 @@ const serviceCities = [
           <span className="text-white">At-Home Service</span>{' '}
           <span className="text-red-600">Price List</span>
         </h2>
-        <p className="text-base sm:text-xl text-white mb-6 max-w-3xl mx-auto">
+        <p className="text-base sm:text-xl text-white mb-10 sm:mb-12 max-w-3xl mx-auto">
           Transparent pricing for doorstep bike and car service in Noida. Check the labour charges below based on your vehicle's engine size — no hidden fees, no surprises.
         </p>
       </motion.div>
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 justify-items-center"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7 justify-items-center"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
       >
-        {servicePrices.map((service, index) => (
-          <motion.div
-            key={index}
-            variants={staggerItem}
-            className="bg-brandRed p-1.5 rounded-xl w-full max-w-full shadow-lg border border-gray-700 hover:shadow-xl transition-shadow duration-200"
-          >
-            <div className="bg-sky-100 rounded-xl shadow-sm p-3 sm:p-4 w-full h-full">
-              <div className="flex flex-col items-start text-left mb-1">
-                <h3 className="text-base sm:text-lg font-bold text-black mb-1">{service.title}</h3>
-                <p className="text-black text-xs sm:text-sm font-semibold">{service.subtitle}</p>
-                <div className="text-lg sm:text-xl font-bold mt-1">
-                  <span className="line-through text-red-500 mr-1">{service.originalPrice}</span>
-                  <span className="text-green-600">{service.discountedPrice}/-</span>
+        {servicePrices.map((service, index) => {
+          const isBestValue = service.title === 'At-Home Premium Service';
+          // Distinct-but-consistent GarageFixCare orange-family gradient per plan.
+          const headerGradients = [
+            'linear-gradient(135deg, #1f2937 0%, #92400e 130%)', // Regular — dark to amber
+            'linear-gradient(135deg, #78350f 0%, #f97316 120%)', // Classic — warm orange
+            'linear-gradient(135deg, #ea580c 0%, #FF7A18 100%)', // Premium — strong orange (best value)
+            'linear-gradient(135deg, #7c2d12 0%, #f97316 130%)', // Royal — deep orange-red
+            'linear-gradient(135deg, #111827 0%, #c2410c 140%)', // Sports — dark orange
+          ];
+          const headerGradient = headerGradients[index % headerGradients.length];
+
+          return (
+            <motion.div
+              key={index}
+              variants={staggerItem}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="pricing-plan-card relative flex flex-col text-left w-full max-w-[300px] rounded-[22px] overflow-hidden"
+              style={{
+                background: '#111827',
+                border: isBestValue ? '1px solid rgba(255,122,24,0.55)' : '1px solid rgba(255,255,255,0.10)',
+                boxShadow: isBestValue
+                  ? '0 12px 32px rgba(0,0,0,0.35), 0 0 26px rgba(255,122,24,0.18)'
+                  : '0 12px 32px rgba(0,0,0,0.3)',
+              }}
+            >
+              {/* Best value badge — floats over the header/body seam */}
+              {isBestValue && (
+                <span
+                  className="absolute top-3 right-3 z-20 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full shadow-md"
+                  style={{ background: 'linear-gradient(135deg, #FFB157, #FF7A18)', boxShadow: '0 4px 12px rgba(255,122,24,0.45)' }}
+                >
+                  Best Value
+                </span>
+              )}
+
+              {/* Colored header panel */}
+              <div className="pricing-card-header relative pt-6 px-5 pb-9" style={{ background: headerGradient }}>
+                {/* Faint automotive watermark icon */}
+                <Bike className="absolute -right-2 -top-2 h-16 w-16 text-white/10 pointer-events-none" strokeWidth={1.5} />
+                {/* Decorative accent dots */}
+                <div className="flex items-center gap-1 mb-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/50" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
                 </div>
+                <h3 className="relative text-lg sm:text-xl font-extrabold text-white leading-tight tracking-tight">
+                  AT-HOME
+                  <br />
+                  {service.title.replace('At-Home ', '').toUpperCase()}
+                </h3>
+                {/* Curved bottom edge of the header, blending into the card body */}
+                <svg
+                  className="absolute bottom-0 left-0 w-full h-6 sm:h-7"
+                  viewBox="0 0 300 28"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path d="M0,28 C75,0 225,0 300,28 L300,28 L0,28 Z" fill="#111827" />
+                </svg>
+                {/* CC range pill, overlapping the curve */}
+                <span className="absolute left-5 -bottom-3 z-10 inline-block bg-slate-900 border border-white/10 text-slate-200 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                  {service.subtitle}
+                </span>
               </div>
-              <ul className="list-none space-y-0.5 text-left text-gray-700 text-xs">
-                {service.features.map((feature, i) => (
-                  <li key={i} className="flex items-center">
-                    <CheckCircle className="h-3 w-3 text-green-500 mr-1 flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex justify-end mt-1">
+
+              {/* Body */}
+              <div className="flex flex-col flex-grow px-5 pt-6 pb-5">
+                {/* Price hierarchy */}
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-3xl sm:text-[34px] font-extrabold leading-none" style={{ color: '#FF7A18' }}>
+                    {service.discountedPrice}/-
+                  </span>
+                  <span className="text-xs sm:text-sm text-slate-500 line-through">{service.originalPrice}</span>
+                </div>
+
+                {/* Feature list */}
+                <ul className="list-none space-y-2 mb-6 flex-grow">
+                  {service.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm text-slate-300">
+                      <CheckCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: '#FF7A18' }} />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* See checklist CTA */}
                 <button
                   onClick={() => handleSeeChecklist(service.title, service.subtitle)}
-                  className="bg-red-600 text-white px-3 py-1.5 text-xs rounded-lg font-semibold hover:bg-red-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 transition-all duration-200"
+                  className="pricing-checklist-btn mt-auto w-full inline-flex items-center justify-center gap-1.5 text-white px-4 py-3 text-xs sm:text-sm rounded-full font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-200"
+                  style={{ background: 'linear-gradient(135deg, #FF7A18, #EA580C)' }}
                   aria-label={`See full checklist for ${service.title}`}
                 >
-                  See checklist
+                  See checklist <span aria-hidden="true">→</span>
                 </button>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
       </motion.div>
     </div>
+    <style>{`
+      .pricing-plan-card {
+        transition: border-color 300ms ease, box-shadow 300ms ease;
+      }
+      .pricing-plan-card:hover {
+        border-color: rgba(255,122,24,0.55) !important;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,122,24,0.2) !important;
+      }
+      .pricing-plan-card:hover .pricing-card-header {
+        filter: brightness(1.08);
+      }
+      .pricing-card-header {
+        transition: filter 300ms ease;
+      }
+      .pricing-checklist-btn {
+        transition: filter 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+      }
+      .pricing-checklist-btn:hover {
+        filter: brightness(1.1);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(255,122,24,0.4);
+      }
+    `}</style>
   </section>
 
         
