@@ -1,5 +1,5 @@
 // Home.tsx (FULL UPDATED CODE - navigation added for Cars button using useNavigate)
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
@@ -157,6 +157,37 @@ const Home = () => {
   // Subtle top-of-page scroll progress indicator
   const { scrollYProgress } = useScroll();
   const scrollProgressScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  // ================= Navbar-flush hero offset =================
+  // Instead of guessing the fixed navbar's height with hardcoded pt-[..px] values (which can
+  // drift out of sync with the real navbar and leave a dark gap above the video), measure the
+  // actual rendered navbar height at runtime and use that exact value as the hero's top offset.
+  // This guarantees the hero video always starts immediately below the navbar with 0px gap,
+  // on every breakpoint, even if the navbar's height changes.
+  const [heroTopOffset, setHeroTopOffset] = useState(88);
+  useLayoutEffect(() => {
+    const navEl = (document.querySelector('header[class*="fixed"]') ||
+      document.querySelector('nav[class*="fixed"]') ||
+      document.querySelector('header') ||
+      document.querySelector('nav')) as HTMLElement | null;
+    if (!navEl) return;
+
+    const measure = () => {
+      const height = Math.round(navEl.getBoundingClientRect().height);
+      if (height > 0) setHeroTopOffset(height);
+    };
+
+    measure();
+
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(navEl);
+    window.addEventListener('resize', measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
   
 
   // NEW Modal State for API booking
@@ -767,7 +798,7 @@ const serviceCities = [
       <div className="min-h-screen">
         {/* Hero Section */}
         {/* Mobile navbar = 3px accent + 56px nav = 59px. Desktop = 32px strip + 56px nav = 88px */}
-        <main className="bg-slate-800 pt-[59px] lg:pt-[88px]">
+        <main className="bg-slate-800" style={{ paddingTop: `${heroTopOffset}px` }}>
 
 <section className="relative text-white overflow-hidden min-h-[700px] sm:min-h-[600px] lg:min-h-[680px]">
   {/* Full-width cinematic background video: inside.mp4 <-> outside.mp4, continuous crossfade loop, no static image between clips */}
