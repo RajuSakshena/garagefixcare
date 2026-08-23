@@ -126,6 +126,26 @@ const staggerItem: Variants = {
 // Shared viewport setting: animate once, a little before the section is fully in view.
 const viewportOnce = { once: true, amount: 0.15 };
 
+// Hero-only stagger variants: smaller vertical travel + faster stagger so the
+// mobile hero content settles in quickly without ever overflowing the fixed-height hero.
+const heroStaggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.07,
+    },
+  },
+};
+
+const heroStaggerItem: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: 'easeOut' },
+  },
+};
+
 const Home = () => {
   const [happyCustomersCount, setHappyCustomersCount] = useState(0);
   const [reviewScore, setReviewScore] = useState(4.6);
@@ -749,7 +769,7 @@ const serviceCities = [
         {/* Mobile navbar = 3px accent + 56px nav = 59px. Desktop = 32px strip + 56px nav = 88px */}
         <main className="bg-slate-800 pt-[59px] lg:pt-[88px]">
 
-<section className="relative text-white overflow-hidden min-h-[520px] sm:min-h-[600px] lg:min-h-[680px]">
+<section className="relative text-white overflow-hidden min-h-[700px] sm:min-h-[600px] lg:min-h-[680px]">
   {/* Full-width cinematic background video: inside.mp4 <-> outside.mp4, continuous crossfade loop, no static image between clips */}
   <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
     <motion.video
@@ -792,10 +812,18 @@ const serviceCities = [
         scale: prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' },
       }}
     />
-    {/* Cinematic gradient overlay: strong dark on the left (behind text), fading to transparent on the right */}
-    <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
-    {/* Subtle bottom gradient for extra depth */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+    {/* Mobile-only: dark behind the top and bottom text zones, clear over the middle video band */}
+    <div
+      className="absolute inset-0 sm:hidden"
+      style={{
+        background:
+          'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.72) 22%, rgba(0,0,0,0.22) 40%, rgba(0,0,0,0.22) 60%, rgba(0,0,0,0.52) 78%, rgba(0,0,0,0.52) 100%)',
+      }}
+    />
+    {/* Desktop/tablet: cinematic gradient overlay, strong dark on the left (behind text), fading to transparent on the right */}
+    <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
+    {/* Desktop/tablet: subtle bottom gradient for extra depth */}
+    <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
     {/* Very subtle moving light sweep for cinematic lighting feel */}
     <div className="hero-light-sweep absolute inset-0 pointer-events-none" />
   </div>
@@ -818,18 +846,22 @@ const serviceCities = [
     }
   `}</style>
 
-  <div className="relative z-10 w-full px-4 sm:px-6 lg:pl-[6vw] lg:pr-6 py-8 sm:py-10 lg:py-12">
+  {/* Mobile: absolute positioning context that fills the fixed-height hero, so the top and bottom
+      zones can pin to opposite edges and leave the middle band of video clear.
+      Desktop/tablet (sm:+): reverts to the original static, single-column flow — unchanged. */}
+  <div className="absolute inset-0 sm:relative z-10 w-full sm:px-6 lg:pl-[6vw] lg:pr-6 sm:py-10 lg:py-12">
 
-      {/* Left Side: Main Text, Input, Vehicle Selector, and Trust Stats — right side of hero stays clear video */}
+      {/* ============== TOP ZONE (mobile: pinned to top) ==============
+          Heading, subtitle, description, trust points — everything the visitor reads first. */}
       <motion.div
-        className="w-full lg:max-w-[520px]"
+        className="absolute top-5 left-4 right-4 sm:relative sm:top-auto sm:left-auto sm:right-auto sm:w-full lg:max-w-[520px]"
         initial="hidden"
         animate="visible"
-        variants={staggerContainer}
+        variants={heroStaggerContainer}
       >
       <motion.h1
-        variants={staggerItem}
-        className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-2 sm:mb-3"
+        variants={heroStaggerItem}
+        className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] sm:leading-tight mb-1.5 sm:mb-3"
       >
   Bike, Scooty &amp; Car Service in Noida, Gurgaon &amp; Delhi NCR
   <span style={{ color: '#FF7A18' }}> at Your Doorstep</span>
@@ -837,28 +869,31 @@ const serviceCities = [
 
        {/* Subheading */}
        <motion.p
-         variants={staggerItem}
-         className="font-poppins text-xs sm:text-sm font-semibold text-white/85 mb-2"
+         variants={heroStaggerItem}
+         className="font-poppins text-[11px] sm:text-sm font-semibold text-white/85 leading-tight mb-1.5 sm:mb-2"
        >
   Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Same-Day Bike &amp; Car Repair &bull; Trusted Mechanics Across Delhi NCR
 </motion.p>
+      </motion.div>
+      {/* ============== END TOP ZONE ==============
+          Clear video band lives here on mobile — nothing is rendered in this gap. */}
 
-       <motion.p
-         variants={staggerItem}
-         className="font-poppins text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4"
-         style={{ color: '#F1F5F9' }}
-       >
-  Skip the garage queue. Our certified mechanics come to your home or office across Noida, Gurgaon, Delhi and the rest of Delhi NCR — handling everything from routine bike servicing and car oil changes to engine repairs and scooty fixes. Fast, transparent, and affordable.
-</motion.p>
-
+      {/* ============== BOTTOM ZONE (mobile: pinned to bottom) ==============
+          Trust points, CTA buttons, vehicle selector, review stats. */}
+      <motion.div
+        className="absolute bottom-3 left-4 right-4 sm:relative sm:bottom-auto sm:left-auto sm:right-auto sm:w-full lg:max-w-[520px] sm:mt-0"
+        initial="hidden"
+        animate="visible"
+        variants={heroStaggerContainer}
+      >
 {/* Trust points strip */}
 <motion.div
-  variants={staggerItem}
-  className="flex flex-wrap gap-x-3 gap-y-1 mb-4 sm:mb-5 text-xs text-white/85"
+  variants={heroStaggerItem}
+  className="grid grid-cols-2 gap-x-2 gap-y-1 sm:flex sm:flex-wrap sm:gap-x-3 sm:gap-y-1 mb-2 sm:mb-5 text-[9px] sm:text-xs text-white/85"
 >
   {["Starting ₹299", "Same-Day Service", "Doorstep Mechanics", "Trusted Technicians", "No Hidden Charges"].map((point, i) => (
     <span key={i} className="inline-flex items-center gap-1 font-medium">
-      <CheckCircle className="h-3 w-3 flex-shrink-0" style={{ color: '#FF7A18' }} />
+      <CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0" style={{ color: '#FF7A18' }} />
       {point}
     </span>
   ))}
@@ -866,13 +901,13 @@ const serviceCities = [
 
         {/* Book + Call Buttons Row */}
         <motion.div
-          variants={staggerItem}
-          className="flex flex-wrap items-center gap-3"
+          variants={heroStaggerItem}
+          className="flex flex-wrap items-center gap-2 sm:gap-3"
         >
           {!showInput ? (
             <button
               onClick={() => setShowInput(true)}
-              className="bg-orange-600 text-white px-6 py-3 rounded-xl font-semibold text-base shadow-lg hover:bg-orange-700 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:translate-y-0 transition-all duration-300"
+              className="bg-orange-600 text-white px-4 py-2 rounded-lg text-xs sm:px-6 sm:py-3 sm:rounded-xl font-semibold sm:text-base shadow-lg hover:bg-orange-700 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:translate-y-0 transition-all duration-300"
             >
               Book Service Now
             </button>
@@ -928,28 +963,28 @@ const serviceCities = [
           {/* Call Button */}
           <a
             href="tel:9540553759"
-            className="border-2 border-white text-white px-6 py-3 rounded-xl font-semibold text-base hover:bg-white hover:text-blue-900 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 inline-flex items-center justify-center gap-2"
+            className="border-2 border-white text-white px-4 py-2 rounded-lg text-xs sm:px-6 sm:py-3 sm:rounded-xl font-semibold sm:text-base hover:bg-white hover:text-blue-900 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 inline-flex items-center justify-center gap-2"
           >
-            <Phone className="h-4 w-4" />
+            <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             Call Now
           </a>
         </motion.div>
 
         {/* === Compact "Select Your Vehicle" segmented control === */}
         <motion.div
-          variants={staggerItem}
-          className="mt-5 w-full sm:max-w-[380px] lg:max-w-[420px] bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-xl px-3 py-3 shadow-lg"
+          variants={heroStaggerItem}
+          className="mt-2 sm:mt-5 w-full sm:max-w-[380px] lg:max-w-[420px] bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-lg sm:rounded-xl px-2.5 py-2 sm:px-3 sm:py-3 shadow-lg"
         >
-          <p className="text-white/90 text-xs font-semibold mb-2 tracking-tight">Select Your Vehicle</p>
+          <p className="text-white/90 text-[9px] sm:text-xs font-semibold mb-1 sm:mb-2 tracking-tight">Select Your Vehicle</p>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
             {/* Bike & Scooty - Default Active */}
             <button
               type="button"
               aria-pressed="true"
-              className="flex items-center justify-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-lg font-semibold text-xs sm:text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
+              className="flex items-center justify-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white py-1.5 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-xs md:text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
             >
-              <Bike className="h-4 w-4 flex-shrink-0" />
+              <Bike className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
               <span>Bike &amp; Scooty</span>
             </button>
 
@@ -957,9 +992,9 @@ const serviceCities = [
             <button
               type="button"
               onClick={() => navigate('/car')}
-              className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 border border-slate-600 hover:border-slate-400 text-white py-2 rounded-lg font-semibold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
+              className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 border border-slate-600 hover:border-slate-400 text-white py-1.5 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
             >
-              <Car className="h-4 w-4 flex-shrink-0" />
+              <Car className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
               <span>Cars</span>
             </button>
           </div>
@@ -968,30 +1003,68 @@ const serviceCities = [
 
         {/* Review + Customer Stats — moved under the CTA/vehicle selector, aligned with left content */}
         <motion.div
-          variants={staggerItem}
-          className="flex flex-row items-center gap-3 w-full mt-4"
+          variants={heroStaggerItem}
+          className="flex flex-row items-center gap-2 sm:gap-3 w-full mt-2 sm:mt-4"
         >
-          <div className="bg-sky-100 text-black p-1 rounded-xl shadow-lg flex-1">
-            <div className="flex items-center justify-center gap-2 text-lg sm:text-xl font-bold">
-              <Star className="h-4 w-4 text-yellow-400 fill-current" />
+          <div className="bg-sky-100 text-black px-2 py-1.5 sm:p-1 rounded-lg sm:rounded-xl shadow-lg flex-1">
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-xl font-bold">
+              <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
               {reviewScore.toFixed(1)}/5
             </div>
-            <div className="text-xs font-semibold text-center">Google Review</div>
+            <div className="text-[10px] sm:text-xs font-semibold text-center">Google Review</div>
           </div>
-          <div className="bg-sky-100 text-black p-1 rounded-xl shadow-lg flex-1">
-            <div className="text-lg sm:text-xl font-bold text-center">
+          <div className="bg-sky-100 text-black px-2 py-1.5 sm:p-1 rounded-lg sm:rounded-xl shadow-lg flex-1">
+            <div className="text-xs sm:text-xl font-bold text-center">
               {happyCustomersCount.toLocaleString()}+
             </div>
-            <div className="text-xs font-semibold text-center">Happy Customers</div>
+            <div className="text-[10px] sm:text-xs font-semibold text-center">Happy Customers</div>
           </div>
         </motion.div>
-
       </motion.div>
+      {/* ============== END BOTTOM ZONE ============== */}
+
   </div>
 </section>
 
 </main>
 {/* --- Insert this new section after the Hero section --- */}
+
+{/* Dark premium information strip — sits between the hero (video + rating/stats) and the
+    Service Available / city marquee. Continues the cinematic dark visual language of the
+    hero instead of a disconnected white block. Same structure on mobile and desktop. */}
+<motion.div
+  className="w-full"
+  style={{
+    background: 'linear-gradient(135deg, #0f172a 0%, #172033 55%, #111827 100%)',
+    borderTop: '1px solid rgba(255,255,255,0.08)',
+    borderBottom: '1px solid rgba(255,255,255,0.06)',
+    boxShadow: '0 4px 18px rgba(0,0,0,0.25)',
+  }}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+  variants={{
+    hidden: { opacity: 0, y: 8 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  }}
+>
+  <div className="max-w-[1100px] mx-auto px-[14px] py-[10px] sm:px-6 sm:py-3.5 relative overflow-hidden">
+    {/* extremely subtle orange glow accent */}
+    <div
+      className="pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full"
+      style={{ background: 'radial-gradient(circle, rgba(255,122,0,0.10) 0%, transparent 70%)' }}
+    />
+    <span className="relative inline-flex items-center gap-1.5 mb-1">
+      <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#ff7a00' }} />
+      <span className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider" style={{ color: '#ff7a00' }}>
+        Garage Fix Care
+      </span>
+    </span>
+    <p className="relative text-[10px] sm:text-sm leading-[1.4] sm:leading-relaxed" style={{ color: '#cbd5e1' }}>
+      Skip the garage queue. Our certified mechanics come to your home or office across Noida, Gurgaon, Delhi and the rest of Delhi NCR — handling everything from routine bike servicing and car oil changes to engine repairs and scooty fixes. Fast, transparent, and affordable.
+    </p>
+  </div>
+</motion.div>
 
 {/* Background color based on your Navbar: likely a light gray or white. 
     Assuming the Navbar is bg-white or bg-gray-50 based on the screenshot. */}
@@ -2277,14 +2350,14 @@ const serviceCities = [
       box-shadow: 0 0 0 6px rgba(255,255,255,0.12), 0 12px 28px rgba(0,0,0,0.45);
     }
   `}</style>
-  <div className="fixed top-1/2 right-4 sm:right-6 flex flex-col space-y-4 z-50 transform -translate-y-1/2">
+  <div className="fixed top-1/2 right-4 sm:right-6 flex flex-col space-y-3 sm:space-y-4 z-50 transform -translate-y-1/2">
     {/* Call Button — blue color */}
     <div className="btn-float-wrap">
       <span className="btn-pulse-ring" style={{ background: '#1d72b8' }} />
       <a
         href="tel:9540553759"
-        className="btn-shake w-13 h-13 sm:w-15 sm:h-15 rounded-full text-white flex items-center justify-center shadow-2xl relative"
-        style={{ background: 'linear-gradient(135deg, #1d72b8, #145a9c)', width: '52px', height: '52px' }}
+        className="btn-shake w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] rounded-full text-white flex items-center justify-center shadow-2xl relative"
+        style={{ background: 'linear-gradient(135deg, #1d72b8, #145a9c)' }}
         aria-label="Call Us"
       >
         <svg
@@ -2293,7 +2366,7 @@ const serviceCities = [
           viewBox="0 0 24 24"
           strokeWidth="1.8"
           stroke="currentColor"
-          style={{ width: '24px', height: '24px' }}
+          className="w-5 h-5 sm:w-6 sm:h-6"
         >
           <path
             strokeLinecap="round"
@@ -2310,11 +2383,11 @@ const serviceCities = [
         href="https://wa.me/9540553759"
         target="_blank"
         rel="noopener noreferrer"
-        className="btn-shake text-white flex items-center justify-center shadow-2xl rounded-full relative"
-        style={{ background: 'linear-gradient(135deg, #25d366, #128c4e)', width: '52px', height: '52px' }}
+        className="btn-shake w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] text-white flex items-center justify-center shadow-2xl rounded-full relative"
+        style={{ background: 'linear-gradient(135deg, #25d366, #128c4e)' }}
         aria-label="Chat on WhatsApp"
       >
-        <FaWhatsapp size={26} />
+        <FaWhatsapp size="1em" className="text-[22px] sm:text-[26px]" />
       </a>
     </div>
   </div>
