@@ -1,5 +1,7 @@
 // Home.tsx (FULL UPDATED CODE - navigation added for Cars button using useNavigate)
 import { useState, useEffect } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   CheckCircle,
@@ -8,8 +10,6 @@ import {
   X,
   Plus,
   Phone,
-  ChevronLeft,
-  ChevronRight,
   ChevronDown,
   MapPin,
   Bike,
@@ -29,9 +29,6 @@ import hotDealsImage2 from '../images/hotdeals2.png';
 import hotDealsImage3 from '../images/hotdeals3.png';
 import hotDealsImage4 from '../images/hotdeals4.png';
 import hotDealsImage5 from '../images/hotdeals5.png';
-import googleReviewsImage from '../images/google1.png';
-import facebookReviewsImage from '../images/facebook1.png';
-import justdialReviewsImage from '../images/justdial1.png';
 import mechanicImage from '../images/image.jpg';
 import routineService from "../images/Routine Service.png";
 import bikeInsurance from "../images/Bike Insurance.png";
@@ -65,9 +62,8 @@ import maintainGearboxImg from "../images/Maintain-Gearbox1.webp";
 import fourValveEngineImg from "../images/Four-valves.webp";
 import driveBeltScootyImg from "../images/Drive-belt.webp";
 import heroImage from "../images/mechanic.jpg";
-import fortunerImage from "../images/fortuner.png";
-import bigGarageCar from "../images/big_garage_car.png";
-import bigGarageBike from "../images/big_garage_bike.png";
+import insideVideo from "../images/inside.mp4";
+import outsideVideo from "../images/outside.mp4";
 
 // Interface for clean type-checking (required for the new logic)
 interface Service {
@@ -76,10 +72,72 @@ interface Service {
   checklist: string[];
 }
 
+// ==================================================
+// Reusable Framer Motion variants (scroll + entrance)
+// ==================================================
+// Simple opacity + upward slide — used for headings and standalone blocks.
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: 'easeOut' },
+  },
+};
+
+// Plain opacity fade — used where movement would be distracting.
+const fadeIn: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.7, ease: 'easeOut' },
+  },
+};
+
+// Very subtle scale-in — used for large images/banners so they feel alive without a big parallax jump.
+const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.7, ease: 'easeOut' },
+  },
+};
+
+// Wrap around a grid/row of cards; staggers each staggerItem child as the section enters view.
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+// Individual card/item entrance used inside a staggerContainer.
+const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
+};
+
+// Shared viewport setting: animate once, a little before the section is fully in view.
+const viewportOnce = { once: true, amount: 0.15 };
+
 const Home = () => {
   const [happyCustomersCount, setHappyCustomersCount] = useState(0);
   const [reviewScore, setReviewScore] = useState(4.6);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Respect prefers-reduced-motion: used to disable/soften continuous motion (video zoom, light sweep, marquees)
+  const prefersReducedMotion = useReducedMotion();
+
+  // Subtle top-of-page scroll progress indicator
+  const { scrollYProgress } = useScroll();
+  const scrollProgressScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
   
 
   // NEW Modal State for API booking
@@ -90,19 +148,13 @@ const Home = () => {
   const [selectedBrand, setSelectedBrand] = useState('');
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  // Custom hero carousel — no react-slick
-  const [heroIndex, setHeroIndex] = useState(0);
-  const heroImages = [heroImage, fortunerImage, bigGarageCar, bigGarageBike];
-  const heroAlts = [
-    "Bike mechanic at customer doorstep in Noida",
-    "Car repair service at home",
-    "Professional car service garage",
-    "Doorstep bike service in Noida"
-  ];
-  useEffect(() => {
-    const t = setInterval(() => setHeroIndex(i => (i + 1) % heroImages.length), 2500);
-    return () => clearInterval(t);
-  }, []);
+  // Hero background video sequence: inside.mp4 -> outside.mp4 -> inside.mp4 -> ... (loops forever)
+  const heroVideoSources = [insideVideo, outsideVideo];
+  const [heroVideoIndex, setHeroVideoIndex] = useState(0);
+  const [isHeroVideoReady, setIsHeroVideoReady] = useState(false);
+  const handleHeroVideoEnded = () => {
+    setHeroVideoIndex(i => (i + 1) % heroVideoSources.length);
+  };
 
   // Marquee deals images (continuous scroll, no index needed)
   const carouselImages = [
@@ -252,6 +304,25 @@ const Home = () => {
     "Aprilia",
     "Other"
   ];
+
+  // Brands We Service marquee — built from the existing bikeBrands/scootyBrands arrays,
+  // with a few extra recognizable two-wheeler brands added and duplicates/"Other" removed.
+  const marqueeBrands = Array.from(
+    new Set([
+      ...bikeBrands,
+      ...scootyBrands,
+      "Jawa",
+      "Bajaj Chetak",
+      "Vida",
+      "Okinawa",
+      "Ampere",
+      "Revolt",
+    ])
+  ).filter(brand => brand !== "Other");
+
+  // Split into two rows for the opposite-direction marquee (row 1 moves right→left, row 2 moves left→right)
+  const marqueeBrandsRow1 = marqueeBrands.filter((_, i) => i % 2 === 0);
+  const marqueeBrandsRow2 = marqueeBrands.filter((_, i) => i % 2 !== 0);
 
   // --- UPDATED HANDLERS ---
   
@@ -582,41 +653,120 @@ const serviceCities = [
   ]}
 />
 
+      {/* Subtle scroll progress indicator */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-orange-500 origin-left z-[70]"
+        style={{ scaleX: scrollProgressScaleX }}
+      />
 
       <div className="min-h-screen">
         {/* Hero Section */}
         {/* Mobile navbar = 3px accent + 56px nav = 59px. Desktop = 32px strip + 56px nav = 88px */}
         <main className="bg-slate-800 pt-[59px] lg:pt-[88px]">
 
-<section className="text-white py-8 sm:py-10 lg:py-12">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
+<section className="relative text-white overflow-hidden min-h-[520px] sm:min-h-[600px] lg:min-h-[680px]">
+  {/* Full-width cinematic background video: inside.mp4 -> outside.mp4 -> loop */}
+  <div className="absolute inset-0 w-full h-full z-0">
+    <img
+      src={heroImage}
+      alt=""
+      aria-hidden="true"
+      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${isHeroVideoReady ? 'opacity-0' : 'opacity-100'}`}
+    />
+    <motion.video
+      key={heroVideoIndex}
+      autoPlay
+      muted
+      loop={false}
+      playsInline
+      preload={heroVideoIndex === 0 ? 'metadata' : 'auto'}
+      poster={heroImage}
+      onEnded={handleHeroVideoEnded}
+      onCanPlay={() => setIsHeroVideoReady(true)}
+      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${isHeroVideoReady ? 'opacity-100' : 'opacity-0'}`}
+      style={{ willChange: 'transform' }}
+      animate={prefersReducedMotion ? undefined : { scale: [1, 1.02, 1] }}
+      transition={prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+    >
+      <source src={heroVideoSources[heroVideoIndex]} type="video/mp4" />
+    </motion.video>
+    {/* Cinematic gradient overlay: strong dark on the left (behind text), fading to transparent on the right */}
+    <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
+    {/* Subtle bottom gradient for extra depth */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+    {/* Very subtle moving light sweep for cinematic lighting feel */}
+    <div className="hero-light-sweep absolute inset-0 pointer-events-none" />
+  </div>
 
-      {/* Left Side: Main Text and Input */}
-      <div>
-      <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-  Bike &amp; Car Service in Noida, Gurgaon &amp; Delhi NCR
-  <span className="text-orange-500"> at Your Doorstep</span>
-</h1>
+  <style>{`
+    @keyframes heroLightSweep {
+      0%   { transform: translateX(-15%); opacity: 0.35; }
+      50%  { transform: translateX(15%);  opacity: 0.55; }
+      100% { transform: translateX(-15%); opacity: 0.35; }
+    }
+    .hero-light-sweep {
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.06) 48%, transparent 66%);
+      animation: heroLightSweep 10s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-light-sweep {
+        animation: none;
+        opacity: 0.2;
+      }
+    }
+  `}</style>
+
+  <div className="relative z-10 w-full px-4 sm:px-6 lg:pl-[6vw] lg:pr-6 py-8 sm:py-10 lg:py-12">
+
+      {/* Left Side: Main Text, Input, Vehicle Selector, and Trust Stats — right side of hero stays clear video */}
+      <motion.div
+        className="w-full lg:max-w-[520px]"
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainer}
+      >
+      <motion.h1
+        variants={staggerItem}
+        className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-2 sm:mb-3"
+      >
+  Bike, Scooty &amp; Car Service in Noida, Gurgaon &amp; Delhi NCR
+  <span style={{ color: '#FF7A18' }}> at Your Doorstep</span>
+</motion.h1>
 
        {/* Subheading */}
-       <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
-  Starting at just ₹299 &bull; Same-Day Bike &amp; Car Repair &bull; Trusted Mechanics Across Delhi NCR
-</p>
+       <motion.p
+         variants={staggerItem}
+         className="font-poppins text-xs sm:text-sm font-semibold text-white/85 mb-2"
+       >
+  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Same-Day Bike &amp; Car Repair &bull; Trusted Mechanics Across Delhi NCR
+</motion.p>
 
-       <p className="font-poppins text-xs sm:text-sm leading-relaxed text-white/90 mb-3 sm:mb-4">
+       <motion.p
+         variants={staggerItem}
+         className="font-poppins text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4"
+         style={{ color: '#F1F5F9' }}
+       >
   Skip the garage queue. Our certified mechanics come to your home or office across Noida, Gurgaon, Delhi and the rest of Delhi NCR — handling everything from routine bike servicing and car oil changes to engine repairs and scooty fixes. Fast, transparent, and affordable.
-</p>
+</motion.p>
 
 {/* Trust points strip */}
-<div className="flex flex-wrap gap-x-3 gap-y-1 mb-4 sm:mb-5 text-xs text-white/80">
-  {["✔ Starting ₹299", "✔ Same-Day Service", "✔ Doorstep Mechanics", "✔ Trusted Technicians", "✔ No Hidden Charges"].map((point, i) => (
-    <span key={i} className="font-medium">{point}</span>
+<motion.div
+  variants={staggerItem}
+  className="flex flex-wrap gap-x-3 gap-y-1 mb-4 sm:mb-5 text-xs text-white/85"
+>
+  {["Starting ₹299", "Same-Day Service", "Doorstep Mechanics", "Trusted Technicians", "No Hidden Charges"].map((point, i) => (
+    <span key={i} className="inline-flex items-center gap-1 font-medium">
+      <CheckCircle className="h-3 w-3 flex-shrink-0" style={{ color: '#FF7A18' }} />
+      {point}
+    </span>
   ))}
-</div>
+</motion.div>
 
         {/* Book + Call Buttons Row */}
-        <div className="flex flex-wrap items-center gap-3">
+        <motion.div
+          variants={staggerItem}
+          className="flex flex-wrap items-center gap-3"
+        >
           {!showInput ? (
             <button
               onClick={() => setShowInput(true)}
@@ -681,20 +831,23 @@ const serviceCities = [
             <Phone className="h-4 w-4" />
             Call Now
           </a>
-        </div>
+        </motion.div>
 
-        {/* === UPDATED: Modern "Select Your Vehicle" Tile Section (Compact + Responsive) === */}
-        <div className="mt-6 bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-3xl p-4 shadow-2xl">
-          <h3 className="text-white text-lg font-semibold mb-4 text-center tracking-tight">Select Your Vehicle</h3>
-          
-          <div className="grid grid-cols-2 gap-3">
-            {/* Bike & Scooty - Default Active (compact height matching Book/Call buttons) */}
+        {/* === Compact "Select Your Vehicle" segmented control === */}
+        <motion.div
+          variants={staggerItem}
+          className="mt-5 w-full sm:max-w-[380px] lg:max-w-[420px] bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-xl px-3 py-3 shadow-lg"
+        >
+          <p className="text-white/90 text-xs font-semibold mb-2 tracking-tight">Select Your Vehicle</p>
+
+          <div className="grid grid-cols-2 gap-2">
+            {/* Bike & Scooty - Default Active */}
             <button
               type="button"
               aria-pressed="true"
-              className="flex items-center justify-center gap-3 bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-2xl font-semibold text-base shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
+              className="flex items-center justify-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-lg font-semibold text-xs sm:text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
             >
-              <Bike className="h-6 w-6" />
+              <Bike className="h-4 w-4 flex-shrink-0" />
               <span>Bike &amp; Scooty</span>
             </button>
 
@@ -702,72 +855,36 @@ const serviceCities = [
             <button
               type="button"
               onClick={() => navigate('/car')}
-              className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 border border-slate-600 hover:border-slate-400 text-white py-3 rounded-2xl font-semibold text-base focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
+              className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 border border-slate-600 hover:border-slate-400 text-white py-2 rounded-lg font-semibold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
             >
-              <Car className="h-6 w-6" />
+              <Car className="h-4 w-4 flex-shrink-0" />
               <span>Cars</span>
             </button>
           </div>
-        </div>
-        {/* === END UPDATED SECTION === */}
+        </motion.div>
+        {/* === END SECTION === */}
 
-      </div>
-
-      {/* Right Side: Image + Reviews */}
-      <div className="relative flex flex-col items-center lg:items-end gap-1 mt-1 lg:mt-0">
-        {/* Custom Hero Carousel — no react-slick */}
-        <div className="relative w-full rounded-xl overflow-hidden shadow-2xl">
-          <img
-            src={heroImages[heroIndex]}
-            alt={heroAlts[heroIndex]}
-            className="w-full rounded-xl transition-opacity duration-700"
-            style={{ minHeight: '200px', objectFit: 'cover' }}
-            loading="eager"
-            fetchPriority="high"
-          />
-          {/* Left Arrow */}
-          <button
-            onClick={() => setHeroIndex(i => (i - 1 + heroImages.length) % heroImages.length)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-lg transition-all duration-200 z-20 flex items-center justify-center"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-          {/* Right Arrow */}
-          <button
-            onClick={() => setHeroIndex(i => (i + 1) % heroImages.length)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-lg transition-all duration-200 z-20 flex items-center justify-center"
-            aria-label="Next slide"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
-          {/* Dots */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-20">
-            {heroImages.map((_, i) => (
-              <button key={i} onClick={() => setHeroIndex(i)}
-                className={`w-2 h-2 rounded-full transition-all ${i === heroIndex ? 'bg-white scale-125' : 'bg-white/50'}`}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
-          <div className="bg-sky-100 text-black p-1 rounded-xl shadow-lg flex-1 w-full sm:w-auto">
+        {/* Review + Customer Stats — moved under the CTA/vehicle selector, aligned with left content */}
+        <motion.div
+          variants={staggerItem}
+          className="flex flex-row items-center gap-3 w-full mt-4"
+        >
+          <div className="bg-sky-100 text-black p-1 rounded-xl shadow-lg flex-1">
             <div className="flex items-center justify-center gap-2 text-lg sm:text-xl font-bold">
               <Star className="h-4 w-4 text-yellow-400 fill-current" />
               {reviewScore.toFixed(1)}/5
             </div>
             <div className="text-xs font-semibold text-center">Google Review</div>
           </div>
-          <div className="bg-sky-100 text-black p-1 rounded-xl shadow-lg flex-1 w-full sm:w-auto">
+          <div className="bg-sky-100 text-black p-1 rounded-xl shadow-lg flex-1">
             <div className="text-lg sm:text-xl font-bold text-center">
               {happyCustomersCount.toLocaleString()}+
             </div>
             <div className="text-xs font-semibold text-center">Happy Customers</div>
           </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+
+      </motion.div>
   </div>
 </section>
 
@@ -804,7 +921,13 @@ const serviceCities = [
           {/* Autoplay Card Carousel Section */}
           <section className="py-8 bg-slate-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col items-center justify-center mb-8">
+              <motion.div
+                className="flex flex-col items-center justify-center mb-8"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
                   <div className="flex items-center justify-center">
                     {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mr-4">
@@ -820,7 +943,7 @@ const serviceCities = [
   Get up to 10% off on bike repairs and servicing at your doorstep.
   Hurry—these deals won’t last long!
                   </p>
-                </div>
+                </motion.div>
             </div>
             {/* Marquee-style infinite scrolling image strip */}
             <div className="hotdeals-marquee-viewport overflow-hidden w-full px-6 sm:px-12 lg:px-20">
@@ -832,14 +955,14 @@ const serviceCities = [
                 {[...carouselImages, ...carouselImages].map((img, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-white/10"
+                    className="hotdeals-card group flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-white/10 transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
                     style={{ width: 'min(76vw, 400px)' }}
                   >
-                    <div className="relative">
+                    <div className="relative overflow-hidden">
                       <img
                         src={img.src}
                         alt={img.alt}
-                        className="w-full h-full object-contain bg-slate-800"
+                        className="w-full h-full object-contain bg-slate-800 transition-transform duration-300 group-hover:scale-[1.03]"
                         style={{ height: '220px' }}
               loading="lazy"
               decoding="async"
@@ -875,115 +998,141 @@ const serviceCities = [
             `}</style>
           </section>
 
-          {/* What Our Clients Say? Section */}
-          <section className="bg-slate-800 text-black py-10 sm:py-14">
+          {/* Brands We Service — Bike & Scooty brand marquee (replaces old "What Our Clients Say?" section) */}
+          <section className="bg-slate-800 text-white py-10 sm:py-14">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-4 sm:mb-6">
+      <motion.div
+        className="text-center mb-6 sm:mb-8"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
+        <p className="text-xs sm:text-sm font-semibold tracking-widest text-orange-400 uppercase mb-2">
+          Bikes &amp; Scooters
+        </p>
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
-          <span className="text-white">What Our</span>{' '}
-          <span className="text-red-600">Clients Say?</span>
+          <span className="text-white">Brands We</span>{' '}
+          <span style={{ color: '#FF7A18' }}>Service</span>
         </h2>
+        <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto">
+          Service support for leading two-wheeler brands.
+        </p>
+      </motion.div>
+    </div>
+
+    {/* Seamless two-row infinite brand marquee, rows move in opposite directions */}
+    <div className="flex flex-col gap-2 sm:gap-3">
+      {/* Row 1: right → left */}
+      <div className="brand-marquee-viewport overflow-hidden w-full">
+        <div
+          className="brand-marquee-track brand-marquee-track-1"
+          onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+          onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+        >
+          {[...marqueeBrandsRow1, ...marqueeBrandsRow1].map((brand, i) => (
+            <div
+              key={`row1-${brand}-${i}`}
+              className="brand-tile flex-shrink-0 bg-white/90 rounded-lg px-3 py-2 sm:px-5 sm:py-3 shadow-sm"
+              style={{ border: '1px solid #E2E8F0' }}
+            >
+              <span className="text-xs sm:text-sm font-semibold whitespace-nowrap tracking-wide" style={{ color: '#334155' }}>
+                {brand}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
-        {/* Google Reviews */}
-        <div className="bg-sky-50 rounded-xl p-3 shadow-sm">
-          <img
-            src={googleReviewsImage}
-            alt="Google Reviews"
-            className="mx-auto h-8 sm:h-10 mb-2"
-              loading="lazy"
-              decoding="async"
-            />
-          <div className="flex justify-center mb-1">
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-          </div>
-          <p className="text-black font-semibold mb-1 text-sm">4.7/5 Rating</p>
-          <a
-            href="https://goo.gl/maps/dqmKivbhftEaVxK79"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 font-semibold hover:underline text-xs"
-          >
-            view us on Google
-          </a>
-        </div>
 
-        {/* Facebook Reviews */}
-        <div className="bg-sky-50 rounded-xl p-3 shadow-sm">
-          <img
-            src={facebookReviewsImage}
-            alt="Facebook Reviews"
-            className="mx-auto h-8 sm:h-10 mb-2"
-              loading="lazy"
-              decoding="async"
-            />
-          <div className="flex justify-center mb-1">
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-          </div>
-          <p className="text-black font-semibold mb-1 text-sm">4.7/5 Rating</p>
-          <a
-            href="https://www.instagram.com/p/DQVj8SmktgG/?igsh=cTRzNXd5dHZtOGxi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 font-semibold hover:underline text-xs"
-          >
-            view us on FaceBook
-          </a>
-        </div>
-
-        {/* JustDial Reviews */}
-        <div className="bg-sky-50 rounded-xl p-3 shadow-sm">
-          <img
-            src={justdialReviewsImage}
-            alt="JustDial Reviews"
-            className="mx-auto h-8 sm:h-10 mb-2"
-              loading="lazy"
-              decoding="async"
-            />
-          <div className="flex justify-center mb-1">
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <Star className="h-4 w-4 text-yellow-400 fill-current" />
-          </div>
-          <p className="text-black font-semibold mb-1 text-sm">4.7/5 Rating</p>
-          <a
-            href="https://www.justdial.com/jd-business?source=77&wap=77&docid=011PXX11.XX11.251024223108.U1U5"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 font-semibold hover:underline text-xs"
-          >
-            view us on JustDial
-          </a>
+      {/* Row 2: left → right */}
+      <div className="brand-marquee-viewport overflow-hidden w-full">
+        <div
+          className="brand-marquee-track brand-marquee-track-2"
+          onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+          onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+        >
+          {[...marqueeBrandsRow2, ...marqueeBrandsRow2].map((brand, i) => (
+            <div
+              key={`row2-${brand}-${i}`}
+              className="brand-tile flex-shrink-0 bg-white/90 rounded-lg px-3 py-2 sm:px-5 sm:py-3 shadow-sm"
+              style={{ border: '1px solid #E2E8F0' }}
+            >
+              <span className="text-xs sm:text-sm font-semibold whitespace-nowrap tracking-wide" style={{ color: '#334155' }}>
+                {brand}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
+
+    <style>{`
+      @keyframes brandMarqueeScroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .brand-marquee-viewport {
+        -webkit-mask-image: linear-gradient(to right, transparent 0, black 60px, black calc(100% - 60px), transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0, black 60px, black calc(100% - 60px), transparent 100%);
+      }
+      .brand-marquee-track {
+        display: flex;
+        width: max-content;
+        gap: 8px;
+      }
+      @media (min-width: 640px) {
+        .brand-marquee-track {
+          gap: 12px;
+        }
+      }
+      .brand-marquee-track-1 {
+        animation: brandMarqueeScroll 24s linear infinite;
+      }
+      .brand-marquee-track-2 {
+        animation: brandMarqueeScroll 30s linear infinite reverse;
+      }
+      .brand-tile {
+        transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      }
+      .brand-tile:hover {
+        border-color: #FDBA74 !important;
+        transform: translateY(-2px);
+      }
+      .brand-tile:hover span {
+        color: #EA580C !important;
+      }
+    `}</style>
   </section>
           
           {/* At Home Service Price List Section (YOUR REQUIRED SECTION) */}
         
   <section className="py-12 bg-slate-900">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-        <span className="text-white">At-Home Service</span>{' '}
-        <span className="text-red-600">Price List</span>
-      </h2>
-      <p className="text-base sm:text-xl text-white mb-6 max-w-3xl mx-auto">
-        Transparent pricing for doorstep bike and car service in Noida. Check the labour charges below based on your vehicle's engine size — no hidden fees, no surprises.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 justify-items-center">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+          <span className="text-white">At-Home Service</span>{' '}
+          <span className="text-red-600">Price List</span>
+        </h2>
+        <p className="text-base sm:text-xl text-white mb-6 max-w-3xl mx-auto">
+          Transparent pricing for doorstep bike and car service in Noida. Check the labour charges below based on your vehicle's engine size — no hidden fees, no surprises.
+        </p>
+      </motion.div>
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 justify-items-center"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         {servicePrices.map((service, index) => (
-          <div
+          <motion.div
             key={index}
+            variants={staggerItem}
             className="bg-brandRed p-1.5 rounded-xl w-full max-w-full shadow-lg border border-gray-700 hover:shadow-xl transition-shadow duration-200"
           >
             <div className="bg-sky-100 rounded-xl shadow-sm p-3 sm:p-4 w-full h-full">
@@ -1013,9 +1162,9 @@ const serviceCities = [
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
 
@@ -1030,7 +1179,13 @@ const serviceCities = [
             />
     <div className="absolute inset-0 bg-black bg-opacity-50" />
     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 w-full">
+      <motion.div
+        className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 w-full"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <div className="bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 order-2 lg:order-1">
           <h3 className="text-base sm:text-xl font-bold text-gray-900 mb-2 text-center">
             Choose Your Vehicle
@@ -1100,19 +1255,32 @@ const serviceCities = [
             </Link>.
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   </section>
   {/* Bike Services at Home Section */}
   <section className="py-12 bg-slate-800">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-        Complete Bike &amp; Car Care, <span className="text-red-600"> Right at Your Door in Noida</span>
-      </h2>
-      <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
-        From routine oil changes to engine repair, scooty service to car AC checks — our mechanics in Noida handle it all at your location. No waiting, no hassle.
-      </p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2 sm:gap-4">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
+          Complete Bike &amp; Car Care, <span className="text-red-600"> Right at Your Door in Noida</span>
+        </h2>
+        <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
+          From routine oil changes to engine repair, scooty service to car AC checks — our mechanics in Noida handle it all at your location. No waiting, no hassle.
+        </p>
+      </motion.div>
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2 sm:gap-4"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         {[
           { name: "Routine Service", img: routineService },
           { name: "Bike Insurance", img: bikeInsurance },
@@ -1121,8 +1289,9 @@ const serviceCities = [
           { name: "Bike Batteries", img: bikeBatteries },
           { name: "Engine Repair", img: engineRepair },
         ].map((service, index) => (
-          <div
+          <motion.div
             key={index}
+            variants={staggerItem}
             className="bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-200"
           >
             <img
@@ -1133,15 +1302,21 @@ const serviceCities = [
               decoding="async"
             />
             <h3 className="text-xs sm:text-sm font-semibold text-gray-900 text-center">{service.name}</h3>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
 
   {/* GarageFixCare Benefits Section */}
   <section className="py-10 sm:py-14 bg-slate-900 text-white">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+    <motion.div
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+    >
       <div>
         <p className="text-xs text-white mb-1">Get Rs.10 Off On First Service in Noida</p>
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
@@ -1209,12 +1384,18 @@ const serviceCities = [
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   </section>
   {/* Why Choose GarageFixCare Section */}
   <section className="py-12 sm:py-16 bg-slate-800 text-white">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
-      <div className="flex justify-center order-2 lg:order-1">
+      <motion.div
+        className="flex justify-center order-2 lg:order-1"
+        variants={scaleIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <img
           src={whyChooseImg}
           alt="Why Choose GarageFixCare"
@@ -1222,8 +1403,14 @@ const serviceCities = [
               loading="lazy"
               decoding="async"
             />
-      </div>
-      <div className="order-1 lg:order-2">
+      </motion.div>
+      <motion.div
+        className="order-1 lg:order-2"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
           Why Choose <span className="text-red-600">GarageFixCare?</span>
         </h2>
@@ -1244,7 +1431,7 @@ const serviceCities = [
             </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
     </div>
   </section>
 
@@ -1252,14 +1439,26 @@ const serviceCities = [
   <section className="py-12 sm:py-16 bg-slate-900">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       {/* UPDATED: Reduced text size on mobile (text-xl) and scaled up (md:text-3xl) */}
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 sm:mb-10">
+      <motion.h2
+        className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 sm:mb-10"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         Trusted by <span className="text-red-600">Leading Brands</span> and <span className="text-red-600">Over 100,000 Customers</span>
-      </h2>
+      </motion.h2>
 
 
       {/* Brand Logos */}
       {/* UPDATED: Uses 3 columns on mobile (sm:grid-cols-3) and 5 on desktop (md:grid-cols-5) */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 justify-items-center">
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 justify-items-center"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         {[
           { name: "WURTH", img: wurthImg },
           { name: "MOTUL", img: motulImg },
@@ -1267,8 +1466,9 @@ const serviceCities = [
           { name: "Buniyad", img: buniyadImg },
           { name: "Dunzo", img: dunzoImg },
         ].map((brand, index) => (
-          <div
+          <motion.div
             key={index}
+            variants={staggerItem}
             className="bg-white rounded-xl shadow-lg p-3 sm:p-4 flex items-center justify-center w-full max-w-[150px] h-16 sm:w-40 sm:h-20 hover:shadow-xl transition-shadow duration-200"
           >
             <img
@@ -1278,15 +1478,20 @@ const serviceCities = [
               loading="lazy"
               decoding="async"
             />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
   {/* How GarageFixCare Works Section */}
   <section className="bg-slate-800 text-white py-10 sm:py-14">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
-      <div>
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
           How <span className="text-red-600">GarageFixCare</span> Works?
         </h2>
@@ -1307,8 +1512,14 @@ const serviceCities = [
             </li>
           ))}
         </ul>
-      </div>
-      <div className="flex justify-center">
+      </motion.div>
+      <motion.div
+        className="flex justify-center"
+        variants={scaleIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <img
           src={bmw310Image}
           alt="How GarageFixCare Works"
@@ -1316,16 +1527,28 @@ const serviceCities = [
               loading="lazy"
               decoding="async"
             />
-      </div>
+      </motion.div>
     </div>
   </section>
   {/* We Provide Best Bike Service Section */}
   <section className="bg-slate-900 text-white py-12 sm:py-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
+      <motion.h2
+        className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         Doorstep <span className="text-red-600">Bike Service</span> by <span className="text-red-600">Certified Experts</span> Near You
-      </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 justify-items-center">
+      </motion.h2>
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 justify-items-center"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         {[
           { name: "Bike Service in Noida", img: noidaImg, to: "/best-bike-service-noida" },
           { name: "Bike Service in Greater Noida", img: greaterNoidaImg, to: "/best-bike-service-greater-noida-west" },
@@ -1334,56 +1557,70 @@ const serviceCities = [
           { name: "Bike Service in Gurugram", img: gurugramImg, to: "/best-bike-service-gurgaon" },
           { name: "Bike Service in Faridabad", img: faridabadImg, to: "/best-bike-service-gurgaon" },
         ].map((city, index) => (
-          <Link
-            key={index}
-            to={city.to}
-            className="block bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-xs text-center hover:shadow-xl transition-shadow duration-200"
-          >
-            <img
-              src={city.img}
-              alt={city.name}
-              className="h-16 w-16 sm:h-20 sm:w-20 mx-auto rounded-full mb-2 object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-            <h3 className="text-sm sm:text-base font-semibold text-black">
-              {city.name.split("in ")[0]} <span className="text-red-600">{city.name.split("in ")[1]}</span>
-            </h3>
-          </Link>
+          <motion.div key={index} variants={staggerItem} className="w-full max-w-xs">
+            <Link
+              to={city.to}
+              className="block bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 w-full text-center hover:shadow-xl transition-shadow duration-200"
+            >
+              <img
+                src={city.img}
+                alt={city.name}
+                className="h-16 w-16 sm:h-20 sm:w-20 mx-auto rounded-full mb-2 object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+              <h3 className="text-sm sm:text-base font-semibold text-black">
+                {city.name.split("in ")[0]} <span className="text-red-600">{city.name.split("in ")[1]}</span>
+              </h3>
+            </Link>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
   {/* Customers Speaks Section */}
   <section className="bg-slate-800 text-white py-12 sm:py-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
-        What <span className="text-red-600">Customers Say</span>
-      </h2>
-      <p className="text-sm sm:text-base text-white mb-2 sm:mb-4">
-        Customer Testimonials on Google
-      </p>
-      <div className="flex justify-center items-center gap-1 mb-2 sm:mb-4">
-        <span className="flex">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current"
-            />
-          ))}
-        </span>
-        <span className="text-white font-semibold text-sm">4.7 Rating on Google</span>
-      </div>
-      <a
-        href="https://www.google.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-red-600 px-4 py-1 sm:px-5 sm:py-2 rounded-md font-semibold text-xs sm:text-sm text-white hover:bg-red-700 transition-colors duration-200 inline-block"
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
       >
-        Review us on Google
-      </a>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
+          What <span className="text-red-600">Customers Say</span>
+        </h2>
+        <p className="text-sm sm:text-base text-white mb-2 sm:mb-4">
+          Customer Testimonials on Google
+        </p>
+        <div className="flex justify-center items-center gap-1 mb-2 sm:mb-4">
+          <span className="flex">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current"
+              />
+            ))}
+          </span>
+          <span className="text-white font-semibold text-sm">4.7 Rating on Google</span>
+        </div>
+        <a
+          href="https://www.google.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-red-600 px-4 py-1 sm:px-5 sm:py-2 rounded-md font-semibold text-xs sm:text-sm text-white hover:bg-red-700 transition-colors duration-200 inline-block"
+        >
+          Review us on Google
+        </a>
+      </motion.div>
     </div>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 bg-slate-800">
+    <motion.div
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 bg-slate-800"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+    >
       {[
         {
           name: "Surendra Pratap Singh",
@@ -1410,8 +1647,9 @@ const serviceCities = [
           time: "a month ago",
         },
       ].map((t, i) => (
-        <div
+        <motion.div
           key={i}
+          variants={staggerItem}
           className="bg-sky-100 text-black rounded-xl p-4 sm:p-6 shadow-lg flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-200 h-full"
         >
           <img src={googleIcon} alt="Google" className="h-5 sm:h-6 mb-2"
@@ -1430,34 +1668,58 @@ const serviceCities = [
             />
           <h3 className="font-semibold text-gray-900 text-xs sm:text-sm">{t.name}</h3>
           <span className="text-xs text-black">{t.time}</span>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   </section>
   {/* Bike Brands We Service Section */}
   <section className="bg-slate-900 text-white py-12 sm:py-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       {/* UPDATED: Reduced text size on mobile (text-2xl) and scaled up (md:text-4xl) */}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">
+      <motion.h2
+        className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         All Major Bike <span className="text-red-600">Brands</span> Serviced <span className="text-red-600">at Your Doorstep</span>
-      </h2>
+      </motion.h2>
 
 
-      <div className="bg-slate-800 rounded-xl shadow-lg inline-block px-4 py-3 sm:px-6 sm:py-4">
+      <motion.div
+        className="bg-slate-800 rounded-xl shadow-lg inline-block px-4 py-3 sm:px-6 sm:py-4"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         {/* UPDATED: Reduced text size on mobile (text-sm) and scaled up (text-lg) */}
         <p className="text-sm sm:text-lg text-gray-300 leading-relaxed">
           TVS / Bajaj / Royal Enfield / Yamaha / Honda / Hero / Suzuki / KTM / Jawa / Harley Davidson / Ducati / Kawasaki / Benelli / Triumph / Indian / BMW / Aprilia / Yezdi / Husqvarna
         </p>
-      </div>
+      </motion.div>
     </div>
   </section>
   {/* Latest Post Section */}
   <section className="bg-slate-800 text-white py-12 sm:py-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">
+      <motion.h2
+        className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         Latest <span className="text-red-600">Post</span>
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
+      </motion.h2>
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         {[
           {
             title: "How to Maintain the Gearbox on Your R15 V3?",
@@ -1478,8 +1740,9 @@ const serviceCities = [
             link: "/blog",
           },
         ].map((post, i) => (
-          <div
+          <motion.div
             key={i}
+            variants={staggerItem}
             className="bg-sky-100 text-black rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200"
           >
             <div className="w-full h-40 sm:h-48 bg-slate-200 flex items-center justify-center overflow-hidden">
@@ -1496,20 +1759,32 @@ const serviceCities = [
               <p className="text-gray-700 text-xs sm:text-sm mb-2">{post.desc}</p>
             
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
   {/* Frequently Asked Questions Section */}
   <section className="bg-slate-900 text-white py-12 sm:py-16">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-4 sm:mb-6">
+      <motion.div
+        className="text-center mb-4 sm:mb-6"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
           Bike Service in Noida — <span className="text-red-600">Common Questions</span>
         </h2>
-      </div>
-      <div className="space-y-2 sm:space-y-3">
+      </motion.div>
+      <motion.div
+        className="space-y-2 sm:space-y-3"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         {[
           {
             q: "Do you provide both bike and car service in Noida?",
@@ -1600,7 +1875,7 @@ const serviceCities = [
             </div>
           </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
 
@@ -1609,9 +1884,15 @@ const serviceCities = [
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       {/* Section heading */}
-      <h2 className="text-lg sm:text-xl font-bold text-white mb-3">
+      <motion.h2
+        className="text-lg sm:text-xl font-bold text-white mb-3"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         Service Locations &amp; <span className="text-red-600">Popular Pages</span>
-      </h2>
+      </motion.h2>
 
       {/* 2-column on md+, single column on mobile */}
       <div className="flex flex-col md:flex-row md:gap-10">
@@ -1829,7 +2110,13 @@ const serviceCities = [
 
           {/* CTA Section */}
           <section className="py-10 sm:py-14 bg-slate-800">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <motion.div
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+      variants={staggerItem}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+    >
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
         Book Bike or Car Service in Noida Today
       </h2>
@@ -1842,7 +2129,7 @@ const serviceCities = [
       >
         Book Your Service
       </Link>
-    </div>
+    </motion.div>
   </section>
         </div>
           {/* Floating Buttons */}
