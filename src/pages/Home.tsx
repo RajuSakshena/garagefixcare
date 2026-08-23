@@ -148,29 +148,98 @@ const Home = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   // Hero background video sequence: inside.mp4 -> outside.mp4 -> inside.mp4 -> ... (loops forever)
-  // A single persistent <video> element is used and its source is swapped in place
-  // (via videoRef.load()) so there is never an unmount/remount and never a static
-  // poster/fallback image between clips.
-  const heroVideoSources = [insideVideo, outsideVideo];
-  const [heroVideoIndex, setHeroVideoIndex] = useState(0);
-  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
-  const handleHeroVideoEnded = () => {
-    setHeroVideoIndex(i => (i + 1) % heroVideoSources.length);
+  // Two persistent <video> elements are used (never unmounted/recreated). One is the
+  // active/visible clip, the other silently preloads the next clip in the background.
+  // When the active clip nears its end AND the other element reports it is sufficiently
+  // buffered (readyState >= 3 / HAVE_FUTURE_DATA), we start playback on the preloaded
+  // element and crossfade its opacity in — never a hard cut, never a blank/poster frame.
+  const heroVideoSources = [insideVideo, outsideVideo]; // 0 = inside, 1 = outside — fixed order, never randomized
+  const heroVideoSlot0Ref = useRef<HTMLVideoElement | null>(null);
+  const heroVideoSlot1Ref = useRef<HTMLVideoElement | null>(null);
+  const heroVideoRefs = [heroVideoSlot0Ref, heroVideoSlot1Ref] as const;
+  const [activeHeroSlot, setActiveHeroSlot] = useState<0 | 1>(0);
+  const heroSequencePosRef = useRef(0); // heroVideoSources index currently assigned to the active slot
+  const heroTransitioningRef = useRef(false);
+
+  const HERO_CROSSFADE_SECONDS = prefersReducedMotion ? 0 : 0.65;
+  const HERO_TRANSITION_LEAD_SECONDS = 0.6; // start the handoff shortly before the active clip ends
+
+  // Kick off the sequence once: slot 0 plays inside.mp4, slot 1 silently preloads outside.mp4.
+  useEffect(() => {
+    const slot0 = heroVideoRefs[0].current;
+    const slot1 = heroVideoRefs[1].current;
+    if (!slot0 || !slot1) return;
+
+    slot0.src = heroVideoSources[0];
+    slot0.load();
+    slot0.play().catch(() => {
+      // Autoplay can be blocked in some browser contexts; safe to ignore.
+    });
+
+    slot1.src = heroVideoSources[1];
+    slot1.load(); // preload only — stays paused and hidden until it's its turn
+
+    heroSequencePosRef.current = 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Hands playback over from `fromSlot` to the other slot, provided the other slot is
+  // sufficiently buffered. If it isn't ready yet, this is a no-op and will be retried.
+  const attemptHeroTransition = (fromSlot: 0 | 1) => {
+    if (heroTransitioningRef.current) return;
+    const toSlot: 0 | 1 = fromSlot === 0 ? 1 : 0;
+    const nextEl = heroVideoRefs[toSlot].current;
+    if (!nextEl || nextEl.readyState < 3) return; // not buffered enough yet — keep waiting, no blank screen
+
+    heroTransitioningRef.current = true;
+
+    const nextLogicalIndex = (heroSequencePosRef.current + 1) % heroVideoSources.length;
+
+    nextEl.currentTime = 0;
+    const playPromise = nextEl.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+
+    setActiveHeroSlot(toSlot);
+    heroSequencePosRef.current = nextLogicalIndex;
+
+    // Once the crossfade has finished, quietly preload the *following* clip into the
+    // slot that just became inactive, well ahead of when it will be needed again.
+    window.setTimeout(() => {
+      const idleEl = heroVideoRefs[fromSlot].current;
+      if (idleEl) {
+        const upcomingIndex = (nextLogicalIndex + 1) % heroVideoSources.length;
+        idleEl.pause();
+        idleEl.src = heroVideoSources[upcomingIndex];
+        idleEl.load();
+      }
+      heroTransitioningRef.current = false;
+    }, HERO_CROSSFADE_SECONDS * 1000);
   };
 
-  // When the active source index changes, reload the same <video> element with the
-  // new <source> and resume playback immediately — no remount, no poster flash.
-  useEffect(() => {
-    const videoEl = heroVideoRef.current;
-    if (!videoEl) return;
-    videoEl.load();
-    const playPromise = videoEl.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay can be blocked by the browser in some contexts; safe to ignore.
-      });
+  // Begin the handoff slightly before the active clip actually ends, so the crossfade
+  // has time to play out and the next clip is already moving by the time this one stops.
+  const handleHeroTimeUpdate = (slot: 0 | 1) => () => {
+    if (activeHeroSlot !== slot || heroTransitioningRef.current) return;
+    const el = heroVideoRefs[slot].current;
+    if (!el || !el.duration || Number.isNaN(el.duration)) return;
+    if (el.duration - el.currentTime <= HERO_TRANSITION_LEAD_SECONDS) {
+      attemptHeroTransition(slot);
     }
-  }, [heroVideoIndex]);
+  };
+
+  // Safety net: if the active clip reaches its end before the next one was ready, hold
+  // on its final moment (replaying it) instead of showing a blank frame, and keep
+  // retrying the handoff until the next clip is finally buffered.
+  const handleHeroEnded = (slot: 0 | 1) => () => {
+    if (activeHeroSlot !== slot || heroTransitioningRef.current) return;
+    const el = heroVideoRefs[slot].current;
+    if (!el) return;
+    el.currentTime = Math.max(0, el.duration - 1);
+    el.play().catch(() => {});
+    attemptHeroTransition(slot);
+  };
 
   // Marquee deals images (continuous scroll, no index needed)
   const carouselImages = [
@@ -681,23 +750,48 @@ const serviceCities = [
         <main className="bg-slate-800 pt-[59px] lg:pt-[88px]">
 
 <section className="relative text-white overflow-hidden min-h-[520px] sm:min-h-[600px] lg:min-h-[680px]">
-  {/* Full-width cinematic background video: inside.mp4 -> outside.mp4 -> loop, continuous, no static image between clips */}
-  <div className="absolute inset-0 w-full h-full z-0">
+  {/* Full-width cinematic background video: inside.mp4 <-> outside.mp4, continuous crossfade loop, no static image between clips */}
+  <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
     <motion.video
-      ref={heroVideoRef}
+      ref={heroVideoRefs[0]}
       autoPlay
       muted
       loop={false}
       playsInline
-      preload="metadata"
-      onEnded={handleHeroVideoEnded}
+      preload="auto"
+      onTimeUpdate={handleHeroTimeUpdate(0)}
+      onEnded={handleHeroEnded(0)}
       className="absolute inset-0 w-full h-full object-cover"
-      style={{ willChange: 'transform' }}
-      animate={prefersReducedMotion ? undefined : { scale: [1, 1.02, 1] }}
-      transition={prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      <source src={heroVideoSources[heroVideoIndex]} type="video/mp4" />
-    </motion.video>
+      style={{ willChange: 'transform, opacity' }}
+      animate={{
+        opacity: activeHeroSlot === 0 ? 1 : 0,
+        scale: prefersReducedMotion ? 1 : [1, 1.02, 1],
+      }}
+      transition={{
+        opacity: { duration: HERO_CROSSFADE_SECONDS, ease: 'easeInOut' },
+        scale: prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' },
+      }}
+    />
+    <motion.video
+      ref={heroVideoRefs[1]}
+      autoPlay
+      muted
+      loop={false}
+      playsInline
+      preload="auto"
+      onTimeUpdate={handleHeroTimeUpdate(1)}
+      onEnded={handleHeroEnded(1)}
+      className="absolute inset-0 w-full h-full object-cover"
+      style={{ willChange: 'transform, opacity' }}
+      animate={{
+        opacity: activeHeroSlot === 1 ? 1 : 0,
+        scale: prefersReducedMotion ? 1 : [1, 1.02, 1],
+      }}
+      transition={{
+        opacity: { duration: HERO_CROSSFADE_SECONDS, ease: 'easeInOut' },
+        scale: prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' },
+      }}
+    />
     {/* Cinematic gradient overlay: strong dark on the left (behind text), fading to transparent on the right */}
     <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
     {/* Subtle bottom gradient for extra depth */}
