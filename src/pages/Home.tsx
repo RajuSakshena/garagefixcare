@@ -1,5 +1,5 @@
 // Home.tsx (FULL UPDATED CODE - navigation added for Cars button using useNavigate)
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
@@ -61,7 +61,6 @@ import testimonial4 from "../images/Testimonial4.jpeg";
 import maintainGearboxImg from "../images/Maintain-Gearbox1.webp";
 import fourValveEngineImg from "../images/Four-valves.webp";
 import driveBeltScootyImg from "../images/Drive-belt.webp";
-import heroImage from "../images/mechanic.jpg";
 import insideVideo from "../images/inside.mp4";
 import outsideVideo from "../images/outside.mp4";
 
@@ -149,12 +148,29 @@ const Home = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   // Hero background video sequence: inside.mp4 -> outside.mp4 -> inside.mp4 -> ... (loops forever)
+  // A single persistent <video> element is used and its source is swapped in place
+  // (via videoRef.load()) so there is never an unmount/remount and never a static
+  // poster/fallback image between clips.
   const heroVideoSources = [insideVideo, outsideVideo];
   const [heroVideoIndex, setHeroVideoIndex] = useState(0);
-  const [isHeroVideoReady, setIsHeroVideoReady] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const handleHeroVideoEnded = () => {
     setHeroVideoIndex(i => (i + 1) % heroVideoSources.length);
   };
+
+  // When the active source index changes, reload the same <video> element with the
+  // new <source> and resume playback immediately — no remount, no poster flash.
+  useEffect(() => {
+    const videoEl = heroVideoRef.current;
+    if (!videoEl) return;
+    videoEl.load();
+    const playPromise = videoEl.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay can be blocked by the browser in some contexts; safe to ignore.
+      });
+    }
+  }, [heroVideoIndex]);
 
   // Marquee deals images (continuous scroll, no index needed)
   const carouselImages = [
@@ -665,25 +681,17 @@ const serviceCities = [
         <main className="bg-slate-800 pt-[59px] lg:pt-[88px]">
 
 <section className="relative text-white overflow-hidden min-h-[520px] sm:min-h-[600px] lg:min-h-[680px]">
-  {/* Full-width cinematic background video: inside.mp4 -> outside.mp4 -> loop */}
+  {/* Full-width cinematic background video: inside.mp4 -> outside.mp4 -> loop, continuous, no static image between clips */}
   <div className="absolute inset-0 w-full h-full z-0">
-    <img
-      src={heroImage}
-      alt=""
-      aria-hidden="true"
-      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${isHeroVideoReady ? 'opacity-0' : 'opacity-100'}`}
-    />
     <motion.video
-      key={heroVideoIndex}
+      ref={heroVideoRef}
       autoPlay
       muted
       loop={false}
       playsInline
-      preload={heroVideoIndex === 0 ? 'metadata' : 'auto'}
-      poster={heroImage}
+      preload="metadata"
       onEnded={handleHeroVideoEnded}
-      onCanPlay={() => setIsHeroVideoReady(true)}
-      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${isHeroVideoReady ? 'opacity-100' : 'opacity-0'}`}
+      className="absolute inset-0 w-full h-full object-cover"
       style={{ willChange: 'transform' }}
       animate={prefersReducedMotion ? undefined : { scale: [1, 1.02, 1] }}
       transition={prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' }}
