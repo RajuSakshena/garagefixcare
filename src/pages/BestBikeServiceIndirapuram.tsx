@@ -594,6 +594,40 @@ const BestBikeServiceIndirapuram = () => {
           </section>
         </main>
 
+        {/* Dark premium information strip — Indirapuram specific copy, fully visible with proper padding */}
+        <motion.div
+          className="w-full"
+          style={{
+            background: 'linear-gradient(135deg, #0f172a 0%, #172033 55%, #111827 100%)',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
+            boxShadow: '0 4px 18px rgba(0,0,0,0.25)',
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: { opacity: 0, y: 8 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+          }}
+        >
+          <div className="max-w-[1100px] mx-auto px-[14px] py-3 sm:py-4 relative overflow-hidden">
+            <div
+              className="pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(255,122,0,0.10) 0%, transparent 70%)' }}
+            />
+            <span className="relative inline-flex items-center gap-1.5 mb-1.5">
+              <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#ff7a00' }} />
+              <span className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider" style={{ color: '#ff7a00' }}>
+                Garage Fix Care
+              </span>
+            </span>
+            <p className="relative text-[10px] sm:text-sm leading-[1.5] sm:leading-relaxed" style={{ color: '#cbd5e1' }}>
+              Skip the garage queue. Our certified mechanics come to your home or office across Noida, Gurgaon, Delhi and the rest of Delhi NCR — handling everything from routine bike servicing and car oil changes to engine repairs and scooty fixes. Fast, transparent, and affordable.
+            </p>
+          </div>
+        </motion.div>
+
         {/* Marquee cities */}
         <div className="bg-sky-100 border-y border-gray-200 py-2 overflow-hidden">
           <div className="flex items-center text-sm font-semibold max-w-7xl mx-auto">
