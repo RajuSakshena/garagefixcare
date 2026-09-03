@@ -262,11 +262,11 @@ const BestBikeServicePaharganj = () => {
   }, []);
 
   const carePackages = [
-    { title: 'Station Quick Plan', subtitle: '100 CC - 125 CC', originalPrice: 'Rs. 549', discountedPrice: 'Rs. 275', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
-    { title: 'Station Standard Plan', subtitle: '135 CC - 200 CC', originalPrice: 'Rs. 749', discountedPrice: 'Rs. 365', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
-    { title: 'Station Comfort Plan', subtitle: '220 CC - 300 CC', originalPrice: 'Rs. 1,099', discountedPrice: 'Rs. 455', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
-    { title: 'Station Cruiser Plan', subtitle: '350 CC - 450 CC', originalPrice: 'Rs. 1,489', discountedPrice: 'Rs. 555', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
-    { title: 'Station Superbike Plan', subtitle: 'Above 500 CC', originalPrice: 'Rs. 2,029', discountedPrice: 'Rs. 919', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Station Quick Plan', subtitle: '100 CC - 125 CC', originalPrice: 'Rs. 549', discountedPrice: 'Rs. 299', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Station Standard Plan', subtitle: '135 CC - 200 CC', originalPrice: 'Rs. 749', discountedPrice: 'Rs. 399', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Station Comfort Plan', subtitle: '220 CC - 300 CC', originalPrice: 'Rs. 1,099', discountedPrice: 'Rs. 450', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Station Cruiser Plan', subtitle: '350 CC - 450 CC', originalPrice: 'Rs. 1,489', discountedPrice: 'Rs. 550', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Station Superbike Plan', subtitle: 'Above 500 CC', originalPrice: 'Rs. 2,029', discountedPrice: 'Rs. 599', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
   ];
 
   const inspectionItems = [
