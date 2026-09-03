@@ -109,11 +109,11 @@ const BestBikeServiceNewDelhi = () => {
   }, []);
 
   const repairPlans = [
-    { title: "Capital Basic Plan", subtitle: "100 CC - 125 CC", originalPrice: "Rs. 569", discountedPrice: "Rs. 285", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
-    { title: "Capital Standard Plan", subtitle: "135 CC - 200 CC", originalPrice: "Rs. 769", discountedPrice: "Rs. 375", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
-    { title: "Capital Comfort Plan", subtitle: "220 CC - 300 CC", originalPrice: "Rs. 1,129", discountedPrice: "Rs. 465", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
-    { title: "Capital Cruiser Plan", subtitle: "350 CC - 450 CC", originalPrice: "Rs. 1,529", discountedPrice: "Rs. 569", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
-    { title: "Capital Superbike Plan", subtitle: "Above 500 CC", originalPrice: "Rs. 2,079", discountedPrice: "Rs. 939", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] }
+    { title: "Capital Basic Plan", subtitle: "100 CC - 125 CC", originalPrice: "Rs. 569", discountedPrice: "Rs. 299", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
+    { title: "Capital Standard Plan", subtitle: "135 CC - 200 CC", originalPrice: "Rs. 769", discountedPrice: "Rs. 399", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
+    { title: "Capital Comfort Plan", subtitle: "220 CC - 300 CC", originalPrice: "Rs. 1,129", discountedPrice: "Rs. 450", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
+    { title: "Capital Cruiser Plan", subtitle: "350 CC - 450 CC", originalPrice: "Rs. 1,529", discountedPrice: "Rs. 550", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
+    { title: "Capital Superbike Plan", subtitle: "Above 500 CC", originalPrice: "Rs. 2,079", discountedPrice: "Rs. 599", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] }
   ];
 
   const detailedChecklist = [
