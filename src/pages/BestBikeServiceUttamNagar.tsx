@@ -1286,7 +1286,7 @@ const BestBikeServiceUttamNagar = () => {
             >
               {[
                 { name: 'Tarun Bhandari', img: testimonial1, text: 'Mechanic reached my lane in Uttam Nagar West within an hour. Fair pricing, no drama.', time: 'two weeks ago' },
-                { name: 'Sneha Choudhary', img: testimonial2, text: 'Booked for my Activa near Nawada, work was done right outside my gate.', time: 'three weeks ago' },
+                { name: 'Sumit Choudhary', img: testimonial2, text: 'Booked for my Activa near Nawada, work was done right outside my gate.', time: 'three weeks ago' },
                 { name: 'Rohit Tanwar', img: testimonial3, text: 'Quoted the price upfront before touching the bike. Very transparent process.', time: 'a month ago' },
                 { name: 'Komal Saxena', img: testimonial4, text: 'Quick response near Mohan Garden, mechanic was polite and skilled.', time: 'a month ago' },
               ].map(t => (
