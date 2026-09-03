@@ -263,42 +263,12 @@ const BestBikeServiceUttamNagar = () => {
     return () => clearInterval(rater);
   }, []);
 
-const servicePrices = [
-    {
-      title: "At-Home Regular Service",
-      subtitle: "100 CC, 110 CC, 125 CC.",
-      originalPrice: "Rs. 599",
-      discountedPrice: "Rs. 299",
-      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
-    },
-    {
-      title: "At-Home Classic Service",
-      subtitle: "135 CC, 160 CC, 200 CC.",
-      originalPrice: "Rs. 799",
-      discountedPrice: "Rs. 399",
-      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
-    },
-    {
-      title: "At-Home Premium Service",
-      subtitle: "220 CC, 250 CC, 300 CC.",
-      originalPrice: "Rs. 1,199",
-      discountedPrice: "Rs. 450",
-      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
-    },
-    {
-      title: "At-Home Royal Service",
-      subtitle: "350 CC, 400 CC, 450 CC.",
-      originalPrice: "Rs. 1,599",
-      discountedPrice: "Rs. 499",
-      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
-    },
-    {
-      title: "At-Home Sports Service",
-      subtitle: "Above 500, 600 CC, 650 CC.",
-      originalPrice: "Rs. 2,199",
-      discountedPrice: "Rs. 599",
-      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
-    }
+  const planList = [
+    { title: 'Quick Care Plan', subtitle: '100 CC - 125 CC', originalPrice: 'Rs. 549', discountedPrice: 'Rs. 279', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Daily Rider Plan', subtitle: '135 CC - 200 CC', originalPrice: 'Rs. 749', discountedPrice: 'Rs. 369', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Power Commuter Plan', subtitle: '220 CC - 300 CC', originalPrice: 'Rs. 1,099', discountedPrice: 'Rs. 459', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Heavy Cruiser Plan', subtitle: '350 CC - 450 CC', originalPrice: 'Rs. 1,499', discountedPrice: 'Rs. 559', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
+    { title: 'Superbike Care Plan', subtitle: 'Above 500 CC', originalPrice: 'Rs. 2,049', discountedPrice: 'Rs. 929', features: ['Engine Oil Change', 'Oil Filter Wash', 'Air Filter Wash', 'Spark Plug Cleaning'] },
   ];
 
   const fullInspectionList = [
