@@ -364,21 +364,21 @@ const Home = () => {
       title: "At-Home Premium Service",
       subtitle: "220 CC, 250 CC, 300 CC.",
       originalPrice: "Rs. 1,199",
-      discountedPrice: "Rs. 499",
+      discountedPrice: "Rs. 450",
       features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
     },
     {
       title: "At-Home Royal Service",
       subtitle: "350 CC, 400 CC, 450 CC.",
       originalPrice: "Rs. 1,599",
-      discountedPrice: "Rs. 599",
+      discountedPrice: "Rs. 499",
       features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
     },
     {
       title: "At-Home Sports Service",
       subtitle: "Above 500, 600 CC, 650 CC.",
       originalPrice: "Rs. 2,199",
-      discountedPrice: "Rs. 999",
+      discountedPrice: "Rs. 599",
       features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
     }
   ];
