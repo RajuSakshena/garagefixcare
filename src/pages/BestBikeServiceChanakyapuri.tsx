@@ -1,514 +1,1540 @@
-import { useState, useEffect } from 'react';
+// BestBikeServiceChanakyapuri.tsx
+// Chanakyapuri specific SEO/content + Delhi Cantt master design system
+// (cinematic video hero, Framer Motion, marquees, premium pricing cards, checklist modal)
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { CheckCircle, Star, Flame, X, Plus, Phone as PhoneIcon, ChevronLeft, ChevronRight, Bike, Car } from 'lucide-react';
+import { CheckCircle, Star, Flame, X, Plus, Phone, Bike, Car } from 'lucide-react';
 import SEOHelmet from '../components/SEOHelmet';
 import axios from 'axios';
-import { FaWhatsapp } from "react-icons/fa";
-import { Phone } from "lucide-react";
+import { FaWhatsapp } from 'react-icons/fa';
 
-// Only used images
-import bikeServiceOfferImage from '../images/offer11.jpg';
-import doorstepImage from '../images/offer22.jpg';
-import engineImage from '../images/offer33.jpg';
-import roadsideImage from '../images/offer44.jpg';
-import googleReviewsImage from '../images/google1.png';
-import facebookReviewsImage from '../images/facebook1.png';
-import justdialReviewsImage from '../images/justdial1.png';
-import mechanicImage from '../images/image.jpg';
-import warrantyImg from "../images/warranty.webp";
-import pickupImg from "../images/free pickup.webp";
-import transparentImg from "../images/transparent.webp";
-import trainedImg from "../images/trainie.webp";
-import handshakeImg from "../images/handshake.jpg";
-import wurthImg from "../images/WURTH.png";
-import motulImg from "../images/Motul.jpeg";
-import turtlemintImg from "../images/Turtlemint.png";
-import buniyadImg from "../images/Buniyad.png";
-import dunzoImg from "../images/Dunzo.png";
-import howWorksImage from "../images/How-works.jpg";
-import googleIcon from "../images/Testimonial1.png";
-import testimonial1 from "../images/Testimonial1.jpeg";
-import testimonial2 from "../images/Testimonial2.jpeg";
-import testimonial3 from "../images/Testimonial3.jpeg";
-import testimonial4 from "../images/Testimonial4.jpeg";
-import heroImage from "../images/mechanic.jpg";
-import bigGarageCar from "../images/big_garage_car.png";
-import bigGarageBike from "../images/big_garage_bike.png";
+// Hero background video (same assets/crossfade system as Delhi Cantt / Home.tsx)
+import insideVideo from '../images/inside.mp4';
+import outsideVideo from '../images/outside.mp4';
 
-interface TuneUpPlan {
+// Hot Deals marquee — same assets as Delhi Cantt / Home.tsx
+import hotDealsImage1 from '../images/hotdeals1.png';
+import hotDealsImage2 from '../images/hotdeals2.png';
+import hotDealsImage3 from '../images/hotdeals3.png';
+import hotDealsImage4 from '../images/hotdeals4.png';
+import hotDealsImage5 from '../images/hotdeals5.png';
+
+// Bike Services icons — same assets as Delhi Cantt / Home.tsx
+import routineService from '../images/Routine Service.png';
+import bikeInsurance from '../images/Bike Insurance.png';
+import doorstepService from '../images/Doorstep Service.png';
+import wheelCare from '../images/Wheel Care.png';
+import bikeBatteries from '../images/Bike Battery.png';
+import engineRepair from '../images/Engine Repair.png';
+
+// Shared assets — same as Delhi Cantt
+import warrantyImg from '../images/warranty.webp';
+import pickupImg from '../images/free pickup.webp';
+import transparentImg from '../images/transparent.webp';
+import trainedImg from '../images/trainie.webp';
+import whyChooseImg from '../images/whychoose.png';
+import wurthImg from '../images/WURTH.png';
+import motulImg from '../images/Motul.jpeg';
+import turtlemintImg from '../images/Turtlemint.png';
+import buniyadImg from '../images/Buniyad.png';
+import dunzoImg from '../images/Dunzo.png';
+import bmw310Image from '../images/bmw310.png';
+import googleIcon from '../images/Testimonial1.png';
+import testimonial1 from '../images/Testimonial1.jpeg';
+import testimonial2 from '../images/Testimonial2.jpeg';
+import testimonial3 from '../images/Testimonial3.jpeg';
+import testimonial4 from '../images/Testimonial4.jpeg';
+
+interface Service {
   title: string;
   subtitle: string;
   checklist: string[];
 }
 
-const BestBikeServiceChanakyapuri = () => {
-  const [ridersServedCount, setRidersServedCount] = useState(0);
-  const [currentRating, setCurrentRating] = useState(4.5);
-  const [checklistVisible, setChecklistVisible] = useState(false);
-  const [pickedPlan, setPickedPlan] = useState<TuneUpPlan | null>(null);
-  const [phoneDigits, setPhoneDigits] = useState('');
-  const [expandedFaqIdx, setExpandedFaqIdx] = useState<number | null>(null);
-  const navigateTo = useNavigate();
+// ==================================================
+// Reusable Framer Motion variants — same system as Delhi Cantt / Home.tsx
+// ==================================================
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+};
 
-  // Hero rotating banner
-  const [frameIndex, setFrameIndex] = useState(0);
-  const frameImages = [heroImage, bigGarageBike, mechanicImage, bigGarageCar];
-  const frameCaptions = [
-    "Doorstep bike mechanic near Diplomatic Enclave",
-    "On-site two-wheeler repair near Nehru Park",
-    "Trained bike technician serving Chanakyapuri",
-    "Verified mechanic visiting near Shanti Path"
-  ];
-  useEffect(() => {
-    const frameTimer = setInterval(() => setFrameIndex(f => (f + 1) % frameImages.length), 2500);
-    return () => clearInterval(frameTimer);
+const fadeIn: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } },
+};
+
+const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.97 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.7, ease: 'easeOut' } },
+};
+
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+const viewportOnce = { once: true, amount: 0.15 };
+
+const heroStaggerContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07 } },
+};
+
+const heroStaggerItem: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+};
+
+const BestBikeServiceChanakyapuri = () => {
+  const [happyCustomersCount, setHappyCustomersCount] = useState(0);
+  const [reviewScore, setReviewScore] = useState(4.6);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [modalPhoneNumber, setModalPhoneNumber] = useState('');
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  const prefersReducedMotion = useReducedMotion();
+
+  // Subtle top-of-page scroll progress indicator (same as Delhi Cantt)
+  const { scrollYProgress } = useScroll();
+  const scrollProgressScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  // ================= Navbar-flush hero offset =================
+  const [heroTopOffset, setHeroTopOffset] = useState(88);
+  useLayoutEffect(() => {
+    const navEl = (document.querySelector('header[class*="fixed"]') ||
+      document.querySelector('nav[class*="fixed"]') ||
+      document.querySelector('header') ||
+      document.querySelector('nav')) as HTMLElement | null;
+    if (!navEl) return;
+
+    const measure = () => {
+      const height = Math.round(navEl.getBoundingClientRect().height);
+      if (height > 0) setHeroTopOffset(height);
+    };
+
+    measure();
+
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(navEl);
+    window.addEventListener('resize', measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', measure);
+    };
   }, []);
 
-  const promoStrip = [
-    { src: bikeServiceOfferImage, alt: "Bike service offer near Chanakyapuri" },
-    { src: doorstepImage, alt: "Doorstep bike mechanic near Vinay Marg" },
-    { src: engineImage, alt: "Bike engine repair near Teen Murti" },
-    { src: roadsideImage, alt: "Roadside bike help near Race Course Road" },
+  // ================= Hero video sequence (same two-slot crossfade system as Delhi Cantt) =================
+  const heroVideoSources = [insideVideo, outsideVideo];
+  const heroVideoSlot0Ref = useRef<HTMLVideoElement | null>(null);
+  const heroVideoSlot1Ref = useRef<HTMLVideoElement | null>(null);
+  const heroVideoRefs = [heroVideoSlot0Ref, heroVideoSlot1Ref] as const;
+  const [activeHeroSlot, setActiveHeroSlot] = useState<0 | 1>(0);
+  const heroSequencePosRef = useRef(0);
+  const heroTransitioningRef = useRef(false);
+
+  const HERO_CROSSFADE_SECONDS = prefersReducedMotion ? 0 : 0.65;
+  const HERO_TRANSITION_LEAD_SECONDS = 0.6;
+
+  useEffect(() => {
+    const slot0 = heroVideoRefs[0].current;
+    const slot1 = heroVideoRefs[1].current;
+    if (!slot0 || !slot1) return;
+
+    slot0.src = heroVideoSources[0];
+    slot0.load();
+    slot0.play().catch(() => {});
+
+    slot1.src = heroVideoSources[1];
+    slot1.load();
+
+    heroSequencePosRef.current = 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const attemptHeroTransition = (fromSlot: 0 | 1) => {
+    if (heroTransitioningRef.current) return;
+    const toSlot: 0 | 1 = fromSlot === 0 ? 1 : 0;
+    const nextEl = heroVideoRefs[toSlot].current;
+    if (!nextEl || nextEl.readyState < 3) return;
+
+    heroTransitioningRef.current = true;
+    const nextLogicalIndex = (heroSequencePosRef.current + 1) % heroVideoSources.length;
+
+    nextEl.currentTime = 0;
+    const playPromise = nextEl.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+
+    setActiveHeroSlot(toSlot);
+    heroSequencePosRef.current = nextLogicalIndex;
+
+    window.setTimeout(() => {
+      const idleEl = heroVideoRefs[fromSlot].current;
+      if (idleEl) {
+        const upcomingIndex = (nextLogicalIndex + 1) % heroVideoSources.length;
+        idleEl.pause();
+        idleEl.src = heroVideoSources[upcomingIndex];
+        idleEl.load();
+      }
+      heroTransitioningRef.current = false;
+    }, HERO_CROSSFADE_SECONDS * 1000);
+  };
+
+  const handleHeroTimeUpdate = (slot: 0 | 1) => () => {
+    if (activeHeroSlot !== slot || heroTransitioningRef.current) return;
+    const el = heroVideoRefs[slot].current;
+    if (!el || !el.duration || Number.isNaN(el.duration)) return;
+    if (el.duration - el.currentTime <= HERO_TRANSITION_LEAD_SECONDS) {
+      attemptHeroTransition(slot);
+    }
+  };
+
+  const handleHeroEnded = (slot: 0 | 1) => () => {
+    if (activeHeroSlot !== slot || heroTransitioningRef.current) return;
+    const el = heroVideoRefs[slot].current;
+    if (!el) return;
+    el.currentTime = Math.max(0, el.duration - 1);
+    el.play().catch(() => {});
+    attemptHeroTransition(slot);
+  };
+  // ================= End hero video sequence =================
+
+  // Hot Deals marquee images — Chanakyapuri specific copy/alt text
+  const carouselImages = [
+    { src: hotDealsImage1, alt: 'Bike service offer in Chanakyapuri, New Delhi' },
+    { src: hotDealsImage2, alt: 'Doorstep scooty service near Diplomatic Enclave' },
+    { src: hotDealsImage3, alt: 'Car engine repair near Nehru Park' },
+    { src: hotDealsImage4, alt: 'Roadside vehicle assistance near Vinay Marg' },
+    { src: hotDealsImage5, alt: 'Doorstep vehicle repair deal near Safdarjung' },
   ];
+  const hotDealsAreaBadges = ['Chanakyapuri', 'Diplomatic Enclave', 'Nehru Park', 'Vinay Marg', 'Shanti Path', 'Safdarjung'];
 
   // Animated counters
   useEffect(() => {
-    const targetVal = 100000;
-    const span = 2000;
-    const stepVal = Math.ceil(targetVal / (span / 10));
-    if (ridersServedCount < targetVal) {
-      const counterId = setInterval(() => {
-        setRidersServedCount(prev => {
-          const next = prev + stepVal;
-          if (next >= targetVal) {
-            clearInterval(counterId);
-            return targetVal;
+    const targetCount = 100000;
+    const duration = 2000;
+    const increment = Math.ceil(targetCount / (duration / 10));
+    if (happyCustomersCount < targetCount) {
+      const timer = setInterval(() => {
+        setHappyCustomersCount(prevCount => {
+          const newCount = prevCount + increment;
+          if (newCount >= targetCount) {
+            clearInterval(timer);
+            return targetCount;
           }
-          return next;
+          return newCount;
         });
       }, 10);
-      return () => clearInterval(counterId);
+      return () => clearInterval(timer);
     }
-  }, [ridersServedCount]);
+  }, [happyCustomersCount]);
 
   useEffect(() => {
-    const targetRating = 4.7;
-    const span = 1000;
-    const tick = 10;
-    const stepVal = (targetRating - currentRating) / (span / tick);
-    let runningVal = currentRating;
-    const ratingId = setInterval(() => {
-      runningVal += stepVal;
-      if (runningVal >= targetRating) {
-        runningVal = targetRating;
-        clearInterval(ratingId);
+    const targetScore = 4.7;
+    const duration = 1000;
+    const interval = 10;
+    const increments = (targetScore - reviewScore) / (duration / interval);
+    let currentScore = reviewScore;
+    const timer = setInterval(() => {
+      currentScore += increments;
+      if (currentScore >= targetScore) {
+        currentScore = targetScore;
+        clearInterval(timer);
       }
-      setCurrentRating(parseFloat(runningVal.toFixed(1)));
-    }, tick);
-    return () => clearInterval(ratingId);
+      setReviewScore(parseFloat(currentScore.toFixed(1)));
+    }, interval);
+    return () => clearInterval(timer);
   }, []);
 
-  const tuneUpPlans = [
-    { title: "Enclave Essential Plan", subtitle: "100 CC - 125 CC", originalPrice: "Rs. 559", discountedPrice: "Rs. 282", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
-    { title: "Enclave Standard Plan", subtitle: "135 CC - 200 CC", originalPrice: "Rs. 759", discountedPrice: "Rs. 372", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
-    { title: "Enclave Comfort Plan", subtitle: "220 CC - 300 CC", originalPrice: "Rs. 1,119", discountedPrice: "Rs. 462", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
-    { title: "Enclave Cruiser Plan", subtitle: "350 CC - 450 CC", originalPrice: "Rs. 1,519", discountedPrice: "Rs. 565", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] },
-    { title: "Enclave Superbike Plan", subtitle: "Above 500 CC", originalPrice: "Rs. 2,069", discountedPrice: "Rs. 935", features: ["Engine Oil Change", "Oil Filter Wash", "Air Filter Wash", "Spark Plug Cleaning"] }
+  const servicePrices = [
+    { title: 'At-Home Regular Service', subtitle: '100 CC - 125 CC', originalPrice: 'Rs. 599', discountedPrice: 'Rs. 299', features: ['Engine Oil Change', 'Oil Filter Clean', 'Air Filter Clean', 'Spark Plug Clean'] },
+    { title: 'At-Home Classic Service', subtitle: '135 CC - 200 CC', originalPrice: 'Rs. 799', discountedPrice: 'Rs. 399', features: ['Engine Oil Change', 'Oil Filter Clean', 'Air Filter Clean', 'Spark Plug Clean'] },
+    { title: 'At-Home Premium Service', subtitle: '220 CC - 300 CC', originalPrice: 'Rs. 1,199', discountedPrice: 'Rs. 450', features: ['Engine Oil Change', 'Oil Filter Clean', 'Air Filter Clean', 'Spark Plug Clean'] },
+    { title: 'At-Home Royal Service', subtitle: '350 CC - 450 CC', originalPrice: 'Rs. 1,599', discountedPrice: 'Rs. 499', features: ['Engine Oil Change', 'Oil Filter Clean', 'Air Filter Clean', 'Spark Plug Clean'] },
+    { title: 'At-Home Sports Service', subtitle: 'Above 500 CC', originalPrice: 'Rs. 2,199', discountedPrice: 'Rs. 599', features: ['Engine Oil Change', 'Oil Filter Clean', 'Air Filter Clean', 'Spark Plug Clean'] },
   ];
 
-  const inspectionChecklist = [
-    "Coolant Level Check", "Quick Body Wipe-Down", "Chain & Pivot Greasing", "Battery Terminal Check",
-    "Engine Idle & Sound Inspection", "Front Fork Inspection", "Carburettor Quick Tune", "Lights & Wiring Check",
-    "Front & Rear Brake Setting", "Drive Chain Cleaning", "Bolt & Nut Tightening",
-    "Mileage & Power Check", "Engine Oil Replacement (Billed Separately)", "Oil Filter Swap (If Needed)",
-    "Air Filter Swap (If Needed)", "Spark Plug Swap (If Needed)", "Tubeless Tyre Air Refill",
-    "Free Pickup & Drop (On Request)"
+  const checklistItems = [
+    'Coolant check-up', 'Basic Hand Cleaning', 'Oiling and greasing', 'Battery General check-up',
+    'Basic Engine Inspection', 'Basic Fork Inspection', 'Carburettor Basic check-up', 'Minor Electrical check-up',
+    'Brakes – Front & Rear Adjust', 'Driven Chain Basic Cleaning', 'Tightening of Screws Bolts & Nuts',
+    'Average and Performance check-up', 'Engine Oil Change (Price Extra)', 'Oil Filter Clean (If Replace Charges)',
+    'Air Filter Clean (If Replace Charges)', 'Spark Plug Clean (If Replace Charges)', 'Tyre Air Fill (only tubeless)',
+    'Free Pick and Drop (if needed)',
   ];
 
-  const openChecklistModal = (title: string, subtitle: string) => {
-    setPickedPlan({ title, subtitle, checklist: inspectionChecklist });
-    setPhoneDigits('');
-    setChecklistVisible(true);
+  const handleSeeChecklist = (title: string, subtitle: string) => {
+    setSelectedService({ title, subtitle, checklist: checklistItems });
+    setModalPhoneNumber('');
+    setIsModalOpen(true);
   };
 
-  const closeChecklistModal = () => {
-    setChecklistVisible(false);
-    setPickedPlan(null);
-    setPhoneDigits('');
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedService(null);
+    setModalPhoneNumber('');
   };
 
-  const finalizeBooking = async () => {
-    if (!phoneDigits || phoneDigits.length !== 10) {
-      alert('Please enter a valid 10-digit mobile number to proceed.');
+  const handleModalBookNow = async () => {
+    if (!modalPhoneNumber || modalPhoneNumber.length !== 10) {
+      alert('Please enter a valid 10-digit phone number.');
       return;
     }
-    if (!pickedPlan) return;
+    if (!selectedService) return;
     try {
-      const serviceType = `${pickedPlan.title} (${pickedPlan.subtitle})`;
+      const serviceType = `${selectedService.title} (${selectedService.subtitle})`;
       await axios.post(`${import.meta.env.VITE_API_URL}/api/quick-book-service`, {
-        phoneNumber: phoneDigits,
-        serviceType: serviceType
+        phoneNumber: modalPhoneNumber,
+        serviceType: serviceType,
       });
-      alert('Booking confirmed! Our Chanakyapuri team will call you shortly to finalise the slot.');
-      closeChecklistModal();
+      alert('Thanks for booking! We have received your request and will contact you in 5 minutes.');
+      closeModal();
     } catch (error) {
-      alert('We could not complete your booking. Please try again.');
+      alert('Booking failed. Please try again.');
       console.error('Error booking service:', error);
     }
   };
 
-  const zoneMarquee = [
-    { name: "Chanakyapuri", color: "text-indigo-700" },
-    { name: "New Delhi", color: "text-red-700" },
-    { name: "Connaught Place", color: "text-teal-700" },
-    { name: "Gurgaon", color: "text-gray-900" },
-    { name: "Noida", color: "text-orange-700" },
-    { name: "Faridabad", color: "text-slate-700" },
+  const serviceCities = [
+    { name: 'Chanakyapuri', color: 'text-indigo-700' },
+    { name: 'Diplomatic Enclave', color: 'text-red-700' },
+    { name: 'Nehru Park', color: 'text-teal-700' },
+    { name: 'Vinay Marg', color: 'text-gray-900' },
+    { name: 'Shanti Path', color: 'text-orange-700' },
+    { name: 'Safdarjung', color: 'text-slate-700' },
   ];
 
-  const landmarkCoverage = [
-    "Diplomatic Enclave", "Nehru Park", "Vinay Marg", "Shanti Path",
-    "Teen Murti", "Yashwant Place", "Embassy Area",
-    "Sarojini Nagar", "Safdarjung", "Race Course Road"
+  const coveredAreas = [
+    'Diplomatic Enclave', 'Nehru Park', 'Vinay Marg', 'Shanti Path',
+    'Teen Murti', 'Yashwant Place', 'Embassy Area', 'Sarojini Nagar',
+    'Safdarjung', 'Race Course Road', 'Moti Bagh', 'Dhaula Kuan',
   ];
 
-  const relatedCityPages = [
-    { name: "New Delhi", path: "/best-bike-service-new-delhi" },
-    { name: "Connaught Place", path: "/best-bike-service-connaught-place" },
-    { name: "Gurgaon", path: "/best-bike-service-gurgaon" },
-    { name: "Uttam Nagar", path: "/best-bike-service-uttam-nagar" },
-    { name: "Noida", path: "/best-bike-service-noida" },
+  const cityPages = [
+    { name: 'Gurgaon', path: '/best-bike-service-gurgaon' },
+    { name: 'Delhi', path: '/best-bike-service-delhi' },
+    { name: 'Noida', path: '/best-bike-service-noida' },
+    { name: 'Greater Noida', path: '/best-bike-service-greater-noida' },
+    { name: 'Ghaziabad', path: '/best-bike-service-ghaziabad' },
+    { name: 'Faridabad', path: '/best-bike-service-faridabad' },
+  ];
+
+  // Brands We Service marquee data (same structure/logic as Delhi Cantt)
+  const bikeBrands = ['Hero', 'Honda', 'TVS', 'Bajaj', 'Suzuki', 'Yamaha', 'Kawasaki', 'Royal Enfield', 'KTM', 'BMW', 'Harley Davidson', 'Ducati', 'Triumph', 'Indian', 'Vespa', 'Benelli', 'Aprilia', 'Yezdi', 'Husqvarna', 'Other'];
+  const scootyBrands = ['Honda', 'TVS', 'Hero', 'Suzuki', 'Yamaha', 'Ather', 'Ola Electric', 'Bajaj', 'Vespa', 'Aprilia', 'Other'];
+  const marqueeBrands = Array.from(
+    new Set([...bikeBrands, ...scootyBrands, 'Jawa', 'Bajaj Chetak', 'Vida', 'Okinawa', 'Ampere', 'Revolt'])
+  ).filter(brand => brand !== 'Other');
+  const marqueeBrandsRow1 = marqueeBrands.filter((_, i) => i % 2 === 0);
+  const marqueeBrandsRow2 = marqueeBrands.filter((_, i) => i % 2 !== 0);
+
+  const bikeServiceCards = [
+    { name: 'Regular Service', img: routineService },
+    { name: 'Engine Repair', img: engineRepair },
+    { name: 'Battery Replacement', img: bikeBatteries },
+    { name: 'Brake Repair', img: wheelCare },
+    { name: 'Tyre Service', img: doorstepService },
+    { name: 'Insurance Assistance', img: bikeInsurance },
+  ];
+
+  // FAQs — visible list and FAQPage schema MUST match exactly
+  const faqs = [
+    {
+      q: 'What is the best bike, scooty and car service in Chanakyapuri?',
+      a: "Garage Fix Care is Chanakyapuri's trusted doorstep service for bikes, scooties and cars, starting at just ₹299 for bike and scooty service, with certified mechanics, transparent pricing, genuine parts and a 10-day service guarantee.",
+    },
+    {
+      q: 'How much does bike service cost in Chanakyapuri?',
+      a: 'Bike service in Chanakyapuri starts from ₹299 for 100–125cc vehicles (Regular Service). Classic Service (135–200 CC) is ₹399, Premium Service (220–300 CC) is ₹499, Royal Service (350–450 CC) is ₹599, and Sports Service (above 500 CC) is ₹999. All prices include labour with zero hidden charges.',
+    },
+    {
+      q: 'How much does scooty service cost in Chanakyapuri?',
+      a: 'Scooty service in Chanakyapuri uses the same transparent CC-based pricing as bike service — starting at ₹299 for 100–125cc scooties like the Honda Activa or TVS Jupiter, up to ₹999 for larger engine sizes. Every price includes labour, with no hidden add-ons.',
+    },
+    {
+      q: 'Do you provide car service in Chanakyapuri?',
+      a: 'Yes. Alongside bikes and scooties, we offer doorstep car servicing and repairs in Chanakyapuri and nearby areas. Car service is quoted transparently based on your car model and the work required — just book online or call us for a quote.',
+    },
+    {
+      q: 'Do you provide doorstep service in the Diplomatic Enclave?',
+      a: 'Yes. Our certified mechanics regularly attend bookings within the Diplomatic Enclave and the surrounding embassy lanes. They arrive fully equipped with tools, oils and common spare parts so most jobs are finished on the spot.',
+    },
+    {
+      q: 'Do you cover Nehru Park and Vinay Marg?',
+      a: 'Yes, Nehru Park and Vinay Marg are fully covered under our doorstep service zone for bikes, scooties and cars. Same-day service is available subject to location and technician availability — share your address while booking.',
+    },
+    {
+      q: 'Do you provide service near Shanti Path and Teen Murti?',
+      a: 'Yes, Shanti Path and Teen Murti are part of our Chanakyapuri service belt. Our mechanics can attend to bikes, scooties and cars at your home, office or parking spot.',
+    },
+    {
+      q: 'Can a mechanic come to residential or official premises in Chanakyapuri?',
+      a: 'Yes. Our mechanics regularly service vehicles inside residential complexes, embassy quarters and office premises across Chanakyapuri. Share your location, society name and gate number during booking — we come directly to your parking bay.',
+    },
+    {
+      q: 'Do you provide emergency breakdown assistance in Chanakyapuri?',
+      a: 'Yes. If your bike, scooty or car breaks down anywhere in Chanakyapuri — near Safdarjung, Race Course Road or Yashwant Place — call us immediately and we dispatch a mechanic to your location for on-spot repair or recovery.',
+    },
+    {
+      q: 'Is same-day doorstep service available in Chanakyapuri?',
+      a: 'Yes, same-day doorstep service is available across Chanakyapuri, subject to location and technician availability. Our mechanics typically reach your address within 2–4 hours of booking.',
+    },
+    {
+      q: 'Do you provide pickup and drop for service in Chanakyapuri?',
+      a: 'Yes. Free pickup and drop is available when a service requires workshop-level work — for example if a specific spare part is needed that cannot be fitted on-site. Most routine services are completed directly at your doorstep.',
+    },
+    {
+      q: 'Are your mechanics certified and verified in Chanakyapuri?',
+      a: 'Yes. Every mechanic dispatched by Garage Fix Care is background-verified, trained and certified to work on major bike, scooty and car brands. Each service is also backed by our 10-day hassle-free service guarantee.',
+    },
   ];
 
   return (
     <>
       <SEOHelmet
-        title="Bike Service Near Chanakyapuri | Doorstep Repair ₹282 | Garage Fix Care"
-        description="Trusted doorstep bike service across Chanakyapuri and the Diplomatic Enclave — Nehru Park, Vinay Marg, Shanti Path — starting at ₹282 with verified mechanics."
+        title="Best Bike, Scooty and Car Service in Chanakyapuri | Doorstep Service Just ₹299"
+        description="Garage Fix Care offers doorstep bike, scooty and car service in Chanakyapuri, New Delhi, covering the Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, Embassy Area, Sarojini Nagar, Safdarjung and Race Course Road, starting at just ₹299. Certified mechanics, transparent pricing and same-day doorstep service."
         canonical="https://www.garagefixcare.in/best-bike-service-chanakyapuri"
         robots="index, follow"
         og={{
-          url: "https://www.garagefixcare.in/best-bike-service-chanakyapuri",
-          image: "https://www.garagefixcare.in/og-banner.png",
-          imageAlt: "Doorstep bike mechanic serving Chanakyapuri and the Diplomatic Enclave",
-          type: "website",
+          url: 'https://www.garagefixcare.in/best-bike-service-chanakyapuri',
+          image: 'https://www.garagefixcare.in/og-banner.png',
+          imageAlt: 'Best bike, scooty and car service in Chanakyapuri at doorstep by Garage Fix Care',
+          type: 'website',
         }}
         twitter={{
-          image: "https://www.garagefixcare.in/og-banner.png",
-          imageAlt: "Garage Fix Care doorstep bike service in Chanakyapuri",
+          image: 'https://www.garagefixcare.in/og-banner.png',
+          imageAlt: 'Doorstep bike, scooty and car service in Chanakyapuri, Diplomatic Enclave and Nehru Park',
         }}
         structuredData={[
           {
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Garage Fix Care",
-            "description": "Doorstep bike repair and servicing across Chanakyapuri, covering the Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path and nearby areas, starting at ₹282.",
-            "url": "https://www.garagefixcare.in/best-bike-service-chanakyapuri",
-            "telephone": "+919540553759",
-            "priceRange": "₹₹",
-            "image": "https://www.garagefixcare.in/og-banner.png",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Chanakyapuri",
-              "addressRegion": "Delhi",
-              "addressCountry": "IN"
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: 'Garage Fix Care',
+            description: 'Best bike, scooty and car service in Chanakyapuri, New Delhi. Doorstep repair, servicing, oil change and battery replacement for bikes, scooties and cars, starting at just ₹299 for bike and scooty service.',
+            url: 'https://www.garagefixcare.in/best-bike-service-chanakyapuri',
+            telephone: '+919540553759',
+            priceRange: '₹₹',
+            image: 'https://www.garagefixcare.in/og-banner.png',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Chanakyapuri, New Delhi',
+              addressRegion: 'Delhi',
+              addressCountry: 'IN',
             },
-            "geo": { "@type": "GeoCoordinates", "latitude": "28.5933", "longitude": "77.1880" },
-            "areaServed": [
-                { "@type": "Place", "name": "Diplomatic Enclave" },
-                { "@type": "Place", "name": "Nehru Park" },
-                { "@type": "Place", "name": "Vinay Marg" },
-                { "@type": "Place", "name": "Shanti Path" },
-                { "@type": "Place", "name": "Teen Murti" },
-                { "@type": "Place", "name": "Yashwant Place" },
-                { "@type": "Place", "name": "Embassy Area" },
-                { "@type": "Place", "name": "Sarojini Nagar" },
-                { "@type": "Place", "name": "Safdarjung" },
-                { "@type": "Place", "name": "Race Course Road" }
-              ],
-            "serviceType": ["Doorstep Bike Repair", "Bike Servicing", "Engine Repair", "Battery Replacement", "Brake Repair", "Puncture Repair"],
-            "openingHours": "Mo-Su 08:00-20:00",
-            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "100000" }
+            geo: { '@type': 'GeoCoordinates', latitude: '28.5933', longitude: '77.1880' },
+            areaServed: [
+              { '@type': 'Place', name: 'Chanakyapuri' },
+              { '@type': 'Place', name: 'Diplomatic Enclave' },
+              { '@type': 'Place', name: 'Nehru Park' },
+              { '@type': 'Place', name: 'Vinay Marg' },
+              { '@type': 'Place', name: 'Shanti Path' },
+              { '@type': 'Place', name: 'Teen Murti' },
+              { '@type': 'Place', name: 'Yashwant Place' },
+              { '@type': 'Place', name: 'Embassy Area' },
+              { '@type': 'Place', name: 'Sarojini Nagar' },
+              { '@type': 'Place', name: 'Safdarjung' },
+              { '@type': 'Place', name: 'Race Course Road' },
+              { '@type': 'Place', name: 'Moti Bagh' },
+              { '@type': 'Place', name: 'Dhaula Kuan' },
+            ],
+            serviceType: ['Bike Repair', 'Scooty Repair', 'Car Service', 'Doorstep Vehicle Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
+            openingHours: 'Mo-Su 08:00-20:00',
+            aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', reviewCount: '100000' },
           },
           {
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "name": "Doorstep Bike Service in Chanakyapuri",
-            "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
-            "areaServed": "Chanakyapuri",
-            "description": "On-demand bike servicing at your location starting at ₹282, including oil change, brake adjustment, battery check, and puncture repair across Chanakyapuri and the Embassy Area.",
-            "offers": { "@type": "Offer", "priceCurrency": "INR", "price": "282", "availability": "https://schema.org/InStock" }
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Doorstep Bike, Scooty and Car Service in Chanakyapuri',
+            provider: { '@type': 'LocalBusiness', name: 'Garage Fix Care' },
+            areaServed: 'Chanakyapuri, New Delhi',
+            description: 'At-home bike, scooty and car servicing across Chanakyapuri and nearby Central Delhi areas including the Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, Embassy Area, Sarojini Nagar, Safdarjung and Race Course Road. Bike and scooty service starts at ₹299, covering oil change, engine repair, battery replacement, brake repair, tyre service and puncture fix. Car service is quote-based and depends on the car model and work required — same-day doorstep service subject to availability.',
+            offers: { '@type': 'Offer', priceCurrency: 'INR', price: '299', availability: 'https://schema.org/InStock' },
           },
           {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              { "@type": "Question", "name": "How much does doorstep bike service cost near Chanakyapuri?", "acceptedAnswer": { "@type": "Answer", "text": "Doorstep bike service near Chanakyapuri starts at ₹282 under the Enclave Essential Plan for 100-125cc bikes, going up to ₹935 for the Enclave Superbike Plan, all inclusive of labour." } },
-              { "@type": "Question", "name": "Do you cover bike repair near the Diplomatic Enclave?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, mechanics regularly attend bookings near the Diplomatic Enclave, arriving fully equipped to complete most repairs without needing a workshop visit." } },
-              { "@type": "Question", "name": "Which areas around Chanakyapuri are covered?", "acceptedAnswer": { "@type": "Answer", "text": "We serve Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, the Embassy Area, Sarojini Nagar, Safdarjung, and Race Course Road." } },
-              { "@type": "Question", "name": "Can a mechanic reach me near Nehru Park on short notice?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, bookings near Nehru Park are typically attended within 2-4 hours. A phone call helps us prioritise urgent breakdown requests." } }
-            ]
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqs.map(faq => ({
+              '@type': 'Question',
+              name: faq.q,
+              acceptedAnswer: { '@type': 'Answer', text: faq.a },
+            })),
           },
           {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
-              { "@type": "ListItem", "position": 2, "name": "Bike Service Near Chanakyapuri", "item": "https://www.garagefixcare.in/best-bike-service-chanakyapuri" }
-            ]
-          }
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.garagefixcare.in/' },
+              { '@type': 'ListItem', position: 2, name: 'Best Bike, Scooty and Car Service in Chanakyapuri', item: 'https://www.garagefixcare.in/best-bike-service-chanakyapuri' },
+            ],
+          },
         ]}
+      />
+
+      {/* Subtle scroll progress indicator — same as Delhi Cantt */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-orange-500 origin-left z-[70]"
+        style={{ scaleX: scrollProgressScaleX }}
       />
 
       <div className="min-h-screen">
         {/* Hero Section */}
-        <main className="bg-slate-800 pt-[76px] sm:pt-[112px] lg:pt-[120px]">
-          <section className="text-white py-2 sm:py-2 lg:py-2">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-center">
-                {/* Left Side */}
-                <div>
-                  <h1 className="text-brandRed text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 leading-tight">
-                    Bike Service Near Chanakyapuri
-                    <span className="text-orange-500"> — Doorstep Repair from ₹282</span>
-                  </h1>
-                  <p className="font-poppins text-xs sm:text-sm font-semibold text-orange-300 mb-2">
-                    Starting at ₹282 • Mechanics Across the Embassy Belt • Same-Day Slots
-                  </p>
-                  <p className="font-poppins text-xs sm:text-sm leading-relaxed text-white/90 mb-3 sm:mb-4">
-                    Wide tree-lined avenues, embassy security, and a near-total absence of roadside garages make Chanakyapuri one of the hardest places in Delhi to find a quick bike fix. Garage Fix Care closes that gap by sending a trained mechanic directly to your gate anywhere between the Diplomatic Enclave and Safdarjung, handling everything from a routine service to a full engine repair without you driving anywhere.
-                  </p>
-                  <div className="flex flex-wrap gap-x-3 gap-y-1 mb-4 sm:mb-5 text-xs text-white/80">
-                    {["✔ From ₹282", "✔ Same-Day Repair", "✔ Mechanic At Your Gate", "✔ Verified Technicians", "✔ Transparent Billing"].map((point, i) => (
-                      <span key={i} className="font-medium">{point}</span>
-                    ))}
-                  </div>
+        <main className="bg-slate-800" style={{ paddingTop: `${heroTopOffset}px` }}>
+          <section className="relative text-white overflow-hidden min-h-[700px] sm:min-h-[600px] lg:min-h-[680px]">
+            {/* Cinematic background video: inside.mp4 <-> outside.mp4, continuous crossfade loop */}
+            <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+              <motion.video
+                ref={heroVideoRefs[0]}
+                autoPlay
+                muted
+                loop={false}
+                playsInline
+                preload="auto"
+                onTimeUpdate={handleHeroTimeUpdate(0)}
+                onEnded={handleHeroEnded(0)}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ willChange: 'transform, opacity' }}
+                animate={{
+                  opacity: activeHeroSlot === 0 ? 1 : 0,
+                  scale: prefersReducedMotion ? 1 : [1, 1.02, 1],
+                }}
+                transition={{
+                  opacity: { duration: HERO_CROSSFADE_SECONDS, ease: 'easeInOut' },
+                  scale: prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' },
+                }}
+              />
+              <motion.video
+                ref={heroVideoRefs[1]}
+                autoPlay
+                muted
+                loop={false}
+                playsInline
+                preload="auto"
+                onTimeUpdate={handleHeroTimeUpdate(1)}
+                onEnded={handleHeroEnded(1)}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ willChange: 'transform, opacity' }}
+                animate={{
+                  opacity: activeHeroSlot === 1 ? 1 : 0,
+                  scale: prefersReducedMotion ? 1 : [1, 1.02, 1],
+                }}
+                transition={{
+                  opacity: { duration: HERO_CROSSFADE_SECONDS, ease: 'easeInOut' },
+                  scale: prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' },
+                }}
+              />
+              <div
+                className="absolute inset-0 sm:hidden"
+                style={{
+                  background:
+                    'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.72) 22%, rgba(0,0,0,0.22) 40%, rgba(0,0,0,0.22) 60%, rgba(0,0,0,0.52) 78%, rgba(0,0,0,0.52) 100%)',
+                }}
+              />
+              <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
+              <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              <div className="hero-light-sweep absolute inset-0 pointer-events-none" />
+            </div>
 
-                  {/* Book + Call Buttons */}
-                  <div className="flex flex-wrap items-center gap-3">
-                    <a href="https://www.garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-orange-700 transition-all duration-300 inline-block">
-                      Request a Mechanic
-                    </a>
-                    <a href="tel:9540553759" className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-white hover:text-blue-900 transition-colors duration-200 inline-flex items-center justify-center gap-2"><Phone className="h-4 w-4" /> Call Now</a>
-                  </div>
+            <style>{`
+              @keyframes heroLightSweep {
+                0%   { transform: translateX(-15%); opacity: 0.35; }
+                50%  { transform: translateX(15%);  opacity: 0.55; }
+                100% { transform: translateX(-15%); opacity: 0.35; }
+              }
+              .hero-light-sweep {
+                background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.06) 48%, transparent 66%);
+                animation: heroLightSweep 10s ease-in-out infinite;
+              }
+              @media (prefers-reduced-motion: reduce) {
+                .hero-light-sweep { animation: none; opacity: 0.2; }
+              }
+            `}</style>
 
-                  {/* Vehicle Selection */}
-                  <div className="mt-6 bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-3xl p-4 shadow-2xl">
-                    <h3 className="text-white text-lg font-semibold mb-4 text-center">Tell Us Your Vehicle Type</h3>
-                    <div className="grid grid-cols-2 gap-3">
-                      <button className="flex items-center justify-center gap-3 bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-2xl font-semibold text-base transition-all duration-300"><Bike className="h-6 w-6" /><span>Bike &amp; Scooty</span></button>
-                      <button onClick={() => navigateTo('/car')} className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 border border-slate-600 text-white py-3 rounded-2xl font-semibold text-base"><Car className="h-6 w-6" /><span>Cars</span></button>
+            <div className="absolute inset-0 sm:relative z-10 w-full sm:px-6 lg:pl-[6vw] lg:pr-6 sm:py-10 lg:py-12">
+              {/* TOP ZONE — H1 + subheading (Chanakyapuri specific) */}
+              <motion.div
+                className="absolute top-5 left-4 right-4 sm:relative sm:top-auto sm:left-auto sm:right-auto sm:w-full lg:max-w-[560px]"
+                initial="hidden"
+                animate="visible"
+                variants={heroStaggerContainer}
+              >
+                <motion.h1
+                  variants={heroStaggerItem}
+                  className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] sm:leading-tight mb-1.5 sm:mb-3"
+                >
+                  Best Bike, Scooty and Car Service in Chanakyapuri
+                  <span style={{ color: '#FF7A18' }}> — Doorstep Service Just ₹299</span>
+                </motion.h1>
+
+                <motion.p
+                  variants={heroStaggerItem}
+                  className="font-poppins text-[11px] sm:text-sm font-semibold text-white/85 leading-tight mb-1.5 sm:mb-2"
+                >
+                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Bikes, Scooties &amp; Cars &bull; Same-Day Doorstep Service &bull; Certified Mechanics Near You
+                </motion.p>
+
+                <motion.p
+                  variants={heroStaggerItem}
+                  className="hidden sm:block text-xs sm:text-sm leading-relaxed text-white/80 mb-2 sm:mb-3 max-w-[520px]"
+                >
+                  Trusted by residents across the Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, Embassy Area, Sarojini Nagar, Safdarjung and Race Course Road — our certified mechanics handle bikes, scooties and cars right at your doorstep.
+                </motion.p>
+              </motion.div>
+
+              {/* BOTTOM ZONE — trust points, CTAs, vehicle selector, stats */}
+              <motion.div
+                className="absolute bottom-3 left-4 right-4 sm:relative sm:bottom-auto sm:left-auto sm:right-auto sm:w-full lg:max-w-[560px] sm:mt-0"
+                initial="hidden"
+                animate="visible"
+                variants={heroStaggerContainer}
+              >
+                <motion.div
+                  variants={heroStaggerItem}
+                  className="grid grid-cols-2 gap-x-2 gap-y-1 sm:flex sm:flex-wrap sm:gap-x-3 sm:gap-y-1 mb-2 sm:mb-5 text-[9px] sm:text-xs text-white/85"
+                >
+                  {['Starting ₹299', 'Same-Day Service', 'Doorstep Mechanics', 'Trusted Technicians', 'No Hidden Charges'].map((point, i) => (
+                    <span key={i} className="inline-flex items-center gap-1 font-medium">
+                      <CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0" style={{ color: '#FF7A18' }} />
+                      {point}
+                    </span>
+                  ))}
+                </motion.div>
+
+                <motion.div variants={heroStaggerItem} className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <a
+                    href="https://www.garagefixcare.in/bookservice"
+                    className="bg-orange-600 text-white px-4 py-2 rounded-lg text-xs sm:px-6 sm:py-3 sm:rounded-xl font-semibold sm:text-base shadow-lg hover:bg-orange-700 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:translate-y-0 transition-all duration-300 inline-block"
+                  >
+                    Book Service Now
+                  </a>
+                  <a
+                    href="tel:9540553759"
+                    className="border-2 border-white text-white px-4 py-2 rounded-lg text-xs sm:px-6 sm:py-3 sm:rounded-xl font-semibold sm:text-base hover:bg-white hover:text-blue-900 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 inline-flex items-center justify-center gap-2"
+                  >
+                    <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    Call Now
+                  </a>
+                </motion.div>
+
+                {/* Select Your Vehicle */}
+                <motion.div
+                  variants={heroStaggerItem}
+                  className="mt-2 sm:mt-5 w-full sm:max-w-[380px] lg:max-w-[420px] bg-slate-900/80 backdrop-blur-md border border-slate-700 rounded-lg sm:rounded-xl px-2.5 py-2 sm:px-3 sm:py-3 shadow-lg"
+                >
+                  <p className="text-white/90 text-[9px] sm:text-xs font-semibold mb-1 sm:mb-2 tracking-tight">Select Your Vehicle</p>
+                  <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                    <button
+                      type="button"
+                      aria-pressed="true"
+                      className="flex items-center justify-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white py-1.5 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-xs md:text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
+                    >
+                      <Bike className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                      <span>Bike &amp; Scooty</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => navigate('/car')}
+                      className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 border border-slate-600 hover:border-slate-400 text-white py-1.5 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
+                    >
+                      <Car className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                      <span>Cars</span>
+                    </button>
+                  </div>
+                </motion.div>
+
+                {/* Review + Customer Stats */}
+                <motion.div variants={heroStaggerItem} className="flex flex-row items-center gap-2 sm:gap-3 w-full mt-2 sm:mt-4">
+                  <div className="bg-sky-100 text-black px-2 py-1.5 sm:p-1 rounded-lg sm:rounded-xl shadow-lg flex-1">
+                    <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-xl font-bold">
+                      <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
+                      {reviewScore.toFixed(1)}/5
                     </div>
+                    <div className="text-[10px] sm:text-xs font-semibold text-center">Google Review</div>
                   </div>
-                </div>
-
-                {/* Right Side: Image Carousel + Reviews */}
-                <div className="relative flex flex-col items-center lg:items-end gap-1">
-                  <div className="relative w-full rounded-lg overflow-hidden shadow-2xl">
-                    <img src={frameImages[frameIndex]} alt={frameCaptions[frameIndex]} className="w-full rounded-lg transition-opacity duration-700" style={{ minHeight: '200px', objectFit: 'cover' }} />
-                    <button onClick={() => setFrameIndex(f => (f - 1 + frameImages.length) % frameImages.length)} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full"><ChevronLeft className="h-6 w-6" /></button>
-                    <button onClick={() => setFrameIndex(f => (f + 1) % frameImages.length)} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full"><ChevronRight className="h-6 w-6" /></button>
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-                      {frameImages.map((_, i) => <button key={i} onClick={() => setFrameIndex(i)} className={`w-2 h-2 rounded-full transition-all ${i === frameIndex ? 'bg-white scale-125' : 'bg-white/50'}`} />)}
-                    </div>
+                  <div className="bg-sky-100 text-black px-2 py-1.5 sm:p-1 rounded-lg sm:rounded-xl shadow-lg flex-1">
+                    <div className="text-xs sm:text-xl font-bold text-center">{happyCustomersCount.toLocaleString()}+</div>
+                    <div className="text-[10px] sm:text-xs font-semibold text-center">Happy Customers</div>
                   </div>
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
-                    <div className="bg-sky-100 text-black p-1 rounded-lg shadow-lg flex-1 text-center"><div className="flex items-center justify-center gap-2 text-lg font-bold"><Star className="h-4 w-4 text-yellow-400 fill-current" />{currentRating.toFixed(1)}/5</div><div className="text-xs font-semibold">Google Rating</div></div>
-                    <div className="bg-sky-100 text-black p-1 rounded-lg shadow-lg flex-1 text-center"><div className="text-lg font-bold">{ridersServedCount.toLocaleString()}+</div><div className="text-xs font-semibold">Riders Served</div></div>
-                  </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
           </section>
         </main>
 
-        {/* Marquee cities */}
+        {/* Dark premium information strip — Chanakyapuri specific copy */}
+        <motion.div
+          className="w-full"
+          style={{
+            background: 'linear-gradient(135deg, #0f172a 0%, #172033 55%, #111827 100%)',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
+            boxShadow: '0 4px 18px rgba(0,0,0,0.25)',
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: { opacity: 0, y: 8 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+          }}
+        >
+          <div className="max-w-[1100px] mx-auto px-[14px] py-[10px] sm:px-6 sm:py-3.5 relative overflow-hidden">
+            <div
+              className="pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(255,122,0,0.10) 0%, transparent 70%)' }}
+            />
+            <span className="relative inline-flex items-center gap-1.5 mb-1">
+              <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#ff7a00' }} />
+              <span className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider" style={{ color: '#ff7a00' }}>
+                Garage Fix Care — Chanakyapuri
+              </span>
+            </span>
+            <p className="relative text-[10px] sm:text-sm leading-[1.4] sm:leading-relaxed" style={{ color: '#cbd5e1' }}>
+              Skip the garage queue. Our certified mechanics come to your home, quarters or office across the Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, Embassy Area, Sarojini Nagar, Safdarjung and Race Course Road — servicing bikes, scooties and cars, from routine maintenance to engine repairs, starting at ₹299 for bike and scooty service. Fast, transparent, and affordable.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Marquee: Service Available cities */}
         <div className="bg-sky-100 border-y border-gray-200 py-2 overflow-hidden">
-          <div className="flex items-center text-sm font-semibold max-w-7xl mx-auto">
-            <div className="flex-shrink-0 px-2"><span className="text-red-600 mr-1 font-bold">Mechanics On Standby</span><span className="text-brandRed font-bold"> (10% Off Today)</span></div>
-            <div className="flex-1 overflow-hidden"><div className="flex items-center animate-marquee">{[...Array(3)].map((_, repIdx) => zoneMarquee.map((zone, idx) => <span key={`${repIdx}-${idx}`} className={`ml-2 sm:ml-6 md:ml-12 tracking-wider flex-shrink-0 font-bold text-sm ${zone.color}`}>{zone.name}</span>))}</div></div>
+          <div className="flex items-center text-sm sm:text-sm font-semibold max-w-7xl mx-auto">
+            <div className="flex-shrink-0 px-2 sm:px-2 pr-2">
+              <span className="text-red-600 mr-1 sm:mr-2 font-bold">Service Available </span>
+              <span className="text-brandRed font-bold sm:inline"> (10% off)</span>
+            </div>
+            <div className="flex-1 min-w-0 overflow-hidden">
+              <div className="flex items-center animate-marquee">
+                {[...Array(3)].map((_, repIdx) =>
+                  serviceCities.map((city, idx) => (
+                    <span
+                      key={`${repIdx}-${idx}`}
+                      className={`ml-2 sm:ml-6 md:ml-12 tracking-wider flex-shrink-0 font-bold text-sm sm:text-sm ${city.color}`}
+                    >
+                      {city.name}
+                    </span>
+                  ))
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Hot Deals Carousel */}
+        {/* Hot Deals This Week — Chanakyapuri specific copy, Delhi Cantt-style marquee */}
         <section className="py-8 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center justify-center mb-8"><div className="flex items-center"><h2 className="text-2xl sm:text-4xl font-bold mr-4"><span className="text-white">This Week's Offers</span> <span className="text-red-600">in Chanakyapuri</span></h2><Flame className="h-8 w-8 text-orange-500" /></div><p className="text-lg text-white text-center">Limited-period savings for riders across the Diplomatic Enclave and nearby embassy lanes. Lock in your slot before it's gone!</p></div>
+            <motion.div
+              className="flex flex-col items-center justify-center mb-8"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <div className="flex items-center justify-center">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mr-4">
+                  <span className="text-white">Hot Deals</span> <span className="text-red-600">This Week</span>
+                </h2>
+                <Flame className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />
+              </div>
+              <p className="text-base sm:text-lg text-white max-w-7xl mx-auto mt-2 text-center">
+                Limited-time offer for Chanakyapuri, the Diplomatic Enclave and Safdarjung customers! Get up to 10% off on bike, scooty and car repairs and servicing at your doorstep, starting at ₹299. Hurry—these deals won&apos;t last long!
+              </p>
+            </motion.div>
           </div>
-          <div className="overflow-hidden w-full px-2 sm:px-4">
-            <div style={{ display: 'flex', animation: 'marqueeScroll 22s linear infinite', width: 'max-content', gap: '14px' }} onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')} onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}>
-              {[...promoStrip, ...promoStrip].map((img, i) => (
-                <div key={i} className="flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-white/10" style={{ width: 'min(76vw, 400px)' }}>
-                  <img src={img.src} alt={img.alt} className="w-full object-cover" style={{ height: '220px' }} />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-2 flex gap-1"><span className="text-white text-xs font-semibold bg-red-600/80 px-2 py-0.5 rounded-full">Chanakyapuri</span><span className="text-white text-xs font-semibold bg-red-600/80 px-2 py-0.5 rounded-full">Delhi</span></div>
+          <div className="hotdeals-marquee-viewport overflow-hidden w-full px-6 sm:px-12 lg:px-20">
+            <div
+              className="hotdeals-marquee-track"
+              onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+              onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+            >
+              {[...carouselImages, ...carouselImages].map((img, i) => (
+                <div
+                  key={i}
+                  className="hotdeals-card group flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-white/10 transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                  style={{ width: 'min(76vw, 400px)' }}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full h-full object-contain bg-slate-800 transition-transform duration-300 group-hover:scale-[1.03]"
+                      style={{ height: '220px' }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-2 flex flex-wrap gap-1">
+                      {[hotDealsAreaBadges[i % hotDealsAreaBadges.length], hotDealsAreaBadges[(i + 2) % hotDealsAreaBadges.length]].map((area, ai) => (
+                        <span key={ai} className="text-white text-xs font-semibold bg-red-600/80 px-2 py-0.5 rounded-full">
+                          {area}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-          <style>{`@keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
+          <style>{`
+            @keyframes marqueeScroll {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .hotdeals-marquee-viewport {
+              -webkit-mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
+            }
+            .hotdeals-marquee-track {
+              display: flex;
+              width: max-content;
+              gap: 14px;
+              animation: marqueeScroll 22s linear infinite;
+            }
+          `}</style>
         </section>
 
-        {/* What Clients Say */}
-        <section className="bg-slate-800 text-black py-4 sm:py-6">
-          <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 text-center mb-4"><h2 className="text-xl sm:text-3xl font-bold"><span className="text-white">Straight From</span> <span className="text-red-600">Our Riders</span></h2></div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-7xl mx-auto px-2">
-            {[{ img: googleReviewsImage, name: "Google", rating: "4.7/5", link: "https://goo.gl/maps/dqmKivbhftEaVxK79" }, { img: facebookReviewsImage, name: "Facebook", rating: "4.7/5", link: "https://www.instagram.com/p/DQVj8SmktgG/" }, { img: justdialReviewsImage, name: "JustDial", rating: "4.7/5", link: "https://www.justdial.com/jd-business?docid=011PXX11.XX11.251024223108.U1U5" }].map((rev, i) => (
-              <div key={i} className="bg-sky-50 rounded-lg p-3 shadow-sm text-center"><img src={rev.img} alt={rev.name} className="mx-auto h-10 mb-2" /><div className="flex justify-center mb-1">{[...Array(5)].map((_, s) => <Star key={s} className="h-4 w-4 text-yellow-400 fill-current" />)}</div><p className="font-semibold text-sm">{rev.rating} Rating</p><a href={rev.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 text-xs hover:underline">view us on {rev.name}</a></div>
-            ))}
+        {/* Bikes & Scooters — Brands We Service */}
+        <section className="bg-slate-800 text-white py-10 sm:py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              className="text-center mb-6 sm:mb-8"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <p className="text-xs sm:text-sm font-semibold tracking-widest text-orange-400 uppercase mb-2">Bikes &amp; Scooters</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+                <span className="text-white">Brands We</span> <span style={{ color: '#FF7A18' }}>Service</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto">Service support for leading two-wheeler brands across Chanakyapuri and Delhi.</p>
+            </motion.div>
           </div>
+
+          <div className="flex flex-col gap-2 sm:gap-3">
+            <div className="brand-marquee-viewport overflow-hidden w-full">
+              <div
+                className="brand-marquee-track brand-marquee-track-1"
+                onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+                onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+              >
+                {[...marqueeBrandsRow1, ...marqueeBrandsRow1].map((brand, i) => (
+                  <div
+                    key={`row1-${brand}-${i}`}
+                    className="brand-tile flex-shrink-0 bg-white/90 rounded-lg px-3 py-2 sm:px-5 sm:py-3 shadow-sm"
+                    style={{ border: '1px solid #E2E8F0' }}
+                  >
+                    <span className="text-xs sm:text-sm font-semibold whitespace-nowrap tracking-wide" style={{ color: '#334155' }}>
+                      {brand}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="brand-marquee-viewport overflow-hidden w-full">
+              <div
+                className="brand-marquee-track brand-marquee-track-2"
+                onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+                onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+              >
+                {[...marqueeBrandsRow2, ...marqueeBrandsRow2].map((brand, i) => (
+                  <div
+                    key={`row2-${brand}-${i}`}
+                    className="brand-tile flex-shrink-0 bg-white/90 rounded-lg px-3 py-2 sm:px-5 sm:py-3 shadow-sm"
+                    style={{ border: '1px solid #E2E8F0' }}
+                  >
+                    <span className="text-xs sm:text-sm font-semibold whitespace-nowrap tracking-wide" style={{ color: '#334155' }}>
+                      {brand}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <style>{`
+            @keyframes brandMarqueeScroll {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .brand-marquee-viewport {
+              -webkit-mask-image: linear-gradient(to right, transparent 0, black 60px, black calc(100% - 60px), transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, black 60px, black calc(100% - 60px), transparent 100%);
+            }
+            .brand-marquee-track {
+              display: flex;
+              width: max-content;
+              gap: 8px;
+            }
+            @media (min-width: 640px) {
+              .brand-marquee-track { gap: 12px; }
+            }
+            .brand-marquee-track-1 { animation: brandMarqueeScroll 24s linear infinite; }
+            .brand-marquee-track-2 { animation: brandMarqueeScroll 30s linear infinite reverse; }
+            .brand-tile { transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+            .brand-tile:hover { border-color: #FDBA74 !important; transform: translateY(-2px); }
+            .brand-tile:hover span { color: #EA580C !important; }
+          `}</style>
         </section>
 
-        {/* At-Home Service Price List */}
-        <section className="py-12 bg-slate-900">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-2xl sm:text-4xl font-bold mb-4"><span className="text-white">Chanakyapuri Service</span> <span className="text-red-600">Rate Card</span></h2>
-            <p className="text-xl text-white mb-6">Plain, upfront pricing for doorstep bike service across Chanakyapuri and the Embassy Area. The only variable is your engine size — nothing else changes the bill.</p>
-            <div className="grid grid-cols-2 gap-3 justify-items-center">
-              {tuneUpPlans.map((service, idx) => (
-                <div key={idx} className="bg-brandRed p-1 rounded-lg w-full"><div className="bg-sky-100 rounded-lg p-2"><div className="text-left"><h3 className="text-base font-bold">{service.title}</h3><p className="text-xs font-semibold">{service.subtitle}</p><div><span className="line-through text-red-500 mr-1">{service.originalPrice}</span><span className="text-green-600 font-bold">{service.discountedPrice}/-</span></div></div><ul className="list-none text-left text-xs mt-1">{service.features.map((f, fi) => <li key={fi} className="flex items-center"><CheckCircle className="h-3 w-3 text-green-500 mr-1" />{f}</li>)}</ul><div className="flex justify-end mt-1"><button onClick={() => openChecklistModal(service.title, service.subtitle)} className="bg-red-600 text-white px-2 py-1 text-xs rounded-md">See full checklist</button></div></div></div>
+        {/* At-Home Service Price List — Chanakyapuri pricing (premium vertical service-plan cards) */}
+        <section className="py-12 sm:py-16 bg-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-white">At-Home Bike &amp; Scooty Service</span> <span className="text-red-600">Price List</span>
+              </h2>
+              <p className="text-base sm:text-xl text-white mb-10 sm:mb-12 max-w-3xl mx-auto">
+                Transparent pricing for doorstep bike and scooty service in Chanakyapuri and nearby Central Delhi areas, starting at just ₹299. Check the labour charges below based on your two-wheeler&apos;s engine size — no hidden fees, no surprises. Looking for car service instead? Tap Cars above for a tailored quote.
+              </p>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 justify-items-center"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {servicePrices.map((service, index) => {
+                const isBestValue = service.title === 'At-Home Premium Service';
+                const headerGradients = [
+                  'linear-gradient(135deg, #1f2937 0%, #92400e 130%)',
+                  'linear-gradient(135deg, #78350f 0%, #f97316 120%)',
+                  'linear-gradient(135deg, #ea580c 0%, #FF7A18 100%)',
+                  'linear-gradient(135deg, #7c2d12 0%, #f97316 130%)',
+                  'linear-gradient(135deg, #111827 0%, #c2410c 140%)',
+                ];
+                const headerGradient = headerGradients[index % headerGradients.length];
+
+                return (
+                  <motion.div
+                    key={index}
+                    variants={staggerItem}
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    className="pricing-plan-card relative flex flex-col text-left w-full max-w-[300px] rounded-[22px] overflow-hidden"
+                    style={{
+                      background: '#111827',
+                      border: isBestValue ? '1px solid rgba(255,122,24,0.55)' : '1px solid rgba(255,255,255,0.10)',
+                      boxShadow: isBestValue
+                        ? '0 12px 32px rgba(0,0,0,0.35), 0 0 26px rgba(255,122,24,0.18)'
+                        : '0 12px 32px rgba(0,0,0,0.3)',
+                    }}
+                  >
+                    {isBestValue && (
+                      <span
+                        className="absolute top-3 right-3 z-20 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full shadow-md"
+                        style={{ background: 'linear-gradient(135deg, #FFB157, #FF7A18)', boxShadow: '0 4px 12px rgba(255,122,24,0.45)' }}
+                      >
+                        Best Value
+                      </span>
+                    )}
+
+                    <div className="pricing-card-header relative pt-6 px-5 pb-9" style={{ background: headerGradient }}>
+                      <Bike className="absolute -right-2 -top-2 h-16 w-16 text-white/10 pointer-events-none" strokeWidth={1.5} />
+                      <div className="flex items-center gap-1 mb-2">
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/50" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+                      </div>
+                      <h3 className="relative text-lg sm:text-xl font-extrabold text-white leading-tight tracking-tight">
+                        AT-HOME
+                        <br />
+                        {service.title.replace('At-Home ', '').toUpperCase()}
+                      </h3>
+                      <svg
+                        className="absolute bottom-0 left-0 w-full h-6 sm:h-7"
+                        viewBox="0 0 300 28"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <path d="M0,28 C75,0 225,0 300,28 L300,28 L0,28 Z" fill="#111827" />
+                      </svg>
+                      <span className="absolute left-5 -bottom-3 z-10 inline-block bg-slate-900 border border-white/10 text-slate-200 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                        {service.subtitle}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col flex-grow px-5 pt-6 pb-5">
+                      <div className="flex items-baseline gap-2 mb-4">
+                        <span className="text-3xl sm:text-[34px] font-extrabold leading-none" style={{ color: '#FF7A18' }}>
+                          {service.discountedPrice}/-
+                        </span>
+                        <span className="text-xs sm:text-sm text-slate-500 line-through">{service.originalPrice}</span>
+                      </div>
+
+                      <ul className="list-none space-y-2 mb-6 flex-grow">
+                        {service.features.map((feature, i) => (
+                          <li key={i} className="flex items-center gap-2 text-sm text-slate-300">
+                            <CheckCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: '#FF7A18' }} />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <button
+                        onClick={() => handleSeeChecklist(service.title, service.subtitle)}
+                        className="pricing-checklist-btn mt-auto w-full inline-flex items-center justify-center gap-1.5 text-white px-4 py-3 text-xs sm:text-sm rounded-full font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-200"
+                        style={{ background: 'linear-gradient(135deg, #FF7A18, #EA580C)' }}
+                        aria-label={`See full checklist for ${service.title}`}
+                      >
+                        See checklist <span aria-hidden="true">→</span>
+                      </button>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+          <style>{`
+            .pricing-plan-card {
+              transition: border-color 300ms ease, box-shadow 300ms ease;
+            }
+            .pricing-plan-card:hover {
+              border-color: rgba(255,122,24,0.55) !important;
+              box-shadow: 0 18px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,122,24,0.2) !important;
+            }
+            .pricing-plan-card:hover .pricing-card-header {
+              filter: brightness(1.08);
+            }
+            .pricing-card-header {
+              transition: filter 300ms ease;
+            }
+            .pricing-checklist-btn {
+              transition: filter 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+            }
+            .pricing-checklist-btn:hover {
+              filter: brightness(1.1);
+              transform: translateY(-2px);
+              box-shadow: 0 6px 16px rgba(255,122,24,0.4);
+            }
+          `}</style>
+        </section>
+
+        {/* Areas Covered — Chanakyapuri localities */}
+        <section className="py-10 sm:py-14 bg-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Areas We Serve in <span className="text-red-600">Chanakyapuri</span>
+            </motion.h2>
+            <motion.div
+              className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5 sm:mb-6"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {coveredAreas.map(area => (
+                <motion.span
+                  key={area}
+                  variants={staggerItem}
+                  className="bg-red-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold shadow-md hover:bg-red-700 transition-colors duration-200"
+                >
+                  {area}
+                </motion.span>
               ))}
-            </div>
+            </motion.div>
+            <motion.p
+              className="text-white/90 text-sm sm:text-base max-w-3xl mx-auto"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Whether your vehicle is parked near the Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, the Embassy Area, Sarojini Nagar, Safdarjung, Race Course Road, Moti Bagh or Dhaula Kuan, our bike, scooty and car mechanics reach your doorstep. Same-day doorstep service is available across Chanakyapuri, subject to location and technician availability, starting at ₹299 for bike and scooty service.
+            </motion.p>
           </div>
         </section>
 
-        {/* Areas Covered Section */}
-        <section className="py-8 bg-slate-800">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Covering Every Lane of <span className="text-red-600">Chanakyapuri</span></h2>
-            <div className="flex flex-wrap justify-center gap-3 mb-6">
-              {landmarkCoverage.map(area => <span key={area} className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-md">{area}</span>)}
-            </div>
-            <p className="text-white text-base max-w-3xl mx-auto">Whether your bike is parked near the Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, the Embassy Area, Sarojini Nagar, Safdarjung, or Race Course Road, our mechanics reach you within 2-4 hours. Same-day visits are available throughout this leafy, low-density zone.</p>
-          </div>
-        </section>
-
-        {/* Bike Services We Offer */}
+        {/* Vehicle Services We Offer */}
         <section className="py-12 bg-slate-800">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Complete Bike Care, <span className="text-red-600">Delivered Right to Your Gate</span></h2>
-            <p className="text-white mb-6">From a quick servicing run to a deeper engine fix — our Chanakyapuri mechanics are equipped for both.</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-              {["General Servicing", "Engine Repair", "Battery Replacement", "Brake Repair", "Tyre & Puncture", "Insurance Assistance"].map(service => (
-                <div key={service} className="bg-sky-100 rounded-lg p-3 shadow-md text-center font-semibold text-gray-800 text-sm">{service}</div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
+                Complete Bike, Scooty &amp; Car Care, <span className="text-red-600">Right at Your Door in Chanakyapuri</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
+                From routine oil changes to full engine repair — our Chanakyapuri mechanics handle bikes, scooties and cars at your location, starting at ₹299 for bike and scooty service. No waiting, no hassle.
+              </p>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {bikeServiceCards.map((service, index) => (
+                <motion.div
+                  key={index}
+                  variants={staggerItem}
+                  className="bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-200"
+                >
+                  <img
+                    src={service.img}
+                    alt={`${service.name} in Chanakyapuri`}
+                    className="h-12 w-12 sm:h-16 sm:w-16 object-contain mb-2"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p className="font-semibold text-gray-800 text-xs sm:text-sm text-center">{service.name}</p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Comprehensive Bike Service Content */}
-        <section className="py-10 bg-slate-900 text-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">About Doorstep Bike Service in <span className="text-red-600">Chanakyapuri</span></h2>
-            <div className="space-y-4 text-gray-200 text-base leading-relaxed">
-              <p>Chanakyapuri is unlike most parts of Delhi — wide diplomatic avenues, heavy embassy security, and almost no roadside mechanics anywhere near the Diplomatic Enclave or the wider Embassy Area. For residents, staff, and diplomatic households riding two-wheelers through this belt, finding a workshop usually means a long detour outside the zone altogether. Garage Fix Care removes that detour entirely by sending a trained mechanic directly to your home, office, or gate anywhere from Nehru Park to Safdarjung. Doorstep service here starts at ₹282, covering an engine oil change, filter cleaning, spark plug check, and brake adjustment, with the entire job completed at your address. We service all the major two-wheeler brands seen around Vinay Marg and Shanti Path — Hero, Honda, Bajaj, TVS, Suzuki, Yamaha, and Royal Enfield — along with scooties like the Activa that household staff and residents commonly rely on near Teen Murti and Yashwant Place. Every estimate is shared with you in writing before work begins, so the final bill never carries any surprise.</p>
-              <p>The long, tree-lined stretches near Race Course Road and Sarojini Nagar see less stop-start traffic than central Delhi, but Chanakyapuri's bikes still face their own wear pattern from extended idling at embassy checkpoints and longer commute distances. Our mechanics are trained to catch early signs of battery drain, brake wear, and engine inefficiency before they become bigger repairs. If your bike does break down anywhere between the Diplomatic Enclave and Safdarjung, a single call sends a technician to your exact location for an on-the-spot fix, no towing involved. We regularly handle battery replacements, brake pad changes, clutch adjustments, and tubeless puncture repairs right at your doorstep. Garage Fix Care has completed over 1,00,000 services across Delhi NCR and holds a consistent 4.7-star Google rating for punctuality and clear, honest pricing. Reach us through our website, a WhatsApp message, or a direct call, and get dependable two-wheeler care delivered straight to Chanakyapuri.</p>
-            </div>
+        {/* Comprehensive SEO Content (Chanakyapuri specific) */}
+        <section className="py-10 sm:py-14 bg-slate-900 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold mb-4"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Why Garage Fix Care is the <span className="text-red-600">Best Bike, Scooty and Car Service in Chanakyapuri</span>
+            </motion.h2>
+            <motion.div
+              className="space-y-4 text-gray-200 text-sm sm:text-base leading-relaxed"
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <p>Chanakyapuri is unlike most parts of Delhi — wide diplomatic avenues, heavy embassy security, and almost no roadside mechanics anywhere near the Diplomatic Enclave or the wider Embassy Area. For residents, diplomatic households and office staff riding or driving through this belt, finding a workshop usually means a long detour outside the zone altogether. Garage Fix Care removes that detour entirely by sending a trained, background-verified mechanic directly to your home, quarters, society parking or office anywhere from Nehru Park to Safdarjung, and from Vinay Marg to Race Course Road. Doorstep bike and scooty service in Chanakyapuri starts at just ₹299 — covering an engine oil change, air filter cleaning, spark plug check, brake adjustment and basic electrical check, with the entire job completed at your address. We also handle car servicing and repairs at your doorstep, with pricing quoted based on your car&apos;s model and requirement. We service every major two-wheeler brand seen around Chanakyapuri — Hero, Honda, Bajaj, TVS, Suzuki, Yamaha, Royal Enfield and KTM — along with family scooties like the Honda Activa and TVS Jupiter that residents and household staff commonly rely on near Teen Murti and Yashwant Place, alongside popular hatchbacks and sedans. What distinguishes us as the best bike, scooty and car service in Chanakyapuri is our strict pricing transparency — you receive a full itemised estimate before a single tool is touched, ensuring zero hidden charges at the end. We use only genuine engine oils from Motul and Wurth, paired with manufacturer-approved spare parts, and each service is backed by our 10-day hassle-free service guarantee.</p>
+              <p>The long, tree-lined stretches near Race Course Road and Sarojini Nagar see less stop-start traffic than central Delhi, but Chanakyapuri&apos;s vehicles still face their own wear pattern from extended idling at embassy checkpoints and longer commute distances. Our mechanics carry professional diagnostic tools to catch early signs of battery drain, brake wear and engine inefficiency before they become bigger repairs — significantly extending your vehicle&apos;s lifespan whether you commute daily through Shanti Path or just ride around the neighbourhood. We also handle emergency breakdown situations across Chanakyapuri — if your bike, scooty or car stops near Safdarjung or anywhere on the way to Dhaula Kuan, call us and we dispatch a mechanic to your exact location as soon as possible, without any towing required. From battery replacement and brake pad changes to clutch cable adjustment and tyre puncture repair, our technicians fix it all on the spot. Garage Fix Care has completed over 1,00,000 services across Delhi NCR, earning a consistent 4.7-star Google rating for professionalism, punctuality and honest pricing. Book your bike, scooty or car service in Chanakyapuri, Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, Embassy Area, Sarojini Nagar, Safdarjung or Race Course Road today via our website, WhatsApp or direct call — and discover the convenience of professional doorstep vehicle care starting at just ₹299 for bike and scooty service.</p>
+            </motion.div>
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-8 bg-slate-900 text-white">
-          <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6 items-center">
-            <div><p className="text-xs">Flat ₹10 Off Your First Chanakyapuri Booking</p><h2 className="text-3xl font-bold">GarageFixCare <span className="text-red-600">Service Pledge</span></h2><p className="mb-4">Chanakyapuri's reliable doorstep bike mechanic. We work on every common motorcycle and scooter brand — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — right at your home or office across the Embassy belt.</p><div className="flex gap-2"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="h-10" /><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" className="h-10" /></div></div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[{ img: warrantyImg, title: "10-Day Service Guarantee", desc: "Worry-free coverage" }, { img: pickupImg, title: "Free Pickup & Drop", desc: "No travel required" }, { img: transparentImg, title: "Clear, Itemised Pricing", desc: "Save up to 30%" }, { img: trainedImg, title: "Verified, Trained Mechanics", desc: "Skilled every visit" }].map((item, idx) => (
-                <div key={idx} className="bg-sky-100 text-black rounded-lg p-3 flex items-center gap-3"><img src={item.img} alt={item.title} className="h-10 w-10 object-contain" /><div><h3 className="font-bold text-sm">{item.title}</h3><p className="text-xs">{item.desc}</p></div></div>
+        {/* Warranty / Benefits Section */}
+        <section className="py-10 sm:py-14 bg-slate-900 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <p className="text-xs sm:text-sm font-semibold text-orange-400 uppercase tracking-wide mb-1">
+                Get Rs.10 Off On First Service in Chanakyapuri
+              </p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+                GarageFixCare <span className="text-red-600">Service Warranty</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white mb-4">
+                Chanakyapuri&apos;s trusted doorstep bike, scooty and car service, starting at ₹299. We service all major motorcycle, scooter and car brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM and more — right at your home or office near Nehru Park and the Diplomatic Enclave.
+              </p>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {[
+                { img: warrantyImg, title: 'Enjoy a 10-Day Free Service Guarantee', desc: '10-Day Hassle-Free Warranty' },
+                { img: pickupImg, title: 'Enjoy Free Pickup and Drop at Your Convenience', desc: 'Free Pick & Drop Available' },
+                { img: transparentImg, title: 'Transparent Pricing, Competitive Rate', desc: 'Save up to 30% on your bike, scooty or car service' },
+                { img: trainedImg, title: 'Skilled and Certified Mechanics', desc: 'Certified Bike, Scooty and Car Mechanics' },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={staggerItem}
+                  className="bg-sky-100 text-black rounded-xl p-4 sm:p-6 shadow-lg flex items-center space-x-2 sm:space-x-3"
+                >
+                  <img src={item.img} alt={item.title} className="h-8 w-8 sm:h-10 sm:w-10 object-contain" loading="lazy" decoding="async" />
+                  <div>
+                    <h3 className="font-bold text-sm sm:text-base">{item.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-900">{item.desc}</p>
+                  </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Why Choose GarageFixCare */}
-        <section className="py-12 bg-slate-800 text-white">
-          <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6 items-center">
-            <div className="order-2 lg:order-1"><img src={handshakeImg} alt="Handshake" className="rounded-lg shadow-lg w-full max-w-sm" /></div>
-            <div className="order-1"><h2 className="text-3xl font-bold mb-2">Why Chanakyapuri Residents Choose <span className="text-red-600">GarageFixCare</span></h2><p>We bring the workshop to you across the Diplomatic Enclave and surrounding lanes — fair pricing, genuine parts, no long detours to find a garage.</p><ul className="space-y-2 mt-4">{["Mechanic Comes to Your Gate", "Verified, Trained Technicians", "Transparent, No-Surprise Pricing", "Genuine Spare Parts Only", "Backed by a Service Guarantee", "Quick, Professional Turnaround"].map(item => <li key={item} className="flex items-center"><span className="text-red-500 mr-1">◆</span> {item}</li>)}</ul></div>
+        <section className="py-12 sm:py-16 bg-slate-800 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+            <motion.div
+              className="flex justify-center order-2 lg:order-1"
+              variants={scaleIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <img src={whyChooseImg} alt="Why Choose GarageFixCare in Chanakyapuri" className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm" loading="lazy" decoding="async" />
+            </motion.div>
+            <motion.div className="order-1 lg:order-2" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+                Why Choose <span className="text-red-600">GarageFixCare?</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white mb-4">
+                We bring certified mechanics for bikes, scooties and cars directly to residents across Chanakyapuri, the Diplomatic Enclave, Nehru Park and Safdarjung — doorstep service starting at ₹299, with honest pricing, genuine parts and zero hassle.
+              </p>
+              <ul className="space-y-2 text-left">
+                {['Hassle-Free Doorstep Service', 'Certified and Skilled Technicians', 'Honest Pricing', 'Certified Genuine Parts', 'Your Satisfaction Guaranteed', 'Fast and Professional Service'].map(item => (
+                  <li key={item} className="flex items-center text-gray-200 text-sm sm:text-base">
+                    <span className="text-red-500 text-base mr-1">◆</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           </div>
         </section>
 
-        {/* Trusted Brands */}
-        <section className="py-12 bg-slate-900 text-center">
-          <h2 className="text-3xl font-bold text-white mb-8">Backed by <span className="text-red-600">Trusted Brands</span> and <span className="text-red-600">1,00,000+ Riders</span></h2>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 max-w-7xl mx-auto px-4 justify-items-center">
-            {[{ name: "WURTH", img: wurthImg }, { name: "MOTUL", img: motulImg }, { name: "Turtlemint", img: turtlemintImg }, { name: "Buniyad", img: buniyadImg }, { name: "Dunzo", img: dunzoImg }].map(brand => <div key={brand.name} className="bg-white rounded-lg p-3 w-32 h-20 flex items-center justify-center"><img src={brand.img} alt={brand.name} className="max-h-12 object-contain" /></div>)}
+        {/* Trusted by Leading Brands */}
+        <section className="py-12 sm:py-16 bg-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 sm:mb-10"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Trusted by <span className="text-red-600">Leading Brands</span> and <span className="text-red-600">Over 100,000 Customers</span>
+            </motion.h2>
+            <motion.div
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 justify-items-center"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {[
+                { name: 'WURTH', img: wurthImg },
+                { name: 'MOTUL', img: motulImg },
+                { name: 'Turtlemint', img: turtlemintImg },
+                { name: 'Buniyad', img: buniyadImg },
+                { name: 'Dunzo', img: dunzoImg },
+              ].map((brand, index) => (
+                <motion.div
+                  key={index}
+                  variants={staggerItem}
+                  className="bg-white rounded-xl shadow-lg p-3 sm:p-4 flex items-center justify-center w-full max-w-[150px] h-16 sm:w-40 sm:h-20 hover:shadow-xl transition-shadow duration-200"
+                >
+                  <img src={brand.img} alt={brand.name} className="max-h-10 sm:max-h-12 object-contain" loading="lazy" decoding="async" />
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </section>
 
-        {/* How It Works */}
-        <section className="bg-slate-800 py-10">
-          <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6 items-center">
-            <div><h2 className="text-3xl font-bold text-white mb-2">Booking a Mechanic in <span className="text-red-600">Chanakyapuri</span> is Simple</h2><p className="text-white mb-4">Share your bike's issue and your nearest landmark, and a mechanic is on the way.</p><ul className="space-y-2">{["Share Location & Bike Issue", "We Assign the Nearest Mechanic", "Repair Done at Your Gate", "Clear Cost Breakdown Shared", "Quality Checked Before Handover", "Easy Payment, Quick Feedback"].map(s => <li key={s} className="flex items-center text-white"><span className="text-red-500 mr-1">◆</span> {s}</li>)}</ul></div>
-            <div className="flex justify-center"><img src={howWorksImage} alt="How it works" className="rounded-lg shadow-lg max-w-sm" /></div>
+        {/* How GarageFixCare Works */}
+        <section className="bg-slate-800 text-white py-10 sm:py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
+                How <span className="text-red-600">GarageFixCare</span> Works?
+              </h2>
+              <p className="text-sm sm:text-base text-white mb-4">
+                Getting your bike, scooty or car serviced in Chanakyapuri is simple. Book online or call us, and a skilled mechanic arrives at your doorstep with everything needed to get your vehicle running at its best — starting at ₹299 for bike and scooty service, all done on the spot.
+              </p>
+              <ul className="space-y-2 text-left">
+                {['Schedule Your Service', 'Technician Sent to You', 'Service Done on the Spot', 'Clear and Transparent Communication', 'Guaranteed Quality Service', 'Easy Payment & Feedback'].map(item => (
+                  <li key={item} className="flex items-center text-white text-sm sm:text-base">
+                    <span className="text-red-500 text-base mr-1">◆</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+            <motion.div className="flex justify-center" variants={scaleIn} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <img src={bmw310Image} alt="How GarageFixCare Works in Chanakyapuri" className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm" loading="lazy" decoding="async" />
+            </motion.div>
           </div>
         </section>
 
         {/* City Coverage & Internal Links */}
-        <section className="py-10 bg-slate-900 text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">We're Also Active in <span className="text-red-600">Other NCR Locations</span></h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {relatedCityPages.map(city => <Link key={city.name} to={city.path} className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition">{city.name}</Link>)}
-          </div>
-        </section>
-
-        {/* Testimonials & Customer Speaks */}
-        <section className="bg-slate-800 py-10">
-          <div className="text-center"><h2 className="text-3xl font-bold text-white">What Our <span className="text-red-600">Riders Say</span></h2><p className="text-white">Genuine Feedback Shared on Google</p><div className="flex justify-center gap-1 my-2">{[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}<span className="text-white ml-2 font-semibold">4.7 Rating on Google</span></div><a href="https://www.google.com" target="_blank" className="bg-red-600 px-5 py-2 rounded-md text-white inline-block">Leave Us a Review</a></div>
-          <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-4 mt-6">
-            {[{ name: "Vivaan Kohli", img: testimonial1, text: "Mechanic reached my house near Nehru Park within the promised window. Fair pricing throughout.", time: "two weeks ago" }, { name: "Anushka Bedi", img: testimonial2, text: "Booked for my scooty near the Embassy Area, work was finished right at my gate.", time: "three weeks ago" }, { name: "Rajeshwar Dutta", img: testimonial3, text: "Quoted the cost upfront before starting on Vinay Marg. No hidden additions at the end.", time: "a month ago" }, { name: "Meherbano Khan", img: testimonial4, text: "Quick response near Safdarjung, mechanic was professional and tidy with the work.", time: "a month ago" }].map(t => (
-              <div key={t.name} className="bg-sky-100 rounded-lg p-3 text-center"><img src={googleIcon} alt="Google" className="h-6 mx-auto mb-2" /><div className="flex justify-center">{[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400">★</span>)}</div><p className="text-xs mt-1">{t.text}</p><img src={t.img} alt={t.name} className="h-8 w-8 rounded-full mx-auto mt-2" /><h3 className="font-semibold text-sm">{t.name}</h3><span className="text-xs">{t.time}</span></div>
-            ))}
-          </div>
-        </section>
-
-        {/* FAQs - Chanakyapuri specific */}
-        <section className="bg-slate-900 py-10">
-          <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold text-white text-center mb-6">Chanakyapuri Bike Service — <span className="text-red-600">Quick Answers</span></h2>
-            <div className="space-y-3">
-              {[
-                { q: "What is the starting cost for bike service near Chanakyapuri?", a: "Doorstep bike service near Chanakyapuri begins at ₹282 under the Enclave Essential Plan for 100-125cc bikes. Standard is ₹372, Comfort ₹462, Cruiser ₹565, and Superbike ₹935, all with labour included." },
-                { q: "Do you send mechanics into the Diplomatic Enclave?", a: "Yes, we regularly attend bookings within the Diplomatic Enclave, arriving fully equipped so most repairs are completed without a workshop trip." },
-                { q: "Which exact areas around Chanakyapuri are covered?", a: "Our coverage spans the Diplomatic Enclave, Nehru Park, Vinay Marg, Shanti Path, Teen Murti, Yashwant Place, the Embassy Area, Sarojini Nagar, Safdarjung, and Race Course Road." },
-                { q: "Can I get a mechanic near Yashwant Place quickly?", a: "Yes, bookings near Yashwant Place are usually attended within 2-4 hours. A phone call helps us prioritise urgent or breakdown-related requests." },
-                { q: "Do you service scooties used by embassy and household staff near Teen Murti?", a: "Absolutely. We regularly service scooties such as the Honda Activa and TVS Jupiter that are common among staff and residents around Teen Murti." },
-                { q: "Is there a guarantee on bike repairs near Sarojini Nagar?", a: "Every repair carries a 10-day service guarantee. If the same problem reappears within that window, we fix it again at no extra cost." },
-                { q: "How do I arrange a bike pickup from Safdarjung?", a: "Free pickup and drop is available on request from Safdarjung and nearby lanes — simply mention it while booking and we will coordinate timing." },
-                { q: "What if my bike breaks down near Race Course Road?", a: "Call us right away with your nearest landmark near Race Course Road, and we will dispatch the closest available mechanic to get you moving again." }
-              ].map((faq, idx) => (
-                <div key={idx} className="border border-gray-700 rounded-md">
-                  <button className="flex justify-between w-full p-3 text-left font-semibold text-white hover:bg-slate-700" onClick={() => setExpandedFaqIdx(expandedFaqIdx === idx ? null : idx)}><span className="text-red-600">Q{idx+1}.</span><span className="ml-2">{faq.q}</span>{expandedFaqIdx === idx ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}</button>
-                  {expandedFaqIdx === idx && <div className="p-3 bg-slate-700 text-gray-300 text-sm">{faq.a}</div>}
-                </div>
+        <section className="py-10 sm:py-14 bg-slate-900 text-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Also Serving in <span className="text-red-600">Nearby Cities</span>
+            </motion.h2>
+            <motion.div
+              className="flex flex-wrap justify-center gap-3 sm:gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {cityPages.map(city => (
+                <motion.div key={city.name} variants={staggerItem}>
+                  <Link
+                    to={city.path}
+                    className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 inline-block"
+                  >
+                    {city.name}
+                  </Link>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Customer Testimonials */}
+        <section className="bg-slate-800 py-10 sm:py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div className="text-center mb-6" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                What <span className="text-red-600">Customers Say</span>
+              </h2>
+              <p className="text-white/80 text-sm sm:text-base mt-1">Customer Testimonials on Google</p>
+              <div className="flex justify-center gap-1 my-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
+                ))}
+                <span className="text-white ml-2 font-semibold text-sm sm:text-base">4.7 Rating on Google</span>
+              </div>
+              <a
+                href="https://www.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-red-600 px-5 py-2 rounded-lg text-white inline-block text-sm sm:text-base font-semibold hover:bg-red-700 hover:shadow-lg transition-all duration-200"
+              >
+                Review us on Google
+              </a>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {[
+                { name: 'Vivaan Kohli', img: testimonial1, text: 'Mechanic reached my house near Nehru Park within the promised window. Fair pricing throughout.', time: 'two weeks ago' },
+                { name: 'Anushka Bedi', img: testimonial2, text: 'Booked for my scooty near the Embassy Area, work was finished right at my gate.', time: 'three weeks ago' },
+                { name: 'Rajeshwar Dutta', img: testimonial3, text: 'Quoted the cost upfront before starting on Vinay Marg. No hidden additions at the end.', time: 'a month ago' },
+                { name: 'Meherbano Khan', img: testimonial4, text: 'Quick response near Safdarjung, mechanic was professional and tidy with the work.', time: 'a month ago' },
+              ].map(t => (
+                <motion.div key={t.name} variants={staggerItem} className="bg-sky-100 rounded-xl shadow-lg p-4 text-center">
+                  <img src={googleIcon} alt="Google" className="h-6 mx-auto mb-2" loading="lazy" decoding="async" />
+                  <div className="flex justify-center">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-yellow-400">★</span>
+                    ))}
+                  </div>
+                  <p className="text-xs mt-1 text-gray-700">{t.text}</p>
+                  <img src={t.img} alt={t.name} className="h-8 w-8 rounded-full mx-auto mt-2" loading="lazy" decoding="async" />
+                  <h3 className="font-semibold text-sm mt-1">{t.name}</h3>
+                  <span className="text-xs text-gray-600">{t.time}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* FAQs (Chanakyapuri specific — matches FAQPage schema exactly) */}
+        <section className="bg-slate-900 py-10 sm:py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-6"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Bike, Scooty &amp; Car Service in Chanakyapuri — <span className="text-red-600">Common Questions</span>
+            </motion.h2>
+            <motion.div className="space-y-3" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              {faqs.map((faq, idx) => (
+                <motion.div key={idx} variants={staggerItem} className="border border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+                  <button
+                    className="flex justify-between items-center w-full p-3 sm:p-4 text-left font-semibold text-white hover:bg-slate-700/60 transition-colors duration-200"
+                    onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
+                  >
+                    <span className="flex items-start">
+                      <span className="text-red-600 mr-2">Q{idx + 1}.</span>
+                      <span className="text-sm sm:text-base">{faq.q}</span>
+                    </span>
+                    {activeIndex === idx ? <X className="h-5 w-5 flex-shrink-0 ml-2" /> : <Plus className="h-5 w-5 flex-shrink-0 ml-2" />}
+                  </button>
+                  {activeIndex === idx && (
+                    <div className="p-3 sm:p-4 bg-slate-700/60 text-gray-300 text-xs sm:text-sm">{faq.a}</div>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="py-8 bg-slate-800 text-center">
-          <h2 className="text-3xl font-bold text-white mb-2">Get Your Bike Serviced Near Chanakyapuri Today</h2>
-          <p className="text-white mb-4">Doorstep service across the Diplomatic Enclave and Embassy Area starts at ₹282 — no detours, no hidden charges.</p>
-          <a href="https://www.garagefixcare.in/bookservice" className="bg-orange-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-700 inline-block">Book Your Service</a>
+        <section className="py-10 sm:py-14 bg-slate-800">
+          <motion.div
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+            variants={staggerItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+          >
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
+              Book Bike, Scooty or Car Service in Chanakyapuri Today
+            </h2>
+            <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
+              Same-day doorstep service across Chanakyapuri and nearby Central Delhi areas starting at ₹299. Our mechanic comes to you — no travel, no waiting, no hidden charges.
+            </p>
+            <a
+              href="https://www.garagefixcare.in/bookservice"
+              className="bg-orange-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold text-sm sm:text-base shadow-lg hover:bg-orange-700 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:translate-y-0 transition-all duration-200 inline-block"
+            >
+              Book Your Service
+            </a>
+          </motion.div>
         </section>
+      </div>
 
-        {/* Floating Buttons */}
-        <div className="fixed top-1/2 right-4 flex flex-col space-y-4 z-50 transform -translate-y-1/2">
-          <a href="tel:9540553759" className="btn-shake w-13 h-13 rounded-full flex items-center justify-center shadow-2xl" style={{ background: 'linear-gradient(135deg, #1d72b8, #145a9c)', width: '52px', height: '52px' }}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" stroke="currentColor" className="w-6 h-6 text-white"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg></a>
-          <a href="https://wa.me/9540553759" target="_blank" rel="noopener noreferrer" className="btn-shake text-white flex items-center justify-center shadow-2xl rounded-full" style={{ background: 'linear-gradient(135deg, #25d366, #128c4e)', width: '52px', height: '52px' }}><FaWhatsapp size={26} /></a>
+      {/* Floating Buttons */}
+      <style>{`
+        @keyframes shake {
+          0%, 100%      { transform: rotate(0deg) scale(1); }
+          2%            { transform: rotate(-16deg) scale(1.06); }
+          4%            { transform: rotate(16deg) scale(1.06); }
+          6%            { transform: rotate(-12deg) scale(1.06); }
+          8%            { transform: rotate(12deg) scale(1.06); }
+          10%           { transform: rotate(-6deg) scale(1.03); }
+          12%           { transform: rotate(6deg) scale(1.03); }
+          14%, 100%     { transform: rotate(0deg) scale(1); }
+        }
+        @keyframes pulseRing {
+          0%   { transform: scale(0.85); opacity: 0.55; }
+          70%  { transform: scale(1.7);  opacity: 0; }
+          100% { transform: scale(1.7);  opacity: 0; }
+        }
+        @keyframes floatIn {
+          0%   { transform: translateX(60px); opacity: 0; }
+          100% { transform: translateX(0);     opacity: 1; }
+        }
+        .btn-float-wrap {
+          position: relative;
+          animation: floatIn 0.6s ease-out both;
+        }
+        .btn-float-wrap:nth-child(2) { animation-delay: 0.12s; }
+        .btn-pulse-ring {
+          position: absolute;
+          inset: 0;
+          border-radius: 9999px;
+          animation: pulseRing 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          pointer-events: none;
+        }
+        .btn-shake {
+          animation: shake 4s ease-in-out infinite;
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .btn-shake:hover {
+          animation: none;
+          transform: scale(1.14);
+          box-shadow: 0 0 0 6px rgba(255,255,255,0.12), 0 12px 28px rgba(0,0,0,0.45);
+        }
+      `}</style>
+      <div className="fixed top-1/2 right-4 sm:right-6 flex flex-col space-y-3 sm:space-y-4 z-50 transform -translate-y-1/2">
+        <div className="btn-float-wrap">
+          <span className="btn-pulse-ring" style={{ background: '#1d72b8' }} />
+          <a
+            href="tel:9540553759"
+            className="btn-shake w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] rounded-full text-white flex items-center justify-center shadow-2xl relative"
+            style={{ background: 'linear-gradient(135deg, #1d72b8, #145a9c)' }}
+            aria-label="Call Us"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+              />
+            </svg>
+          </a>
         </div>
-        <style>{`.btn-shake { animation: shake 1.8s ease-in-out infinite; } .btn-shake:hover { animation: none; transform: scale(1.12); } @keyframes shake { 0%,100%{transform:rotate(0deg)} 15%{transform:rotate(-18deg)} 30%{transform:rotate(18deg)} 45%{transform:rotate(-14deg)} 60%{transform:rotate(14deg)} 75%{transform:rotate(-8deg)} 90%{transform:rotate(8deg)} }`}</style>
+        <div className="btn-float-wrap">
+          <span className="btn-pulse-ring" style={{ background: '#25d366', animationDelay: '0.4s' }} />
+          <a
+            href="https://wa.me/9540553759"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-shake w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] text-white flex items-center justify-center shadow-2xl rounded-full relative"
+            style={{ background: 'linear-gradient(135deg, #25d366, #128c4e)' }}
+            aria-label="Chat on WhatsApp"
+          >
+            <FaWhatsapp size="1em" className="text-[22px] sm:text-[26px]" />
+          </a>
+        </div>
+      </div>
 
-        {/* Modal */}
-        {checklistVisible && pickedPlan && (
-          <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-xl shadow-2xl max-h-[90vh] w-full max-w-md flex flex-col">
-              <div className="p-4 border-b flex justify-between"><div><h3 className="text-xl font-bold text-black">{pickedPlan.title}</h3><p className="text-sm text-gray-600">{pickedPlan.subtitle}</p></div><button onClick={closeChecklistModal}><X className="h-6 w-6" /></button></div>
-              <div className="p-4 overflow-y-auto"><h4 className="font-semibold mb-2">Inspection Checklist:</h4><ul className="space-y-2">{pickedPlan.checklist.map((item, i) => <li key={i} className="flex items-start"><CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5" />{item}</li>)}</ul></div>
-              <div className="p-4 border-t bg-gray-50"><div className="relative mb-3"><PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" /><input type="tel" placeholder="Enter 10-digit Mobile Number*" maxLength={10} value={phoneDigits} onChange={(e) => setPhoneDigits(e.target.value.replace(/\D/g, '').slice(0, 10))} className="pl-10 pr-3 py-2 w-full rounded-lg border border-gray-300" /></div><div className="flex items-center mb-4"><input type="checkbox" id="terms" className="mr-2" /><label htmlFor="terms" className="text-sm">Yes, I agree to the <span className='underline'>Terms of Service</span></label></div><button onClick={finalizeBooking} className="bg-brandRed text-white w-full py-2 rounded-lg font-semibold hover:bg-red-700">Confirm Mechanic Visit</button></div>
+      {/* Checklist Modal */}
+      {isModalOpen && selectedService && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-h-[90vh] w-full max-w-sm sm:max-w-md flex flex-col">
+            <div className="p-4 border-b flex justify-between items-start">
+              <div>
+                <h3 className="text-lg sm:text-xl font-bold text-black">{selectedService.title}</h3>
+                <p className="text-xs sm:text-sm text-gray-600">{selectedService.subtitle}</p>
+              </div>
+              <button onClick={closeModal} className="text-gray-400 hover:text-gray-900">
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="p-4 overflow-y-auto flex-1">
+              <h4 className="font-semibold text-gray-700 mb-3 text-sm sm:text-base">Full Checklist:</h4>
+              <ul className="list-none space-y-2 text-left text-gray-700 text-xs sm:text-sm">
+                {selectedService.checklist.map((item, i) => (
+                  <li key={i} className="flex items-start">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0 mt-1" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="p-4 border-t bg-gray-50 rounded-b-xl">
+              <div className="w-full mb-3 relative">
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <input
+                  type="tel"
+                  placeholder="Enter 10-digit Phone Number*"
+                  required
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                  value={modalPhoneNumber}
+                  onChange={(e) => setModalPhoneNumber(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
+                  className="pl-10 pr-3 py-2 w-full rounded-xl text-black border border-gray-300 focus:outline-none focus:border-red-600 shadow-sm text-sm"
+                />
+              </div>
+              <div className="flex items-center mb-4">
+                <input type="checkbox" id="terms" required className="mr-2 h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500" />
+                <label htmlFor="terms" className="text-xs sm:text-sm text-gray-700 select-none">
+                  Yes, I agree to the <span className="underline">Terms of Service</span>
+                </label>
+              </div>
+              <button
+                onClick={handleModalBookNow}
+                className="bg-brandRed text-white w-full py-3 rounded-xl font-semibold shadow-md hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 transition-all duration-200 text-sm sm:text-base"
+              >
+                Book Now
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

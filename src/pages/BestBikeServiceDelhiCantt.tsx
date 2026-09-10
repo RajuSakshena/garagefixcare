@@ -357,26 +357,26 @@ const BestBikeServiceDelhiCantt = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Bike Service in Delhi Cantt | Doorstep Bike Repair ₹299 | Garage Fix Care"
-        description="Trusted doorstep bike service in Delhi Cantonment, Brar Square, Kirby Place, Sadar Bazaar, Dhaula Kuan and Naraina starting at ₹299. Same day bike repair and maintenance at home."
+        title="Best Bike, Scooty and Car Service in Delhi Cantt | Doorstep Service Just ₹299"
+        description="Garage Fix Care offers doorstep bike, scooty and car service in Delhi Cantonment, Brar Square, Kirby Place, Sadar Bazaar, Dhaula Kuan and Naraina, starting at just ₹299. Certified mechanics, same-day service at your home."
         canonical="https://www.garagefixcare.in/best-bike-service-delhi-cantt"
         robots="index, follow"
         og={{
           url: 'https://www.garagefixcare.in/best-bike-service-delhi-cantt',
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Best bike service in Delhi Cantt at doorstep by Garage Fix Care',
+          imageAlt: 'Best bike, scooty and car service in Delhi Cantt at doorstep by Garage Fix Care',
           type: 'website',
         }}
         twitter={{
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Doorstep bike service and repair in Delhi Cantt, Dhaula Kuan and Naraina',
+          imageAlt: 'Doorstep bike, scooty and car service in Delhi Cantt, Dhaula Kuan and Naraina',
         }}
         structuredData={[
           {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'Garage Fix Care',
-            description: 'Best bike service in Delhi Cantt. Doorstep bike repair, servicing, oil change, battery replacement starting at ₹299.',
+            description: 'Best bike, scooty and car service in Delhi Cantt. Doorstep repair, servicing, oil change and battery replacement for bikes, scooties and cars, starting at just ₹299.',
             url: 'https://www.garagefixcare.in/best-bike-service-delhi-cantt',
             telephone: '+919540553759',
             priceRange: '₹₹',
@@ -400,27 +400,28 @@ const BestBikeServiceDelhiCantt = () => {
               { '@type': 'Place', name: 'Army Area' },
               { '@type': 'Place', name: 'Palam' },
             ],
-            serviceType: ['Bike Repair', 'Doorstep Bike Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
+            serviceType: ['Bike Repair', 'Scooty Repair', 'Car Service', 'Doorstep Vehicle Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
             openingHours: 'Mo-Su 08:00-20:00',
             aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', reviewCount: '100000' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Doorstep Bike Service in Delhi Cantt',
+            name: 'Doorstep Bike, Scooty and Car Service in Delhi Cantt',
             provider: { '@type': 'LocalBusiness', name: 'Garage Fix Care' },
             areaServed: 'Delhi Cantonment, New Delhi',
-            description: 'At-home bike servicing starting at ₹299 across Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, Army Area and Palam. Oil change, engine repair, battery replacement, puncture fix — same-day doorstep service.',
+            description: 'At-home bike, scooty and car servicing starting at ₹299 across Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, Army Area and Palam. Oil change, engine repair, battery replacement, puncture fix and car maintenance — same-day doorstep service.',
             offers: { '@type': 'Offer', priceCurrency: 'INR', price: '299', availability: 'https://schema.org/InStock' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: [
-              { '@type': 'Question', name: 'How much does bike service cost in Delhi Cantt?', acceptedAnswer: { '@type': 'Answer', text: 'Bike service in Delhi Cantt starts from ₹299 for 100–125cc bikes. Classic Service is ₹399, Premium ₹499, Royal ₹599, and Sports ₹999. All prices include labour with no hidden charges.' } },
-              { '@type': 'Question', name: 'Do you provide doorstep bike repair in Brar Square and Kirby Place?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, we provide complete doorstep bike repair across Brar Square and Kirby Place. Certified mechanics come to your home fully equipped — no garage visit needed.' } },
-              { '@type': 'Question', name: 'Which areas near Delhi Cantt are covered?', acceptedAnswer: { '@type': 'Answer', text: 'We cover Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, Army Area and Palam.' } },
-              { '@type': 'Question', name: 'Do you handle emergency bike breakdown near Dhaula Kuan or Naraina?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. If your bike breaks down anywhere near Dhaula Kuan or Naraina, call us immediately and we dispatch a mechanic to your location for on-spot repair or recovery.' } },
+              { '@type': 'Question', name: 'What is the best bike, scooty and car service in Delhi Cantt?', acceptedAnswer: { '@type': 'Answer', text: 'Garage Fix Care is Delhi Cantt\'s trusted doorstep service for bikes, scooties and cars, starting at just ₹299, with certified mechanics and transparent pricing.' } },
+              { '@type': 'Question', name: 'How much does bike, scooty or car service cost in Delhi Cantt?', acceptedAnswer: { '@type': 'Answer', text: 'Bike and scooty service in Delhi Cantt starts from ₹299 for 100–125cc vehicles. Classic Service is ₹399, Premium ₹499, Royal ₹599, and Sports ₹999. Car service pricing is quoted based on your car model and requirement. All prices include labour with no hidden charges.' } },
+              { '@type': 'Question', name: 'Do you provide doorstep bike, scooty and car repair in Brar Square and Kirby Place?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, we provide complete doorstep repair for bikes, scooties and cars across Brar Square and Kirby Place. Certified mechanics come to your home fully equipped — no garage visit needed.' } },
+              { '@type': 'Question', name: 'Which areas near Delhi Cantt are covered?', acceptedAnswer: { '@type': 'Answer', text: 'We cover Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, Army Area and Palam for bike, scooty and car service.' } },
+              { '@type': 'Question', name: 'Do you handle emergency bike, scooty or car breakdown near Dhaula Kuan or Naraina?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. If your bike, scooty or car breaks down anywhere near Dhaula Kuan or Naraina, call us immediately and we dispatch a mechanic to your location for on-spot repair or recovery.' } },
             ],
           },
           {
@@ -428,7 +429,7 @@ const BestBikeServiceDelhiCantt = () => {
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.garagefixcare.in/' },
-              { '@type': 'ListItem', position: 2, name: 'Best Bike Service in Delhi Cantt', item: 'https://www.garagefixcare.in/best-bike-service-delhi-cantt' },
+              { '@type': 'ListItem', position: 2, name: 'Best Bike, Scooty and Car Service in Delhi Cantt', item: 'https://www.garagefixcare.in/best-bike-service-delhi-cantt' },
             ],
           },
         ]}
@@ -525,22 +526,22 @@ const BestBikeServiceDelhiCantt = () => {
                   variants={heroStaggerItem}
                   className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] sm:leading-tight mb-1.5 sm:mb-3"
                 >
-                  Best Bike Service in Delhi Cantt
-                  <span style={{ color: '#FF7A18' }}> — Doorstep Repair from ₹299</span>
+                  Best Bike, Scooty and Car Service in Delhi Cantt
+                  <span style={{ color: '#FF7A18' }}> — Doorstep Service Just ₹299</span>
                 </motion.h1>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="font-poppins text-[11px] sm:text-sm font-semibold text-white/85 leading-tight mb-1.5 sm:mb-2"
                 >
-                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Same-Day Bike Repair &bull; Certified Mechanics Near You
+                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Bikes, Scooties &amp; Cars &bull; Same-Day Doorstep Service &bull; Certified Mechanics Near You
                 </motion.p>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="hidden sm:block text-xs sm:text-sm leading-relaxed text-white/80 mb-2 sm:mb-3 max-w-[520px]"
                 >
-                  Trusted by riders in the Army Area, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park and Palam — our expert mechanics handle everything from oil change to engine overhaul, right at your doorstep.
+                  Trusted by residents in the Army Area, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park and Palam — our expert mechanics handle bikes, scooties and cars, from oil change to engine overhaul, right at your doorstep.
                 </motion.p>
               </motion.div>
 
@@ -653,7 +654,7 @@ const BestBikeServiceDelhiCantt = () => {
               </span>
             </span>
             <p className="relative text-[10px] sm:text-sm leading-[1.4] sm:leading-relaxed" style={{ color: '#cbd5e1' }}>
-              Skip the garage queue. Our certified mechanics come to your quarters, home or office across Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, Army Area and Palam — handling everything from routine servicing to engine repairs. Fast, transparent, and affordable.
+              Skip the garage queue. Our certified mechanics come to your quarters, home or office across Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, Army Area and Palam — servicing bikes, scooties and cars, from routine maintenance to engine repairs, starting at ₹299. Fast, transparent, and affordable.
             </p>
           </div>
         </motion.div>
@@ -699,7 +700,7 @@ const BestBikeServiceDelhiCantt = () => {
                 <Flame className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />
               </div>
               <p className="text-base sm:text-lg text-white max-w-7xl mx-auto mt-2 text-center">
-                Limited-time offer for Delhi Cantt, Dhaula Kuan and Naraina customers! Get up to 10% off on bike repairs and servicing at your doorstep. Hurry—these deals won&apos;t last long!
+                Limited-time offer for Delhi Cantt, Dhaula Kuan and Naraina customers! Get up to 10% off on bike, scooty and car repairs and servicing at your doorstep, starting at ₹299. Hurry—these deals won&apos;t last long!
               </p>
             </motion.div>
           </div>
@@ -843,10 +844,10 @@ const BestBikeServiceDelhiCantt = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-white">At-Home Service</span> <span className="text-red-600">Price List</span>
+                <span className="text-white">At-Home Bike &amp; Scooty Service</span> <span className="text-red-600">Price List</span>
               </h2>
               <p className="text-base sm:text-xl text-white mb-10 sm:mb-12 max-w-3xl mx-auto">
-                Transparent pricing for doorstep bike service near Delhi Cantt and Dhaula Kuan. Check the labour charges below based on your bike&apos;s engine size — no hidden fees, no surprises.
+                Transparent pricing for doorstep bike and scooty service near Delhi Cantt and Dhaula Kuan, starting at just ₹299. Check the labour charges below based on your two-wheeler&apos;s engine size — no hidden fees, no surprises. Looking for car service instead? Tap Cars above for a tailored quote.
               </p>
             </motion.div>
             <motion.div
@@ -1019,7 +1020,7 @@ const BestBikeServiceDelhiCantt = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Whether you live in Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, near Dhaula Kuan, Naraina, Subroto Park, in the Army Area, or close to Palam, our bike mechanics reach your doorstep within 2-4 hours. Same-day bike service available across the Delhi Cantt belt.
+              Whether you live in Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, near Dhaula Kuan, Naraina, Subroto Park, in the Army Area, or close to Palam, our bike, scooty and car mechanics reach your doorstep within 2-4 hours. Same-day doorstep service available across the Delhi Cantt belt, starting at ₹299.
             </motion.p>
           </div>
         </section>
@@ -1029,10 +1030,10 @@ const BestBikeServiceDelhiCantt = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-                Complete Bike Care, <span className="text-red-600">Right at Your Door in Delhi Cantt</span>
+                Complete Bike, Scooty &amp; Car Care, <span className="text-red-600">Right at Your Door in Delhi Cantt</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
-                From routine oil changes to full engine repair — our Delhi Cantt mechanics handle it all at your location. No waiting, no hassle.
+                From routine oil changes to full engine repair — our Delhi Cantt mechanics handle bikes, scooties and cars at your location, starting at ₹299. No waiting, no hassle.
               </p>
             </motion.div>
             <motion.div
@@ -1072,7 +1073,7 @@ const BestBikeServiceDelhiCantt = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Why Garage Fix Care is the <span className="text-red-600">Best Bike Service in Delhi Cantt</span>
+              Why Garage Fix Care is the <span className="text-red-600">Best Bike, Scooty and Car Service in Delhi Cantt</span>
             </motion.h2>
             <motion.div
               className="space-y-4 text-gray-200 text-sm sm:text-base leading-relaxed"
@@ -1081,8 +1082,8 @@ const BestBikeServiceDelhiCantt = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              <p>Delhi Cantonment is one of the most distinctive parts of the capital, home to defence establishments, the Army Area, and quiet tree-lined roads that connect Brar Square, Kirby Place, and Gopinath Bazaar to the busier commercial stretches of Sadar Bazaar and Dhaula Kuan. Two-wheeler owners in this region deserve a bike service that respects their time and matches the disciplined pace of cantonment life — reliable, transparent, and delivered right at the doorstep. Garage Fix Care is Delhi Cantt&apos;s most trusted doorstep bike service, bringing certified and background-verified mechanics directly to your home, quarters, or office, whether you&apos;re based near Subroto Park, Naraina, or closer to Palam. Our mechanics reach your location within 2–4 hours of booking. Doorstep bike repair in Delhi Cantt starts at just ₹299 — covering all essential checks including engine oil change, air filter cleaning, spark plug inspection, brake adjustment, and basic electrical check — with every task completed on the spot without you needing to ride to a workshop. We service every major bike brand seen across the cantonment area: Hero, Honda, Bajaj, TVS, Suzuki, Yamaha, Royal Enfield, KTM, and more, handling everything from daily commuters and premium sports bikes to family scooties like the Honda Activa, TVS Jupiter, and Suzuki Access. What distinguishes us as the best bike service in Delhi Cantt is our strict pricing transparency — you receive a full itemised estimate before a single tool is touched, ensuring zero hidden charges at the end. We use only genuine engine oils from Motul and Wurth, paired with manufacturer-approved spare parts, and each service is backed by our 10-day hassle-free service guarantee.</p>
-              <p>The mix of military traffic, narrow internal roads in Kirby Place and Brar Square, and the busy flow around Dhaula Kuan and Naraina accelerates wear on engine oil, air filters, tyres, and brakes — making regular servicing not just a good habit but a safety necessity. Our mechanics carry professional diagnostic tools to identify emerging issues before they become expensive failures, significantly extending your bike&apos;s lifespan whether you commute daily through Gopinath Bazaar or just within the Army Area. We also handle emergency breakdown situations across Delhi Cantt — if your bike stops near Subroto Park or anywhere on the way to Palam, call us and we dispatch a mechanic to your exact location immediately. From battery replacement and brake pad changes to clutch cable adjustment and tyre puncture repair, our technicians fix it all on the spot. Garage Fix Care has completed over 1,00,000 services across Delhi NCR, earning a consistent 4.7-star Google rating for professionalism, punctuality, and honest pricing. Book your bike service in Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, or the Army Area today via our website, WhatsApp, or direct call — and discover the convenience of professional two-wheeler care that comes to you.</p>
+              <p>Delhi Cantonment is one of the most distinctive parts of the capital, home to defence establishments, the Army Area, and quiet tree-lined roads that connect Brar Square, Kirby Place, and Gopinath Bazaar to the busier commercial stretches of Sadar Bazaar and Dhaula Kuan. Vehicle owners in this region deserve a bike, scooty and car service that respects their time and matches the disciplined pace of cantonment life — reliable, transparent, and delivered right at the doorstep. Garage Fix Care is Delhi Cantt&apos;s most trusted doorstep vehicle service, bringing certified and background-verified mechanics directly to your home, quarters, or office, whether you&apos;re based near Subroto Park, Naraina, or closer to Palam. Our mechanics reach your location within 2–4 hours of booking. Doorstep bike and scooty service in Delhi Cantt starts at just ₹299 — covering all essential checks including engine oil change, air filter cleaning, spark plug inspection, brake adjustment, and basic electrical check — with every task completed on the spot without you needing to ride to a workshop. We also handle car servicing and repairs at your doorstep, with pricing quoted based on your car&apos;s model and requirement. We service every major two-wheeler brand seen across the cantonment area: Hero, Honda, Bajaj, TVS, Suzuki, Yamaha, Royal Enfield, KTM, and more, handling everything from daily commuters and premium sports bikes to family scooties like the Honda Activa, TVS Jupiter, and Suzuki Access, alongside popular hatchbacks and sedans. What distinguishes us as the best bike, scooty and car service in Delhi Cantt is our strict pricing transparency — you receive a full itemised estimate before a single tool is touched, ensuring zero hidden charges at the end. We use only genuine engine oils from Motul and Wurth, paired with manufacturer-approved spare parts, and each service is backed by our 10-day hassle-free service guarantee.</p>
+              <p>The mix of military traffic, narrow internal roads in Kirby Place and Brar Square, and the busy flow around Dhaula Kuan and Naraina accelerates wear on engine oil, air filters, tyres, and brakes — making regular servicing not just a good habit but a safety necessity for bikes, scooties and cars alike. Our mechanics carry professional diagnostic tools to identify emerging issues before they become expensive failures, significantly extending your vehicle&apos;s lifespan whether you commute daily through Gopinath Bazaar or just within the Army Area. We also handle emergency breakdown situations across Delhi Cantt — if your bike, scooty or car stops near Subroto Park or anywhere on the way to Palam, call us and we dispatch a mechanic to your exact location immediately. From battery replacement and brake pad changes to clutch cable adjustment and tyre puncture repair, our technicians fix it all on the spot. Garage Fix Care has completed over 1,00,000 services across Delhi NCR, earning a consistent 4.7-star Google rating for professionalism, punctuality, and honest pricing. Book your bike, scooty or car service in Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, or the Army Area today via our website, WhatsApp, or direct call — and discover the convenience of professional doorstep vehicle care starting at just ₹299.</p>
             </motion.div>
           </div>
         </section>
@@ -1098,7 +1099,7 @@ const BestBikeServiceDelhiCantt = () => {
                 GarageFixCare <span className="text-red-600">Service Warranty</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                Delhi Cantt&apos;s trusted doorstep bike service. We service all motorcycle and scooter brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — right at your home or office near Sadar Bazaar and Dhaula Kuan.
+                Delhi Cantt&apos;s trusted doorstep bike, scooty and car service, starting at ₹299. We service all major motorcycle, scooter and car brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — right at your home or office near Sadar Bazaar and Dhaula Kuan.
               </p>
             </motion.div>
             <motion.div
@@ -1111,8 +1112,8 @@ const BestBikeServiceDelhiCantt = () => {
               {[
                 { img: warrantyImg, title: 'Enjoy a 10-Day Free Service Guarantee', desc: '10-Day Hassle-Free Warranty' },
                 { img: pickupImg, title: 'Enjoy Free Pickup and Drop at Your Convenience', desc: 'Free Pick & Drop Available' },
-                { img: transparentImg, title: 'Transparent Pricing, Competitive Rate', desc: 'Save up to 30% on your bike service' },
-                { img: trainedImg, title: 'Skilled and Certified Mechanics', desc: 'Exclusively Certified Two-Wheeler Mechanics' },
+                { img: transparentImg, title: 'Transparent Pricing, Competitive Rate', desc: 'Save up to 30% on your bike, scooty or car service' },
+                { img: trainedImg, title: 'Skilled and Certified Mechanics', desc: 'Certified Bike, Scooty and Car Mechanics' },
               ].map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -1147,7 +1148,7 @@ const BestBikeServiceDelhiCantt = () => {
                 Why Choose <span className="text-red-600">GarageFixCare?</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                We bring certified mechanics directly to residents of Delhi Cantt, Dhaula Kuan, and Naraina — honest pricing, genuine parts, zero hassle.
+                We bring certified mechanics for bikes, scooties and cars directly to residents of Delhi Cantt, Dhaula Kuan, and Naraina — doorstep service starting at ₹299, with honest pricing, genuine parts and zero hassle.
               </p>
               <ul className="space-y-2 text-left">
                 {['Hassle-Free Doorstep Service', 'Certified and Skilled Technicians', 'Honest Pricing', 'Certified Genuine Parts', 'Your Satisfaction Guaranteed', 'Fast and Professional Service'].map(item => (
@@ -1206,7 +1207,7 @@ const BestBikeServiceDelhiCantt = () => {
                 How <span className="text-red-600">GarageFixCare</span> Works?
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                Getting your bike serviced near Delhi Cantt is simple. Book online or call us, and a skilled mechanic arrives at your doorstep with everything needed to get your bike running at its best — all done on the spot.
+                Getting your bike, scooty or car serviced near Delhi Cantt is simple. Book online or call us, and a skilled mechanic arrives at your doorstep with everything needed to get your vehicle running at its best — starting at ₹299, all done on the spot.
               </p>
               <ul className="space-y-2 text-left">
                 {['Schedule Your Service', 'Technician Sent to You', 'Service Done on the Spot', 'Clear and Transparent Communication', 'Guaranteed Quality Service', 'Easy Payment & Feedback'].map(item => (
@@ -1318,25 +1319,26 @@ const BestBikeServiceDelhiCantt = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Bike Service in Delhi Cantt — <span className="text-red-600">Common Questions</span>
+              Bike, Scooty &amp; Car Service in Delhi Cantt — <span className="text-red-600">Common Questions</span>
             </motion.h2>
             <motion.div className="space-y-3" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               {[
-                { q: 'How much does bike service cost in Delhi Cantt?', a: 'Bike service in Delhi Cantt at Garage Fix Care starts from ₹299 for 100–125cc bikes (Regular Service). Classic Service (135–200 CC) is ₹399, Premium Service (220–300 CC) is ₹499, Royal Service (350–450 CC) is ₹599, and Sports Service (above 500 CC) is ₹999. All prices include labour with zero hidden charges.' },
-                { q: 'Do you provide doorstep bike repair in Brar Square and Kirby Place?', a: 'Yes, we provide complete doorstep bike repair across Brar Square and Kirby Place. Our certified mechanics arrive with all tools, oils, and parts — no garage visit needed.' },
-                { q: 'Which areas near Delhi Cantt are covered for bike service?', a: 'We cover Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, Army Area and Palam.' },
-                { q: 'What is the best bike service in Delhi Cantt?', a: 'Garage Fix Care is Delhi Cantt\'s highest-rated doorstep bike service, starting at ₹299 with certified mechanics, transparent pricing, genuine parts, and a 10-day service guarantee.' },
+                { q: 'What is the best bike, scooty and car service in Delhi Cantt?', a: 'Garage Fix Care is Delhi Cantt\'s highest-rated doorstep service for bikes, scooties and cars, starting at ₹299 with certified mechanics, transparent pricing, genuine parts, and a 10-day service guarantee.' },
+                { q: 'How much does bike or scooty service cost in Delhi Cantt?', a: 'Bike and scooty service in Delhi Cantt at Garage Fix Care starts from ₹299 for 100–125cc vehicles (Regular Service). Classic Service (135–200 CC) is ₹399, Premium Service (220–300 CC) is ₹499, Royal Service (350–450 CC) is ₹599, and Sports Service (above 500 CC) is ₹999. All prices include labour with zero hidden charges.' },
+                { q: 'Do you provide car service in Delhi Cantt too?', a: 'Yes. Alongside bikes and scooties, we offer doorstep car servicing in Delhi Cantt and nearby areas. Car service pricing is quoted based on your car\'s model and the work required — just book online or call us for a quote.' },
+                { q: 'Do you provide doorstep bike and scooty repair in Brar Square and Kirby Place?', a: 'Yes, we provide complete doorstep bike and scooty repair across Brar Square and Kirby Place. Our certified mechanics arrive with all tools, oils, and parts — no garage visit needed.' },
+                { q: 'Which areas near Delhi Cantt are covered for bike, scooty and car service?', a: 'We cover Delhi Cantonment, Brar Square, Kirby Place, Gopinath Bazaar, Sadar Bazaar, Dhaula Kuan, Naraina, Subroto Park, Army Area and Palam.' },
                 { q: 'Do you service Royal Enfield bikes near Delhi Cantt?', a: 'Yes. We specialise in Royal Enfield servicing across Delhi Cantt and Dhaula Kuan — Classic 350, Bullet 350, Meteor 350, Himalayan, and Thunderbird — all serviced at your doorstep.' },
-                { q: 'How quickly can a mechanic reach me in Delhi Cantt?', a: 'Our mechanics typically reach your location in Delhi Cantt, Naraina, or near Palam within 2–4 hours of booking. For urgent requests, call us and we will prioritise your slot.' },
-                { q: 'Is your bike service pricing transparent in Delhi Cantt?', a: 'Absolutely. We provide a full itemised cost estimate before starting any work. No surprise bills — what you see is exactly what you pay.' },
+                { q: 'How quickly can a mechanic reach me in Delhi Cantt?', a: 'Our mechanics typically reach your location in Delhi Cantt, Naraina, or near Palam within 2–4 hours of booking, for bikes, scooties and cars alike. For urgent requests, call us and we will prioritise your slot.' },
+                { q: 'Is your bike, scooty and car service pricing transparent in Delhi Cantt?', a: 'Absolutely. We provide a full itemised cost estimate before starting any work, whether it\'s a bike, scooty or car. No surprise bills — what you see is exactly what you pay.' },
                 { q: 'Do you service scooties near Sadar Bazaar and Gopinath Bazaar?', a: 'Yes. We repair and service all scooties near Sadar Bazaar and Gopinath Bazaar — Honda Activa, TVS Jupiter, Suzuki Access 125, Honda Dio, Hero Maestro — all at your doorstep.' },
-                { q: 'Do you offer a warranty on bike service in Delhi Cantt?', a: 'Every service by Garage Fix Care in Delhi Cantt includes a 10-day hassle-free service guarantee. If any issue arises post-service, we address it at no extra cost.' },
-                { q: 'How do I book a bike mechanic near me in Delhi Cantt?', a: 'You can book via our website, WhatsApp us on 9540553759, or call directly. Share your area near Delhi Cantt and preferred time slot — we handle the rest.' },
+                { q: 'Do you offer a warranty on bike, scooty and car service in Delhi Cantt?', a: 'Every service by Garage Fix Care in Delhi Cantt includes a 10-day hassle-free service guarantee, whether it\'s a bike, scooty or car. If any issue arises post-service, we address it at no extra cost.' },
+                { q: 'How do I book a bike, scooty or car mechanic near me in Delhi Cantt?', a: 'You can book via our website, WhatsApp us on 9540553759, or call directly. Let us know whether it\'s a bike, scooty or car, share your area near Delhi Cantt and preferred time slot — we handle the rest.' },
                 { q: 'What payment methods are accepted in Delhi Cantt?', a: 'We accept cash, UPI (Google Pay, PhonePe, Paytm), and all major mobile wallets. Payment is collected only after the service is complete.' },
-                { q: 'Do I need to arrange any tools or oils?', a: 'No. Our Delhi Cantt mechanics arrive fully equipped — tools, genuine Motul/Wurth engine oils, and all required spare parts are brought to your doorstep.' },
-                { q: 'Can I book service for multiple bikes in the Army Area or Subroto Park?', a: 'Yes, simply mention the number of bikes while booking and we will arrange the right team for your location in the Army Area or near Subroto Park.' },
-                { q: 'Do you handle emergency bike breakdown near Dhaula Kuan or Naraina?', a: 'Yes. If your bike breaks down anywhere near Dhaula Kuan or Naraina, call us immediately and we dispatch a mechanic to your location.' },
-                { q: 'What makes Garage Fix Care better than a local Delhi Cantt workshop?', a: 'We come to you, save your travel time, offer transparent itemised billing, use genuine parts, and provide a 10-day warranty — something most local Delhi Cantt workshops cannot match.' },
+                { q: 'Do I need to arrange any tools or oils?', a: 'No. Our Delhi Cantt mechanics arrive fully equipped — tools, genuine Motul/Wurth engine oils, and all required spare parts are brought to your doorstep, for bikes, scooties and cars.' },
+                { q: 'Can I book service for multiple bikes or vehicles in the Army Area or Subroto Park?', a: 'Yes, simply mention the number and type of vehicles while booking and we will arrange the right team for your location in the Army Area or near Subroto Park.' },
+                { q: 'Do you handle emergency bike, scooty or car breakdown near Dhaula Kuan or Naraina?', a: 'Yes. If your bike, scooty or car breaks down anywhere near Dhaula Kuan or Naraina, call us immediately and we dispatch a mechanic to your location.' },
+                { q: 'What makes Garage Fix Care better than a local Delhi Cantt workshop?', a: 'We come to you for bikes, scooties and cars, save your travel time, offer transparent itemised billing, use genuine parts, and provide a 10-day warranty — something most local Delhi Cantt workshops cannot match.' },
               ].map((faq, idx) => (
                 <motion.div key={idx} variants={staggerItem} className="border border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
                   <button
@@ -1368,7 +1370,7 @@ const BestBikeServiceDelhiCantt = () => {
             viewport={viewportOnce}
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-              Book Bike Service in Delhi Cantt Today
+              Book Bike, Scooty or Car Service in Delhi Cantt Today
             </h2>
             <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
               Same-day doorstep service starting at ₹299. Our mechanic comes to you — no travel, no waiting, no hidden charges.

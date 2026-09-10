@@ -1,5 +1,5 @@
 // BestBikeServiceDelhi.tsx
-// Delhi specific SEO/content + Home.tsx / Delhi Cantt design system (video hero, Framer Motion, marquees)
+// Delhi Bike, Scooty & Car Service page — Home.tsx design system (video hero, Framer Motion, marquees)
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import type { Variants } from 'framer-motion';
@@ -9,11 +9,11 @@ import SEOHelmet from '../components/SEOHelmet';
 import axios from 'axios';
 import { FaWhatsapp } from 'react-icons/fa';
 
-// Hero background video (same assets/crossfade system as Delhi Cantt / Home.tsx)
+// Hero background video (same assets/crossfade system as Home.tsx)
 import insideVideo from '../images/inside.mp4';
 import outsideVideo from '../images/outside.mp4';
 
-// Bike Services icons — same assets as Delhi Cantt / Home.tsx
+// Bike, Scooty & Car service icons — same assets as Home.tsx
 import routineService from '../images/Routine Service.png';
 import bikeInsurance from '../images/Bike Insurance.png';
 import doorstepService from '../images/Doorstep Service.png';
@@ -21,7 +21,7 @@ import wheelCare from '../images/Wheel Care.png';
 import bikeBatteries from '../images/Bike Battery.png';
 import engineRepair from '../images/Engine Repair.png';
 
-// Hot Deals marquee — latest Delhi Cantt / Home.tsx asset set
+// Hot Deals marquee — same Home.tsx asset set
 import hotDealsImage1 from '../images/hotdeals1.png';
 import hotDealsImage2 from '../images/hotdeals2.png';
 import hotDealsImage3 from '../images/hotdeals3.png';
@@ -53,7 +53,7 @@ interface Service {
 }
 
 // ==================================================
-// Reusable Framer Motion variants — same system as Delhi Cantt / Home.tsx
+// Reusable Framer Motion variants — same system as Home.tsx
 // ==================================================
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -103,7 +103,7 @@ const BestBikeServiceDelhi = () => {
 
   const prefersReducedMotion = useReducedMotion();
 
-  // Subtle top-of-page scroll progress indicator (same as Delhi Cantt / Home.tsx)
+  // Subtle top-of-page scroll progress indicator (same as Home.tsx)
   const { scrollYProgress } = useScroll();
   const scrollProgressScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -138,7 +138,7 @@ const BestBikeServiceDelhi = () => {
     };
   }, []);
 
-  // ================= Hero video sequence (same two-slot crossfade system as Delhi Cantt / Home.tsx) =================
+  // ================= Hero video sequence (same two-slot crossfade system as Home.tsx) =================
   // inside.mp4 -> outside.mp4 -> inside.mp4 -> ... loops forever, no hard cut, no blank frame.
   const heroVideoSources = [insideVideo, outsideVideo];
   const heroVideoSlot0Ref = useRef<HTMLVideoElement | null>(null);
@@ -216,7 +216,7 @@ const BestBikeServiceDelhi = () => {
   };
   // ================= End hero video sequence =================
 
-  // Hot Deals marquee images — latest Delhi Cantt / Home.tsx assets, Delhi-specific copy
+  // Hot Deals marquee images — Home.tsx assets, Delhi bike/scooty/car specific copy
   const carouselImages = [
     { src: hotDealsImage1, alt: 'Bike service offer in Delhi' },
     { src: hotDealsImage2, alt: 'Doorstep bike service in South Delhi' },
@@ -332,7 +332,7 @@ const BestBikeServiceDelhi = () => {
     { name: 'Faridabad', path: '/best-bike-service-faridabad' },
   ];
 
-  // Brands We Service marquee data (same structure/logic as Delhi Cantt / Home.tsx)
+  // Brands We Service marquee data (same structure/logic as Home.tsx)
   const bikeBrands = ['Hero', 'Honda', 'TVS', 'Bajaj', 'Suzuki', 'Yamaha', 'Kawasaki', 'Royal Enfield', 'KTM', 'BMW', 'Harley Davidson', 'Ducati', 'Triumph', 'Indian', 'Vespa', 'Benelli', 'Aprilia', 'Yezdi', 'Husqvarna', 'Other'];
   const scootyBrands = ['Honda', 'TVS', 'Hero', 'Suzuki', 'Yamaha', 'Ather', 'Ola Electric', 'Bajaj', 'Vespa', 'Aprilia', 'Other'];
   const marqueeBrands = Array.from(
@@ -353,26 +353,26 @@ const BestBikeServiceDelhi = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Bike Service in Delhi | Doorstep Bike Repair ₹299 | Garage Fix Care"
-        description="Book best bike service in Delhi starting at ₹299. Doorstep bike repair, oil change, battery replacement and trusted mechanics across Delhi NCR."
+        title="Best Bike, Scooty and Car Service in Delhi | Doorstep Service Just ₹299 | Garage Fix Care"
+        description="Garage Fix Care offers doorstep bike, scooty and car service across Delhi, starting at just ₹299. Certified mechanics, transparent pricing and same-day service across Delhi NCR."
         canonical="https://www.garagefixcare.in/best-bike-service-delhi"
         robots="index, follow"
         og={{
           url: 'https://www.garagefixcare.in/best-bike-service-delhi',
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Best bike service in Delhi at doorstep by Garage Fix Care',
+          imageAlt: 'Best bike, scooty and car service in Delhi at doorstep by Garage Fix Care',
           type: 'website',
         }}
         twitter={{
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Doorstep bike service and repair in Delhi',
+          imageAlt: 'Doorstep bike, scooty and car service in Delhi',
         }}
         structuredData={[
           {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'Garage Fix Care',
-            description: 'Best bike service in Delhi. Doorstep bike repair, servicing, oil change, battery replacement starting at ₹299.',
+            description: 'Best bike, scooty and car service in Delhi. Doorstep repair, servicing, oil change and battery replacement for bikes, scooties and cars, starting at just ₹299.',
             url: 'https://www.garagefixcare.in/best-bike-service-delhi',
             telephone: '+919540553759',
             priceRange: '₹₹',
@@ -392,27 +392,28 @@ const BestBikeServiceDelhi = () => {
               { '@type': 'City', name: 'Faridabad' },
               { '@type': 'City', name: 'Greater Noida' },
             ],
-            serviceType: ['Bike Repair', 'Doorstep Bike Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
+            serviceType: ['Bike Repair', 'Scooty Repair', 'Car Service', 'Doorstep Vehicle Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
             openingHours: 'Mo-Su 08:00-20:00',
             aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', reviewCount: '100000' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Doorstep Bike Service in Delhi',
+            name: 'Doorstep Bike, Scooty and Car Service in Delhi',
             provider: { '@type': 'LocalBusiness', name: 'Garage Fix Care' },
             areaServed: 'Delhi',
-            description: 'At-home bike servicing starting at ₹299. Oil change, engine repair, battery replacement, puncture fix — same-day doorstep service across Delhi.',
+            description: 'At-home bike, scooty and car servicing starting at ₹299. Oil change, engine repair, battery replacement, puncture fix and car maintenance — same-day doorstep service across Delhi.',
             offers: { '@type': 'Offer', priceCurrency: 'INR', price: '299', availability: 'https://schema.org/InStock' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: [
-              { '@type': 'Question', name: 'How much does bike service cost in Delhi?', acceptedAnswer: { '@type': 'Answer', text: 'Bike service in Delhi starts from ₹299 for 100–125cc bikes. Classic Service is ₹399, Premium ₹499, Royal ₹599, and Sports ₹999. All include labour with no hidden charges.' } },
-              { '@type': 'Question', name: 'Do you provide doorstep bike repair in Delhi?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, we provide complete doorstep bike repair across all major areas of Delhi. Certified mechanics come to your home fully equipped — no garage visit needed.' } },
-              { '@type': 'Question', name: 'Which areas of Delhi are covered?', acceptedAnswer: { '@type': 'Answer', text: 'We cover South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Pitampura, Janakpuri, Mayur Vihar, Vasant Kunj and all surrounding localities.' } },
-              { '@type': 'Question', name: 'Do you handle emergency bike breakdown in Delhi?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. If your bike breaks down anywhere in Delhi, call us immediately and we dispatch a mechanic to your location for on-spot repair or recovery.' } },
+              { '@type': 'Question', name: 'What is the best bike, scooty and car service in Delhi?', acceptedAnswer: { '@type': 'Answer', text: 'Garage Fix Care is Delhi\'s trusted doorstep service for bikes, scooties and cars, starting at just ₹299, with certified mechanics and transparent pricing.' } },
+              { '@type': 'Question', name: 'How much does bike, scooty or car service cost in Delhi?', acceptedAnswer: { '@type': 'Answer', text: 'Bike and scooty service in Delhi starts from ₹299 for 100–125cc bikes. Classic Service is ₹399, Premium ₹499, Royal ₹599, and Sports ₹999. Car service pricing is quoted based on your car model and requirement. All include labour with no hidden charges.' } },
+              { '@type': 'Question', name: 'Do you provide doorstep bike, scooty and car repair in Delhi?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, we provide complete doorstep repair for bikes, scooties and cars across all major areas of Delhi. Certified mechanics come to your home fully equipped — no garage visit needed.' } },
+              { '@type': 'Question', name: 'Which areas of Delhi are covered?', acceptedAnswer: { '@type': 'Answer', text: 'We cover South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Pitampura, Janakpuri, Mayur Vihar, Vasant Kunj and all surrounding localities for bike, scooty and car service.' } },
+              { '@type': 'Question', name: 'Do you handle emergency bike, scooty or car breakdown in Delhi?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. If your bike, scooty or car breaks down anywhere in Delhi, call us immediately and we dispatch a mechanic to your location for on-spot repair or recovery.' } },
             ],
           },
           {
@@ -420,13 +421,13 @@ const BestBikeServiceDelhi = () => {
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.garagefixcare.in/' },
-              { '@type': 'ListItem', position: 2, name: 'Best Bike Service in Delhi', item: 'https://www.garagefixcare.in/best-bike-service-delhi' },
+              { '@type': 'ListItem', position: 2, name: 'Best Bike, Scooty and Car Service in Delhi', item: 'https://www.garagefixcare.in/best-bike-service-delhi' },
             ],
           },
         ]}
       />
 
-      {/* Subtle scroll progress indicator — same as Delhi Cantt / Home.tsx */}
+      {/* Subtle scroll progress indicator — same as Home.tsx */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-orange-500 origin-left z-[70]"
         style={{ scaleX: scrollProgressScaleX }}
@@ -517,22 +518,22 @@ const BestBikeServiceDelhi = () => {
                   variants={heroStaggerItem}
                   className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] sm:leading-tight mb-1.5 sm:mb-3"
                 >
-                  Best Bike Service in Delhi
-                  <span style={{ color: '#FF7A18' }}> — Doorstep Repair from ₹299</span>
+                  Best Bike, Scooty and Car Service in Delhi
+                  <span style={{ color: '#FF7A18' }}> — Doorstep Service Just ₹299</span>
                 </motion.h1>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="font-poppins text-[11px] sm:text-sm font-semibold text-white/85 leading-tight mb-1.5 sm:mb-2"
                 >
-                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Same-Day Bike Repair &bull; Certified Mechanics Near You
+                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Bikes, Scooties &amp; Cars &bull; Same-Day Doorstep Service &bull; Certified Mechanics Near You
                 </motion.p>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="hidden sm:block text-xs sm:text-sm leading-relaxed text-white/80 mb-2 sm:mb-3 max-w-[520px]"
                 >
-                  Get the most trusted bike service in Delhi right at your doorstep — from South Delhi and North Delhi to Dwarka, Rohini, Laxmi Nagar and Saket. Our expert mechanics handle everything from oil change to engine overhaul, no garage queues, no hidden costs.
+                  Get the most trusted bike, scooty and car service in Delhi right at your doorstep — from South Delhi and North Delhi to Dwarka, Rohini, Laxmi Nagar and Saket. Our expert mechanics handle everything from oil change to engine overhaul, no garage queues, no hidden costs.
                 </motion.p>
               </motion.div>
 
@@ -645,7 +646,7 @@ const BestBikeServiceDelhi = () => {
               </span>
             </span>
             <p className="relative text-[10px] sm:text-sm leading-[1.4] sm:leading-relaxed" style={{ color: '#cbd5e1' }}>
-              Skip the garage queue. Our certified mechanics come to your home or office across South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar and Saket — handling everything from routine servicing to engine repairs. Fast, transparent, and affordable.
+              Skip the garage queue. Our certified mechanics come to your home or office across South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar and Saket — servicing bikes, scooties and cars, from routine maintenance to engine repairs, starting at ₹299. Fast, transparent, and affordable.
             </p>
           </div>
         </motion.div>
@@ -691,7 +692,7 @@ const BestBikeServiceDelhi = () => {
                 <Flame className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />
               </div>
               <p className="text-base sm:text-lg text-white max-w-7xl mx-auto mt-2 text-center">
-                Limited-time offer for Delhi customers! Get up to 10% off on bike repairs and servicing at your doorstep. Hurry—these deals won&apos;t last long!
+                Limited-time offer for Delhi customers! Get up to 10% off on bike, scooty and car repairs and servicing at your doorstep, starting at ₹299. Hurry—these deals won&apos;t last long!
               </p>
             </motion.div>
           </div>
@@ -835,10 +836,10 @@ const BestBikeServiceDelhi = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-white">At-Home Service</span> <span className="text-red-600">Price List</span>
+                <span className="text-white">At-Home Bike &amp; Scooty Service</span> <span className="text-red-600">Price List</span>
               </h2>
               <p className="text-base sm:text-xl text-white mb-10 sm:mb-12 max-w-3xl mx-auto">
-                Transparent pricing for doorstep bike service across Delhi. Check the labour charges below based on your bike&apos;s engine size — no hidden fees, no surprises.
+                Transparent pricing for doorstep bike and scooty service across Delhi, starting at just ₹299. Check the labour charges below based on your two-wheeler&apos;s engine size — no hidden fees, no surprises. Looking for car service instead? Tap Cars above for a tailored quote.
               </p>
             </motion.div>
             <motion.div
@@ -1011,20 +1012,20 @@ const BestBikeServiceDelhi = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Whether you live in South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, or Saket, our bike mechanics reach your doorstep within 2-4 hours. Same-day bike service available across Delhi NCR.
+              Whether you live in South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, or Saket, our bike, scooty and car mechanics reach your doorstep within 2-4 hours. Same-day doorstep service available across Delhi NCR, starting at ₹299.
             </motion.p>
           </div>
         </section>
 
-        {/* Bike Services We Offer */}
+        {/* Bike, Scooty & Car Services We Offer */}
         <section className="py-12 bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-                Complete Bike Care, <span className="text-red-600">Right at Your Door in Delhi</span>
+                Complete Bike, Scooty &amp; Car Care, <span className="text-red-600">Right at Your Door in Delhi</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
-                From routine oil changes to full engine repair — our Delhi mechanics handle it all at your location. No waiting, no hassle.
+                From routine oil changes to full engine repair — our Delhi mechanics handle bikes, scooties and cars at your location, starting at ₹299. No waiting, no hassle.
               </p>
             </motion.div>
             <motion.div
@@ -1054,7 +1055,7 @@ const BestBikeServiceDelhi = () => {
           </div>
         </section>
 
-        {/* Comprehensive Bike Service Content (Delhi specific, 1000+ words) */}
+        {/* Comprehensive Bike, Scooty & Car Service Content (Delhi specific, 1000+ words) */}
         <section className="py-10 sm:py-14 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
@@ -1064,7 +1065,7 @@ const BestBikeServiceDelhi = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Why Garage Fix Care is the <span className="text-red-600">Best Bike Service in Delhi</span>
+              Why Garage Fix Care is the <span className="text-red-600">Best Bike, Scooty and Car Service in Delhi</span>
             </motion.h2>
             <motion.div
               className="space-y-4 text-gray-200 text-sm sm:text-base leading-relaxed"
@@ -1073,8 +1074,8 @@ const BestBikeServiceDelhi = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              <p>Getting a trustworthy bike service in Delhi has always been harder than it should be. Across the city — from the crowded lanes of Laxmi Nagar to the wide avenues of Dwarka, from busy Rohini to upscale South Delhi — two-wheeler owners routinely face overcharging, unclear billing, and mechanics who keep bikes for days without updates. Garage Fix Care was built specifically to solve this. We are Delhi&apos;s most trusted doorstep bike service, sending certified and background-verified mechanics directly to your home or office. Our doorstep bike repair in Delhi starts at just ₹299, and we cover every major locality across the city — North Delhi, South Delhi, East Delhi, West Delhi, Dwarka, Rohini, Saket, Laxmi Nagar, Pitampura, Janakpuri, Mayur Vihar, and Vasant Kunj. Our mechanics arrive fully equipped with tools, genuine engine oils, and spare parts, so your bike gets serviced on the spot without you stepping out. Whether you ride a Hero Splendor, Honda Activa, Bajaj Pulsar, Royal Enfield Classic 350, KTM Duke, or any other brand, our expert Delhi mechanics handle everything from routine oil changes to full engine overhauls. What makes us the best bike service in Delhi is simple: complete pricing transparency. You receive a detailed cost estimate before a single bolt is turned — zero surprise charges, guaranteed. We use only certified engine oils from Motul and Wurth with manufacturer-recommended parts, and every service is backed by our 10-day hassle-free guarantee.</p>
-              <p>Delhi&apos;s extreme heat, heavy traffic, and dusty roads put serious stress on your bike&apos;s engine, air filter, brakes, and tyres. Regular professional servicing is not a luxury — it is essential for safety and performance on Delhi roads. Our mechanics use diagnostic tools to catch issues early before they become expensive problems, significantly extending the life of your vehicle. Beyond scheduled servicing, we also handle emergency breakdown situations in Delhi. If your bike stops working mid-route anywhere in the city, call us and we dispatch a mechanic to your exact location as quickly as possible. From battery replacement and brake pad changes to clutch cable adjustment and tyre puncture repair, we do it all on the spot. We have successfully completed over 1,00,000 services across Delhi NCR, and our customers consistently rate us 4.7 stars on Google for punctuality, honesty, and professionalism. Book your bike service in Delhi today through our website, WhatsApp, or phone — and experience the difference that genuine doorstep care makes.</p>
+              <p>Getting a trustworthy bike, scooty or car service in Delhi has always been harder than it should be. Across the city — from the crowded lanes of Laxmi Nagar to the wide avenues of Dwarka, from busy Rohini to upscale South Delhi — vehicle owners routinely face overcharging, unclear billing, and mechanics who keep vehicles for days without updates. Garage Fix Care was built specifically to solve this. We are Delhi&apos;s most trusted doorstep vehicle service, sending certified and background-verified mechanics directly to your home or office. Our doorstep bike and scooty repair in Delhi starts at just ₹299, and we cover every major locality across the city — North Delhi, South Delhi, East Delhi, West Delhi, Dwarka, Rohini, Saket, Laxmi Nagar, Pitampura, Janakpuri, Mayur Vihar, and Vasant Kunj. We also offer doorstep car servicing and repairs in Delhi, with pricing quoted based on your car&apos;s model and requirement. Our mechanics arrive fully equipped with tools, genuine engine oils, and spare parts, so your vehicle gets serviced on the spot without you stepping out. Whether you ride a Hero Splendor, Honda Activa, Bajaj Pulsar, Royal Enfield Classic 350, KTM Duke, or drive a popular hatchback or sedan, our expert Delhi mechanics handle everything from routine oil changes to full engine overhauls. What makes us the best bike, scooty and car service in Delhi is simple: complete pricing transparency. You receive a detailed cost estimate before a single bolt is turned — zero surprise charges, guaranteed. We use only certified engine oils from Motul and Wurth with manufacturer-recommended parts, and every service is backed by our 10-day hassle-free guarantee.</p>
+              <p>Delhi&apos;s extreme heat, heavy traffic, and dusty roads put serious stress on your engine, air filter, brakes, and tyres — whether you ride a bike, scooty, or drive a car. Regular professional servicing is not a luxury — it is essential for safety and performance on Delhi roads. Our mechanics use diagnostic tools to catch issues early before they become expensive problems, significantly extending the life of your vehicle. Beyond scheduled servicing, we also handle emergency breakdown situations in Delhi. If your bike, scooty or car stops working mid-route anywhere in the city, call us and we dispatch a mechanic to your exact location as quickly as possible. From battery replacement and brake pad changes to clutch cable adjustment and tyre puncture repair, we do it all on the spot. We have successfully completed over 1,00,000 services across Delhi NCR, and our customers consistently rate us 4.7 stars on Google for punctuality, honesty, and professionalism. Book your bike, scooty or car service in Delhi today through our website, WhatsApp, or phone — and experience the difference that genuine doorstep care makes.</p>
             </motion.div>
           </div>
         </section>
@@ -1090,7 +1091,7 @@ const BestBikeServiceDelhi = () => {
                 GarageFixCare <span className="text-red-600">Service Warranty</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                Delhi&apos;s trusted doorstep bike service. We service all motorcycle and scooter brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — right at your home or office.
+                Delhi&apos;s trusted doorstep bike, scooty and car service, starting at ₹299. We service all major motorcycle, scooter and car brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — right at your home or office.
               </p>
             </motion.div>
             <motion.div
@@ -1103,8 +1104,8 @@ const BestBikeServiceDelhi = () => {
               {[
                 { img: warrantyImg, title: 'Enjoy a 10-Day Free Service Guarantee', desc: '10-Day Hassle-Free Warranty' },
                 { img: pickupImg, title: 'Enjoy Free Pickup and Drop at Your Convenience', desc: 'Free Pick & Drop Available' },
-                { img: transparentImg, title: 'Transparent Pricing, Competitive Rate', desc: 'Save up to 30% on your bike service' },
-                { img: trainedImg, title: 'Skilled and Certified Mechanics', desc: 'Exclusively Certified Two-Wheeler Mechanics' },
+                { img: transparentImg, title: 'Transparent Pricing, Competitive Rate', desc: 'Save up to 30% on your bike, scooty or car service' },
+                { img: trainedImg, title: 'Skilled and Certified Mechanics', desc: 'Certified Bike, Scooty and Car Mechanics' },
               ].map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -1139,7 +1140,7 @@ const BestBikeServiceDelhi = () => {
                 Why Choose <span className="text-red-600">GarageFixCare?</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                We bring certified mechanics directly to Delhi residents — honest pricing, genuine parts, zero hassle.
+                We bring certified mechanics for bikes, scooties and cars directly to Delhi residents — doorstep service starting at ₹299, with honest pricing, genuine parts and zero hassle.
               </p>
               <ul className="space-y-2 text-left">
                 {['Hassle-Free Doorstep Service', 'Certified and Skilled Technicians', 'Honest Pricing', 'Certified Genuine Parts', 'Your Satisfaction Guaranteed', 'Fast and Professional Service'].map(item => (
@@ -1198,7 +1199,7 @@ const BestBikeServiceDelhi = () => {
                 How <span className="text-red-600">GarageFixCare</span> Works?
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                Getting your bike serviced in Delhi is simple. Book online or call us, and a skilled mechanic arrives at your doorstep with everything needed to get your bike running at its best — all done on the spot.
+                Getting your bike, scooty or car serviced in Delhi is simple. Book online or call us, and a skilled mechanic arrives at your doorstep with everything needed to get your vehicle running at its best — starting at ₹299, all done on the spot.
               </p>
               <ul className="space-y-2 text-left">
                 {['Schedule Your Service', 'Technician Sent to You', 'Service Done on the Spot', 'Clear and Transparent Communication', 'Guaranteed Quality Service', 'Easy Payment & Feedback'].map(item => (
@@ -1313,7 +1314,7 @@ const BestBikeServiceDelhi = () => {
           </div>
         </section>
 
-        {/* FAQs (15 items, Delhi specific) */}
+        {/* FAQs (16 items, Delhi bike/scooty/car specific) */}
         <section className="bg-slate-900 py-10 sm:py-14">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
@@ -1323,25 +1324,26 @@ const BestBikeServiceDelhi = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Bike Service in Delhi — <span className="text-red-600">Common Questions</span>
+              Bike, Scooty &amp; Car Service in Delhi — <span className="text-red-600">Common Questions</span>
             </motion.h2>
             <motion.div className="space-y-3" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               {[
-                { q: 'How much does bike service cost in Delhi?', a: 'Bike service in Delhi at Garage Fix Care starts from ₹299 for 100–125cc bikes (Regular Service). Classic Service (135–200 CC) is ₹399, Premium Service (220–300 CC) is ₹499, Royal Service (350–450 CC) is ₹599, and Sports Service (above 500 CC) is ₹999. All prices cover labour with zero hidden charges.' },
-                { q: 'Do you provide doorstep bike repair in Delhi?', a: 'Yes, we provide complete doorstep bike repair across all major areas of Delhi. Our certified mechanics come to your home or office fully equipped with tools, oils, and parts. You never need to visit a garage.' },
-                { q: 'Which areas of Delhi are covered for bike service?', a: 'We cover South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Pitampura, Janakpuri, Mayur Vihar, Vasant Kunj, and all surrounding Delhi NCR localities.' },
-                { q: 'What is the best bike service in Delhi?', a: 'Garage Fix Care is Delhi\'s highest-rated doorstep bike service, starting at ₹299 with certified mechanics, transparent pricing, genuine parts, and a 10-day service guarantee.' },
+                { q: 'What is the best bike, scooty and car service in Delhi?', a: 'Garage Fix Care is Delhi\'s highest-rated doorstep service for bikes, scooties and cars, starting at ₹299 with certified mechanics, transparent pricing, genuine parts, and a 10-day service guarantee.' },
+                { q: 'How much does bike or scooty service cost in Delhi?', a: 'Bike and scooty service in Delhi at Garage Fix Care starts from ₹299 for 100–125cc vehicles (Regular Service). Classic Service (135–200 CC) is ₹399, Premium Service (220–300 CC) is ₹499, Royal Service (350–450 CC) is ₹599, and Sports Service (above 500 CC) is ₹999. All prices cover labour with zero hidden charges.' },
+                { q: 'Do you provide car service in Delhi too?', a: 'Yes. Alongside bikes and scooties, we offer doorstep car servicing across Delhi. Car service pricing is quoted based on your car\'s model and the work required — just book online or call us for a quote.' },
+                { q: 'Do you provide doorstep bike and scooty repair in Delhi?', a: 'Yes, we provide complete doorstep bike and scooty repair across all major areas of Delhi. Our certified mechanics come to your home or office fully equipped with tools, oils, and parts. You never need to visit a garage.' },
+                { q: 'Which areas of Delhi are covered for bike, scooty and car service?', a: 'We cover South Delhi, North Delhi, East Delhi, West Delhi, Dwarka, Rohini, Laxmi Nagar, Saket, Pitampura, Janakpuri, Mayur Vihar, Vasant Kunj, and all surrounding Delhi NCR localities.' },
                 { q: 'Do you service Royal Enfield bikes in Delhi?', a: 'Yes. We specialise in Royal Enfield servicing across Delhi — Classic 350, Bullet 350, Meteor 350, Himalayan, and Thunderbird — all serviced at your doorstep.' },
-                { q: 'How quickly can a mechanic reach me in Delhi?', a: 'Our mechanics typically reach your location in Delhi within 2–4 hours of booking. For urgent requests, call us and we will prioritise your slot.' },
-                { q: 'Is your bike service pricing transparent in Delhi?', a: 'Absolutely. We provide a full cost estimate before starting any work. No surprise bills — what you see is exactly what you pay.' },
+                { q: 'How quickly can a mechanic reach me in Delhi?', a: 'Our mechanics typically reach your location in Delhi within 2–4 hours of booking, for bikes, scooties and cars alike. For urgent requests, call us and we will prioritise your slot.' },
+                { q: 'Is your bike, scooty and car service pricing transparent in Delhi?', a: 'Absolutely. We provide a full cost estimate before starting any work, whether it\'s a bike, scooty or car. No surprise bills — what you see is exactly what you pay.' },
                 { q: 'Do you service scooties in Delhi?', a: 'Yes. We repair and service all scooties across Delhi — Honda Activa, TVS Jupiter, Suzuki Access 125, Honda Dio, Hero Maestro — all at your doorstep.' },
-                { q: 'Do you offer a warranty on bike service in Delhi?', a: 'Every service by Garage Fix Care in Delhi includes a 10-day hassle-free service guarantee. If any issue arises post-service, we address it at no extra cost.' },
-                { q: 'How do I book a bike mechanic near me in Delhi?', a: 'You can book via our website, WhatsApp us on 9540553759, or call directly. Share your Delhi area and preferred time slot — we handle the rest.' },
+                { q: 'Do you offer a warranty on bike, scooty and car service in Delhi?', a: 'Every service by Garage Fix Care in Delhi includes a 10-day hassle-free service guarantee, whether it\'s a bike, scooty or car. If any issue arises post-service, we address it at no extra cost.' },
+                { q: 'How do I book a bike, scooty or car mechanic near me in Delhi?', a: 'You can book via our website, WhatsApp us on 9540553759, or call directly. Let us know whether it\'s a bike, scooty or car, share your Delhi area and preferred time slot — we handle the rest.' },
                 { q: 'What payment methods are accepted in Delhi?', a: 'We accept cash, UPI (Google Pay, PhonePe, Paytm), and all major mobile wallets. Payment is collected only after the service is complete.' },
-                { q: 'Do I need to arrange any tools or oils?', a: 'No. Our Delhi mechanics arrive fully equipped — tools, genuine Motul/Wurth engine oils, and all required spare parts are brought by the mechanic.' },
-                { q: 'Can I book service for multiple bikes in Delhi?', a: 'Yes, simply mention the number of bikes while booking and we will arrange the right team for your location.' },
-                { q: 'What makes Garage Fix Care better than a local Delhi workshop?', a: 'We come to you, save your travel time, offer transparent itemised billing, use genuine parts, and provide a 10-day warranty — something most local Delhi workshops cannot match.' },
-                { q: 'Do you handle emergency bike breakdown in Delhi?', a: 'Yes. If your bike breaks down anywhere in Delhi, call us immediately. We dispatch a mechanic to your location for on-spot repair or recovery assistance.' },
+                { q: 'Do I need to arrange any tools or oils?', a: 'No. Our Delhi mechanics arrive fully equipped — tools, genuine Motul/Wurth engine oils, and all required spare parts are brought by the mechanic, for bikes, scooties and cars.' },
+                { q: 'Can I book service for multiple bikes or vehicles in Delhi?', a: 'Yes, simply mention the number and type of vehicles while booking and we will arrange the right team for your location.' },
+                { q: 'What makes Garage Fix Care better than a local Delhi workshop?', a: 'We come to you for bikes, scooties and cars, save your travel time, offer transparent itemised billing, use genuine parts, and provide a 10-day warranty — something most local Delhi workshops cannot match.' },
+                { q: 'Do you handle emergency bike, scooty or car breakdown in Delhi?', a: 'Yes. If your bike, scooty or car breaks down anywhere in Delhi, call us immediately. We dispatch a mechanic to your location for on-spot repair or recovery assistance.' },
               ].map((faq, idx) => (
                 <motion.div key={idx} variants={staggerItem} className="border border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
                   <button
@@ -1373,7 +1375,7 @@ const BestBikeServiceDelhi = () => {
             viewport={viewportOnce}
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-              Book Bike Service in Delhi Today
+              Book Bike, Scooty or Car Service in Delhi Today
             </h2>
             <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
               Same-day doorstep service starting at ₹299. Our mechanic comes to you — no travel, no waiting, no hidden charges.

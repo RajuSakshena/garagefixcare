@@ -358,26 +358,26 @@ const BestBikeServicePalam = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Bike Service in Palam | Doorstep Bike Repair ₹299 | Garage Fix Care"
-        description="Top-rated doorstep bike repair in Palam, Delhi starting at ₹299. Covering Palam Colony, Palam Village, Raj Nagar, Dashrath Puri, Dwarka Sector 7–9 & more. Book now!"
+        title="Best Bike, Scooty & Car Service in Palam | Doorstep Vehicle Repair ₹299 | Garage Fix Care"
+        description="Top-rated doorstep bike, scooty & car service in Palam, Delhi — two-wheeler repair starting at ₹299, plus doorstep car servicing. Covering Palam Colony, Palam Village, Raj Nagar, Dashrath Puri, Dwarka Sector 7–9 & more. Book now!"
         canonical="https://www.garagefixcare.in/best-bike-service-palam"
         robots="index, follow"
         og={{
           url: 'https://www.garagefixcare.in/best-bike-service-palam',
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Doorstep bike service in Palam Delhi by Garage Fix Care',
+          imageAlt: 'Doorstep bike, scooty and car service in Palam Delhi by Garage Fix Care',
           type: 'website',
         }}
         twitter={{
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Expert bike repair at home in Palam Colony and surrounding areas',
+          imageAlt: 'Expert bike, scooty and car repair at home in Palam Colony and surrounding areas',
         }}
         structuredData={[
           {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'Garage Fix Care',
-            description: 'Trusted doorstep bike service in Palam, Delhi. At-home bike repair, oil change, engine servicing and battery replacement starting at ₹299. Serving Palam Colony, Palam Village, Raj Nagar, Dashrath Puri and Dwarka.',
+            description: 'Trusted doorstep bike, scooty and car service in Palam, Delhi. At-home bike and scooty repair, oil change, engine servicing and battery replacement starting at ₹299, plus doorstep car repair and servicing. Serving Palam Colony, Palam Village, Raj Nagar, Dashrath Puri and Dwarka.',
             url: 'https://www.garagefixcare.in/best-bike-service-palam',
             telephone: '+919540553759',
             priceRange: '₹₹',
@@ -397,17 +397,17 @@ const BestBikeServicePalam = () => {
               { '@type': 'City', name: 'Faridabad' },
               { '@type': 'City', name: 'Greater Noida' },
             ],
-            serviceType: ['Bike Repair', 'Doorstep Bike Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
+            serviceType: ['Bike Repair', 'Scooty Repair', 'Doorstep Bike Service', 'Doorstep Car Service', 'Car Repair', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
             openingHours: 'Mo-Su 08:00-20:00',
             aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', reviewCount: '100000' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Doorstep Bike Service in Palam Delhi',
+            name: 'Doorstep Bike, Scooty & Car Service in Palam Delhi',
             provider: { '@type': 'LocalBusiness', name: 'Garage Fix Care' },
             areaServed: 'Palam, Delhi',
-            description: 'At-home bike servicing starting at ₹299 across Palam Colony, Palam Village, Raj Nagar, Dashrath Puri, Dwarka Sector 7, 8, 9 and Delhi Cantonment. Oil change, engine repair, battery replacement — same-day doorstep service.',
+            description: 'At-home bike and scooty servicing starting at ₹299, plus doorstep car repair and servicing, across Palam Colony, Palam Village, Raj Nagar, Dashrath Puri, Dwarka Sector 7, 8, 9 and Delhi Cantonment. Oil change, engine repair, battery replacement — same-day doorstep service for two-wheelers and cars.',
             offers: { '@type': 'Offer', priceCurrency: 'INR', price: '299', availability: 'https://schema.org/InStock' },
           },
           {
@@ -418,6 +418,7 @@ const BestBikeServicePalam = () => {
               { '@type': 'Question', name: 'Do you cover Palam Colony and Palam Village for doorstep bike service?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, we provide full doorstep bike repair in Palam Colony, Palam Village, Raj Nagar, Dashrath Puri, Dwarka Sectors 7–9, Manglapuri, Delhi Cantonment and IGI Airport area.' } },
               { '@type': 'Question', name: 'Can your mechanic reach me near IGI Airport in Palam?', acceptedAnswer: { '@type': 'Answer', text: 'Absolutely. Our mechanics regularly serve residents and professionals near the IGI Airport zone. Share your pin location and we dispatch a certified technician within 2–4 hours.' } },
               { '@type': 'Question', name: 'Do you handle emergency breakdown in Palam?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. If your bike breaks down on any road in Palam, Dashrath Puri or Dwarka Sector 8, call us immediately and we dispatch a mechanic to your exact location for on-spot repair.' } },
+              { '@type': 'Question', name: 'Do you also provide car service in Palam?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Along with bike and scooty service, Garage Fix Care also offers doorstep car repair and servicing across Palam and the surrounding areas. Call or WhatsApp us with your car details and requirement for a quote.' } },
             ],
           },
           {
@@ -425,7 +426,7 @@ const BestBikeServicePalam = () => {
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.garagefixcare.in/' },
-              { '@type': 'ListItem', position: 2, name: 'Best Bike Service in Palam', item: 'https://www.garagefixcare.in/best-bike-service-palam' },
+              { '@type': 'ListItem', position: 2, name: 'Best Bike, Scooty & Car Service in Palam', item: 'https://www.garagefixcare.in/best-bike-service-palam' },
             ],
           },
         ]}
@@ -522,22 +523,22 @@ const BestBikeServicePalam = () => {
                   variants={heroStaggerItem}
                   className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] sm:leading-tight mb-1.5 sm:mb-3"
                 >
-                  Best Bike Service in Palam
-                  <span style={{ color: '#FF7A18' }}> — Doorstep Repair from ₹299</span>
+                  Best Bike, Scooty &amp; Car Service in Palam
+                  <span style={{ color: '#FF7A18' }}> — Doorstep Vehicle Repair from ₹299</span>
                 </motion.h1>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="font-poppins text-[11px] sm:text-sm font-semibold text-white/85 leading-tight mb-1.5 sm:mb-2"
                 >
-                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Same-Day Bike Repair &bull; Verified Mechanics at Your Door
+                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Same-Day Bike, Scooty &amp; Car Service &bull; Verified Mechanics at Your Door
                 </motion.p>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="hidden sm:block text-xs sm:text-sm leading-relaxed text-white/80 mb-2 sm:mb-3 max-w-[520px]"
                 >
-                  Trusted by riders in Palam Colony, Palam Village, Raj Nagar, Dashrath Puri, Dwarka Sector 7, 8, 9, Manglapuri, Delhi Cantonment and the IGI Airport area — our expert mechanics handle everything from oil change to engine overhaul, right at your doorstep.
+                  Trusted by riders and car owners in Palam Colony, Palam Village, Raj Nagar, Dashrath Puri, Dwarka Sector 7, 8, 9, Manglapuri, Delhi Cantonment and the IGI Airport area — our expert mechanics handle everything from bike and scooty oil change to engine overhaul, plus doorstep car repair and servicing, right at your doorstep.
                 </motion.p>
               </motion.div>
 
@@ -1069,7 +1070,7 @@ const BestBikeServicePalam = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Palam&apos;s Most Reliable <span className="text-red-600">Doorstep Bike Service</span> — Why Garage Fix Care Leads
+              Palam&apos;s Most Reliable <span className="text-red-600">Doorstep Bike, Scooty &amp; Car Service</span> — Why Garage Fix Care Leads
             </motion.h2>
             <motion.div
               className="space-y-4 text-gray-200 text-sm sm:text-base leading-relaxed"
@@ -1079,7 +1080,7 @@ const BestBikeServicePalam = () => {
               viewport={viewportOnce}
             >
               <p>Palam is one of Southwest Delhi&apos;s most densely connected localities — a patchwork of established residential colonies, bustling market lanes, military cantonments, and the arterial roads that feed into IGI Airport. For the tens of thousands of two-wheeler owners navigating through Palam Colony&apos;s narrow by-lanes, the Raj Nagar market stretch, Dashrath Puri&apos;s working-class quarters, or commuting daily between Manglapuri and Dwarka Sector 7, 8 and 9, maintaining a healthy bike is not a luxury — it is a daily necessity. The problem has always been the same: good local mechanics are either too far, too busy, or too opaque about pricing. Garage Fix Care was built to solve exactly this problem. Our certified, background-verified mechanics travel to your doorstep anywhere in Palam and the surrounding belt. Whether you are a resident in Palam Village&apos;s older housing blocks, a professional near Delhi Cantonment, or a family in one of Dwarka Sector 8&apos;s multi-storey societies, you get the same quality service — starting at just ₹299 for a complete at-home regular bike service covering engine oil change, air filter cleaning, spark plug inspection, brake calibration, chain lubrication, and a thorough electrical check. No prior visit to a garage. No waiting in a queue. No inflated bills.</p>
-              <p>The roads connecting Palam to the airport ring road and the Dwarka Expressway see heavy mixed traffic — auto-rickshaws, heavy vehicles, and daily commuters weaving through congestion. This takes a real toll on your two-wheeler&apos;s engine oil, brake pads, tyre pressure, and suspension. Palam&apos;s summer heat further degrades oil viscosity and battery charge. Our mechanics understand these local conditions intimately and bring professional diagnostic tools to spot deterioration before it turns into an expensive breakdown. We use only Motul and Wurth certified engine oils and manufacturer-grade spare parts to ensure your engine runs clean and efficiently long after our visit. Every completed service comes with a 10-day hassle-free guarantee — if any issue directly related to our work surfaces within that window, we return and fix it at no cost. Garage Fix Care has served over 1,00,000 customers across Delhi NCR and maintains a 4.7-star Google rating built on consistent professionalism, punctuality, and honest itemised billing. To book a bike mechanic in Palam today, WhatsApp us on 9540553759, call us directly, or schedule through our website — and let us handle your bike while you get on with your day.</p>
+              <p>The roads connecting Palam to the airport ring road and the Dwarka Expressway see heavy mixed traffic — auto-rickshaws, heavy vehicles, and daily commuters weaving through congestion. This takes a real toll on your two-wheeler&apos;s engine oil, brake pads, tyre pressure, and suspension. Palam&apos;s summer heat further degrades oil viscosity and battery charge. Our mechanics understand these local conditions intimately and bring professional diagnostic tools to spot deterioration before it turns into an expensive breakdown. We use only Motul and Wurth certified engine oils and manufacturer-grade spare parts to ensure your engine runs clean and efficiently long after our visit. Every completed service comes with a 10-day hassle-free guarantee — if any issue directly related to our work surfaces within that window, we return and fix it at no cost. Garage Fix Care has served over 1,00,000 customers across Delhi NCR and maintains a 4.7-star Google rating built on consistent professionalism, punctuality, and honest itemised billing. Beyond two-wheelers, we also offer doorstep car repair and servicing for Palam residents who would rather skip the workshop visit altogether. To book a bike, scooty or car mechanic in Palam today, WhatsApp us on 9540553759, call us directly, or schedule through our website — and let us handle your vehicle while you get on with your day.</p>
             </motion.div>
           </div>
         </section>
@@ -1315,7 +1316,7 @@ const BestBikeServicePalam = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Bike Service in Palam — <span className="text-red-600">Frequently Asked Questions</span>
+              Bike, Scooty &amp; Car Service in Palam — <span className="text-red-600">Frequently Asked Questions</span>
             </motion.h2>
             <motion.div className="space-y-3" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               {[
@@ -1327,6 +1328,13 @@ const BestBikeServicePalam = () => {
                 { q: 'Is there emergency breakdown assistance available in Palam and Manglapuri?', a: 'Yes. If your bike breaks down on any road in Palam Colony, Manglapuri market area, Raj Nagar or the roads connecting to Dwarka Sector 9, call us immediately on 9540553759. We dispatch a mechanic to your GPS location for on-the-spot repair or assistance.' },
                 { q: 'Do you service Royal Enfield bikes in Palam?', a: 'Yes, we specialise in Royal Enfield doorstep servicing across Palam and Dwarka — Classic 350, Bullet 350, Meteor 350, Himalayan, and all other models. Our mechanics are trained to handle the specific oil grades and engine requirements of these machines.' },
                 { q: 'What payment options do you accept in Palam?', a: 'We accept cash, UPI (Google Pay, PhonePe, Paytm), and all popular mobile wallets. Payment is collected only after the service is fully completed and you are satisfied — there is no advance required to confirm your booking.' },
+                { q: 'Do you offer a warranty on bike service in Palam?', a: 'Yes. Every service completed by Garage Fix Care in Palam is backed by a 10-day hassle-free service guarantee. If any issue directly related to our work comes up within that window, we return and fix it at no extra cost.' },
+                { q: 'Do I need to arrange tools, oils or parts myself?', a: 'No. Our Palam-based mechanics arrive fully equipped with all tools, genuine Motul and Wurth engine oils, and manufacturer-grade spare parts. You don\'t need to arrange anything — just share your address and vehicle details while booking.' },
+                { q: 'How do I book a bike mechanic near me in Palam?', a: 'You can book through our website, WhatsApp us on 9540553759, or call us directly. Share your exact address in Palam Colony, Raj Nagar, Dwarka or any nearby locality along with your preferred time slot, and we take care of the rest.' },
+                { q: 'Can you service scooties like Activa and Jupiter near Raj Nagar and Manglapuri?', a: 'Yes. We regularly repair and service scooties including Honda Activa, TVS Jupiter, Suzuki Access 125, Honda Dio and Hero Maestro for residents around Raj Nagar and Manglapuri, all handled at your doorstep.' },
+                { q: 'Can I book service for more than one bike at the same Palam address?', a: 'Yes, simply mention the number and models of the bikes while booking and we will send an appropriately sized mechanic team to your location in Palam or Dwarka.' },
+                { q: 'What makes Garage Fix Care better than a local Palam workshop?', a: 'We save you the trip to a garage, provide a transparent itemised bill before any work starts, use genuine parts and oils, and back every job with a 10-day guarantee — a combination most local Palam workshops don\'t offer.' },
+                { q: 'Do you provide doorstep car service in Palam too?', a: 'Yes. Along with bike and scooty service, Garage Fix Care also offers doorstep car repair and servicing across Palam Colony, Raj Nagar, Dashrath Puri and Dwarka. Share your car\'s make, model and the issue with us on WhatsApp or by phone and we will confirm the visit and pricing for you.' },
               ].map((faq, idx) => (
                 <motion.div key={idx} variants={staggerItem} className="border border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
                   <button
@@ -1358,10 +1366,10 @@ const BestBikeServicePalam = () => {
             viewport={viewportOnce}
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-              Book Bike Service in Palam Today
+              Book Bike, Scooty &amp; Car Service in Palam Today
             </h2>
             <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
-              Doorstep bike repair across Palam Colony, Raj Nagar, Dashrath Puri &amp; Dwarka — starting at just ₹299. No queues, no garage trips, no surprises.
+              Doorstep bike, scooty &amp; car repair across Palam Colony, Raj Nagar, Dashrath Puri &amp; Dwarka — two-wheeler service starting at just ₹299, plus doorstep car servicing. No queues, no garage trips, no surprises.
             </p>
             <a
               href="https://www.garagefixcare.in/bookservice"

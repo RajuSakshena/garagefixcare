@@ -1,5 +1,5 @@
 // BestBikeServiceDefenceColony.tsx
-// Defence Colony specific SEO/content + Home.tsx / Delhi Cantt design system (video hero, Framer Motion, marquees)
+// Defence Colony Bike, Scooty & Car Service page — Home.tsx design system (video hero, Framer Motion, marquees)
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import type { Variants } from 'framer-motion';
@@ -9,18 +9,18 @@ import SEOHelmet from '../components/SEOHelmet';
 import axios from 'axios';
 import { FaWhatsapp } from 'react-icons/fa';
 
-// Hero background video (same assets/crossfade system as Home.tsx / Delhi Cantt)
+// Hero background video (same assets/crossfade system as Home.tsx)
 import insideVideo from '../images/inside.mp4';
 import outsideVideo from '../images/outside.mp4';
 
-// Hot Deals marquee — same assets as Home.tsx / Delhi Cantt
+// Hot Deals marquee — same assets as Home.tsx
 import hotDealsImage1 from '../images/hotdeals1.png';
 import hotDealsImage2 from '../images/hotdeals2.png';
 import hotDealsImage3 from '../images/hotdeals3.png';
 import hotDealsImage4 from '../images/hotdeals4.png';
 import hotDealsImage5 from '../images/hotdeals5.png';
 
-// Bike Services icons — same assets as Home.tsx / Delhi Cantt
+// Bike, Scooty & Car service icons — same assets as Home.tsx
 import routineService from '../images/Routine Service.png';
 import bikeInsurance from '../images/Bike Insurance.png';
 import doorstepService from '../images/Doorstep Service.png';
@@ -28,7 +28,7 @@ import wheelCare from '../images/Wheel Care.png';
 import bikeBatteries from '../images/Bike Battery.png';
 import engineRepair from '../images/Engine Repair.png';
 
-// Shared / latest asset set (same as Delhi Cantt — replaces older Defence Colony-only images)
+// Shared / latest asset set (same as Home.tsx — replaces older Defence Colony-only images)
 import warrantyImg from '../images/warranty.webp';
 import pickupImg from '../images/free pickup.webp';
 import transparentImg from '../images/transparent.webp';
@@ -46,11 +46,6 @@ import testimonial2 from '../images/Testimonial2.jpeg';
 import testimonial3 from '../images/Testimonial3.jpeg';
 import testimonial4 from '../images/Testimonial4.jpeg';
 
-// Defence Colony specific review-platform assets (kept — unique working functionality)
-import googleReviewsImage from '../images/google1.png';
-import facebookReviewsImage from '../images/facebook1.png';
-import justdialReviewsImage from '../images/justdial1.png';
-
 interface Service {
   title: string;
   subtitle: string;
@@ -58,7 +53,7 @@ interface Service {
 }
 
 // ==================================================
-// Reusable Framer Motion variants — same system as Home.tsx / Delhi Cantt
+// Reusable Framer Motion variants — same system as Home.tsx
 // ==================================================
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -108,7 +103,7 @@ const BestBikeServiceDefenceColony = () => {
 
   const prefersReducedMotion = useReducedMotion();
 
-  // Subtle top-of-page scroll progress indicator (same as Home.tsx / Delhi Cantt)
+  // Subtle top-of-page scroll progress indicator (same as Home.tsx)
   const { scrollYProgress } = useScroll();
   const scrollProgressScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -141,7 +136,7 @@ const BestBikeServiceDefenceColony = () => {
     };
   }, []);
 
-  // ================= Hero video sequence (same two-slot crossfade system as Home.tsx / Delhi Cantt) =================
+  // ================= Hero video sequence (same two-slot crossfade system as Home.tsx) =================
   // inside.mp4 -> outside.mp4 -> inside.mp4 -> ... loops forever, no hard cut, no blank frame.
   const heroVideoSources = [insideVideo, outsideVideo];
   const heroVideoSlot0Ref = useRef<HTMLVideoElement | null>(null);
@@ -337,7 +332,7 @@ const BestBikeServiceDefenceColony = () => {
     { name: 'Faridabad', path: '/best-bike-service-faridabad' },
   ];
 
-  // Brands We Service marquee data (same structure/logic as Home.tsx / Delhi Cantt)
+  // Brands We Service marquee data (same structure/logic as Home.tsx)
   const bikeBrands = ['Hero', 'Honda', 'TVS', 'Bajaj', 'Suzuki', 'Yamaha', 'Kawasaki', 'Royal Enfield', 'KTM', 'BMW', 'Harley Davidson', 'Ducati', 'Triumph', 'Indian', 'Vespa', 'Benelli', 'Aprilia', 'Yezdi', 'Husqvarna', 'Other'];
   const scootyBrands = ['Honda', 'TVS', 'Hero', 'Suzuki', 'Yamaha', 'Ather', 'Ola Electric', 'Bajaj', 'Vespa', 'Aprilia', 'Other'];
   const marqueeBrands = Array.from(
@@ -346,7 +341,7 @@ const BestBikeServiceDefenceColony = () => {
   const marqueeBrandsRow1 = marqueeBrands.filter((_, i) => i % 2 === 0);
   const marqueeBrandsRow2 = marqueeBrands.filter((_, i) => i % 2 !== 0);
 
-  // Bike Services We Offer — Defence Colony specific naming, latest Home-style icons
+  // Bike, Scooty & Car Services We Offer — Defence Colony specific naming, latest Home-style icons
   const bikeServiceCards = [
     { name: 'Regular Servicing', img: routineService },
     { name: 'Engine Overhaul', img: engineRepair },
@@ -359,26 +354,26 @@ const BestBikeServiceDefenceColony = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Bike Service in Defence Colony Delhi | Doorstep Repair from ₹299 | Garage Fix Care"
-        description="Need a trusted bike mechanic near Defence Colony? Garage Fix Care delivers certified doorstep bike service across South Delhi — oil change, engine repair & more from ₹299."
+        title="Best Bike, Scooty and Car Service in Defence Colony | Doorstep Service Just ₹299 | Garage Fix Care"
+        description="Garage Fix Care offers doorstep bike, scooty and car service in Defence Colony and across South Delhi, starting at just ₹299. Certified mechanics, transparent pricing, same-day service."
         canonical="https://www.garagefixcare.in/best-bike-service-defence-colony"
         robots="index, follow"
         og={{
           url: 'https://www.garagefixcare.in/best-bike-service-defence-colony',
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Doorstep bike service in Defence Colony Delhi by Garage Fix Care',
+          imageAlt: 'Best bike, scooty and car service in Defence Colony at doorstep by Garage Fix Care',
           type: 'website',
         }}
         twitter={{
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Professional bike repair and service at home in Defence Colony',
+          imageAlt: 'Doorstep bike, scooty and car service in Defence Colony, South Delhi',
         }}
         structuredData={[
           {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'Garage Fix Care',
-            description: 'Doorstep bike service and repair in Defence Colony, South Delhi. Certified mechanics for oil change, engine overhaul, battery replacement and full bike maintenance starting at ₹299.',
+            description: 'Best bike, scooty and car service in Defence Colony, South Delhi. Certified mechanics for doorstep oil change, engine overhaul, battery replacement and full vehicle maintenance starting at ₹299.',
             url: 'https://www.garagefixcare.in/best-bike-service-defence-colony',
             telephone: '+919540553759',
             priceRange: '₹₹',
@@ -401,27 +396,27 @@ const BestBikeServiceDefenceColony = () => {
               { '@type': 'Place', name: 'AIIMS' },
               { '@type': 'Place', name: 'Moolchand' },
             ],
-            serviceType: ['Bike Repair', 'Doorstep Bike Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
+            serviceType: ['Bike Repair', 'Scooty Repair', 'Car Service', 'Doorstep Vehicle Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
             openingHours: 'Mo-Su 08:00-20:00',
             aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', reviewCount: '100000' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Doorstep Bike Service in Defence Colony Delhi',
+            name: 'Doorstep Bike, Scooty and Car Service in Defence Colony',
             provider: { '@type': 'LocalBusiness', name: 'Garage Fix Care' },
             areaServed: 'Defence Colony, South Delhi',
-            description: 'At-home bike repair and maintenance across Defence Colony and neighbouring South Delhi areas. Covers oil change, brake service, engine diagnostics, battery swap and more — starting at ₹299 with no hidden charges.',
+            description: 'At-home bike, scooty and car repair and maintenance across Defence Colony and neighbouring South Delhi areas. Covers oil change, brake service, engine diagnostics, battery swap and car servicing — starting at ₹299 with no hidden charges.',
             offers: { '@type': 'Offer', priceCurrency: 'INR', price: '299', availability: 'https://schema.org/InStock' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: [
-              { '@type': 'Question', name: 'Is doorstep bike service available in Defence Colony?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Garage Fix Care provides fully equipped doorstep bike servicing across Defence Colony, Lajpat Nagar, South Extension, Lodhi Colony, INA, Jangpura, Andrews Ganj, AIIMS, Moolchand and Ring Road.' } },
-              { '@type': 'Question', name: 'How much does bike repair cost near Defence Colony Main Market?', acceptedAnswer: { '@type': 'Answer', text: 'Service starts at ₹299 for 100–125cc bikes. Rates go up to ₹999 for performance bikes above 500cc. All prices are inclusive of labour with itemised billing.' } },
-              { '@type': 'Question', name: 'How quickly does a mechanic arrive in Defence Colony?', acceptedAnswer: { '@type': 'Answer', text: 'Our mechanics typically reach your Defence Colony address within 2–4 hours of booking. For priority slots, call us directly.' } },
-              { '@type': 'Question', name: 'Do you service bikes near AIIMS and Moolchand?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. We regularly service bikes belonging to medical staff, students and residents near AIIMS Delhi, Moolchand Hospital and the surrounding colonies.' } },
+              { '@type': 'Question', name: 'Is doorstep bike, scooty and car service available in Defence Colony?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Garage Fix Care provides fully equipped doorstep servicing for bikes, scooties and cars across Defence Colony, Lajpat Nagar, South Extension, Lodhi Colony, INA, Jangpura, Andrews Ganj, AIIMS, Moolchand and Ring Road.' } },
+              { '@type': 'Question', name: 'How much does bike or scooty repair cost near Defence Colony Main Market?', acceptedAnswer: { '@type': 'Answer', text: 'Bike and scooty service starts at ₹299 for 100–125cc vehicles. Rates go up to ₹999 for performance bikes above 500cc. Car service pricing is quoted based on your car model. All prices are inclusive of labour with itemised billing.' } },
+              { '@type': 'Question', name: 'How quickly does a mechanic arrive in Defence Colony?', acceptedAnswer: { '@type': 'Answer', text: 'Our mechanics typically reach your Defence Colony address within 2–4 hours of booking, for bikes, scooties and cars alike. For priority slots, call us directly.' } },
+              { '@type': 'Question', name: 'Do you service bikes, scooties and cars near AIIMS and Moolchand?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. We regularly service bikes, scooties and cars belonging to medical staff, students and residents near AIIMS Delhi, Moolchand Hospital and the surrounding colonies.' } },
             ],
           },
           {
@@ -429,13 +424,13 @@ const BestBikeServiceDefenceColony = () => {
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.garagefixcare.in/' },
-              { '@type': 'ListItem', position: 2, name: 'Best Bike Service in Defence Colony', item: 'https://www.garagefixcare.in/best-bike-service-defence-colony' },
+              { '@type': 'ListItem', position: 2, name: 'Best Bike, Scooty and Car Service in Defence Colony', item: 'https://www.garagefixcare.in/best-bike-service-defence-colony' },
             ],
           },
         ]}
       />
 
-      {/* Subtle scroll progress indicator — same as Home.tsx / Delhi Cantt */}
+      {/* Subtle scroll progress indicator — same as Home.tsx */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-orange-500 origin-left z-[70]"
         style={{ scaleX: scrollProgressScaleX }}
@@ -526,22 +521,22 @@ const BestBikeServiceDefenceColony = () => {
                   variants={heroStaggerItem}
                   className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] sm:leading-tight mb-1.5 sm:mb-3"
                 >
-                  Doorstep Bike Service in Defence Colony
-                  <span style={{ color: '#FF7A18' }}> — Starting at ₹299</span>
+                  Best Bike, Scooty and Car Service in Defence Colony
+                  <span style={{ color: '#FF7A18' }}> — Doorstep Service Just ₹299</span>
                 </motion.h1>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="font-poppins text-[11px] sm:text-sm font-semibold text-white/85 leading-tight mb-1.5 sm:mb-2"
                 >
-                  Certified Mechanics &bull; Same-Day Slots &bull; Zero Hidden Charges
+                  Bikes, Scooties &amp; Cars &bull; Certified Mechanics &bull; Same-Day Slots &bull; Zero Hidden Charges
                 </motion.p>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="hidden sm:block text-xs sm:text-sm leading-relaxed text-white/80 mb-2 sm:mb-3 max-w-[520px]"
                 >
-                  South Delhi&apos;s busiest lanes — from Defence Colony Main Market to Ring Road — demand a bike that performs every single day. Whether you ride to your office in Lodhi Colony, drop kids at a school near Jangpura, or commute to AIIMS, Garage Fix Care&apos;s verified mechanics arrive at your door fully equipped. No workshop visit, no downtime, no surprises on the bill.
+                  South Delhi&apos;s busiest lanes — from Defence Colony Main Market to Ring Road — demand a vehicle that performs every single day. Whether you ride to your office in Lodhi Colony, drop kids at a school near Jangpura, or commute to AIIMS, Garage Fix Care&apos;s verified mechanics service your bike, scooty or car right at your door. No workshop visit, no downtime, no surprises on the bill.
                 </motion.p>
               </motion.div>
 
@@ -654,7 +649,7 @@ const BestBikeServiceDefenceColony = () => {
               </span>
             </span>
             <p className="relative text-[10px] sm:text-sm leading-[1.4] sm:leading-relaxed" style={{ color: '#cbd5e1' }}>
-              Skip the garage queue. Our certified mechanics come to your home, office parking or society gate across Defence Colony, Lajpat Nagar, South Extension, Lodhi Colony, INA Market, Jangpura, Andrews Ganj, AIIMS, Moolchand and Ring Road — handling everything from routine servicing to engine repairs. Fast, transparent, and affordable.
+              Skip the garage queue. Our certified mechanics come to your home, office parking or society gate across Defence Colony, Lajpat Nagar, South Extension, Lodhi Colony, INA Market, Jangpura, Andrews Ganj, AIIMS, Moolchand and Ring Road — servicing bikes, scooties and cars, from routine maintenance to engine repairs, starting at ₹299. Fast, transparent, and affordable.
             </p>
           </div>
         </motion.div>
@@ -700,7 +695,7 @@ const BestBikeServiceDefenceColony = () => {
                 <Flame className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />
               </div>
               <p className="text-base sm:text-lg text-white max-w-7xl mx-auto mt-2 text-center">
-                Limited-time offer for Defence Colony, Lajpat Nagar and South Extension customers! Get up to 10% off on bike repairs and servicing at your doorstep. Hurry—these deals won&apos;t last long!
+                Limited-time offer for Defence Colony, Lajpat Nagar and South Extension customers! Get up to 10% off on bike, scooty and car repairs and servicing at your doorstep, starting at ₹299. Hurry—these deals won&apos;t last long!
               </p>
             </motion.div>
           </div>
@@ -755,46 +750,8 @@ const BestBikeServiceDefenceColony = () => {
           `}</style>
         </section>
 
-        {/* Ratings across platforms — Defence Colony specific working links (kept, restyled) */}
-        <section className="bg-slate-800 text-white py-10 sm:py-14">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              className="text-center mb-6 sm:mb-8"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
-                <span className="text-white">Riders in Defence Colony</span> <span className="text-red-600">Trust Us</span>
-              </h2>
-              <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto">Verified across every major review platform.</p>
-            </motion.div>
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-3 gap-4"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              {[
-                { img: googleReviewsImage, name: 'Google', rating: '4.7/5', link: 'https://goo.gl/maps/dqmKivbhftEaVxK79' },
-                { img: facebookReviewsImage, name: 'Facebook', rating: '4.7/5', link: 'https://www.instagram.com/p/DQVj8SmktgG/' },
-                { img: justdialReviewsImage, name: 'JustDial', rating: '4.7/5', link: 'https://www.justdial.com/jd-business?docid=011PXX11.XX11.251024223108.U1U5' },
-              ].map((rev, i) => (
-                <motion.div key={i} variants={staggerItem} className="bg-sky-100 rounded-xl shadow-lg p-4 text-center hover:shadow-xl transition-shadow duration-200">
-                  <img src={rev.img} alt={rev.name} className="mx-auto h-10 mb-2" loading="lazy" decoding="async" />
-                  <div className="flex justify-center mb-1">{[...Array(5)].map((_, s) => <Star key={s} className="h-4 w-4 text-yellow-400 fill-current" />)}</div>
-                  <p className="font-semibold text-sm text-gray-800">{rev.rating} Rating</p>
-                  <a href={rev.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 text-xs hover:underline">View us on {rev.name}</a>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
         {/* Bikes & Scooters — Brands We Service */}
-        <section className="bg-slate-900 text-white py-10 sm:py-14">
+        <section className="bg-slate-800 text-white py-10 sm:py-14">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               className="text-center mb-6 sm:mb-8"
@@ -885,7 +842,7 @@ const BestBikeServiceDefenceColony = () => {
                 <span className="text-white">Transparent Pricing</span> <span className="text-red-600">— No Surprises</span>
               </h2>
               <p className="text-base sm:text-xl text-white mb-10 sm:mb-12 max-w-3xl mx-auto">
-                Flat labour rates for doorstep bike care across Defence Colony. Check the pricing below based on your bike&apos;s engine size — what you see is exactly what you pay.
+                Flat labour rates for doorstep bike and scooty care across Defence Colony, starting at just ₹299. Check the pricing below based on your two-wheeler&apos;s engine size — what you see is exactly what you pay. Need car service? Tap Cars above for a tailored quote.
               </p>
             </motion.div>
             <motion.div
@@ -1056,20 +1013,20 @@ const BestBikeServiceDefenceColony = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              From Defence Colony Main Market and INA to Moolchand and Ring Road, our mechanics cover every block of South Delhi. Residents of Jangpura, Andrews Ganj, Lodhi Colony and South Extension can book same-day slots and receive service within 2–4 hours.
+              From Defence Colony Main Market and INA to Moolchand and Ring Road, our mechanics cover every block of South Delhi for bike, scooty and car service. Residents of Jangpura, Andrews Ganj, Lodhi Colony and South Extension can book same-day slots and receive doorstep service within 2–4 hours.
             </motion.p>
           </div>
         </section>
 
-        {/* Bike Services We Offer */}
+        {/* Bike, Scooty & Car Services We Offer */}
         <section className="py-12 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-                Every Bike Need Covered, <span className="text-red-600">Right at Your Gate</span>
+                Every Bike, Scooty &amp; Car Need Covered, <span className="text-red-600">Right at Your Gate</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
-                Our Defence Colony mechanics handle everything from a quick oil top-up to a full electrical diagnosis — without you losing a working day.
+                Our Defence Colony mechanics handle everything from a quick oil top-up to a full electrical diagnosis for your bike, scooty or car — without you losing a working day.
               </p>
             </motion.div>
             <motion.div
@@ -1099,7 +1056,7 @@ const BestBikeServiceDefenceColony = () => {
           </div>
         </section>
 
-        {/* Comprehensive Bike Service Content (Defence Colony specific, long-form) */}
+        {/* Comprehensive Bike, Scooty & Car Service Content (Defence Colony specific, long-form) */}
         <section className="py-10 sm:py-14 bg-slate-800 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
@@ -1118,10 +1075,10 @@ const BestBikeServiceDefenceColony = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              <p>Defence Colony is one of South Delhi&apos;s most vibrant residential and commercial hubs. Thousands of two-wheeler owners navigate its lanes every morning — heading to offices in Lodhi Colony, picking up groceries from Defence Colony Main Market, visiting cafes along South Extension, or commuting to hospitals near AIIMS and Moolchand. For these riders, a smoothly running bike is not a luxury but a necessity. Yet finding reliable, honest bike service in this part of the city has historically meant either long waits at a local workshop or expensive dealership charges. Garage Fix Care was built to change that reality.</p>
-              <p>We deploy background-verified, certified mechanics directly to your home, office parking, or society gate across Defence Colony, Lajpat Nagar, INA, Jangpura, Andrews Ganj, Ring Road and the surrounding pockets. There is no need to push your bike to a service centre or waste half your day in a workshop waiting area. Book online or over a call, share your address and preferred time, and our technician arrives with a fully stocked kit — genuine engine oils from Motul and Wurth, manufacturer-approved filters, spark plugs, and professional diagnostic tools. Every service begins with a transparent cost estimate; you approve the scope before any work starts, so there are zero bill shocks when the job is done.</p>
-              <p>South Delhi&apos;s road conditions — from the Ring Road flyovers to the tight bylanes near Jangpura and Andrews Ganj — put consistent pressure on brakes, tyres, clutch cables, and engine components. Our mechanics are trained to spot minor wear before it escalates. During a standard service we inspect brake pads, chain tension, battery terminals, tyre pressure, and the air and oil filters, catching problems early and saving you from costlier repairs down the road. We also handle urgent breakdowns — if your bike stalls near Moolchand or dies on the way to school near South Extension, a call to Garage Fix Care will have a mechanic at your precise location, not asking you to bring the bike to us.</p>
-              <p>Medical professionals commuting to AIIMS, families running errands near INA Market, students riding between tuition classes in Lajpat Nagar, delivery riders navigating residential colonies — all trust Garage Fix Care because our pricing starts at just ₹299 and every completed job carries a 10-day hassle-free service guarantee. We service every popular brand: Hero Splendor, Honda CB Shine, Bajaj Pulsar, Royal Enfield Classic, TVS Apache, Yamaha FZ, Honda Activa, TVS Jupiter, Suzuki Access 125 and more. With over one lakh services completed across Delhi NCR and a consistent 4.7-star Google rating, we bring both expertise and accountability to your doorstep. Book your slot today and experience two-wheeler care that respects your time and your budget.</p>
+              <p>Defence Colony is one of South Delhi&apos;s most vibrant residential and commercial hubs. Thousands of bike, scooty and car owners navigate its lanes every morning — heading to offices in Lodhi Colony, picking up groceries from Defence Colony Main Market, visiting cafes along South Extension, or commuting to hospitals near AIIMS and Moolchand. For these residents, a smoothly running vehicle is not a luxury but a necessity. Yet finding reliable, honest bike, scooty or car service in this part of the city has historically meant either long waits at a local workshop or expensive dealership charges. Garage Fix Care was built to change that reality.</p>
+              <p>We deploy background-verified, certified mechanics directly to your home, office parking, or society gate across Defence Colony, Lajpat Nagar, INA, Jangpura, Andrews Ganj, Ring Road and the surrounding pockets — for bikes, scooties and cars alike. There is no need to push your vehicle to a service centre or waste half your day in a workshop waiting area. Book online or over a call, share your address and preferred time, and our technician arrives with a fully stocked kit — genuine engine oils from Motul and Wurth, manufacturer-approved filters, spark plugs, and professional diagnostic tools. Every service begins with a transparent cost estimate; you approve the scope before any work starts, so there are zero bill shocks when the job is done.</p>
+              <p>South Delhi&apos;s road conditions — from the Ring Road flyovers to the tight bylanes near Jangpura and Andrews Ganj — put consistent pressure on brakes, tyres, clutch cables, and engine components, whether you ride a bike, scooty, or drive a car. Our mechanics are trained to spot minor wear before it escalates. During a standard service we inspect brake pads, chain tension (or belts/discs for cars), battery terminals, tyre pressure, and the air and oil filters, catching problems early and saving you from costlier repairs down the road. We also handle urgent breakdowns — if your bike, scooty or car stalls near Moolchand or dies on the way to school near South Extension, a call to Garage Fix Care will have a mechanic at your precise location, not asking you to bring the vehicle to us.</p>
+              <p>Medical professionals commuting to AIIMS, families running errands near INA Market, students riding between tuition classes in Lajpat Nagar, delivery riders navigating residential colonies — all trust Garage Fix Care because our bike and scooty pricing starts at just ₹299, car service is quoted based on your car&apos;s model, and every completed job carries a 10-day hassle-free service guarantee. We service every popular brand: Hero Splendor, Honda CB Shine, Bajaj Pulsar, Royal Enfield Classic, TVS Apache, Yamaha FZ, Honda Activa, TVS Jupiter, Suzuki Access 125, and popular hatchbacks and sedans. With over one lakh services completed across Delhi NCR and a consistent 4.7-star Google rating, we bring both expertise and accountability to your doorstep. Book your bike, scooty or car service today and experience vehicle care that respects your time and your budget.</p>
             </motion.div>
           </div>
         </section>
@@ -1137,7 +1094,7 @@ const BestBikeServiceDefenceColony = () => {
                 GarageFixCare <span className="text-red-600">Quality Promise</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                We service all motorcycle and scooter brands in Defence Colony and South Delhi — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM and more — right at your home, office parking or society gate.
+                We service all motorcycle, scooter and car brands in Defence Colony and South Delhi — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM and more — right at your home, office parking or society gate.
               </p>
               <div className="flex gap-2">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="h-10" loading="lazy" decoding="async" />
@@ -1190,7 +1147,7 @@ const BestBikeServiceDefenceColony = () => {
                 What Sets <span className="text-red-600">Garage Fix Care Apart?</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                South Delhi riders deserve more than a quick patch-up. We bring integrity, skill, and genuine parts directly to Defence Colony and beyond.
+                South Delhi vehicle owners deserve more than a quick patch-up. We bring integrity, skill, and genuine parts directly to Defence Colony and beyond — for bikes, scooties and cars.
               </p>
               <ul className="space-y-2 text-left">
                 {['Mechanics arrive at your gate — no travel needed', 'Itemised quotation approved by you before work starts', 'Genuine Motul & Wurth lubricants on every job', '10-day warranty on all services, no fine print', 'Punctual, polite, background-checked technicians', 'Emergency breakdown response across South Delhi'].map(item => (
@@ -1249,7 +1206,7 @@ const BestBikeServiceDefenceColony = () => {
                 How <span className="text-red-600">GarageFixCare</span> Works in Defence Colony?
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                Getting your bike serviced near Defence Colony Main Market or anywhere in South Delhi takes just a few steps — no garage run, no waiting room.
+                Getting your bike, scooty or car serviced near Defence Colony Main Market or anywhere in South Delhi takes just a few steps — no garage run, no waiting room.
               </p>
               <ul className="space-y-2 text-left">
                 {['Pick a time slot and share your address', 'Verified mechanic rides to your location', 'Inspection and estimate shared upfront', 'All work done on-site with genuine parts', 'Test ride and quality check before we leave', 'Pay digitally or cash — only after you\u2019re satisfied'].map(item => (
@@ -1351,7 +1308,7 @@ const BestBikeServiceDefenceColony = () => {
           </div>
         </section>
 
-        {/* FAQs — Defence Colony specific */}
+        {/* FAQs — Defence Colony bike, scooty & car specific */}
         <section className="bg-slate-900 py-10 sm:py-14">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
@@ -1361,18 +1318,19 @@ const BestBikeServiceDefenceColony = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Bike Service in Defence Colony — <span className="text-red-600">Your Questions Answered</span>
+              Bike, Scooty &amp; Car Service in Defence Colony — <span className="text-red-600">Your Questions Answered</span>
             </motion.h2>
             <motion.div className="space-y-3" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               {[
-                { q: 'Do you offer doorstep bike service near Defence Colony Main Market?', a: 'Yes. Our mechanics reach Defence Colony Main Market and all adjacent blocks directly. You don\u2019t need to move your bike — we come fully equipped to your parking spot or gate.' },
-                { q: 'What is the starting price for bike service in Defence Colony?', a: 'Service for 100–125cc bikes starts at ₹299. Standard bikes (135–200cc) are ₹399, premium (220–300cc) ₹499, elite Royal Enfield-class bikes (350–450cc) ₹599, and high-performance bikes above 500cc ₹999. All rates are for labour and include zero hidden fees.' },
-                { q: 'Can I book a bike mechanic near Lajpat Nagar or South Extension?', a: 'Absolutely. We cover Lajpat Nagar, South Extension Part I and II, INA Market and the entire surrounding belt. Book a slot and our mechanic will arrive at your specified South Delhi address within 2–4 hours.' },
-                { q: 'Do you service bikes for medical staff commuting to AIIMS or Moolchand?', a: 'Yes, and we understand the urgency for healthcare professionals. Early morning and late evening slots are available for riders near AIIMS, Moolchand Hospital and Safdarjung Enclave so that you can get your bike serviced without disrupting your shift.' },
-                { q: 'Is bike servicing available near Jangpura and Andrews Ganj?', a: 'Yes. Jangpura and Andrews Ganj fall well within our service radius. Residents of both areas can book same-day or next-morning slots for complete doorstep bike maintenance.' },
-                { q: 'My bike broke down on Ring Road — can you help?', a: 'Call us immediately. Our breakdown response team dispatches a mechanic to your Ring Road location and can perform on-spot repairs for most common failures including flat tyres, battery issues, and minor engine faults.' },
-                { q: 'Do you handle bikes used for office commutes and school runs in South Delhi?', a: 'Most of our Defence Colony customers use their bikes for daily office commutes in Lodhi Colony, school runs near Jangpura, café trips in South Extension, or market visits at INA. We schedule visits at times that don\u2019t disrupt your routine — early mornings, lunch slots or evenings.' },
-                { q: 'What warranty do you give on bike service in Defence Colony?', a: 'Every service carries our 10-day hassle-free guarantee. If any issue related to the work performed arises within 10 days, we return and resolve it at no extra cost. No arguments, no fine print.' },
+                { q: 'Do you offer doorstep bike, scooty and car service near Defence Colony Main Market?', a: 'Yes. Our mechanics reach Defence Colony Main Market and all adjacent blocks directly for bikes, scooties and cars. You don\u2019t need to move your vehicle — we come fully equipped to your parking spot or gate.' },
+                { q: 'What is the starting price for bike or scooty service in Defence Colony?', a: 'Service for 100–125cc bikes and scooties starts at ₹299. Standard bikes (135–200cc) are ₹399, premium (220–300cc) ₹499, elite Royal Enfield-class bikes (350–450cc) ₹599, and high-performance bikes above 500cc ₹999. All rates are for labour and include zero hidden fees.' },
+                { q: 'Do you provide car service in Defence Colony too?', a: 'Yes. Alongside bikes and scooties, we offer doorstep car servicing across Defence Colony and South Delhi. Car service pricing is quoted based on your car\'s model and the work required — just book online or call us for a quote.' },
+                { q: 'Can I book a bike, scooty or car mechanic near Lajpat Nagar or South Extension?', a: 'Absolutely. We cover Lajpat Nagar, South Extension Part I and II, INA Market and the entire surrounding belt. Book a slot and our mechanic will arrive at your specified South Delhi address within 2–4 hours.' },
+                { q: 'Do you service bikes, scooties and cars for medical staff commuting to AIIMS or Moolchand?', a: 'Yes, and we understand the urgency for healthcare professionals. Early morning and late evening slots are available for residents near AIIMS, Moolchand Hospital and Safdarjung Enclave so that you can get your vehicle serviced without disrupting your shift.' },
+                { q: 'Is bike and scooty servicing available near Jangpura and Andrews Ganj?', a: 'Yes. Jangpura and Andrews Ganj fall well within our service radius. Residents of both areas can book same-day or next-morning slots for complete doorstep bike, scooty and car maintenance.' },
+                { q: 'My bike, scooty or car broke down on Ring Road — can you help?', a: 'Call us immediately. Our breakdown response team dispatches a mechanic to your Ring Road location and can perform on-spot repairs for most common failures including flat tyres, battery issues, and minor engine faults.' },
+                { q: 'Do you handle vehicles used for office commutes and school runs in South Delhi?', a: 'Most of our Defence Colony customers use their bikes, scooties or cars for daily office commutes in Lodhi Colony, school runs near Jangpura, café trips in South Extension, or market visits at INA. We schedule visits at times that don\u2019t disrupt your routine — early mornings, lunch slots or evenings.' },
+                { q: 'What warranty do you give on bike, scooty and car service in Defence Colony?', a: 'Every service carries our 10-day hassle-free guarantee. If any issue related to the work performed arises within 10 days, we return and resolve it at no extra cost. No arguments, no fine print.' },
               ].map((faq, idx) => (
                 <motion.div key={idx} variants={staggerItem} className="border border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
                   <button
@@ -1404,10 +1362,10 @@ const BestBikeServiceDefenceColony = () => {
             viewport={viewportOnce}
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-              Book Your Defence Colony Bike Service Today
+              Book Your Defence Colony Bike, Scooty or Car Service Today
             </h2>
             <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
-              Certified mechanics at your doorstep. Prices from ₹299. No garage, no waiting, no hidden bills.
+              Certified mechanics at your doorstep. Bike/scooty service from ₹299, car service quoted on request. No garage, no waiting, no hidden bills.
             </p>
             <a
               href="https://www.garagefixcare.in/bookservice"

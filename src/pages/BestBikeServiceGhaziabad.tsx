@@ -1,5 +1,5 @@
 // BestBikeServiceGhaziabad.tsx
-// Ghaziabad specific SEO/content + Delhi Cantt / Home.tsx design system (video hero, Framer Motion, marquees)
+// Ghaziabad Bike, Scooty & Car Service page — Home.tsx design system (video hero, Framer Motion, marquees)
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import type { Variants } from 'framer-motion';
@@ -9,18 +9,18 @@ import SEOHelmet from '../components/SEOHelmet';
 import axios from 'axios';
 import { FaWhatsapp } from 'react-icons/fa';
 
-// Hero background video (same assets/crossfade system as Home.tsx / Delhi Cantt)
+// Hero background video (same assets/crossfade system as Home.tsx)
 import insideVideo from '../images/inside.mp4';
 import outsideVideo from '../images/outside.mp4';
 
-// Hot Deals marquee — now using the same Delhi Cantt/Home assets
+// Hot Deals marquee — same assets as Home.tsx
 import hotDealsImage1 from '../images/hotdeals1.png';
 import hotDealsImage2 from '../images/hotdeals2.png';
 import hotDealsImage3 from '../images/hotdeals3.png';
 import hotDealsImage4 from '../images/hotdeals4.png';
 import hotDealsImage5 from '../images/hotdeals5.png';
 
-// Bike Services icons — same as Delhi Cantt
+// Bike, Scooty & Car service icons — same as Home.tsx
 import routineService from '../images/Routine Service.png';
 import bikeInsurance from '../images/Bike Insurance.png';
 import doorstepService from '../images/Doorstep Service.png';
@@ -53,7 +53,7 @@ interface Service {
 }
 
 // ==================================================
-// Reusable Framer Motion variants — same system as Delhi Cantt / Home.tsx
+// Reusable Framer Motion variants — same system as Home.tsx
 // ==================================================
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -104,7 +104,7 @@ const BestBikeServiceGhaziabad = () => {
 
   const prefersReducedMotion = useReducedMotion();
 
-  // Subtle top-of-page scroll progress indicator (same as Delhi Cantt / Home.tsx)
+  // Subtle top-of-page scroll progress indicator (same as Home.tsx)
   const { scrollYProgress } = useScroll();
   const scrollProgressScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -276,7 +276,7 @@ const BestBikeServiceGhaziabad = () => {
   };
   // ================= End hero video sequence =================
 
-  // Hot Deals marquee images — Ghaziabad specific copy/alt text, now using Delhi Cantt/Home assets
+  // Hot Deals marquee images — Ghaziabad specific copy/alt text (bike, scooty & car), Home-style assets
   const carouselImages = [
     { src: hotDealsImage1, alt: 'Bike service offer in Ghaziabad' },
     { src: hotDealsImage2, alt: 'Doorstep bike service near Indirapuram' },
@@ -414,7 +414,7 @@ const BestBikeServiceGhaziabad = () => {
     { name: 'Faridabad', path: '/best-bike-service-faridabad' },
   ];
 
-  // Brands We Service marquee data (same as Delhi Cantt)
+  // Brands We Service marquee data (same structure/logic as Home.tsx)
   const bikeBrands = ['Hero', 'Honda', 'TVS', 'Bajaj', 'Suzuki', 'Yamaha', 'Kawasaki', 'Royal Enfield', 'KTM', 'BMW', 'Harley Davidson', 'Ducati', 'Triumph', 'Indian', 'Vespa', 'Benelli', 'Aprilia', 'Yezdi', 'Husqvarna', 'Other'];
   const scootyBrands = ['Honda', 'TVS', 'Hero', 'Suzuki', 'Yamaha', 'Ather', 'Ola Electric', 'Bajaj', 'Vespa', 'Aprilia', 'Other'];
   const marqueeBrands = Array.from(
@@ -435,26 +435,26 @@ const BestBikeServiceGhaziabad = () => {
   return (
     <>
       <SEOHelmet
-        title="Best Bike Service in Ghaziabad | Doorstep Bike Repair ₹299 | Garage Fix Care"
-        description="Best doorstep bike service in Ghaziabad starting at ₹299. Trusted mechanics for bike repair, maintenance, oil change and battery replacement."
+        title="Best Bike, Scooty and Car Service in Ghaziabad | Doorstep Service Just ₹299 | Garage Fix Care"
+        description="Garage Fix Care offers doorstep bike, scooty and car service in Ghaziabad, covering Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara and Kaushambi, starting at just ₹299. Certified mechanics, transparent pricing, same-day service."
         canonical="https://www.garagefixcare.in/best-bike-service-ghaziabad"
         robots="index, follow"
         og={{
           url: 'https://www.garagefixcare.in/best-bike-service-ghaziabad',
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Best bike service in Ghaziabad at doorstep by Garage Fix Care',
+          imageAlt: 'Best bike, scooty and car service in Ghaziabad at doorstep by Garage Fix Care',
           type: 'website',
         }}
         twitter={{
           image: 'https://www.garagefixcare.in/og-banner.png',
-          imageAlt: 'Doorstep bike service and repair in Ghaziabad',
+          imageAlt: 'Doorstep bike, scooty and car service in Ghaziabad',
         }}
         structuredData={[
           {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'Garage Fix Care',
-            description: 'Best bike service in Ghaziabad. Doorstep bike repair, maintenance, oil change, and battery replacement starting at ₹299.',
+            description: 'Best bike, scooty and car service in Ghaziabad. Doorstep repair, servicing, oil change and battery replacement for bikes, scooties and cars, starting at just ₹299.',
             url: 'https://www.garagefixcare.in/best-bike-service-ghaziabad',
             telephone: '+919540553759',
             priceRange: '₹₹',
@@ -477,28 +477,28 @@ const BestBikeServiceGhaziabad = () => {
               { '@type': 'City', name: 'Greater Noida' },
             ],
             hasMap: 'https://goo.gl/maps/dqmKivbhftEaVxK79',
-            serviceType: ['Bike Repair', 'Doorstep Bike Service', 'Bike Service Ghaziabad', 'Bike Repair Ghaziabad', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
+            serviceType: ['Bike Repair', 'Scooty Repair', 'Car Service', 'Doorstep Vehicle Service', 'Engine Repair', 'Battery Replacement', 'Brake Repair', 'Tyre Service'],
             openingHours: 'Mo-Su 08:00-20:00',
             aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.7', reviewCount: '100000' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Best Bike Service in Ghaziabad',
+            name: 'Doorstep Bike, Scooty and Car Service in Ghaziabad',
             provider: { '@type': 'LocalBusiness', name: 'Garage Fix Care' },
             areaServed: { '@type': 'City', name: 'Ghaziabad' },
-            description: 'Best doorstep bike service in Ghaziabad starting at ₹299. Oil change, engine repair, battery replacement, puncture fix — same-day bike repair across Ghaziabad including Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, and Kaushambi.',
+            description: 'At-home bike, scooty and car servicing starting at ₹299 across Ghaziabad including Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, and Kaushambi. Oil change, engine repair, battery replacement, puncture fix and car maintenance — same-day doorstep service.',
             offers: { '@type': 'Offer', priceCurrency: 'INR', price: '299', availability: 'https://schema.org/InStock' },
           },
           {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: [
-              { '@type': 'Question', name: 'What is the best bike service in Ghaziabad?', acceptedAnswer: { '@type': 'Answer', text: 'Garage Fix Care is the best bike service in Ghaziabad, offering doorstep bike repair starting at ₹299 with certified mechanics, genuine parts, and same-day service across Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, and Kaushambi.' } },
-              { '@type': 'Question', name: 'Do you provide doorstep bike repair in Ghaziabad?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, Garage Fix Care provides doorstep bike repair in Ghaziabad. Our mechanics come to your home or office for all bike repairs and servicing. Just book online or call us.' } },
-              { '@type': 'Question', name: 'How much does bike service cost in Ghaziabad?', acceptedAnswer: { '@type': 'Answer', text: 'Bike service in Ghaziabad with Garage Fix Care starts at just ₹299 for 100–125cc bikes. Prices vary by engine size and service type. All pricing is transparent with no hidden charges.' } },
-              { '@type': 'Question', name: 'Which areas in Ghaziabad do you cover for bike service?', acceptedAnswer: { '@type': 'Answer', text: 'We cover all major areas in Ghaziabad including Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, and Kaushambi for doorstep bike service and bike repair.' } },
-              { '@type': 'Question', name: 'How quickly can a bike mechanic reach me in Ghaziabad?', acceptedAnswer: { '@type': 'Answer', text: 'Our bike mechanics typically reach your location in Ghaziabad within 2–4 hours. For urgent same-day service, call us and we will prioritise your booking.' } },
+              { '@type': 'Question', name: 'What is the best bike, scooty and car service in Ghaziabad?', acceptedAnswer: { '@type': 'Answer', text: 'Garage Fix Care is Ghaziabad\'s trusted doorstep service for bikes, scooties and cars, starting at just ₹299, with certified mechanics and transparent pricing across Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, and Kaushambi.' } },
+              { '@type': 'Question', name: 'Do you provide doorstep bike, scooty and car repair in Ghaziabad?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, we provide complete doorstep repair for bikes, scooties and cars across Ghaziabad. Certified mechanics come to your home or office fully equipped — no garage visit needed.' } },
+              { '@type': 'Question', name: 'How much does bike or scooty service cost in Ghaziabad?', acceptedAnswer: { '@type': 'Answer', text: 'Bike and scooty service in Ghaziabad starts from ₹299 for 100–125cc vehicles. Classic Service is ₹399, Premium ₹499, Royal ₹599, and Sports ₹999. Car service pricing is quoted based on your car model and requirement. All prices include labour with no hidden charges.' } },
+              { '@type': 'Question', name: 'Do you provide doorstep car service in Ghaziabad?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Alongside bikes and scooties, we offer doorstep car servicing across Ghaziabad. Car service pricing is quoted based on your car\'s model and the work required — just book online or call us for a quote.' } },
+              { '@type': 'Question', name: 'Which areas of Ghaziabad do you cover?', acceptedAnswer: { '@type': 'Answer', text: 'We cover Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, and Kaushambi for bike, scooty and car service.' } },
             ],
           },
           {
@@ -506,13 +506,13 @@ const BestBikeServiceGhaziabad = () => {
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.garagefixcare.in/' },
-              { '@type': 'ListItem', position: 2, name: 'Best Bike Service in Ghaziabad', item: 'https://www.garagefixcare.in/best-bike-service-ghaziabad' },
+              { '@type': 'ListItem', position: 2, name: 'Best Bike, Scooty and Car Service in Ghaziabad', item: 'https://www.garagefixcare.in/best-bike-service-ghaziabad' },
             ],
           },
         ]}
       />
 
-      {/* Subtle scroll progress indicator — same as Delhi Cantt / Home.tsx */}
+      {/* Subtle scroll progress indicator — same as Home.tsx */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-orange-500 origin-left z-[70]"
         style={{ scaleX: scrollProgressScaleX }}
@@ -603,22 +603,22 @@ const BestBikeServiceGhaziabad = () => {
                   variants={heroStaggerItem}
                   className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] sm:leading-tight mb-1.5 sm:mb-3"
                 >
-                  Best Bike Service in Ghaziabad
-                  <span style={{ color: '#FF7A18' }}> — Doorstep Bike Repair ₹299</span>
+                  Best Bike, Scooty and Car Service in Ghaziabad
+                  <span style={{ color: '#FF7A18' }}> — Doorstep Service Just ₹299</span>
                 </motion.h1>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="font-poppins text-[11px] sm:text-sm font-semibold text-white/85 leading-tight mb-1.5 sm:mb-2"
                 >
-                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Same-Day Bike Repair &bull; Certified Mechanics Near You
+                  Starting at just <span style={{ color: '#FF7A18' }}>₹299</span> &bull; Bikes, Scooties &amp; Cars &bull; Same-Day Doorstep Service &bull; Certified Mechanics Near You
                 </motion.p>
 
                 <motion.p
                   variants={heroStaggerItem}
                   className="hidden sm:block text-xs sm:text-sm leading-relaxed text-white/80 mb-2 sm:mb-3 max-w-[520px]"
                 >
-                  Get the most trusted bike service in Ghaziabad right at your doorstep. Whether you live in Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, or Kaushambi, our expert mechanics handle everything from oil change to engine overhaul — no garage queues, no hidden costs.
+                  Get the most trusted bike, scooty and car service in Ghaziabad right at your doorstep. Whether you live in Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, or Kaushambi, our expert mechanics handle your bike, scooty or car — from oil change to engine overhaul — no garage queues, no hidden costs.
                 </motion.p>
               </motion.div>
 
@@ -762,7 +762,7 @@ const BestBikeServiceGhaziabad = () => {
               </span>
             </span>
             <p className="relative text-[10px] sm:text-sm leading-[1.4] sm:leading-relaxed" style={{ color: '#cbd5e1' }}>
-              Skip the garage queue. Our certified mechanics come to your home or office across Noida, Gurgaon, Delhi and the rest of Delhi NCR — handling everything from routine bike servicing and car oil changes to engine repairs and scooty fixes. Fast, transparent, and affordable.
+              Skip the garage queue. Our certified mechanics come to your home or office across Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi and the rest of Delhi NCR — servicing bikes, scooties and cars, from routine maintenance to engine repairs, starting at ₹299. Fast, transparent, and affordable.
             </p>
           </div>
         </motion.div>
@@ -791,7 +791,7 @@ const BestBikeServiceGhaziabad = () => {
           </div>
         </div>
 
-        {/* Hot Deals This Week — Ghaziabad specific copy, Delhi Cantt-style marquee */}
+        {/* Hot Deals This Week — Ghaziabad specific copy, Home-style marquee */}
         <section className="py-8 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -808,7 +808,7 @@ const BestBikeServiceGhaziabad = () => {
                 <Flame className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />
               </div>
               <p className="text-base sm:text-lg text-white max-w-7xl mx-auto mt-2 text-center">
-                Limited-time offer for Ghaziabad customers! Get up to 10% off on bike repairs and servicing at your doorstep. Hurry—these deals won&apos;t last long!
+                Limited-time offer for Ghaziabad customers! Get up to 10% off on bike, scooty and car repairs and servicing at your doorstep, starting at ₹299. Hurry—these deals won&apos;t last long!
               </p>
             </motion.div>
           </div>
@@ -947,15 +947,15 @@ const BestBikeServiceGhaziabad = () => {
           `}</style>
         </section>
 
-        {/* At-Home Service Price List — Ghaziabad pricing (premium vertical service-plan cards) */}
+        {/* At-Home Service Price List — Ghaziabad bike & scooty pricing, car quoted separately (premium vertical service-plan cards) */}
         <section className="py-12 sm:py-16 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-white">At-Home Service</span> <span className="text-red-600">Price List</span>
+                <span className="text-white">At-Home Bike &amp; Scooty Service</span> <span className="text-red-600">Price List</span>
               </h2>
               <p className="text-base sm:text-xl text-white mb-10 sm:mb-12 max-w-3xl mx-auto">
-                Transparent pricing for doorstep bike service in Ghaziabad. Check the labour charges below based on your bike&apos;s engine size — no hidden fees, no surprises.
+                Transparent pricing for doorstep bike and scooty service in Ghaziabad, starting at just ₹299. Check the labour charges below based on your two-wheeler&apos;s engine size — no hidden fees, no surprises. Looking for car service instead? Tap Cars above for a tailored quote.
               </p>
             </motion.div>
             <motion.div
@@ -1128,20 +1128,20 @@ const BestBikeServiceGhaziabad = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Whether you live in Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, or Kaushambi, our bike mechanics reach your doorstep within 2-4 hours. Same-day bike service available across Ghaziabad.
+              Whether you live in Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, or Kaushambi, our bike, scooty and car mechanics reach your doorstep within 2-4 hours. Same-day doorstep service available across Ghaziabad, starting at ₹299.
             </motion.p>
           </div>
         </section>
 
-        {/* Bike Services We Offer */}
+        {/* Bike, Scooty & Car Services We Offer */}
         <section className="py-12 bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-                Complete Bike Care, <span className="text-red-600">Right at Your Door in Ghaziabad</span>
+                Complete Bike, Scooty &amp; Car Care, <span className="text-red-600">Right at Your Door in Ghaziabad</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
-                From routine oil changes to full engine repair — our Ghaziabad mechanics handle it all at your location. No waiting, no hassle.
+                From routine oil changes to full engine repair — our Ghaziabad mechanics handle bikes, scooties and cars at your location, starting at ₹299. No waiting, no hassle.
               </p>
             </motion.div>
             <motion.div
@@ -1171,7 +1171,7 @@ const BestBikeServiceGhaziabad = () => {
           </div>
         </section>
 
-        {/* Comprehensive Bike Service Content — Ghaziabad specific, 1000+ words */}
+        {/* Comprehensive Bike, Scooty & Car Service Content — Ghaziabad specific, 1000+ words */}
         <section className="py-10 sm:py-14 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
@@ -1181,32 +1181,32 @@ const BestBikeServiceGhaziabad = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Why Garage Fix Care is the <span className="text-red-600">Best Bike Service in Ghaziabad</span>
+              Why Garage Fix Care is the <span className="text-red-600">Best Bike, Scooty and Car Service in Ghaziabad</span>
             </motion.h2>
             <div className="space-y-4 text-gray-200 text-sm sm:text-base leading-relaxed">
               <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-                Finding a reliable bike service in Ghaziabad can be challenging. Most local garages overcharge, use duplicate parts, or keep your bike for days without a clear timeline. Garage Fix Care changes that entirely. We bring fully certified, background-verified mechanics directly to your home or office in Ghaziabad — whether you live in Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, or Kaushambi. Our doorstep bike service in Ghaziabad saves you time, money, and unnecessary hassle.
+                Finding a reliable bike, scooty or car service in Ghaziabad can be challenging. Most local garages overcharge, use duplicate parts, or keep your vehicle for days without a clear timeline. Garage Fix Care changes that entirely. We bring fully certified, background-verified mechanics directly to your home or office in Ghaziabad — whether you live in Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, or Kaushambi. Our doorstep bike, scooty and car service in Ghaziabad saves you time, money, and unnecessary hassle.
               </motion.p>
               <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-                Ghaziabad is one of the fastest-growing cities in the NCR region, with lakhs of two-wheeler commuters navigating busy stretches like NH-9 and NH-58, and densely trafficked inner roads through Raj Nagar, Lal Kuan, Modi Nagar, and GT Road. This demanding environment accelerates engine wear, brake fade, chain stretch, and tyre pressure loss. That is why timely bike repair in Ghaziabad is not optional — it is critical for your safety and the long-term health of your vehicle.
+                Ghaziabad is one of the fastest-growing cities in the NCR region, with lakhs of two-wheeler and car commuters navigating busy stretches like NH-9 and NH-58, and densely trafficked inner roads through Raj Nagar, Lal Kuan, Modi Nagar, and GT Road. This demanding environment accelerates engine wear, brake fade, chain stretch, and tyre pressure loss for bikes and scooties, and puts similar strain on car engines, brakes and suspension. That is why timely bike, scooty and car repair in Ghaziabad is not optional — it is critical for your safety and the long-term health of your vehicle.
               </motion.p>
               <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-                We service every bike brand popular among Ghaziabad riders — Hero Splendor, Honda Activa, Bajaj Pulsar, TVS Apache, Suzuki Access, Yamaha FZ, Royal Enfield Classic 350, KTM Duke, and many more. Our mechanics carry all necessary tools and genuine spare parts on every visit, handling everything from a routine oil change to complex engine diagnostics and overhauls, all at your doorstep in Ghaziabad. Need a battery swap before your morning commute? A brake pad replacement for weekend riding? Clutch cable adjustment? It gets done on the spot.
+                We service every bike and scooty brand popular among Ghaziabad riders — Hero Splendor, Honda Activa, Bajaj Pulsar, TVS Apache, Suzuki Access, Yamaha FZ, Royal Enfield Classic 350, KTM Duke, and many more — alongside doorstep car servicing for popular hatchbacks and sedans, with pricing quoted based on your car&apos;s model and requirement. Our mechanics carry all necessary tools and genuine spare parts on every visit, handling everything from a routine oil change to complex engine diagnostics and overhauls, all at your doorstep in Ghaziabad. Need a battery swap before your morning commute? A brake pad replacement for weekend riding? Clutch cable adjustment on your car? It gets done on the spot.
               </motion.p>
               <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-                What consistently ranks us as the best bike service in Ghaziabad is our unwavering commitment to transparency. Before any work begins, we provide a written cost estimate — no surprise charges, no pressure upselling, no hidden fees. We use only genuine engine oils from Motul and Wurth, and manufacturer-recommended parts for every brand. Every completed service is backed by a 10-day hassle-free warranty, giving you full peace of mind long after the mechanic has left your driveway.
+                What consistently ranks us as the best bike, scooty and car service in Ghaziabad is our unwavering commitment to transparency. Before any work begins, we provide a written cost estimate — no surprise charges, no pressure upselling, no hidden fees. We use only genuine engine oils from Motul and Wurth, and manufacturer-recommended parts for every brand. Every completed service is backed by a 10-day hassle-free warranty, giving you full peace of mind long after the mechanic has left your driveway.
               </motion.p>
               <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-                Ghaziabad&apos;s dust, pollution, and summer heat also accelerate air filter clogging and coolant depletion, both of which directly impact fuel efficiency and engine longevity. Our mechanics perform a thorough 18-point inspection during each service visit — covering engine oil level, brake pads, chain tension, electrical connections, tyre air pressure, spark plug condition, coolant level, and more. Nothing gets skipped, and you receive a full report of work done.
+                Ghaziabad&apos;s dust, pollution, and summer heat also accelerate air filter clogging and coolant depletion, both of which directly impact fuel efficiency and engine longevity, whether you ride a bike or scooty or drive a car. Our mechanics perform a thorough 18-point inspection during each service visit — covering engine oil level, brake pads, chain tension (or discs and belts for cars), electrical connections, tyre air pressure, spark plug condition, coolant level, and more. Nothing gets skipped, and you receive a full report of work done.
               </motion.p>
               <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-                We have completed over 1,00,000 successful bike services across Ghaziabad, Delhi, Noida, and Gurugram. Our customer satisfaction rate exceeds 98%, reflected in our 4.7-star average ratings on Google, Facebook, and JustDial. For scooty owners in Ghaziabad, we provide complete service for Honda Activa, TVS Jupiter, Suzuki Access, Honda Dio, and Hero Pleasure — including tyre puncture repair, chain lubrication, air filter replacement, and battery testing, all done at your door.
+                We have completed over 1,00,000 successful bike, scooty and car services across Ghaziabad, Delhi, Noida, and Gurugram. Our customer satisfaction rate exceeds 98%, reflected in our 4.7-star average ratings on Google, Facebook, and JustDial. For scooty owners in Ghaziabad, we provide complete service for Honda Activa, TVS Jupiter, Suzuki Access, Honda Dio, and Hero Pleasure — including tyre puncture repair, chain lubrication, air filter replacement, and battery testing, all done at your door. Car owners can book the same doorstep convenience for servicing, repairs and maintenance, with pricing quoted after a quick assessment of your car&apos;s make and model.
               </motion.p>
               <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-                We also offer emergency roadside assistance across Ghaziabad. If your bike breaks down on a highway or in a residential colony at an inconvenient hour, call us and we dispatch a mechanic immediately. From puncture repair to electrical fault diagnosis, our team keeps you moving.
+                We also offer emergency roadside assistance across Ghaziabad. If your bike, scooty or car breaks down on a highway or in a residential colony at an inconvenient hour, call us and we dispatch a mechanic immediately. From puncture repair to electrical fault diagnosis, our team keeps you moving.
               </motion.p>
               <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-                Choose Garage Fix Care for affordable, reliable, and the best doorstep bike service in Ghaziabad. Book your appointment today and discover why over one lakh customers trust us with their bikes.
+                Choose Garage Fix Care for affordable, reliable, and the best doorstep bike, scooty and car service in Ghaziabad, with bike and scooty service starting at just ₹299. Book your appointment today and discover why over one lakh customers trust us with their vehicles.
               </motion.p>
             </div>
           </div>
@@ -1223,7 +1223,7 @@ const BestBikeServiceGhaziabad = () => {
                 GarageFixCare <span className="text-red-600">Service Warranty</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                Ghaziabad&apos;s trusted doorstep bike service. We service all motorcycle and scooter brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — right at your home or office.
+                Ghaziabad&apos;s trusted doorstep bike, scooty and car service, starting at ₹299. We service all major motorcycle, scooter and car brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — right at your home or office.
               </p>
               <div className="flex gap-2">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="h-10" loading="lazy" decoding="async" />
@@ -1240,8 +1240,8 @@ const BestBikeServiceGhaziabad = () => {
               {[
                 { img: warrantyImg, title: 'Enjoy a 10-Day Free Service Guarantee', desc: '10-Day Hassle-Free Warranty' },
                 { img: pickupImg, title: 'Enjoy Free Pickup and Drop at Your Convenience', desc: 'Free Pick & Drop Available' },
-                { img: transparentImg, title: 'Transparent Pricing, Competitive Rate', desc: 'Save up to 30% on your bike service' },
-                { img: trainedImg, title: 'Skilled and Certified Mechanics', desc: 'Exclusively Certified Two-Wheeler Mechanics' },
+                { img: transparentImg, title: 'Transparent Pricing, Competitive Rate', desc: 'Save up to 30% on your bike, scooty or car service' },
+                { img: trainedImg, title: 'Skilled and Certified Mechanics', desc: 'Certified Bike, Scooty and Car Mechanics' },
               ].map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -1276,7 +1276,7 @@ const BestBikeServiceGhaziabad = () => {
                 Why Choose <span className="text-red-600">GarageFixCare?</span>
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                We bring certified mechanics directly to Ghaziabad residents — honest pricing, genuine parts, zero hassle.
+                We bring certified mechanics for bikes, scooties and cars directly to Ghaziabad residents — doorstep service starting at ₹299, with honest pricing, genuine parts and zero hassle.
               </p>
               <motion.ul
                 className="space-y-2 text-left"
@@ -1341,7 +1341,7 @@ const BestBikeServiceGhaziabad = () => {
                 How <span className="text-red-600">GarageFixCare</span> Works?
               </h2>
               <p className="text-sm sm:text-base text-white mb-4">
-                Getting your bike serviced in Ghaziabad is simple. Book online or call us, and a skilled mechanic arrives at your doorstep with everything needed to get your bike running at its best — all done on the spot.
+                Getting your bike, scooty or car serviced in Ghaziabad is simple. Book online or call us, and a skilled mechanic arrives at your doorstep with everything needed to get your vehicle running at its best — starting at ₹299, all done on the spot.
               </p>
               <motion.ul
                 className="space-y-2 text-left"
@@ -1449,7 +1449,7 @@ const BestBikeServiceGhaziabad = () => {
           </div>
         </section>
 
-        {/* FAQs — Bike Service Ghaziabad */}
+        {/* FAQs — Ghaziabad bike, scooty & car specific */}
         <section className="bg-slate-900 py-10 sm:py-14">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
@@ -1459,7 +1459,7 @@ const BestBikeServiceGhaziabad = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Frequently Asked Questions — <span className="text-red-600">Bike Service in Ghaziabad</span>
+              Bike, Scooty &amp; Car Service in Ghaziabad — <span className="text-red-600">Frequently Asked Questions</span>
             </motion.h2>
             <motion.p
               className="text-center text-gray-400 mb-6 text-sm sm:text-base"
@@ -1468,25 +1468,26 @@ const BestBikeServiceGhaziabad = () => {
               whileInView="visible"
               viewport={viewportOnce}
             >
-              Everything you need to know about bike repair and bike service in Ghaziabad with Garage Fix Care.
+              Everything you need to know about bike, scooty and car service in Ghaziabad with Garage Fix Care.
             </motion.p>
             <motion.div className="space-y-3" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
               {[
-                { q: 'What is the best bike service in Ghaziabad?', a: 'Garage Fix Care is the best bike service in Ghaziabad, offering doorstep bike repair starting at ₹299 with certified mechanics, genuine parts, and same-day service across Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi, and all major areas of Ghaziabad.' },
-                { q: 'How do I book a bike service in Ghaziabad?', a: 'Booking a bike service in Ghaziabad with Garage Fix Care is simple. Call us, WhatsApp us, or use the booking form on this page. Share your Ghaziabad address and preferred time slot, and a trained mechanic will arrive at your doorstep.' },
-                { q: 'What is the cost of bike service in Ghaziabad?', a: 'Bike service in Ghaziabad with Garage Fix Care starts at just ₹299 for 100–125cc bikes. Classic bikes (135–200cc) start at ₹399, premium bikes (220–300cc) at ₹499, and Royal Enfield and higher CC bikes from ₹599. Pricing is fully transparent with no hidden charges.' },
-                { q: 'Do you provide doorstep bike repair in Ghaziabad?', a: 'Yes, Garage Fix Care specialises in doorstep bike repair in Ghaziabad. Our mechanics come to your home or office fully equipped with tools, oils, and parts. No need to visit any garage.' },
-                { q: 'Which areas in Ghaziabad do you cover for bike service?', a: 'We cover all major localities in Ghaziabad including Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi, Lal Kuan, Modi Nagar, Mohan Nagar, Raj Nagar, and surrounding areas.' },
-                { q: 'How quickly can a mechanic reach me in Ghaziabad?', a: 'Our bike mechanics typically reach your Ghaziabad location within 2–4 hours. For urgent same-day bike repair in Ghaziabad, call us and we will prioritise your booking.' },
+                { q: 'What is the best bike, scooty and car service in Ghaziabad?', a: 'Garage Fix Care is Ghaziabad\'s highest-rated doorstep service for bikes, scooties and cars, starting at ₹299 with certified mechanics, transparent pricing, genuine parts, and a 10-day service guarantee, across Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi, and all major areas of Ghaziabad.' },
+                { q: 'How do I book a bike, scooty or car service in Ghaziabad?', a: 'Booking with Garage Fix Care is simple. Call us, WhatsApp us, or use the booking form on this page. Let us know whether it\'s a bike, scooty or car, share your Ghaziabad address and preferred time slot, and a trained mechanic will arrive at your doorstep.' },
+                { q: 'How much does bike or scooty service cost in Ghaziabad?', a: 'Bike and scooty service in Ghaziabad at Garage Fix Care starts from ₹299 for 100–125cc vehicles (Regular Service). Classic Service (135–200 CC) is ₹399, Premium Service (220–300 CC) is ₹499, Royal Service (350–450 CC) is ₹599, and Sports Service (above 500 CC) is ₹999. All prices include labour with zero hidden charges.' },
+                { q: 'Do you provide doorstep car service in Ghaziabad?', a: 'Yes. Alongside bikes and scooties, we offer doorstep car servicing in Ghaziabad and nearby areas. Car service pricing is quoted based on your car\'s model and the work required — just book online or call us for a quote.' },
+                { q: 'Do you provide doorstep bike, scooty and car repair in Ghaziabad?', a: 'Yes, Garage Fix Care specialises in doorstep repair for bikes, scooties and cars in Ghaziabad. Our mechanics come to your home or office fully equipped with tools, oils, and parts. No need to visit any garage.' },
+                { q: 'Which areas of Ghaziabad do you cover?', a: 'We cover all major localities in Ghaziabad including Indirapuram, Vaishali, Raj Nagar Extension, Crossings Republik, Vasundhara, Kaushambi, Lal Kuan, Modi Nagar, Mohan Nagar, Raj Nagar, and surrounding areas for bike, scooty and car service.' },
+                { q: 'How quickly can a mechanic reach me in Ghaziabad?', a: 'Our mechanics typically reach your Ghaziabad location within 2–4 hours, for bikes, scooties and cars alike. For urgent same-day service, call us and we will prioritise your booking.' },
                 { q: 'Do you service Royal Enfield bikes in Ghaziabad?', a: 'Absolutely. We specialise in Royal Enfield servicing in Ghaziabad, including Classic 350, Bullet 350, Meteor, Himalayan, and Hunter 350. All services use genuine parts and oils.' },
                 { q: 'Do you repair scooties in Ghaziabad?', a: 'Yes, we provide complete scooty repair and service in Ghaziabad for Honda Activa, TVS Jupiter, Suzuki Access, Hero Pleasure, and Honda Dio. All repairs are done at your doorstep in Ghaziabad.' },
-                { q: 'Is your bike service pricing transparent in Ghaziabad?', a: 'Yes, we provide a written estimate before work begins on any bike in Ghaziabad. You will never be surprised by hidden charges or unexplained costs.' },
-                { q: 'Do you offer a service warranty for bike repair in Ghaziabad?', a: 'Every bike service and repair in Ghaziabad comes with a 10-day hassle-free service guarantee. If the same issue recurs within 10 days, we will fix it at no extra cost.' },
-                { q: 'Are your bike mechanics certified in Ghaziabad?', a: 'Yes, all our bike mechanics serving Ghaziabad are trained, certified, background-verified professionals. They follow safety protocols and use genuine parts on every visit.' },
-                { q: 'What payment methods do you accept for bike service in Ghaziabad?', a: 'We accept cash, UPI (Google Pay, PhonePe, Paytm), and other mobile wallets for bike service payments in Ghaziabad.' },
-                { q: 'Do I need to provide tools for the mechanic in Ghaziabad?', a: 'No, our mechanics arrive at your Ghaziabad location fully equipped with all necessary tools, engine oils, and spare parts. Just share your address and we handle the rest.' },
-                { q: 'Can I book bike service for multiple bikes in Ghaziabad?', a: 'Yes, you can book service for multiple bikes in Ghaziabad at the same time. Just mention the number of vehicles while booking and we will arrange accordingly.' },
-                { q: 'What makes GarageFixCare the best bike service in Ghaziabad compared to local garages?', a: 'Unlike traditional Ghaziabad garages, GarageFixCare comes to you, offers transparent pricing, uses genuine parts, employs trained mechanics, and backs every job with a 10-day warranty — saving you time, travel, and money.' },
+                { q: 'Is your bike, scooty and car service pricing transparent in Ghaziabad?', a: 'Yes, we provide a written estimate before work begins, whether it\'s a bike, scooty or car in Ghaziabad. You will never be surprised by hidden charges or unexplained costs.' },
+                { q: 'Do you offer a warranty on bike, scooty and car service in Ghaziabad?', a: 'Every service by Garage Fix Care in Ghaziabad includes a 10-day hassle-free service guarantee, whether it\'s a bike, scooty or car. If the same issue recurs within 10 days, we will fix it at no extra cost.' },
+                { q: 'Are your mechanics certified in Ghaziabad?', a: 'Yes, all our mechanics serving Ghaziabad are trained, certified, background-verified professionals for bikes, scooties and cars. They follow safety protocols and use genuine parts on every visit.' },
+                { q: 'What payment methods do you accept for service in Ghaziabad?', a: 'We accept cash, UPI (Google Pay, PhonePe, Paytm), and other mobile wallets for bike, scooty and car service payments in Ghaziabad.' },
+                { q: 'Do I need to provide tools for the mechanic in Ghaziabad?', a: 'No, our mechanics arrive at your Ghaziabad location fully equipped with all necessary tools, genuine engine oils, and spare parts, for bikes, scooties and cars. Just share your address and we handle the rest.' },
+                { q: 'Can I book service for multiple bikes or vehicles in Ghaziabad?', a: 'Yes, you can book service for multiple bikes, scooties or cars in Ghaziabad at the same time. Just mention the number and type of vehicles while booking and we will arrange accordingly.' },
+                { q: 'What makes GarageFixCare the best bike, scooty and car service in Ghaziabad compared to local garages?', a: 'Unlike traditional Ghaziabad garages, GarageFixCare comes to you for bikes, scooties and cars, offers transparent pricing, uses genuine parts, employs trained mechanics, and backs every job with a 10-day warranty — saving you time, travel, and money.' },
               ].map((faq, idx) => (
                 <motion.div key={idx} variants={staggerItem} className="border border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
                   <button
@@ -1518,7 +1519,7 @@ const BestBikeServiceGhaziabad = () => {
             viewport={viewportOnce}
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
-              Book Bike Service in Ghaziabad Today
+              Book Bike, Scooty or Car Service in Ghaziabad Today
             </h2>
             <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
               Same-day doorstep service starting at ₹299. Our mechanic comes to you — no travel, no waiting, no hidden charges.
