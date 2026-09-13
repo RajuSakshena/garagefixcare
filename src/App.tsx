@@ -10,7 +10,7 @@ import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import BookService from './pages/BookService';
 import Blog from './pages/Blog';
-import Car from './pages/Car'; // ✅ ADD THIS LINE
+import Car from './pages/Car';
 
 // City Landing Pages — Bike
 import BestBikeServiceNoida from './pages/BestBikeServiceNoida';
@@ -36,6 +36,25 @@ import BestBikeServiceSikanderpurGhosi from './pages/BestBikeServiceSikanderpurG
 import BestBikeServiceIndirapuram from './pages/BestBikeServiceIndirapuram';
 import BestBikeServiceVaishali from './pages/BestBikeServiceVaishali';
 import BestBikeServiceGreaterNoidaWest from './pages/BestBikeServiceGreaterNoidaWest';
+
+import BestBikeServiceBurari from './pages/BestBikeServiceBurari';
+import BestBikeServiceChhatarpur from './pages/BestBikeServiceChhatarpur';
+import BestBikeServiceKarolBagh from './pages/BestBikeServiceKarolBagh';
+import BestBikeServiceKashmereGate from './pages/BestBikeServiceKashmereGate';
+import BestBikeServiceLajpatNagar from './pages/BestBikeServiceLajpatNagar';
+import BestBikeServiceMahipalpur from './pages/BestBikeServiceMahipalpur';
+import BestBikeServiceMalviyaNagar from './pages/BestBikeServiceMalviyaNagar';
+import BestBikeServiceMandiHouse from './pages/BestBikeServiceMandiHouse';
+import BestBikeServiceNSP from './pages/BestBikeServiceNSP';
+import BestBikeServiceNewFriendsColony from './pages/BestBikeServiceNewFriendsColony';
+import BestBikeServicePanchsheelPark from './pages/BestBikeServicePanchsheelPark';
+import BestBikeServicePitampura from './pages/BestBikeServicePitampura';
+import BestBikeServiceRamaKrishnaPuram from './pages/BestBikeServiceRamaKrishnaPuram';
+import BestBikeServiceRohini from './pages/BestBikeServiceRohini';
+import BestBikeServiceSarojiniNagar from './pages/BestBikeServiceSarojiniNagar';
+import BestBikeServiceVasantVihar from './pages/BestBikeServiceVasantVihar';
+import BestBikeServiceDhaulaKuan from './pages/BestBikeServiceDhaulaKuan';
+import BestBikeServiceMotiBagh from './pages/BestBikeServiceMotiBagh';
 
 // City Landing Pages — Car
 import BestCarServiceNoida from './pages/BestCarServiceNoida';
@@ -66,7 +85,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
 
-            {/* ✅ ADD THIS ROUTE */}
             <Route path="/car" element={<Car />} />
 
             {/* City Landing Pages — Bike */}
@@ -93,6 +111,25 @@ function App() {
             <Route path="/best-bike-service-indirapuram" element={<BestBikeServiceIndirapuram />} />
             <Route path="/best-bike-service-vaishali" element={<BestBikeServiceVaishali />} />
             <Route path="/best-bike-service-greater-noida-west" element={<BestBikeServiceGreaterNoidaWest />} />
+
+            <Route path="/best-bike-service-burari" element={<BestBikeServiceBurari />} />
+            <Route path="/best-bike-service-chhatarpur" element={<BestBikeServiceChhatarpur />} />
+            <Route path="/best-bike-service-karol-bagh" element={<BestBikeServiceKarolBagh />} />
+            <Route path="/best-bike-service-kashmere-gate" element={<BestBikeServiceKashmereGate />} />
+            <Route path="/best-bike-service-lajpat-nagar" element={<BestBikeServiceLajpatNagar />} />
+            <Route path="/best-bike-service-mahipalpur" element={<BestBikeServiceMahipalpur />} />
+            <Route path="/best-bike-service-malviya-nagar" element={<BestBikeServiceMalviyaNagar />} />
+            <Route path="/best-bike-service-mandi-house" element={<BestBikeServiceMandiHouse />} />
+            <Route path="/best-bike-service-nsp" element={<BestBikeServiceNSP />} />
+            <Route path="/best-bike-service-new-friends-colony" element={<BestBikeServiceNewFriendsColony />} />
+            <Route path="/best-bike-service-panchsheel-park" element={<BestBikeServicePanchsheelPark />} />
+            <Route path="/best-bike-service-pitampura" element={<BestBikeServicePitampura />} />
+            <Route path="/best-bike-service-rama-krishna-puram" element={<BestBikeServiceRamaKrishnaPuram />} />
+            <Route path="/best-bike-service-rohini" element={<BestBikeServiceRohini />} />
+            <Route path="/best-bike-service-sarojini-nagar" element={<BestBikeServiceSarojiniNagar />} />
+            <Route path="/best-bike-service-vasant-vihar" element={<BestBikeServiceVasantVihar />} />
+            <Route path="/best-bike-service-dhaula-kuan" element={<BestBikeServiceDhaulaKuan />} />
+            <Route path="/best-bike-service-moti-bagh" element={<BestBikeServiceMotiBagh />} />
 
             {/* City Landing Pages — Car */}
             <Route path="/best-car-service-noida" element={<BestCarServiceNoida />} />
