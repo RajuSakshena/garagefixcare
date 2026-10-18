@@ -33,6 +33,24 @@ const Footer = () => {
     { path: '/best-bike-service-indirapuram',          label: 'Best Bike Service in Indirapuram' },
     { path: '/best-bike-service-vaishali',             label: 'Best Bike Service in Vaishali' },
     { path: '/best-bike-service-greater-noida-west',   label: 'Best Bike Service in Greater Noida West' },
+    { path: '/best-bike-service-burari', label: 'Best Bike Service in Burari' },
+    { path: '/best-bike-service-chhatarpur', label: 'Best Bike Service in Chhatarpur' },
+    { path: '/best-bike-service-dhaula-kuan', label: 'Best Bike Service in Dhaula Kuan' },
+    { path: '/best-bike-service-karol-bagh', label: 'Best Bike Service in Karol Bagh' },
+    { path: '/best-bike-service-kashmere-gate', label: 'Best Bike Service in Kashmere Gate' },
+    { path: '/best-bike-service-lajpat-nagar', label: 'Best Bike Service in Lajpat Nagar' },
+    { path: '/best-bike-service-mahipalpur', label: 'Best Bike Service in Mahipalpur' },
+    { path: '/best-bike-service-malviya-nagar', label: 'Best Bike Service in Malviya Nagar' },
+    { path: '/best-bike-service-mandi-house', label: 'Best Bike Service in Mandi House' },
+    { path: '/best-bike-service-moti-bagh', label: 'Best Bike Service in Moti Bagh' },
+    { path: '/best-bike-service-nsp', label: 'Best Bike Service in NSP' },
+    { path: '/best-bike-service-new-friends-colony', label: 'Best Bike Service in New Friends Colony' },
+    { path: '/best-bike-service-panchsheel-park', label: 'Best Bike Service in Panchsheel Park' },
+    { path: '/best-bike-service-pitampura', label: 'Best Bike Service in Pitampura' },
+    { path: '/best-bike-service-rama-krishna-puram', label: 'Best Bike Service in Rama Krishna Puram' },
+    { path: '/best-bike-service-rohini', label: 'Best Bike Service in Rohini' },
+    { path: '/best-bike-service-sarojini-nagar', label: 'Best Bike Service in Sarojini Nagar' },
+    { path: '/best-bike-service-vasant-vihar', label: 'Best Bike Service in Vasant Vihar' },
   ];
 
   const handleJoinUsSubmit = async (e: React.FormEvent) => {
@@ -182,7 +200,7 @@ const Footer = () => {
 
           <div
             id="footer-service-locations"
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${isLocationsOpen ? 'max-h-[1000px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${isLocationsOpen ? 'max-h-[2500px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}
           >
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-1.5 text-sm sm:text-base pb-2">
               {moreBikeLocations.map(link => (
