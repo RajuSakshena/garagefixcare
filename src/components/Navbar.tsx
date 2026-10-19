@@ -241,11 +241,11 @@ const Navbar = () => {
               <div className="w-px h-4 bg-gray-300 mx-1" />
 
               <a
-                href="mailto:garagefixcare@gmail.com"
+                href="mailto:support@gfc.com"
                 className="flex items-center gap-1.5 px-2 text-sm font-bold text-gray-900 hover:text-red-600 transition-colors whitespace-nowrap"
               >
                 <Mail className="h-4 w-4 text-orange-600 flex-shrink-0" />
-                garagefixcare@gmail.com
+                support@gfc.com
               </a>
 
               {/* CTA */}
@@ -270,11 +270,11 @@ const Navbar = () => {
               <span className="text-gray-300 select-none">|</span>
 
               <a
-                href="mailto:garagefixcare@gmail.com"
+                href="mailto:support@gfc.com"
                 className="flex items-center gap-1 text-xs font-semibold text-gray-700 hover:text-red-600 transition-colors"
               >
                 <Mail className="h-3.5 w-3.5 text-orange-600" />
-                <span>garagefixcare@gmail.com</span>
+                <span>support@gfc.com</span>
               </a>
 
               <button
@@ -426,11 +426,11 @@ const Navbar = () => {
                 </a>
 
                 <a
-                  href="mailto:garagefixcare@gmail.com"
+                  href="mailto:support@gfc.com"
                   className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors"
                 >
                   <Mail className="h-4 w-4 text-orange-600" />
-                  garagefixcare@gmail.com
+                  support@gfc.com
                 </a>
               </div>
 
