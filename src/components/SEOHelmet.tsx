@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-// ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────
 // Types
-// ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────
 
 interface OpenGraphProps {
   title?: string;
@@ -31,22 +32,18 @@ type JsonLdObject = Record<string, unknown>;
 export interface SEOHelmetProps {
   title?: string;
   description?: string;
-
   keywords?: string;
   author?: string;
-
   canonical?: string;
   robots?: string;
-
   og?: OpenGraphProps;
   twitter?: TwitterProps;
-
   structuredData?: JsonLdObject | JsonLdObject[];
 }
 
-// ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────
 // Defaults
-// ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────
 
 const SITE_NAME = 'Garage Fix Care';
 
@@ -65,10 +62,6 @@ const DEFAULT_ROBOTS = 'index, follow';
 
 const SITE_ORIGIN = 'https://www.garagefixcare.in';
 
-// Only used as a last-resort fallback (e.g. during SSR/build where `window`
-// is unavailable). In the browser we always derive the canonical from the
-// current path so a page can never silently inherit the homepage's
-// canonical just because it forgot to pass one in explicitly.
 const DEFAULT_CANONICAL = `${SITE_ORIGIN}/`;
 
 const DEFAULT_OG_IMAGE =
@@ -79,62 +72,43 @@ const DEFAULT_OG_IMAGE_ALT =
 
 const SITE_TWITTER = '@garagefixcare';
 
-// ─────────────────────────────────────────────────────────────
-// Component
-// ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────
+// SEO Component
+// ─────────────────────────────────────────────
 
 const SEOHelmet: React.FC<SEOHelmetProps> = ({
   title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
   keywords = DEFAULT_KEYWORDS,
   author = DEFAULT_AUTHOR,
-
   canonical,
   robots = DEFAULT_ROBOTS,
-
   og = {},
   twitter = {},
-
   structuredData,
 }) => {
+  // Use the explicitly supplied canonical URL.
+  // Otherwise, derive it from the current page path.
+  const currentPath =
+    typeof window !== 'undefined'
+      ? window.location.pathname
+      : '/';
 
-  // IMPORTANT: every page should pass its own `canonical` prop explicitly.
-  // This fallback exists purely as a safety net — it derives the canonical
-  // from the page's actual current path (not a hardcoded homepage URL), so
-  // a landing page that forgets to pass `canonical` still points to itself
-  // rather than incorrectly pointing to "/".
   const resolvedCanonical =
-    canonical ??
-    (typeof window !== 'undefined'
-      ? `${SITE_ORIGIN}${window.location.pathname}`
-      : DEFAULT_CANONICAL);
+    canonical ?? `${SITE_ORIGIN}${currentPath}`;
 
-  const ogTitle =
-    og.title ?? title;
-
-  const ogDescription =
-    og.description ?? description;
-
-  const ogType =
-    og.type ?? 'website';
-
-  const ogSiteName =
-    og.siteName ?? SITE_NAME;
-
-  const ogLocale =
-    og.locale ?? 'en_IN';
-
-  const ogImage =
-    og.image ?? DEFAULT_OG_IMAGE;
-
-  const ogImageAlt =
-    og.imageAlt ?? DEFAULT_OG_IMAGE_ALT;
+  const ogTitle = og.title ?? title;
+  const ogDescription = og.description ?? description;
+  const ogType = og.type ?? 'website';
+  const ogSiteName = og.siteName ?? SITE_NAME;
+  const ogLocale = og.locale ?? 'en_IN';
+  const ogImage = og.image ?? DEFAULT_OG_IMAGE;
+  const ogImageAlt = og.imageAlt ?? DEFAULT_OG_IMAGE_ALT;
 
   const twitterCard =
     twitter.card ?? 'summary_large_image';
 
-  const twitterTitle =
-    twitter.title ?? title;
+  const twitterTitle = twitter.title ?? title;
 
   const twitterDescription =
     twitter.description ?? description;
@@ -148,16 +122,14 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
   const twitterImageAlt =
     twitter.imageAlt ?? DEFAULT_OG_IMAGE_ALT;
 
-  const schemas: JsonLdObject[] =
-    structuredData
-      ? Array.isArray(structuredData)
-        ? structuredData
-        : [structuredData]
-      : [];
+  const schemas: JsonLdObject[] = structuredData
+    ? Array.isArray(structuredData)
+      ? structuredData
+      : [structuredData]
+    : [];
 
   return (
     <Helmet>
-
       {/* Primary SEO */}
 
       <title>{title}</title>
@@ -182,33 +154,11 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
         content={robots}
       />
 
-      {/* Canonical */}
+      {/* Canonical URL */}
 
       <link
         rel="canonical"
         href={resolvedCanonical}
-      />
-
-      {/* Local SEO */}
-
-      <meta
-        name="geo.region"
-        content="IN-UP"
-      />
-
-      <meta
-        name="geo.placename"
-        content="Noida, Greater Noida, Delhi, New Delhi, Gurgaon, Gurugram, Ghaziabad, Faridabad, Delhi NCR"
-      />
-
-      <meta
-        name="distribution"
-        content="global"
-      />
-
-      <meta
-        name="language"
-        content="English"
       />
 
       {/* Open Graph */}
@@ -253,7 +203,7 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
         content={ogImageAlt}
       />
 
-      {/* Twitter */}
+      {/* Twitter Cards */}
 
       <meta
         name="twitter:card"
@@ -302,7 +252,6 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
           {JSON.stringify(schema)}
         </script>
       ))}
-
     </Helmet>
   );
 };
