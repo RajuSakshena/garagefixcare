@@ -1,15 +1,21 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
 export default defineConfig({
-  base: '/', // Root-relative assets for Vercel and SPA routes
+  base: '/',
   plugins: [react()],
+
   optimizeDeps: {
-    exclude: ['lucide-react'], // ⚡ avoid optimize errors
+    exclude: ['lucide-react'],
   },
+
   build: {
-    outDir: 'dist', // ✅ build output folder
-    assetsDir: 'assets', // ✅ keep assets inside /dist/assets
+    outDir: 'dist',
+    assetsDir: 'assets',
+
+    // Generate manifest to map source image imports
+    // to their actual production asset URLs.
+    manifest: true,
   },
-})
+});
