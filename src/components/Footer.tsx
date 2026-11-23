@@ -1,0 +1,211 @@
+import { openWhatsAppBooking } from "../utils/whatsapp";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Phone as PhoneIcon, Mail as MailIcon, MapPin, Facebook, Instagram, ChevronDown } from 'lucide-react';
+import logo41 from "../images/transparent_logo.png";
+
+const Footer = () => {
+  const [joinUsPhoneNumber, setJoinUsPhoneNumber] = useState('');
+  const [isLocationsOpen, setIsLocationsOpen] = useState(false);
+
+  const moreBikeLocations = [
+    { path: '/best-bike-service-dwarka',              label: 'Best Bike Service in Dwarka' },
+    { path: '/best-bike-service-greater-kailash',      label: 'Best Bike Service in Greater Kailash' },
+    { path: '/best-bike-service-defence-colony',       label: 'Best Bike Service in Defence Colony' },
+    { path: '/best-bike-service-hauz-khas',            label: 'Best Bike Service in Hauz Khas' },
+    { path: '/best-bike-service-saket',                label: 'Best Bike Service in Saket' },
+    { path: '/best-bike-service-connaught-place',      label: 'Best Bike Service in Connaught Place' },
+    { path: '/best-bike-service-uttam-nagar',          label: 'Best Bike Service in Uttam Nagar' },
+    { path: '/best-bike-service-new-delhi',            label: 'Best Bike Service in New Delhi' },
+    { path: '/best-bike-service-chanakyapuri',         label: 'Best Bike Service in Chanakyapuri' },
+    { path: '/best-bike-service-paharganj',            label: 'Best Bike Service in Paharganj' },
+    { path: '/best-bike-service-palam',                label: 'Best Bike Service in Palam' },
+    { path: '/best-bike-service-delhi-cantt',          label: 'Best Bike Service in Delhi Cantt' },
+    { path: '/best-bike-service-udyog-vihar',          label: 'Best Bike Service in Udyog Vihar' },
+    { path: '/best-bike-service-sushant-lok-phase-1',  label: 'Best Bike Service in Sushant Lok Phase 1' },
+    { path: '/best-bike-service-sector-56-gurugram',   label: 'Best Bike Service in Sector 56 Gurugram' },
+    { path: '/best-bike-service-sikanderpur-ghosi',    label: 'Best Bike Service in Sikanderpur Ghosi' },
+    { path: '/best-bike-service-indirapuram',          label: 'Best Bike Service in Indirapuram' },
+    { path: '/best-bike-service-vaishali',             label: 'Best Bike Service in Vaishali' },
+    { path: '/best-bike-service-greater-noida-west',   label: 'Best Bike Service in Greater Noida West' },
+    { path: '/best-bike-service-burari', label: 'Best Bike Service in Burari' },
+    { path: '/best-bike-service-chhatarpur', label: 'Best Bike Service in Chhatarpur' },
+    { path: '/best-bike-service-dhaula-kuan', label: 'Best Bike Service in Dhaula Kuan' },
+    { path: '/best-bike-service-karol-bagh', label: 'Best Bike Service in Karol Bagh' },
+    { path: '/best-bike-service-kashmere-gate', label: 'Best Bike Service in Kashmere Gate' },
+    { path: '/best-bike-service-lajpat-nagar', label: 'Best Bike Service in Lajpat Nagar' },
+    { path: '/best-bike-service-mahipalpur', label: 'Best Bike Service in Mahipalpur' },
+    { path: '/best-bike-service-malviya-nagar', label: 'Best Bike Service in Malviya Nagar' },
+    { path: '/best-bike-service-mandi-house', label: 'Best Bike Service in Mandi House' },
+    { path: '/best-bike-service-moti-bagh', label: 'Best Bike Service in Moti Bagh' },
+    { path: '/best-bike-service-nsp', label: 'Best Bike Service in NSP' },
+    { path: '/best-bike-service-new-friends-colony', label: 'Best Bike Service in New Friends Colony' },
+    { path: '/best-bike-service-panchsheel-park', label: 'Best Bike Service in Panchsheel Park' },
+    { path: '/best-bike-service-pitampura', label: 'Best Bike Service in Pitampura' },
+    { path: '/best-bike-service-rama-krishna-puram', label: 'Best Bike Service in Rama Krishna Puram' },
+    { path: '/best-bike-service-rohini', label: 'Best Bike Service in Rohini' },
+    { path: '/best-bike-service-sarojini-nagar', label: 'Best Bike Service in Sarojini Nagar' },
+    { path: '/best-bike-service-vasant-vihar', label: 'Best Bike Service in Vasant Vihar' },
+  ];
+
+  const handleJoinUsSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    openWhatsAppBooking({ serviceType: "Join our team enquiry", phoneNumber: joinUsPhoneNumber });
+    setJoinUsPhoneNumber('');
+  };
+
+  return (
+    <footer className="bg-slate-900 text-gray-300 py-4 sm:py-6">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+        
+        {/* TOP SECTION: Logo & Corporate Office */}
+        <div className="flex flex-col md:flex-row items-center justify-center mb-4 sm:mb-6">
+          <div className="flex flex-col md:flex-row items-center space-x-2 sm:space-x-4">
+            <img src={logo41} alt="Garage Fix Care" className="w-32 sm:w-36 h-16 sm:h-20 bg-sky-100 rounded-b-2xl" />
+            <div className="text-left mt-2 sm:mt-0">
+              <h3 className="text-lg sm:text-xl font-bold text-white">Corporate Office</h3>
+              <p className="text-sm sm:text-base">The Corenthum Tower-1, Block-A, Industrial Area, Sector 62, Noida, UP 201309</p>
+            </div>
+          </div>
+        </div>
+
+        {/* HORIZONTAL LINE SEPARATOR */}
+        <div className="border-t border-gray-800 my-2 sm:my-4"></div>
+
+        {/* BOTTOM SECTION: Other sections */}
+        <div className="flex flex-col md:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4">
+          
+          {/* Company Links */}
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Company</h3>
+            <ul className="space-y-1 text-sm sm:text-base">
+              <li><Link to="/contact" className="hover:text-red-600">Contact Us</Link></li>
+              <li><a href="https://wa.me/919540553759?text=Hello%20Garage%20Fix%20Care%2C%20I%20would%20like%20to%20book%20a%20service.%20Please%20help%20me%20with%20availability." target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Book Enquiry</a></li>
+              <li><Link to="/bike-service" className="hover:text-red-600">Browse Bike Models</Link></li>
+              <li><Link to="/scooty-service" className="hover:text-red-600">Browse Scooty Models</Link></li>
+              <li><Link to="/blog" className="hover:text-red-600">Maintenance Guides</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Contact</h3>
+            <ul className="space-y-1 text-sm sm:text-base">
+              <li className="flex items-center"><MailIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="mailto:support@gfc.com" className="hover:text-red-600">support@gfc.com</a></li>
+              <li className="flex items-center"><PhoneIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="tel:+919540553759" className="hover:text-red-600">+91 9540553759</a></li>
+              <li className="flex items-center"><MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1" /> <a href="https://garagefixcare.in" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Garagefixcare.in</a></li>
+            </ul>
+          </div>
+
+          {/* Social Media */}
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Social Media</h3>
+            <ul className="space-y-1 text-sm sm:text-base">
+              <li className="flex items-center"><Facebook className="h-4 w-4 mr-1" /><a href="https://www.facebook.com/people/Garage-Fix-Care/61582606570830/" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Facebook</a></li>
+              <li className="flex items-center"><Instagram className="h-4 w-4 mr-1" /><a href="https://www.instagram.com/p/DQVj8SmktgG/?igsh=cTRzNXd5dHZtOGxi" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">Instagram</a></li>
+            </ul>
+          </div>
+
+          {/* Available In */}
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Available In</h3>
+            <ul className="space-y-1 text-sm sm:text-base">
+              <li><span className="text-red-600 text-base mr-1">◆</span> Delhi</li>
+              <li><span className="text-red-600 text-base mr-1">◆</span> Noida</li>
+              <li><span className="text-red-600 text-base mr-1">◆</span> Greater Noida</li>
+              <li><span className="text-red-600 text-base mr-1">◆</span> Gurugram</li>
+              <li><span className="text-red-600 text-base mr-1">◆</span> Ghaziabad</li>
+              <li><span className="text-red-600 text-base mr-1">◆</span> Faridabad</li>
+            </ul>
+          </div>
+          
+          {/* Join Us */}
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Join Us</h3>
+            <p className="text-sm mb-2">Join for expert bike service at your location.</p>
+            <form onSubmit={handleJoinUsSubmit} className="flex flex-col sm:flex-row gap-1">
+              <input
+                type="tel"
+                placeholder="Phone Number*"
+                required
+                value={joinUsPhoneNumber}
+                onChange={(e) => setJoinUsPhoneNumber(e.target.value)}
+                className="px-2 py-1 w-full rounded-lg bg-slate-800 text-white border border-slate-700 focus:outline-none focus:border-red-600 text-sm"
+              />
+              <button
+                type="submit"
+                className="bg-red-600 text-white px-3 py-1 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 text-sm"
+              >
+                Join
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* HORIZONTAL LINE SEPARATOR */}
+        <div className="border-t border-gray-800 my-2 sm:my-4"></div>
+
+        {/* Popular Service Pages */}
+        <div className="flex flex-col md:flex-row justify-between space-y-4 md:space-y-0 md:space-x-4">
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Popular Bike Service Pages</h3>
+            <ul className="space-y-1 text-sm sm:text-base">
+              <li><Link to="/best-bike-service-noida" className="hover:text-red-600">Best Bike Service in Noida</Link></li>
+              <li><Link to="/best-bike-service-delhi" className="hover:text-red-600">Best Bike Service in Delhi</Link></li>
+              <li><Link to="/best-bike-service-gurgaon" className="hover:text-red-600">Best Bike Service in Gurgaon</Link></li>
+              <li><Link to="/best-bike-service-ghaziabad" className="hover:text-red-600">Best Bike Service in Ghaziabad</Link></li>
+            </ul>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Popular Car Service Pages</h3>
+            <ul className="space-y-1 text-sm sm:text-base">
+              <li><Link to="/best-car-service-noida" className="hover:text-red-600">Best Car Service in Noida</Link></li>
+              <li><Link to="/best-car-service-delhi" className="hover:text-red-600">Best Car Service in Delhi</Link></li>
+              <li><Link to="/best-car-service-gurgaon" className="hover:text-red-600">Best Car Service in Gurgaon</Link></li>
+              <li><Link to="/best-car-service-ghaziabad" className="hover:text-red-600">Best Car Service in Ghaziabad</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* HORIZONTAL LINE SEPARATOR */}
+        <div className="border-t border-gray-800 my-2 sm:my-4"></div>
+
+        {/* Collapsible: More Service Locations */}
+        <div>
+          <button
+            type="button"
+            onClick={() => setIsLocationsOpen(!isLocationsOpen)}
+            aria-expanded={isLocationsOpen}
+            aria-controls="footer-service-locations"
+            className="flex items-center justify-between w-full text-left text-lg sm:text-xl font-bold text-white py-1 focus:outline-none focus:ring-2 focus:ring-red-600 rounded"
+          >
+            <span>📍 Service Locations</span>
+            <ChevronDown
+              className={`h-5 w-5 text-red-600 transition-transform duration-300 ${isLocationsOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+
+          <div
+            id="footer-service-locations"
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${isLocationsOpen ? 'max-h-[2500px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}
+          >
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-1.5 text-sm sm:text-base pb-2">
+              {moreBikeLocations.map(link => (
+                <li key={link.path}>
+                  <Link to={link.path} className="hover:text-red-600">{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Copyright Section */}
+        <div className="border-t border-gray-800 mt-2 pt-2 text-center text-xs sm:text-sm text-white">
+          <p>Copyright 2022, GarageFixCare. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

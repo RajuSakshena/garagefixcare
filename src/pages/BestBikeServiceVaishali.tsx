@@ -1,0 +1,1515 @@
+import CustomerReviews from '../components/CustomerReviews';
+import { openWhatsAppBooking } from "../utils/whatsapp.ts";
+// BestBikeServiceVaishali.tsx
+// Vaishali specific SEO/content + Home.tsx design system (video hero, Framer Motion, marquees)
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
+import type { Variants } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
+import { CheckCircle, Star, Flame, X, Plus, Phone, Bike, Car } from 'lucide-react';
+import SEOHelmet from '../components/SEOHelmet';
+import { FaWhatsapp } from 'react-icons/fa';
+
+// Hero background video (same assets/crossfade system as Home.tsx)
+import insideVideo from '../images/inside.mp4';
+import outsideVideo from '../images/outside.mp4';
+
+// Hot Deals marquee — same assets as Home.tsx
+import hotDealsImage1 from '../images/hotdeals1.png';
+import hotDealsImage2 from '../images/hotdeals2.png';
+import hotDealsImage3 from '../images/hotdeals3.png';
+import hotDealsImage4 from '../images/hotdeals4.png';
+import hotDealsImage5 from '../images/hotdeals5.png';
+
+// Bike Services icons — same assets as Home.tsx
+import routineService from '../images/Routine Service.png';
+import bikeInsurance from '../images/Bike Insurance.png';
+import doorstepService from '../images/Doorstep Service.png';
+import wheelCare from '../images/Wheel Care.png';
+import bikeBatteries from '../images/Bike Battery.png';
+import engineRepair from '../images/Engine Repair.png';
+
+// Shared assets — same as Delhi Cantt / Home.tsx
+import warrantyImg from '../images/warranty.webp';
+import pickupImg from '../images/free pickup.webp';
+import transparentImg from '../images/transparent.webp';
+import trainedImg from '../images/trainie.webp';
+import whyChooseImg from '../images/whychoose.png';
+import wurthImg from '../images/WURTH.png';
+import motulImg from '../images/Motul.jpeg';
+import turtlemintImg from '../images/Turtlemint.png';
+import buniyadImg from '../images/Buniyad.png';
+import dunzoImg from '../images/Dunzo.png';
+import bmw310Image from '../images/bmw310.png';
+import googleIcon from '../images/Testimonial1.png';
+import testimonial1 from '../images/Testimonial1.jpeg';
+import testimonial2 from '../images/Testimonial2.jpeg';
+import testimonial3 from '../images/Testimonial3.jpeg';
+import testimonial4 from '../images/Testimonial4.jpeg';
+
+interface Service {
+  title: string;
+  subtitle: string;
+  checklist: string[];
+}
+
+// ==================================================
+// Reusable Framer Motion variants — same system as Home.tsx / Delhi Cantt
+// ==================================================
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+};
+
+const fadeIn: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } },
+};
+
+const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.97 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.7, ease: 'easeOut' } },
+};
+
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+const viewportOnce = { once: true, amount: 0.15 };
+
+const heroStaggerContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07 } },
+};
+
+const heroStaggerItem: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+};
+
+const BestBikeServiceVaishali = () => {
+  const [happyCustomersCount, setHappyCustomersCount] = useState(0);
+  const [reviewScore, setReviewScore] = useState(4.6);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [modalPhoneNumber, setModalPhoneNumber] = useState('');
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const navigate = useNavigate();
+
+  const prefersReducedMotion = useReducedMotion();
+
+  // Subtle top-of-page scroll progress indicator (same as Home.tsx)
+  const { scrollYProgress } = useScroll();
+  const scrollProgressScaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  // ================= Navbar-flush hero offset =================
+  // Instead of guessing the fixed navbar's height with hardcoded pt-[..px] values (which can
+  // drift out of sync with the real navbar and leave a dark gap above the video), measure the
+  // actual rendered navbar height at runtime and use that exact value as the hero's top offset.
+  // This guarantees the hero video always starts immediately below the navbar with 0px gap,
+  // on every breakpoint, even if the navbar's height changes.
+  const [heroTopOffset, setHeroTopOffset] = useState(88);
+  useLayoutEffect(() => {
+    const navEl = (document.querySelector('header[class*="fixed"]') ||
+      document.querySelector('nav[class*="fixed"]') ||
+      document.querySelector('header') ||
+      document.querySelector('nav')) as HTMLElement | null;
+    if (!navEl) return;
+
+    const measure = () => {
+      const height = Math.round(navEl.getBoundingClientRect().height);
+      if (height > 0) setHeroTopOffset(height);
+    };
+
+    measure();
+
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(navEl);
+    window.addEventListener('resize', measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
+
+  // ================= Hero video sequence (same two-slot crossfade system as Home.tsx) =================
+  // inside.mp4 -> outside.mp4 -> inside.mp4 -> ... loops forever, no hard cut, no blank frame.
+  const heroVideoSources = [insideVideo, outsideVideo];
+  const heroVideoSlot0Ref = useRef<HTMLVideoElement | null>(null);
+  const heroVideoSlot1Ref = useRef<HTMLVideoElement | null>(null);
+  const heroVideoRefs = [heroVideoSlot0Ref, heroVideoSlot1Ref] as const;
+  const [activeHeroSlot, setActiveHeroSlot] = useState<0 | 1>(0);
+  const heroSequencePosRef = useRef(0);
+  const heroTransitioningRef = useRef(false);
+
+  const HERO_CROSSFADE_SECONDS = prefersReducedMotion ? 0 : 0.65;
+  const HERO_TRANSITION_LEAD_SECONDS = 0.6;
+
+  useEffect(() => {
+    const slot0 = heroVideoRefs[0].current;
+    const slot1 = heroVideoRefs[1].current;
+    if (!slot0 || !slot1) return;
+
+    slot0.src = heroVideoSources[0];
+    slot0.load();
+    slot0.play().catch(() => {});
+
+    slot1.src = heroVideoSources[1];
+    slot1.load();
+
+    heroSequencePosRef.current = 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const attemptHeroTransition = (fromSlot: 0 | 1) => {
+    if (heroTransitioningRef.current) return;
+    const toSlot: 0 | 1 = fromSlot === 0 ? 1 : 0;
+    const nextEl = heroVideoRefs[toSlot].current;
+    if (!nextEl || nextEl.readyState < 3) return;
+
+    heroTransitioningRef.current = true;
+    const nextLogicalIndex = (heroSequencePosRef.current + 1) % heroVideoSources.length;
+
+    nextEl.currentTime = 0;
+    const playPromise = nextEl.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+
+    setActiveHeroSlot(toSlot);
+    heroSequencePosRef.current = nextLogicalIndex;
+
+    window.setTimeout(() => {
+      const idleEl = heroVideoRefs[fromSlot].current;
+      if (idleEl) {
+        const upcomingIndex = (nextLogicalIndex + 1) % heroVideoSources.length;
+        idleEl.pause();
+        idleEl.src = heroVideoSources[upcomingIndex];
+        idleEl.load();
+      }
+      heroTransitioningRef.current = false;
+    }, HERO_CROSSFADE_SECONDS * 1000);
+  };
+
+  const handleHeroTimeUpdate = (slot: 0 | 1) => () => {
+    if (activeHeroSlot !== slot || heroTransitioningRef.current) return;
+    const el = heroVideoRefs[slot].current;
+    if (!el || !el.duration || Number.isNaN(el.duration)) return;
+    if (el.duration - el.currentTime <= HERO_TRANSITION_LEAD_SECONDS) {
+      attemptHeroTransition(slot);
+    }
+  };
+
+  const handleHeroEnded = (slot: 0 | 1) => () => {
+    if (activeHeroSlot !== slot || heroTransitioningRef.current) return;
+    const el = heroVideoRefs[slot].current;
+    if (!el) return;
+    el.currentTime = Math.max(0, el.duration - 1);
+    el.play().catch(() => {});
+    attemptHeroTransition(slot);
+  };
+  // ================= End hero video sequence =================
+
+  // Hot Deals marquee images — Vaishali specific copy/alt text, Home-style assets
+  const carouselImages = [
+    { src: hotDealsImage1, alt: 'Bike service offer in Vaishali' },
+    { src: hotDealsImage2, alt: 'Doorstep bike service near Vaishali Metro Station' },
+    { src: hotDealsImage3, alt: 'Bike engine repair near Mahagun Metro Mall' },
+    { src: hotDealsImage4, alt: 'Roadside bike assistance near Kaushambi' },
+    { src: hotDealsImage5, alt: 'Doorstep bike repair deal near Anand Vihar' },
+  ];
+  const hotDealsAreaBadges = ['Vaishali', 'Ghaziabad', 'Kaushambi', 'Anand Vihar', 'Indirapuram', 'Noida'];
+
+  // Animated counters
+  useEffect(() => {
+    const targetCount = 100000;
+    const duration = 2000;
+    const increment = Math.ceil(targetCount / (duration / 10));
+    if (happyCustomersCount < targetCount) {
+      const timer = setInterval(() => {
+        setHappyCustomersCount(prevCount => {
+          const newCount = prevCount + increment;
+          if (newCount >= targetCount) {
+            clearInterval(timer);
+            return targetCount;
+          }
+          return newCount;
+        });
+      }, 10);
+      return () => clearInterval(timer);
+    }
+  }, [happyCustomersCount]);
+
+  useEffect(() => {
+    const targetScore = 4.7;
+    const duration = 1000;
+    const interval = 10;
+    const increments = (targetScore - reviewScore) / (duration / interval);
+    let currentScore = reviewScore;
+    const timer = setInterval(() => {
+      currentScore += increments;
+      if (currentScore >= targetScore) {
+        currentScore = targetScore;
+        clearInterval(timer);
+      }
+      setReviewScore(parseFloat(currentScore.toFixed(1)));
+    }, interval);
+    return () => clearInterval(timer);
+  }, []);
+
+const servicePrices = [
+    {
+      title: "At-Home Premium Service",
+      subtitle: "220 CC - 300 CC",
+      originalPrice: "",
+      discountedPrice: "Rs. 450",
+      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
+    },
+    {
+      title: "At-Home Royal Service",
+      subtitle: "350 CC - 450 CC",
+      originalPrice: "",
+      discountedPrice: "Rs. 499",
+      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
+    },
+    {
+      title: "At-Home Sports Service",
+      subtitle: "500 CC - 650 CC",
+      originalPrice: "",
+      discountedPrice: "Rs. 599",
+      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
+    },
+    {
+      title: "At-Home Superbike Service",
+      subtitle: "650 CC - 900 CC",
+      originalPrice: "",
+      discountedPrice: "Rs. 750",
+      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
+    },
+    {
+      title: "At-Home Elite Superbike Service",
+      subtitle: "Above 900 CC",
+      originalPrice: "",
+      discountedPrice: "Rs. 899",
+      features: ["Engine Oil Change", "Oil Filter Clean", "Air Filter Clean", "Spark Plug Clean"]
+    }
+  ];
+
+  const checklistItems = [
+    'Coolant check-up', 'Basic Hand Cleaning', 'Oiling and greasing', 'Battery General check-up',
+    'Basic Engine Inspection', 'Basic Fork Inspection', 'Carburettor Basic check-up', 'Minor Electrical check-up',
+    'Brakes – Front & Rear Adjust', 'Driven Chain Basic Cleaning', 'Tightening of Screws Bolts & Nuts',
+    'Average and Performance check-up', 'Engine Oil Change (Price Extra)', 'Oil Filter Clean (If Replace Charges)',
+    'Air Filter Clean (If Replace Charges)', 'Spark Plug Clean (If Replace Charges)', 'Tyre Air Fill (only tubeless)',
+    'Free Pick and Drop (if needed)',
+  ];
+
+  const handleSeeChecklist = (title: string, subtitle: string) => {
+    setSelectedService({ title, subtitle, checklist: checklistItems });
+    setModalPhoneNumber('');
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedService(null);
+    setModalPhoneNumber('');
+  };
+
+  const handleModalBookNow = async () => {
+    if (!modalPhoneNumber || modalPhoneNumber.length !== 10) {
+      alert('Please enter a valid 10-digit phone number.');
+      return;
+    }
+    if (!selectedService) return;
+    try {
+      const serviceType = `${selectedService.title} (${selectedService.subtitle})`;
+      openWhatsAppBooking({
+        phoneNumber: modalPhoneNumber,
+        serviceType: serviceType,
+      });
+      alert('WhatsApp is opening with your booking details. Please press Send to submit your request.');
+      closeModal();
+    } catch (error) {
+      alert('Booking failed. Please try again.');
+      console.error('Error booking service:', error);
+    }
+  };
+
+  const serviceCities = [
+    { name: 'Vaishali', color: 'text-slate-700' },
+    { name: 'Ghaziabad', color: 'text-red-700' },
+    { name: 'Noida', color: 'text-teal-700' },
+    { name: 'Delhi', color: 'text-gray-900' },
+    { name: 'Kaushambi', color: 'text-orange-700' },
+    { name: 'Indirapuram', color: 'text-slate-700' },
+  ];
+
+  const coveredAreas = [
+    'Vaishali Sector 1', 'Sector 2', 'Sector 3', 'Sector 4',
+    'Sector 5', 'Sector 6', 'Vaishali Metro Station',
+    'Mahagun Metro Mall', 'Kaushambi', 'Anand Vihar',
+  ];
+
+  const cityPages = [
+    { name: 'Gurgaon', path: '/best-bike-service-gurgaon' },
+    { name: 'Delhi', path: '/best-bike-service-delhi' },
+    { name: 'Noida', path: '/best-bike-service-noida' },
+    { name: 'Greater Noida', path: '/best-bike-service-greater-noida' },
+    { name: 'Ghaziabad', path: '/best-bike-service-ghaziabad' },
+    { name: 'Indirapuram', path: '/best-bike-service-indirapuram' },
+  ];
+
+  // Brands We Service marquee data (same structure/logic as Home.tsx / Delhi Cantt)
+  const bikeBrands = ['Hero', 'Honda', 'TVS', 'Bajaj', 'Suzuki', 'Yamaha', 'Kawasaki', 'Royal Enfield', 'KTM', 'BMW', 'Harley Davidson', 'Ducati', 'Triumph', 'Indian', 'Vespa', 'Benelli', 'Aprilia', 'Yezdi', 'Husqvarna', 'Other'];
+  const scootyBrands = ['Honda', 'TVS', 'Hero', 'Suzuki', 'Yamaha', 'Ather', 'Ola Electric', 'Bajaj', 'Vespa', 'Aprilia', 'Other'];
+  const marqueeBrands = Array.from(
+    new Set([...bikeBrands, ...scootyBrands, 'Jawa', 'Bajaj Chetak', 'Vida', 'Okinawa', 'Ampere', 'Revolt'])
+  ).filter(brand => brand !== 'Other');
+  const marqueeBrandsRow1 = marqueeBrands.filter((_, i) => i % 2 === 0);
+  const marqueeBrandsRow2 = marqueeBrands.filter((_, i) => i % 2 !== 0);
+
+  const bikeServiceCards = [
+    { name: 'Regular Service', img: routineService },
+    { name: 'Engine Repair', img: engineRepair },
+    { name: 'Battery Replacement', img: bikeBatteries },
+    { name: 'Brake Repair', img: wheelCare },
+    { name: 'Tyre Service', img: doorstepService },
+    { name: 'Insurance Assistance', img: bikeInsurance },
+  ];
+
+  return (
+    <>
+      <SEOHelmet
+        title="Best Bike Service in Vaishali | Garage Fix Care"
+        description="Top-rated doorstep bike service in Vaishali, Ghaziabad starting at ₹450. Expert mechanics reach Vaishali Sector 1–6, Mahagun Metro Mall, Kaushambi & Anand Vihar. Same-day repair, oil change, battery & tyre service with no hidden fees."
+        canonical="https://www.garagefixcare.in/best-bike-service-vaishali"
+        robots="index, follow"
+        og={{
+          url: 'https://www.garagefixcare.in/best-bike-service-vaishali',
+          image: 'https://www.garagefixcare.in/og-banner.png',
+          imageAlt: 'Doorstep bike repair in Vaishali Ghaziabad by Garage Fix Care',
+          type: 'website',
+        }}
+        twitter={{
+          image: 'https://www.garagefixcare.in/og-banner.png',
+          imageAlt: 'Certified two-wheeler mechanics at your doorstep in Vaishali',
+        }}
+        structuredData={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Doorstep Bike Repair in Vaishali Ghaziabad',
+            provider: { '@id': 'https://www.garagefixcare.in/#business', '@type': 'LocalBusiness', name: 'Garage Fix Care' },
+            areaServed: 'Vaishali, Ghaziabad',
+            description: 'At-home two-wheeler servicing across all Vaishali sectors, Mahagun Metro Mall, Kaushambi, and Anand Vihar. Oil change, engine diagnostics, battery swap, brake overhaul, tyre puncture fix from ₹450.',
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              { '@type': 'Question', name: 'How much does bike service cost in Vaishali?', acceptedAnswer: { '@type': 'Answer', text: 'Bike service in Vaishali has transparent engine-capacity pricing: 220–300 CC ₹450, 350–450 CC ₹499, 500–650 CC ₹599, 650–900 CC ₹750, and above 900 CC ₹899. Parts, if required, are billed separately.' } },
+              { '@type': 'Question', name: 'Do you send mechanics to Vaishali Sector 2, 3, and 4?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Our mechanics visit every sector in Vaishali — Sector 1, 2, 3, 4, 5, and 6 — arriving at your society gate or basement parking fully equipped within 2–4 hours of booking.' } },
+              { '@type': 'Question', name: 'Can I book bike repair near Vaishali Metro Station or Mahagun Metro Mall?', acceptedAnswer: { '@type': 'Answer', text: 'Absolutely. Both Vaishali Metro Station and Mahagun Metro Mall are within our active service zone. You can pin your exact location and we will send a mechanic there.' } },
+              { '@type': 'Question', name: 'Do you cover Kaushambi and Anand Vihar for doorstep bike service?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Kaushambi and Anand Vihar are covered under the same Vaishali service zone with no additional travel surcharge.' } },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.garagefixcare.in/' },
+              { '@type': 'ListItem', position: 2, name: 'Best Bike Service in Vaishali', item: 'https://www.garagefixcare.in/best-bike-service-vaishali' },
+            ],
+          },
+        ]}
+      />
+
+      {/* Subtle scroll progress indicator — same as Home.tsx */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-orange-500 origin-left z-[70]"
+        style={{ scaleX: scrollProgressScaleX }}
+      />
+
+      <div className="gfc-location-landing min-h-screen">
+        {/* Hero Section */}
+        <main className="bg-slate-800" style={{ paddingTop: `${heroTopOffset}px` }}>
+          <section className="relative text-white overflow-hidden min-h-[700px] sm:min-h-[600px] lg:min-h-[680px] gfc-location-hotdeals-section">
+            {/* Cinematic background video: inside.mp4 <-> outside.mp4, continuous crossfade loop */}
+            <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+              <motion.video
+                ref={heroVideoRefs[0]}
+                autoPlay
+                muted
+                loop={false}
+                playsInline
+                preload="auto"
+                onTimeUpdate={handleHeroTimeUpdate(0)}
+                onEnded={handleHeroEnded(0)}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ willChange: 'transform, opacity' }}
+                animate={{
+                  opacity: activeHeroSlot === 0 ? 1 : 0,
+                  scale: prefersReducedMotion ? 1 : [1, 1.02, 1],
+                }}
+                transition={{
+                  opacity: { duration: HERO_CROSSFADE_SECONDS, ease: 'easeInOut' },
+                  scale: prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' },
+                }}
+              />
+              <motion.video
+                ref={heroVideoRefs[1]}
+                autoPlay
+                muted
+                loop={false}
+                playsInline
+                preload="auto"
+                onTimeUpdate={handleHeroTimeUpdate(1)}
+                onEnded={handleHeroEnded(1)}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ willChange: 'transform, opacity' }}
+                animate={{
+                  opacity: activeHeroSlot === 1 ? 1 : 0,
+                  scale: prefersReducedMotion ? 1 : [1, 1.02, 1],
+                }}
+                transition={{
+                  opacity: { duration: HERO_CROSSFADE_SECONDS, ease: 'easeInOut' },
+                  scale: prefersReducedMotion ? undefined : { duration: 15, repeat: Infinity, ease: 'easeInOut' },
+                }}
+              />
+              <div
+                className="absolute inset-0 sm:hidden"
+                style={{
+                  background:
+                    'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.72) 22%, rgba(0,0,0,0.22) 40%, rgba(0,0,0,0.22) 60%, rgba(0,0,0,0.52) 78%, rgba(0,0,0,0.52) 100%)',
+                }}
+              />
+              <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
+              <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              <div className="hero-light-sweep absolute inset-0 pointer-events-none" />
+            </div>
+
+            <style>{`
+              @keyframes heroLightSweep {
+                0%   { transform: translateX(-15%); opacity: 0.35; }
+                50%  { transform: translateX(15%);  opacity: 0.55; }
+                100% { transform: translateX(-15%); opacity: 0.35; }
+              }
+              .hero-light-sweep {
+                background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.06) 48%, transparent 66%);
+                animation: heroLightSweep 10s ease-in-out infinite;
+              }
+              @media (prefers-reduced-motion: reduce) {
+                .hero-light-sweep { animation: none; opacity: 0.2; }
+              }
+            `}</style>
+
+            <div className="absolute inset-0 sm:relative z-10 w-full sm:px-6 lg:pl-[6vw] lg:pr-6 sm:py-10 lg:py-12">
+              {/* TOP ZONE — H1 + subheading (Vaishali specific) */}
+              <motion.div
+                className="absolute top-5 left-4 right-4 sm:relative sm:top-auto sm:left-auto sm:right-auto sm:w-full lg:max-w-[560px]"
+                initial="hidden"
+                animate="visible"
+                variants={heroStaggerContainer}
+              >
+                <motion.h1
+                  variants={heroStaggerItem}
+                  className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05] sm:leading-tight mb-1.5 sm:mb-3"
+                >
+                  Best Bike Service in Vaishali
+                  <span style={{ color: '#FF7A18' }}> — Doorstep Repair from ₹450</span>
+                </motion.h1>
+
+                <motion.p
+                  variants={heroStaggerItem}
+                  className="font-poppins text-[11px] sm:text-sm font-semibold text-white/85 leading-tight mb-1.5 sm:mb-2"
+                >
+                  Starting at just <span style={{ color: '#FF7A18' }}>₹450</span> &bull; Same-Day Service &bull; Verified Mechanics &bull; All Vaishali Sectors
+                </motion.p>
+
+                <motion.p
+                  variants={heroStaggerItem}
+                  className="hidden sm:block text-xs sm:text-sm leading-relaxed text-white/80 mb-2 sm:mb-3 max-w-[520px]"
+                >
+                  Vaishali riders no longer need to waste a morning at a local workshop. Garage Fix Care sends background-verified, multi-brand certified mechanics straight to your flat, parking basement, or office — whether you are in Vaishali Sector 1, Sector 4, near Mahagun Metro Mall, or commuting through Kaushambi and Anand Vihar. Every job is finished on the spot, with a full itemised bill and genuine parts.
+                </motion.p>
+              </motion.div>
+
+              {/* BOTTOM ZONE — trust points, CTAs, vehicle selector, stats */}
+              <motion.div
+                className="absolute bottom-3 left-4 right-4 sm:relative sm:bottom-auto sm:left-auto sm:right-auto sm:w-full lg:max-w-[560px] sm:mt-0"
+                initial="hidden"
+                animate="visible"
+                variants={heroStaggerContainer}
+              >
+                <motion.div
+                  variants={heroStaggerItem}
+                  className="grid grid-cols-2 gap-x-2 gap-y-1 sm:flex sm:flex-wrap sm:gap-x-3 sm:gap-y-1 mb-2 sm:mb-5 text-[9px] sm:text-xs text-white/85"
+                >
+                  {['Starting ₹450', 'Same-Day Slots', 'Society Doorstep', 'Verified Technicians', 'Zero Hidden Charges'].map((point, i) => (
+                    <span key={i} className="inline-flex items-center gap-1 font-medium">
+                      <CheckCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0" style={{ color: '#FF7A18' }} />
+                      {point}
+                    </span>
+                  ))}
+                </motion.div>
+
+                <motion.div variants={heroStaggerItem} className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <a
+                    href="https://wa.me/919540553759?text=Hello%20Garage%20Fix%20Care%2C%20I%20would%20like%20to%20book%20a%20service.%20Please%20help%20me%20with%20availability." target="_blank" rel="noopener noreferrer"
+                    className="bg-orange-600 text-white px-4 py-2 rounded-lg text-xs sm:px-6 sm:py-3 sm:rounded-xl font-semibold sm:text-base shadow-lg hover:bg-orange-700 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:translate-y-0 transition-all duration-300 inline-block"
+                  >Book Enquiry</a>
+                  <a
+                    href="tel:9540553759"
+                    className="border-2 border-white text-white px-4 py-2 rounded-lg text-xs sm:px-6 sm:py-3 sm:rounded-xl font-semibold sm:text-base hover:bg-white hover:text-amber-700 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 inline-flex items-center justify-center gap-2"
+                  >
+                    <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    Call Now
+                  </a>
+                </motion.div>
+
+                {/* Select Your Vehicle */}
+                <motion.div
+                  variants={heroStaggerItem}
+                  className="gfc-location-vehicle-selector mt-2 sm:mt-5 w-full sm:max-w-[380px] lg:max-w-[420px] bg-[#F5F1E8]/95 backdrop-blur-md border border-[#D8C8AE] rounded-lg sm:rounded-xl px-2.5 py-2 sm:px-3 sm:py-3 shadow-lg"
+                >
+                  <p className="text-[#29251F] text-[9px] sm:text-xs font-semibold mb-1 sm:mb-2 tracking-tight">Select Your Vehicle</p>
+                  <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                    <button
+                      type="button"
+                      aria-pressed="true"
+                      className="flex items-center justify-center gap-1.5 bg-[#29251F] hover:bg-[#3A332A] text-[#F5F1E8] py-1.5 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-xs md:text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
+                    >
+                      <Bike className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                      <span>Bike &amp; Scooty</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => navigate('/car')}
+                      className="flex items-center justify-center gap-1.5 bg-[#E8DFD0] hover:bg-[#DED1BE] border border-[#D1C2AA] hover:border-[#B58A46] text-[#29251F] py-1.5 sm:py-2 rounded-lg font-semibold text-[10px] sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-slate-900 transition-all duration-300 active:scale-95"
+                    >
+                      <Car className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                      <span>Cars</span>
+                    </button>
+                  </div>
+                </motion.div>
+
+                {/* Review + Customer Stats */}
+                <motion.div variants={heroStaggerItem} className="flex flex-row items-center gap-2 sm:gap-3 w-full mt-2 sm:mt-4">
+                  <div className="bg-sky-100 text-black px-2 py-1.5 sm:p-1 rounded-lg sm:rounded-xl shadow-lg flex-1">
+                    <div className="text-xs sm:text-xl font-bold text-center">From ₹450</div>
+                    <div className="text-[10px] sm:text-xs font-semibold text-center">Starting Price</div>
+                  </div>
+                  <div className="bg-sky-100 text-black px-2 py-1.5 sm:p-1 rounded-lg sm:rounded-xl shadow-lg flex-1">
+                    <div className="text-xs sm:text-xl font-bold text-center">At-Home</div>
+                    <div className="text-[10px] sm:text-xs font-semibold text-center">Service</div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
+        </main>
+
+        {/* Dark premium information strip — Vaishali specific copy */}
+        <motion.div
+          className="w-full"
+          style={{
+            background: 'linear-gradient(135deg, #191815 0%, #25221d 55%, #191815 100%)',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
+            boxShadow: '0 4px 18px rgba(0,0,0,0.25)',
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: { opacity: 0, y: 8 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+          }}
+        >
+          <div className="max-w-[1100px] mx-auto px-[14px] py-[10px] sm:px-6 sm:py-3.5 relative overflow-hidden">
+            <div
+              className="pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(255,122,0,0.10) 0%, transparent 70%)' }}
+            />
+            <span className="relative inline-flex items-center gap-1.5 mb-1">
+              <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#ff7a00' }} />
+              <span className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider" style={{ color: '#ff7a00' }}>
+                Garage Fix Care — Vaishali
+              </span>
+            </span>
+            <p className="relative text-[10px] sm:text-sm leading-[1.4] sm:leading-relaxed" style={{ color: '#d9d0c2' }}>
+              Skip the garage queue. Our certified mechanics come to your flat, society or office across Vaishali Sector 1 through Sector 6, Vaishali Metro Station, Mahagun Metro Mall, Kaushambi and Anand Vihar — handling everything from routine servicing to engine repairs. Fast, transparent, and affordable.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Marquee: Service Available cities */}
+        <div className="bg-sky-100 border-y border-gray-200 py-2 overflow-hidden">
+          <div className="flex items-center text-sm sm:text-sm font-semibold max-w-7xl mx-auto">
+            <div className="flex-shrink-0 px-2 sm:px-2 pr-2">
+              <span className="text-red-600 mr-1 sm:mr-2 font-bold">Service Available </span>
+              <span className="text-brandRed font-bold sm:inline"> (10% off)</span>
+            </div>
+            <div className="flex-1 min-w-0 overflow-hidden">
+              <div className="flex items-center animate-marquee">
+                {[...Array(3)].map((_, repIdx) =>
+                  serviceCities.map((city, idx) => (
+                    <span
+                      key={`${repIdx}-${idx}`}
+                      className={`ml-2 sm:ml-6 md:ml-12 tracking-wider flex-shrink-0 font-bold text-sm sm:text-sm ${city.color}`}
+                    >
+                      {city.name}
+                    </span>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Hot Deals This Week — Vaishali specific copy, Home-style marquee */}
+        <section className="py-8 bg-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              className="flex flex-col items-center justify-center mb-8"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <div className="flex items-center justify-center">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mr-4">
+                  <span className="text-white">Hot Deals</span> <span className="text-red-600">This Week</span>
+                </h2>
+                <Flame className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />
+              </div>
+              <p className="text-base sm:text-lg text-white max-w-7xl mx-auto mt-2 text-center">
+                Limited-time offer for Vaishali, Kaushambi and Anand Vihar customers! Get up to 10% off on bike repairs and servicing at your doorstep. Hurry—these deals won&apos;t last long!
+              </p>
+            </motion.div>
+          </div>
+          <div className="hotdeals-marquee-viewport overflow-hidden w-full px-6 sm:px-12 lg:px-20">
+            <div
+              className="hotdeals-marquee-track"
+              onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+              onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+            >
+              {[...carouselImages, ...carouselImages].map((img, i) => (
+                <div
+                  key={i}
+                  className="hotdeals-card group flex-shrink-0 rounded-xl overflow-hidden shadow-lg border border-white/10 transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                  style={{ width: 'min(76vw, 400px)' }}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full h-full object-contain bg-slate-800 transition-transform duration-300 group-hover:scale-[1.03]"
+                      style={{ height: '220px' }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-2 flex flex-wrap gap-1">
+                      {[hotDealsAreaBadges[i % hotDealsAreaBadges.length], hotDealsAreaBadges[(i + 2) % hotDealsAreaBadges.length]].map((area, ai) => (
+                        <span key={ai} className="text-white text-xs font-semibold bg-red-600/80 px-2 py-0.5 rounded-full">
+                          {area}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <style>{`
+            @keyframes marqueeScroll {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .hotdeals-marquee-viewport {
+              -webkit-mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
+            }
+            .hotdeals-marquee-track {
+              display: flex;
+              width: max-content;
+              gap: 14px;
+              animation: marqueeScroll 22s linear infinite;
+            }
+          `}</style>
+        </section>
+
+        {/* Bikes & Scooters — Brands We Service (replaces old Google/Facebook/JustDial review section) */}
+        <section className="bg-slate-800 text-white py-10 sm:py-14 gfc-location-brands-section gfc-location-pricing-section">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              className="text-center mb-6 sm:mb-8"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <p className="text-xs sm:text-sm font-semibold tracking-widest text-orange-400 uppercase mb-2">Bikes &amp; Scooters</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+                <span className="text-white">Brands We</span> <span style={{ color: '#FF7A18' }}>Service</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto">Service support for leading two-wheeler brands.</p>
+            </motion.div>
+          </div>
+
+          <div className="flex flex-col gap-2 sm:gap-3">
+            <div className="brand-marquee-viewport overflow-hidden w-full">
+              <div
+                className="brand-marquee-track brand-marquee-track-1"
+                onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+                onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+              >
+                {[...marqueeBrandsRow1, ...marqueeBrandsRow1].map((brand, i) => (
+                  <div
+                    key={`row1-${brand}-${i}`}
+                    className="brand-tile flex-shrink-0 bg-white/90 rounded-lg px-3 py-2 sm:px-5 sm:py-3 shadow-sm"
+                    style={{ border: '1px solid #DED5C7' }}
+                  >
+                    <span className="text-xs sm:text-sm font-semibold whitespace-nowrap tracking-wide" style={{ color: '#665f55' }}>
+                      {brand}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="brand-marquee-viewport overflow-hidden w-full">
+              <div
+                className="brand-marquee-track brand-marquee-track-2"
+                onMouseEnter={e => (e.currentTarget.style.animationPlayState = 'paused')}
+                onMouseLeave={e => (e.currentTarget.style.animationPlayState = 'running')}
+              >
+                {[...marqueeBrandsRow2, ...marqueeBrandsRow2].map((brand, i) => (
+                  <div
+                    key={`row2-${brand}-${i}`}
+                    className="brand-tile flex-shrink-0 bg-white/90 rounded-lg px-3 py-2 sm:px-5 sm:py-3 shadow-sm"
+                    style={{ border: '1px solid #DED5C7' }}
+                  >
+                    <span className="text-xs sm:text-sm font-semibold whitespace-nowrap tracking-wide" style={{ color: '#665f55' }}>
+                      {brand}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <style>{`
+            @keyframes brandMarqueeScroll {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .brand-marquee-viewport {
+              -webkit-mask-image: linear-gradient(to right, transparent 0, black 60px, black calc(100% - 60px), transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, black 60px, black calc(100% - 60px), transparent 100%);
+            }
+            .brand-marquee-track {
+              display: flex;
+              width: max-content;
+              gap: 8px;
+            }
+            @media (min-width: 640px) {
+              .brand-marquee-track { gap: 12px; }
+            }
+            .brand-marquee-track-1 { animation: brandMarqueeScroll 24s linear infinite; }
+            .brand-marquee-track-2 { animation: brandMarqueeScroll 30s linear infinite reverse; }
+            .brand-tile { transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+            .brand-tile:hover { border-color: #FDBA74 !important; transform: translateY(-2px); }
+            .brand-tile:hover span { color: #EA580C !important; }
+          `}</style>
+        </section>
+
+        {/* At-Home Service Price List — Vaishali pricing (premium vertical service-plan cards) */}
+        <section className="py-12 sm:py-16 bg-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-white">At-Home Service</span> <span className="text-red-600">Price List</span>
+              </h2>
+              <p className="text-base sm:text-xl text-white mb-10 sm:mb-12 max-w-3xl mx-auto">
+                Transparent pricing for doorstep bike service across Vaishali and Ghaziabad. Check the labour charges below based on your bike&apos;s engine size — no hidden fees, no surprises.
+              </p>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 justify-items-center"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {servicePrices.map((service, index) => {
+                const isBestValue = service.title === 'At-Home Premium Service';
+                // Distinct-but-consistent GarageFixCare orange-family gradient per plan.
+                const headerGradients = [
+                  'linear-gradient(135deg, #25221d 0%, #92400e 130%)', // Regular — dark to amber
+                  'linear-gradient(135deg, #78350f 0%, #f97316 120%)', // Classic — warm orange
+                  'linear-gradient(135deg, #ea580c 0%, #FF7A18 100%)', // Premium — strong orange (best value)
+                  'linear-gradient(135deg, #7c2d12 0%, #f97316 130%)', // Royal — deep orange-red
+                  'linear-gradient(135deg, #191815 0%, #c2410c 140%)', // Sports — dark orange
+                ];
+                const headerGradient = headerGradients[index % headerGradients.length];
+
+                return (
+                  <motion.div
+                    key={index}
+                    variants={staggerItem}
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    className="pricing-plan-card relative flex flex-col text-left w-full max-w-[300px] rounded-[22px] overflow-hidden"
+                    style={{
+                      background: '#191815',
+                      border: isBestValue ? '1px solid rgba(255,122,24,0.55)' : '1px solid rgba(255,255,255,0.10)',
+                      boxShadow: isBestValue
+                        ? '0 12px 32px rgba(0,0,0,0.35), 0 0 26px rgba(255,122,24,0.18)'
+                        : '0 12px 32px rgba(0,0,0,0.3)',
+                    }}
+                  >
+                    {/* Best value badge — floats over the header/body seam */}
+                    {isBestValue && (
+                      <span
+                        className="absolute top-3 right-3 z-20 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full shadow-md"
+                        style={{ background: 'linear-gradient(135deg, #FFB157, #FF7A18)', boxShadow: '0 4px 12px rgba(255,122,24,0.45)' }}
+                      >
+                        Best Value
+                      </span>
+                    )}
+
+                    {/* Colored header panel */}
+                    <div className="pricing-card-header relative pt-6 px-5 pb-9" style={{ background: headerGradient }}>
+                      {/* Faint automotive watermark icon */}
+                      <Bike className="absolute -right-2 -top-2 h-16 w-16 text-white/10 pointer-events-none" strokeWidth={1.5} />
+                      {/* Decorative accent dots */}
+                      <div className="flex items-center gap-1 mb-2">
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/50" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+                      </div>
+                      <h3 className="relative text-lg sm:text-xl font-extrabold text-white leading-tight tracking-tight">
+                        AT-HOME
+                        <br />
+                        {service.title.replace('At-Home ', '').toUpperCase()}
+                      </h3>
+                      {/* Curved bottom edge of the header, blending into the card body */}
+                      <svg
+                        className="absolute bottom-0 left-0 w-full h-6 sm:h-7"
+                        viewBox="0 0 300 28"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <path d="M0,28 C75,0 225,0 300,28 L300,28 L0,28 Z" fill="#191815" />
+                      </svg>
+                      {/* CC range pill, overlapping the curve */}
+                      <span className="absolute left-5 -bottom-3 z-10 inline-block bg-slate-900 border border-white/10 text-slate-200 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                        {service.subtitle}
+                      </span>
+                    </div>
+
+                    {/* Body */}
+                    <div className="flex flex-col flex-grow px-5 pt-6 pb-5">
+                      {/* Price hierarchy */}
+                      <div className="flex items-baseline gap-2 mb-4">
+                        <span className="text-3xl sm:text-[34px] font-extrabold leading-none" style={{ color: '#FF7A18' }}>
+                          {service.discountedPrice}/-
+                        </span>
+                        {service.originalPrice ? <span className="text-xs sm:text-sm text-slate-400 line-through">{service.originalPrice}</span> : null}
+                      </div>
+
+                      {/* Feature list */}
+                      <ul className="list-none space-y-2 mb-6 flex-grow">
+                        {service.features.map((feature, i) => (
+                          <li key={i} className="flex items-center gap-2 text-sm text-slate-300" style={{ color: "#29251f" }}>
+                            <CheckCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: '#FF7A18' }} />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* See checklist CTA */}
+                      <button
+                        onClick={() => openWhatsAppBooking({ serviceType: service.title, vehicle: service.subtitle, price: service.discountedPrice })}
+                        className="mb-2 w-full inline-flex items-center justify-center gap-2 rounded-full bg-green-600 px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-md transition hover:bg-green-700"
+                        aria-label={`Book ${service.title} on WhatsApp`}
+                      >
+                        Book
+                      </button>
+                      <button
+                        onClick={() => handleSeeChecklist(service.title, service.subtitle)}
+                        className="pricing-checklist-btn mt-auto w-full inline-flex items-center justify-center gap-1.5 text-white px-4 py-3 text-xs sm:text-sm rounded-full font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-200"
+                        style={{ background: 'linear-gradient(135deg, #FF7A18, #EA580C)' }}
+                        aria-label={`See full checklist for ${service.title}`}
+                      >
+                        See checklist <span aria-hidden="true">→</span>
+                      </button>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+          <style>{`
+            .pricing-plan-card {
+              transition: border-color 300ms ease, box-shadow 300ms ease;
+            }
+            .pricing-plan-card:hover {
+              border-color: rgba(255,122,24,0.55) !important;
+              box-shadow: 0 18px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,122,24,0.2) !important;
+            }
+            .pricing-plan-card:hover .pricing-card-header {
+              filter: brightness(1.08);
+            }
+            .pricing-card-header {
+              transition: filter 300ms ease;
+            }
+            .pricing-checklist-btn {
+              transition: filter 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+            }
+            .pricing-checklist-btn:hover {
+              filter: brightness(1.1);
+              transform: translateY(-2px);
+              box-shadow: 0 6px 16px rgba(255,122,24,0.4);
+            }
+          `}</style>
+        </section>
+
+        {/* Areas Covered — Vaishali localities */}
+        <section className="py-10 sm:py-14 bg-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              We Cover All Major Areas in <span className="text-red-600">Vaishali</span>
+            </motion.h2>
+            <motion.div
+              className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5 sm:mb-6"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {coveredAreas.map(area => (
+                <motion.span
+                  key={area}
+                  variants={staggerItem}
+                  className="bg-red-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold shadow-md hover:bg-red-700 transition-colors duration-200"
+                >
+                  {area}
+                </motion.span>
+              ))}
+            </motion.div>
+            <motion.p
+              className="text-white/90 text-sm sm:text-base max-w-3xl mx-auto"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Whether you park your bike in a Vaishali Sector 2 high-rise, commute daily through Sector 5 lanes, shop at Mahagun Metro Mall, catch the Metro at Vaishali Metro Station, or live near the Kaushambi–Anand Vihar stretch, our mechanics arrive at your pinned location within 2–4 hours. Same-day bike service available across the Vaishali belt.
+            </motion.p>
+          </div>
+        </section>
+
+        {/* Bike Services We Offer */}
+        <section className="py-12 bg-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
+                Complete Bike Care, <span className="text-red-600">Right at Your Door in Vaishali</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white mb-4 sm:mb-6 max-w-2xl mx-auto">
+                From routine oil changes to full engine repair — our Vaishali mechanics handle it all at your location. No waiting, no hassle.
+              </p>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {bikeServiceCards.map((service, index) => (
+                <motion.div
+                  key={index}
+                  variants={staggerItem}
+                  className="bg-sky-100 rounded-xl shadow-lg p-4 sm:p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-200"
+                >
+                  <img
+                    src={service.img}
+                    alt={`${service.name} in Vaishali`}
+                    className="h-12 w-12 sm:h-16 sm:w-16 object-contain mb-2"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p className="font-semibold text-gray-800 text-xs sm:text-sm text-center">{service.name}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Comprehensive Bike Service Content (Vaishali specific, 1000+ words) */}
+        <section className="py-10 sm:py-14 bg-slate-900 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold mb-4"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Why Garage Fix Care is the <span className="text-red-600">Best Bike Service in Vaishali</span>
+            </motion.h2>
+            <motion.div
+              className="space-y-4 text-gray-200 text-sm sm:text-base leading-relaxed"
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <p>Vaishali is one of the best-planned residential townships on the eastern edge of Delhi NCR, with well-laid sectors, a thriving retail scene anchored by Mahagun Metro Mall, and seamless Metro connectivity at Vaishali Metro Station on the Blue Line. Yet for all its urban convenience, getting a two-wheeler properly serviced has traditionally meant a long wait at an overbooked local garage or an uncertain trip to a brand workshop across town. Garage Fix Care changes that entirely. Our background-verified, multi-brand certified mechanics travel directly to Vaishali Sector 1, Sector 2, Sector 3, Sector 4, Sector 5, and Sector 6 — arriving at your building gate, basement parking, or kerbside spot within 2–4 hours of booking. Whether you own a Honda Activa, TVS Jupiter, Hero Splendor, Bajaj Pulsar, Royal Enfield Meteor, or a KTM Duke, our technicians bring professional-grade diagnostic tools, genuine Motul and Wurth lubricants, and brand-approved spare parts, completing every job in front of you with no hidden additions to the bill. Doorstep bike service in Vaishali starts at ₹450 and includes a comprehensive checklist — engine oil change, air filter inspection, spark plug check, brake calibration, chain lubrication, and a battery health scan — with a digital job card shared after completion.</p>
+              <p>The dense residential footprint of Vaishali means thousands of two-wheelers tackle morning school runs, shuttle office commuters toward Vaishali Metro Station, and weave through the busy shopping corridors near Mahagun Metro Mall every single day. This stop-start urban riding pattern, combined with summer heat and post-monsoon humidity, degrades engine oil and air filters far faster than highway driving — making quarterly servicing a safety requirement rather than a luxury. Our mechanics proactively inspect clutch cables, tyre pressure, chain tension, and electrical connections, flagging small faults before they strand you mid-commute. We also serve the Kaushambi and Anand Vihar belt, where hundreds of Vaishali residents work or transit daily, making it easy to book a slot that fits your schedule. For housing society welfare associations and small business owners running delivery fleets, we offer group booking discounts and flexible timing slots including early morning and evening appointments. With more than 1,00,000 completed services across Delhi NCR and a 4.7-star Google rating earned through honest pricing and consistent workmanship, Garage Fix Care is the mechanic Vaishali riders call first. Book via our website, WhatsApp us on 9540553759, or call directly — and have a certified mechanic at your door today.</p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Warranty / Benefits Section */}
+        <section className="py-10 sm:py-14 bg-slate-900 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <p className="text-xs sm:text-sm font-semibold text-orange-400 uppercase tracking-wide mb-1">
+                Get Rs.10 Off On First Service in Vaishali
+              </p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+                GarageFixCare <span className="text-red-600">Service Warranty</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white mb-4">
+                Vaishali&apos;s trusted doorstep bike service. We service all motorcycle and scooter brands — Royal Enfield, Hero, Honda, Bajaj, TVS, Yamaha, KTM, and more — right at your home or office near Mahagun Metro Mall and Kaushambi.
+              </p>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {[
+                { img: warrantyImg, title: 'Enjoy a 10-Day Free Service Guarantee', desc: '10-Day Hassle-Free Warranty' },
+                { img: pickupImg, title: 'Enjoy Free Pickup and Drop at Your Convenience', desc: 'Free Pick & Drop Available' },
+                { img: transparentImg, title: 'Transparent Pricing, Competitive Rate', desc: 'Save up to 30% on your bike service' },
+                { img: trainedImg, title: 'Skilled and Certified Mechanics', desc: 'Exclusively Certified Two-Wheeler Mechanics' },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={staggerItem}
+                  className="bg-sky-100 text-black rounded-xl p-4 sm:p-6 shadow-lg flex items-center space-x-2 sm:space-x-3"
+                >
+                  <img src={item.img} alt={item.title} className="h-8 w-8 sm:h-10 sm:w-10 object-contain" loading="lazy" decoding="async" />
+                  <div>
+                    <h3 className="font-bold text-sm sm:text-base">{item.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-900">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Vaishali Riders Trust GarageFixCare */}
+        <section className="py-12 sm:py-16 bg-slate-800 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+            <motion.div
+              className="flex justify-center order-2 lg:order-1"
+              variants={scaleIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              <img src={whyChooseImg} alt="Why Vaishali Riders Trust GarageFixCare" className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm" loading="lazy" decoding="async" />
+            </motion.div>
+            <motion.div className="order-1 lg:order-2" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+                Why Vaishali Riders <span className="text-red-600">Trust GarageFixCare?</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white mb-4">
+                We bring certified mechanics directly to residents of Vaishali, Kaushambi, and Anand Vihar — honest pricing, genuine parts, zero hassle.
+              </p>
+              <ul className="space-y-2 text-left">
+                {['Hassle-Free Doorstep Service', 'Certified and Skilled Technicians', 'Honest Pricing', 'Certified Genuine Parts', 'Your Satisfaction Guaranteed', 'Fast and Professional Service'].map(item => (
+                  <li key={item} className="flex items-center text-gray-200 text-sm sm:text-base">
+                    <span className="text-red-500 text-base mr-1">◆</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Trusted by Leading Brands */}
+        <section className="py-12 sm:py-16 bg-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 sm:mb-10"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Trusted by <span className="text-red-600">Leading Brands</span> and <span className="text-red-600">Over 100,000 Customers</span>
+            </motion.h2>
+            <motion.div
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 justify-items-center"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {[
+                { name: 'WURTH', img: wurthImg },
+                { name: 'MOTUL', img: motulImg },
+                { name: 'Turtlemint', img: turtlemintImg },
+                { name: 'Buniyad', img: buniyadImg },
+                { name: 'Dunzo', img: dunzoImg },
+              ].map((brand, index) => (
+                <motion.div
+                  key={index}
+                  variants={staggerItem}
+                  className="bg-white rounded-xl shadow-lg p-3 sm:p-4 flex items-center justify-center w-full max-w-[150px] h-16 sm:w-40 sm:h-20 hover:shadow-xl transition-shadow duration-200"
+                >
+                  <img src={brand.img} alt={brand.name} className="max-h-10 sm:max-h-12 object-contain" loading="lazy" decoding="async" />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* How GarageFixCare Works in Vaishali */}
+        <section className="bg-slate-800 text-white py-10 sm:py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">
+                How <span className="text-red-600">GarageFixCare</span> Works in Vaishali?
+              </h2>
+              <p className="text-sm sm:text-base text-white mb-4">
+                Booking your bike service in Vaishali takes under two minutes. Share your sector and preferred slot — our mechanic handles everything else, arriving fully equipped to finish the job on the spot.
+              </p>
+              <ul className="space-y-2 text-left">
+                {['Choose Your Service & Book Online or by Phone', 'Mechanic Assigned and Dispatched to Your Address', 'Complete Service Done On-Site at Your Parking', 'Live Status Updates Throughout the Job', 'Post-Service Quality Check & Digital Invoice', 'Pay After Completion — Cash or UPI Accepted'].map(item => (
+                  <li key={item} className="flex items-center text-white text-sm sm:text-base">
+                    <span className="text-red-500 text-base mr-1">◆</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+            <motion.div className="flex justify-center" variants={scaleIn} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <img src={bmw310Image} alt="How GarageFixCare Works in Vaishali" className="rounded-xl shadow-lg w-full max-w-xs sm:max-w-sm" loading="lazy" decoding="async" />
+            </motion.div>
+          </div>
+        </section>
+
+        {/* City Coverage & Internal Links */}
+        <section className="py-10 sm:py-14 bg-slate-900 text-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Also Serving in <span className="text-red-600">Nearby Cities</span>
+            </motion.h2>
+            <motion.div
+              className="flex flex-wrap justify-center gap-3 sm:gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {cityPages.map(city => (
+                <motion.div key={city.name} variants={staggerItem}>
+                  <Link
+                    to={city.path}
+                    className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 inline-block"
+                  >
+                    {city.name}
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Customer Testimonials */}
+        <CustomerReviews />
+
+        <section className="bg-slate-800 py-10 sm:py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div className="text-center mb-6" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                Vaishali Riders <span className="text-red-600">Love Us</span>
+              </h2>
+              <p className="text-white/80 text-sm sm:text-base mt-1">Verified Customer Reviews on Google</p>
+              <div className="flex justify-center gap-1 my-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
+                ))}
+                <span className="text-white ml-2 font-semibold text-sm sm:text-base">4.7 Rating on Google</span>
+              </div>
+              <a
+                href="https://www.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-red-600 px-5 py-2 rounded-lg text-white inline-block text-sm sm:text-base font-semibold hover:bg-red-700 hover:shadow-lg transition-all duration-200"
+              >
+                Review us on Google
+              </a>
+            </motion.div>
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              {[
+                { name: 'Saurabh Tiwari', img: testimonial1, text: 'Mechanic reached my Vaishali Sector 3 flat right on time. Activa serviced in under an hour — fantastic work.', time: '2 weeks ago' },
+                { name: 'Meena Rastogi', img: testimonial2, text: 'Showed me a detailed checklist and cost before starting. Completely transparent — I will never visit a garage again.', time: 'a month ago' },
+                { name: 'Deepak Saxena', img: testimonial3, text: 'Had a brake issue near Mahagun Metro Mall. Called Garage Fix Care and they sorted it within the hour. Lifesavers.', time: '3 weeks ago' },
+                { name: 'Priya Chaudhary', img: testimonial4, text: 'As a daily Metro commuter from Vaishali, I need my scooty reliable. These guys keep it running perfectly.', time: 'a month ago' },
+              ].map(t => (
+                <motion.div key={t.name} variants={staggerItem} className="bg-sky-100 rounded-xl shadow-lg p-4 text-center">
+                  <img src={googleIcon} alt="Google" className="h-6 mx-auto mb-2" loading="lazy" decoding="async" />
+                  <div className="flex justify-center">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-yellow-400">★</span>
+                    ))}
+                  </div>
+                  <p className="text-xs mt-1 text-gray-700">{t.text}</p>
+                  <img src={t.img} alt={t.name} className="h-8 w-8 rounded-full mx-auto mt-2" loading="lazy" decoding="async" />
+                  <h3 className="font-semibold text-sm mt-1">{t.name}</h3>
+                  <span className="text-xs text-gray-600">{t.time}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* FAQs (Vaishali specific) */}
+        <section className="bg-slate-900 py-10 sm:py-14 gfc-location-faq-section">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-6"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+            >
+              Bike Service in Vaishali — <span className="text-red-600">Your Questions Answered</span>
+            </motion.h2>
+            <motion.div className="space-y-3" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}>
+              {[
+                { q: 'What does a standard bike service cost in Vaishali?', a: "Our bike service charges are based on engine capacity: 220–300 CC ₹450, 350–450 CC ₹499, 500–650 CC ₹599, 650–900 CC ₹750, and above 900 CC ₹899. For bikes below 220 CC and scooters, please contact us on WhatsApp for a quote. Replacement parts, if required, are charged separately." },
+                { q: 'Do you service bikes inside Vaishali Sector 2, Sector 3, and Sector 4 societies?', a: 'Yes. Our mechanics regularly enter gated societies across Vaishali Sector 1 through Sector 6. They carry all necessary equipment and report to your society gate or basement parking, so residents simply point them to the bike — no paperwork required from you.' },
+                { q: 'Can I book a service slot near Vaishali Metro Station or Mahagun Metro Mall?', a: 'Absolutely. Both Vaishali Metro Station and Mahagun Metro Mall are within our active service zone. You can pin your exact location and we will send a mechanic there, whether it is your flat nearby, an office building, or a parking area close to the mall.' },
+                { q: 'Do you cover Kaushambi and Anand Vihar as part of the Vaishali service area?', a: 'Yes. Kaushambi and Anand Vihar are covered under the same Vaishali service zone. Many of our customers commute between Vaishali and these areas daily, so we serve both sides without any additional travel surcharge.' },
+                { q: 'How quickly will a mechanic arrive in Vaishali after I book?', a: 'Our standard arrival window is 2–4 hours from booking confirmation. For urgent requirements — especially if your bike has broken down — call us directly on 9540553759 and we will prioritise the nearest available technician to your Vaishali location.' },
+                { q: 'Is there an emergency breakdown service available in Vaishali Sector 5 and Sector 6?', a: 'Yes. If your bike stops unexpectedly anywhere in Vaishali — including the outer sectors — call us and our nearest mechanic will head to your exact location for on-spot diagnosis and repair. We aim to reach you within 2 hours even for emergency calls.' },
+                { q: 'Do you offer group or bulk booking for housing societies in Vaishali?', a: 'We do. Residential welfare associations and office facility managers in Vaishali can arrange bulk bike servicing days with flexible morning and evening slots. Contact us on WhatsApp at 9540553759 to discuss a tailored schedule for your society.' },
+                { q: 'Which scooter and bike brands do your Vaishali mechanics service?', a: 'Our technicians are trained on all major brands including Honda Activa, TVS Jupiter, Suzuki Access, Hero Splendor, Bajaj Pulsar, Yamaha FZ, Royal Enfield Classic 350, Meteor 350, Himalayan, KTM Duke, and more. We carry brand-specific tools and genuine lubricants for each.' },
+                { q: 'What is the warranty on bike service done in Vaishali?', a: 'Every service carries our 10-day free rectification guarantee. If any fault arises directly from work completed by our Vaishali mechanic within 10 days of the service date, we revisit and correct it at no additional charge.' },
+                { q: 'How do I pay for bike service in Vaishali?', a: 'Payment is collected only after the job is fully done. We accept cash, Google Pay, PhonePe, Paytm, and all major UPI apps. A digital invoice is shared via WhatsApp immediately after payment for your records.' },
+              ].map((faq, idx) => (
+                <motion.div key={idx} variants={staggerItem} className="border border-slate-700 rounded-xl overflow-hidden bg-slate-800/40">
+                  <button
+                    className="flex justify-between items-center w-full p-3 sm:p-4 text-left font-semibold text-white hover:bg-slate-700/60 transition-colors duration-200"
+                    onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
+                  >
+                    <span className="flex items-start">
+                      <span className="text-red-600 mr-2">Q{idx + 1}.</span>
+                      <span className="text-sm sm:text-base">{faq.q}</span>
+                    </span>
+                    {activeIndex === idx ? <X className="h-5 w-5 flex-shrink-0 ml-2" /> : <Plus className="h-5 w-5 flex-shrink-0 ml-2" />}
+                  </button>
+                  {activeIndex === idx && (
+                    <div className="p-3 sm:p-4 bg-slate-700/60 text-gray-300 text-xs sm:text-sm">{faq.a}</div>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-10 sm:py-14 bg-slate-800">
+          <motion.div
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+            variants={staggerItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+          >
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
+              Book Bike Service in Vaishali Today
+            </h2>
+            <p className="text-sm sm:text-base text-white mb-3 sm:mb-5 max-w-xl mx-auto">
+              Same-day doorstep service starting at ₹450. Our mechanic comes to you — no travel, no waiting, no hidden charges.
+            </p>
+            <a
+              href="https://wa.me/919540553759?text=Hello%20Garage%20Fix%20Care%2C%20I%20would%20like%20to%20book%20a%20service.%20Please%20help%20me%20with%20availability." target="_blank" rel="noopener noreferrer"
+              className="bg-orange-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold text-sm sm:text-base shadow-lg hover:bg-orange-700 hover:shadow-xl hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:translate-y-0 transition-all duration-200 inline-block"
+            >
+              Book Your Service
+            </a>
+          </motion.div>
+        </section>
+      </div>
+
+      {/* Floating Buttons */}
+      <style>{`
+        @keyframes shake {
+          0%, 100%      { transform: rotate(0deg) scale(1); }
+          2%            { transform: rotate(-16deg) scale(1.06); }
+          4%            { transform: rotate(16deg) scale(1.06); }
+          6%            { transform: rotate(-12deg) scale(1.06); }
+          8%            { transform: rotate(12deg) scale(1.06); }
+          10%           { transform: rotate(-6deg) scale(1.03); }
+          12%           { transform: rotate(6deg) scale(1.03); }
+          14%, 100%     { transform: rotate(0deg) scale(1); }
+        }
+        @keyframes pulseRing {
+          0%   { transform: scale(0.85); opacity: 0.55; }
+          70%  { transform: scale(1.7);  opacity: 0; }
+          100% { transform: scale(1.7);  opacity: 0; }
+        }
+        @keyframes floatIn {
+          0%   { transform: translateX(60px); opacity: 0; }
+          100% { transform: translateX(0);     opacity: 1; }
+        }
+        .btn-float-wrap {
+          position: relative;
+          animation: floatIn 0.6s ease-out both;
+        }
+        .btn-float-wrap:nth-child(2) { animation-delay: 0.12s; }
+        .btn-pulse-ring {
+          position: absolute;
+          inset: 0;
+          border-radius: 9999px;
+          animation: pulseRing 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          pointer-events: none;
+        }
+        .btn-shake {
+          animation: shake 4s ease-in-out infinite;
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .btn-shake:hover {
+          animation: none;
+          transform: scale(1.14);
+          box-shadow: 0 0 0 6px rgba(255,255,255,0.12), 0 12px 28px rgba(0,0,0,0.45);
+        }
+      `}</style>
+      <div className="fixed top-1/2 right-4 sm:right-6 flex flex-col space-y-3 sm:space-y-4 z-50 transform -translate-y-1/2">
+        <div className="btn-float-wrap">
+          <span className="btn-pulse-ring" style={{ background: '#a77b2f' }} />
+          <a
+            href="tel:9540553759"
+            className="btn-shake w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] rounded-full text-white flex items-center justify-center shadow-2xl relative"
+            style={{ background: 'linear-gradient(135deg, #a77b2f, #80602f)' }}
+            aria-label="Call Us"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" stroke="currentColor" className="w-5 h-5 sm:w-6 sm:h-6">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+              />
+            </svg>
+          </a>
+        </div>
+        <div className="btn-float-wrap">
+          <span className="btn-pulse-ring" style={{ background: '#25d366', animationDelay: '0.4s' }} />
+          <a
+            href="https://wa.me/9540553759"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-shake w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] text-white flex items-center justify-center shadow-2xl rounded-full relative"
+            style={{ background: 'linear-gradient(135deg, #25d366, #128c4e)' }}
+            aria-label="Chat on WhatsApp"
+          >
+            <FaWhatsapp size="1em" className="text-[22px] sm:text-[26px]" />
+          </a>
+        </div>
+      </div>
+
+      {/* Checklist Modal */}
+      {isModalOpen && selectedService && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-h-[90vh] w-full max-w-sm sm:max-w-md flex flex-col">
+            <div className="p-4 border-b flex justify-between items-start">
+              <div>
+                <h3 className="text-lg sm:text-xl font-bold text-black">{selectedService.title}</h3>
+                <p className="text-xs sm:text-sm text-gray-600">{selectedService.subtitle}</p>
+              </div>
+              <button onClick={closeModal} className="text-gray-400 hover:text-gray-900">
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="p-4 overflow-y-auto flex-1">
+              <h4 className="font-semibold text-gray-700 mb-3 text-sm sm:text-base">Full Checklist:</h4>
+              <ul className="list-none space-y-2 text-left text-gray-700 text-xs sm:text-sm">
+                {selectedService.checklist.map((item, i) => (
+                  <li key={i} className="flex items-start">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0 mt-1" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="p-4 border-t bg-gray-50 rounded-b-xl">
+              <div className="w-full mb-3 relative">
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <input
+                  type="tel"
+                  placeholder="Enter 10-digit Phone Number*"
+                  required
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                  value={modalPhoneNumber}
+                  onChange={(e) => setModalPhoneNumber(e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
+                  className="pl-10 pr-3 py-2 w-full rounded-xl text-black border border-gray-300 focus:outline-none focus:border-red-600 shadow-sm text-sm"
+                />
+              </div>
+              <div className="flex items-center mb-4">
+                <input type="checkbox" id="terms" required className="mr-2 h-4 w-4 text-red-600 border-gray-300 rounded focus:ring-red-500" />
+                <label htmlFor="terms" className="text-xs sm:text-sm text-gray-700 select-none">
+                  Yes, I agree to the <span className="underline">Terms of Service</span>
+                </label>
+              </div>
+              <button
+                onClick={handleModalBookNow}
+                className="bg-brandRed text-white w-full py-3 rounded-xl font-semibold shadow-md hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 transition-all duration-200 text-sm sm:text-base"
+              >Book Enquiry</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default BestBikeServiceVaishali;

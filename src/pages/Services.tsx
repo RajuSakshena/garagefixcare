@@ -1,0 +1,231 @@
+import React, { useState } from "react";
+import SEOHelmet from "../components/SEOHelmet";
+import { openWhatsAppBooking } from "../utils/whatsapp";
+
+const Services = () => {
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const handleBooking = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const cleanedPhone = phoneNumber.replace(/\D/g, '');
+    if (cleanedPhone.length !== 10) {
+      alert("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+    openWhatsAppBooking({ serviceType: "Service enquiry", phoneNumber: cleanedPhone });
+    setPhoneNumber('');
+  };
+
+  return (
+    <>
+      <SEOHelmet
+        title="Bike & Car Repair Services in Delhi NCR | Garage Fix Care"
+        description="Doorstep bike and car repair across Noida, Delhi, Gurgaon and Ghaziabad. Oil change, engine repair, battery replacement and more by certified mechanics."
+        keywords="bike repair services, car repair services, doorstep bike service, doorstep car service, engine repair, battery replacement, oil change, mechanic near me noida delhi gurgaon ghaziabad"
+        canonical="https://www.garagefixcare.in/services"
+        robots="index, follow"
+        og={{
+          title: "Bike & Car Repair Services in Delhi NCR | Garage Fix Care",
+          description: "Doorstep bike and car repair across Noida, Delhi, Gurgaon and Ghaziabad. Oil change, engine repair, battery replacement and more.",
+          url: "https://www.garagefixcare.in/services",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Doorstep bike and car repair services by Garage Fix Care",
+          type: "website",
+        }}
+        twitter={{
+          title: "Bike & Car Repair Services in Delhi NCR | Garage Fix Care",
+          description: "Doorstep bike and car repair across Noida, Delhi, Gurgaon and Ghaziabad, delivered by certified mechanics.",
+          image: "https://www.garagefixcare.in/og-banner.png",
+          imageAlt: "Full list of doorstep bike and car services",
+        }}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Doorstep Bike & Car Repair Services",
+            "provider": { "@type": "LocalBusiness", "name": "Garage Fix Care" },
+            "areaServed": ["Noida", "Delhi", "Gurugram", "Ghaziabad", "Greater Noida"],
+            "description": "Complete list of doorstep bike and car services offered by Garage Fix Care, including regular servicing, breakdown assistance, engine diagnostics, battery replacement, tyre replacement and oil change.",
+            "url": "https://www.garagefixcare.in/services",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Garage Fix Care Services",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Regular Servicing" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Breakdown Assistance" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Engine Diagnostics" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Battery Replacement" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tire and Tube Replacement" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Oil Change" } }
+              ]
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.garagefixcare.in/" },
+              { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.garagefixcare.in/services" }
+            ]
+          }
+        ]}
+      />
+
+      <div className="min-h-screen">
+        {/* Hero Section */}
+        <main className="bg-slate-900 pt-[60px] sm:pt-[90px] lg:pt-[120px]">
+          <section className="bg-slate-900 text-white py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+                  <span className="text-blue-600">Our</span>{" "}
+                  <span className="text-orange-600">Services</span>
+                </h1>
+                <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto">
+                  Professional automotive maintenance and repair services delivered
+                  directly to your location with convenience and quality you can trust.
+                </p>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        {/* Booking Section */}
+        <div className="bg-slate-800 text-white py-12 sm:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-snug mb-4 sm:mb-6">
+                Bike <span className="text-brandRed">Service</span> &{" "}
+                <span className="text-brandRed">Repair</span> at Your Doorstep
+              </h2>
+              <p className="text-base sm:text-lg text-sky-100 mb-6 sm:mb-8">
+                Book Expert Mechanic to Fix your Bike at Your Home
+              </p>
+              <a
+                href="tel:9540553759"
+                className="inline-flex items-center justify-center bg-brandRed hover:bg-red-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold shadow-lg mb-6 sm:mb-8 transition"
+              >
+                Call For Offers & Booking
+              </a>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-12">
+                <div>
+                  <p className="text-2xl sm:text-3xl text-brandRed font-bold">4.7/5</p>
+                  <p className="text-base sm:text-xl text-white">
+                    Based on 1,00,000+ <br /> Reviews
+                  </p>
+                </div>
+                <div>
+                  <p className="text-2xl sm:text-3xl text-brandRed font-bold">100,000+</p>
+                  <p className="text-base sm:text-xl text-white">
+                    Happy <br /> Customers
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white text-black rounded-lg shadow-xl p-5 sm:p-6 md:p-8">
+              <form onSubmit={handleBooking}>
+                <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6 text-brandRed">
+                  Bike Service At Home
+                </h2>
+                <input
+                  type="tel"
+                  inputMode="numeric"
+                  maxLength={10}
+                  required
+                  placeholder="10-digit Phone Number*"
+                  className="w-full border rounded-md px-4 py-2 mb-4 sm:mb-6 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-brandRed"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+                <button 
+                  type="submit"
+                  className="w-full bg-brandRed hover:bg-red-400 text-white py-2.5 sm:py-3 rounded-md font-semibold text-base sm:text-lg transition mb-6"
+                >
+                  Continue on WhatsApp
+                </button>
+              </form>
+
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 text-center text-xs sm:text-sm mt-4">
+                <div className="flex flex-col items-center">
+                  <span className="text-brandRed text-xl sm:text-2xl mb-1 sm:mb-2">🛡️</span>
+                  <p>10 Days Service Warranty</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-brandRed text-xl sm:text-2xl mb-1 sm:mb-2">🔧</span>
+                  <p>Expert Mechanics</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-brandRed text-xl sm:text-2xl mb-1 sm:mb-2">💬</span>
+                  <p>Best Customer Support</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Services Details Section */}
+        <section className="bg-slate-800 text-white py-12 sm:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold text-center mb-6 sm:mb-8">
+              Our Services - <span className="text-brandRed">Garage FixCare</span>
+            </h2>
+            <p className="text-center text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto mb-10 sm:mb-12">
+              Welcome to Garage FixCare, where we bring exceptional two-wheeler (bike
+              and scooter) service and repair right to your doorstep. Our commitment is
+              to provide you with a hassle-free and convenient experience, ensuring your
+              two-wheeler stays in optimal condition. Explore the range of services we
+              offer.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              {[
+                {
+                  title: "Regular Servicing:",
+                  desc: "Ensure the longevity and performance of your bike or scooter with our regular servicing. Our skilled technicians perform comprehensive checks, oil changes, and tune-ups, keeping your two-wheeler running smoothly.",
+                },
+                {
+                  title: "Breakdown Assistance:",
+                  desc: "Stuck on the roadside with a breakdown? Fret not! Garage FixCare offers prompt breakdown assistance. Our technicians will reach your location swiftly, diagnosing and resolving issues on the spot.",
+                },
+                {
+                  title: "Engine Diagnostics:",
+                  desc: "For those mysterious engine troubles, our advanced diagnostic tools and experienced technicians will identify the root cause. Trust Garage FixCare to get your engine purring perfectly again.",
+                },
+                {
+                  title: "Battery Replacement:",
+                  desc: "Is your bike or scooter struggling to start? Our technicians will assess your battery’s health and, if necessary, provide a swift replacement with high-quality batteries to keep you on the move.",
+                },
+                {
+                  title: "Tire and Tube Replacement:",
+                  desc: "Worn-out tires or damaged tubes can compromise your safety. Garage FixCare offers efficient tire and tube replacement services to ensure your two-wheeler maintains excellent traction and stability.",
+                },
+                {
+                  title: "Oil Change:",
+                  desc: "Regular oil changes are crucial for engine health. Garage FixCare ensures your bike or scooter receives the right type and amount of oil, promoting smooth functioning and longevity.",
+                },
+                {
+                  title: "And More:",
+                  desc: "Our services go beyond routine maintenance. Whether it’s brake repairs, electrical issues, or any other mechanical problem, Garage FixCare has the expertise and equipment to handle it all.",
+                },
+              ].map((service, idx) => (
+                <div
+                  key={idx}
+                  className="bg-sky-100 rounded-xl shadow-lg p-5 sm:p-6 md:p-8 hover:shadow-xl transition"
+                >
+                  <h3 className="text-xl sm:text-2xl font-bold text-brandRed mb-2 sm:mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-base sm:text-lg text-black leading-relaxed">
+                    {service.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+};
+
+export default Services;

@@ -1,0 +1,454 @@
+import React, { useState, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
+import garageIcon from '../images/transparent_logo.png';
+
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(`${path}/`);
+
+  const bikeLinks = [
+    { path: '/best-bike-service-noida', label: 'Best Bike Service in Noida' },
+    { path: '/best-bike-service-delhi', label: 'Best Bike Service in Delhi' },
+    { path: '/best-bike-service-gurgaon', label: 'Best Bike Service in Gurgaon' },
+    { path: '/best-bike-service-ghaziabad', label: 'Best Bike Service in Ghaziabad' },
+    { path: '/best-bike-service-dwarka', label: 'Best Bike Service in Dwarka' },
+    { path: '/best-bike-service-greater-kailash', label: 'Best Bike Service in Greater Kailash' },
+    { path: '/best-bike-service-defence-colony', label: 'Best Bike Service in Defence Colony' },
+    { path: '/best-bike-service-hauz-khas', label: 'Best Bike Service in Hauz Khas' },
+    { path: '/best-bike-service-saket', label: 'Best Bike Service in Saket' },
+    { path: '/best-bike-service-connaught-place', label: 'Best Bike Service in Connaught Place' },
+    { path: '/best-bike-service-uttam-nagar', label: 'Best Bike Service in Uttam Nagar' },
+    { path: '/best-bike-service-new-delhi', label: 'Best Bike Service in New Delhi' },
+    { path: '/best-bike-service-chanakyapuri', label: 'Best Bike Service in Chanakyapuri' },
+    { path: '/best-bike-service-paharganj', label: 'Best Bike Service in Paharganj' },
+    { path: '/best-bike-service-palam', label: 'Best Bike Service in Palam' },
+    { path: '/best-bike-service-delhi-cantt', label: 'Best Bike Service in Delhi Cantt' },
+    { path: '/best-bike-service-udyog-vihar', label: 'Best Bike Service in Udyog Vihar' },
+    { path: '/best-bike-service-sushant-lok-phase-1', label: 'Best Bike Service in Sushant Lok Phase 1' },
+    { path: '/best-bike-service-sector-56-gurugram', label: 'Best Bike Service in Sector 56 Gurugram' },
+    { path: '/best-bike-service-sikanderpur-ghosi', label: 'Best Bike Service in Sikanderpur Ghosi' },
+    { path: '/best-bike-service-indirapuram', label: 'Best Bike Service in Indirapuram' },
+    { path: '/best-bike-service-vaishali', label: 'Best Bike Service in Vaishali' },
+    { path: '/best-bike-service-greater-noida-west', label: 'Best Bike Service in Greater Noida West' },
+
+    { path: '/best-bike-service-burari', label: 'Best Bike Service in Burari' },
+    { path: '/best-bike-service-chhatarpur', label: 'Best Bike Service in Chhatarpur' },
+    { path: '/best-bike-service-dhaula-kuan', label: 'Best Bike Service in Dhaula Kuan' },
+    { path: '/best-bike-service-karol-bagh', label: 'Best Bike Service in Karol Bagh' },
+    { path: '/best-bike-service-kashmere-gate', label: 'Best Bike Service in Kashmere Gate' },
+    { path: '/best-bike-service-lajpat-nagar', label: 'Best Bike Service in Lajpat Nagar' },
+    { path: '/best-bike-service-mahipalpur', label: 'Best Bike Service in Mahipalpur' },
+    { path: '/best-bike-service-malviya-nagar', label: 'Best Bike Service in Malviya Nagar' },
+    { path: '/best-bike-service-mandi-house', label: 'Best Bike Service in Mandi House' },
+    { path: '/best-bike-service-moti-bagh', label: 'Best Bike Service in Moti Bagh' },
+    { path: '/best-bike-service-nsp', label: 'Best Bike Service in NSP' },
+    { path: '/best-bike-service-new-friends-colony', label: 'Best Bike Service in New Friends Colony' },
+    { path: '/best-bike-service-panchsheel-park', label: 'Best Bike Service in Panchsheel Park' },
+    { path: '/best-bike-service-pitampura', label: 'Best Bike Service in Pitampura' },
+    { path: '/best-bike-service-rama-krishna-puram', label: 'Best Bike Service in Rama Krishna Puram' },
+    { path: '/best-bike-service-rohini', label: 'Best Bike Service in Rohini' },
+    { path: '/best-bike-service-sarojini-nagar', label: 'Best Bike Service in Sarojini Nagar' },
+    { path: '/best-bike-service-vasant-vihar', label: 'Best Bike Service in Vasant Vihar' },
+  ];
+
+  const carLinks = [
+    { path: '/best-car-service-noida', label: 'Best Car Service in Noida' },
+    { path: '/best-car-service-delhi', label: 'Best Car Service in Delhi' },
+    { path: '/best-car-service-gurgaon', label: 'Best Car Service in Gurgaon' },
+    { path: '/best-car-service-ghaziabad', label: 'Best Car Service in Ghaziabad' },
+  ];
+
+  const handleMouseEnter = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setIsServicesOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimer.current = setTimeout(() => setIsServicesOpen(false), 120);
+  };
+
+  return (
+    <div className="fixed top-0 left-0 w-full z-50">
+
+      {/* ── Navbar ── */}
+      <nav className="gfc-navbar shadow-md w-full">
+
+        {/* ── Single main navbar row ── */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center h-14 gap-2">
+
+            {/* Logo */}
+            <Link to="/" className="flex-shrink-0 mr-2">
+              <div className="w-20 h-12 bg-transparent rounded-b-xl shadow-none flex items-center justify-center overflow-hidden">
+                <img
+                  src={garageIcon}
+                  alt="GarageFixCare – Bike & Car Service"
+                  className="w-20 h-12 object-cover rounded-b-xl"
+                />
+              </div>
+            </Link>
+
+            {/* ── Desktop Nav ── */}
+            <div className="hidden lg:flex items-center gap-0.5 w-full">
+
+              {/* Nav links — left side */}
+              <Link
+                to="/"
+                className={`px-2.5 py-1.5 text-sm font-semibold rounded whitespace-nowrap transition-colors duration-150
+                  ${isActive('/') ? 'text-red-600 border-b-2 border-red-600' : 'text-gray-800 hover:text-amber-300'}`}
+              >
+                Home
+              </Link>
+
+              {/* Services Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                <button
+                  aria-haspopup="true"
+                  aria-expanded={isServicesOpen}
+                  className={`flex items-center gap-1 px-2.5 py-1.5 text-sm font-semibold rounded whitespace-nowrap transition-colors duration-150
+                    ${[...bikeLinks, ...carLinks].some(l => isActive(l.path)) || isActive('/services')
+                      ? 'text-red-600 border-b-2 border-red-600'
+                      : 'text-gray-800 hover:text-amber-300'}`}
+                >
+                  Services
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                      isServicesOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                {isServicesOpen && (
+                  <div
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white rounded-xl shadow-xl border border-gray-100 py-4 px-5 w-[520px] z-50 grid grid-cols-2 gap-x-6"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500 mb-2">
+                        🏍 Bike Services
+                      </p>
+
+                      <div className="max-h-64 overflow-y-auto pr-1">
+                        <Link to="/bike-service" className={`block py-1.5 text-sm font-bold transition-colors ${isActive('/bike-service') ? 'text-red-600' : 'text-gray-800 hover:text-amber-300'}`}>Browse All Bike Models</Link>
+                        <Link to="/scooty-service" className={`block py-1.5 text-sm font-bold transition-colors ${isActive('/scooty-service') ? 'text-red-600' : 'text-gray-800 hover:text-amber-300'}`}>Browse All Scooty Models</Link>
+                        <Link to="/two-wheeler-service/honda" className="block py-1.5 text-sm font-semibold text-amber-700 hover:text-amber-500">Browse by Brand</Link>
+                        {bikeLinks.map(link => (
+                          <Link
+                            key={link.path}
+                            to={link.path}
+                            className={`block py-1.5 text-sm transition-colors duration-150
+                              ${
+                                isActive(link.path)
+                                  ? 'text-red-600 font-semibold'
+                                  : 'text-gray-700 hover:text-amber-300'
+                              }`}
+                          >
+                            {link.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500 mb-2">
+                        🚗 Car Services
+                      </p>
+
+                      {carLinks.map(link => (
+                        <Link
+                          key={link.path}
+                          to={link.path}
+                          className={`block py-1.5 text-sm transition-colors duration-150
+                            ${
+                              isActive(link.path)
+                                ? 'text-red-600 font-semibold'
+                                : 'text-gray-700 hover:text-amber-300'
+                            }`}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+
+                    <div className="col-span-2 mt-3 pt-3 border-t border-gray-100">
+                      <Link
+                        to="/services"
+                        className="text-xs font-semibold text-orange-600 hover:text-orange-700 transition-colors"
+                      >
+                        View All Services →
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <Link
+                to="/pricing"
+                className={`px-2.5 py-1.5 text-sm font-semibold rounded whitespace-nowrap transition-colors duration-150
+                  ${
+                    isActive('/pricing')
+                      ? 'text-red-600 border-b-2 border-red-600'
+                      : 'text-gray-800 hover:text-amber-300'
+                  }`}
+              >
+                Pricing
+              </Link>
+
+              <Link
+                to="/blog"
+                className={`px-2.5 py-1.5 text-sm font-semibold rounded whitespace-nowrap transition-colors duration-150
+                  ${
+                    isActive('/blog')
+                      ? 'text-red-600 border-b-2 border-red-600'
+                      : 'text-gray-800 hover:text-amber-300'
+                  }`}
+              >
+                Blog
+              </Link>
+
+              <Link
+                to="/contact"
+                className={`px-2.5 py-1.5 text-sm font-semibold rounded whitespace-nowrap transition-colors duration-150
+                  ${
+                    isActive('/contact')
+                      ? 'text-red-600 border-b-2 border-red-600'
+                      : 'text-gray-800 hover:text-amber-300'
+                  }`}
+              >
+                Contact
+              </Link>
+
+              {/* Spacer pushes contact + CTA to right */}
+              <div className="flex-1" />
+
+              {/* Contact info inline */}
+              <a
+                href="tel:9540553759"
+                className="flex items-center gap-1.5 px-2 text-sm font-bold text-gray-900 hover:text-red-600 transition-colors whitespace-nowrap"
+              >
+                <Phone className="h-4 w-4 text-orange-600 flex-shrink-0" />
+                +91 954055-3759
+              </a>
+
+              <div className="w-px h-4 bg-gray-300 mx-1" />
+
+              <a
+                href="mailto:support@gfc.com"
+                className="flex items-center gap-1.5 px-2 text-sm font-bold text-gray-900 hover:text-red-600 transition-colors whitespace-nowrap"
+              >
+                <Mail className="h-4 w-4 text-orange-600 flex-shrink-0" />
+                support@gfc.com
+              </a>
+
+              {/* CTA */}
+              <a
+                href="https://wa.me/919540553759?text=Hello%20Garage%20Fix%20Care%2C%20I%20would%20like%20to%20book%20a%20service.%20Please%20help%20me%20with%20availability." target="_blank" rel="noopener noreferrer"
+                className="ml-3 bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-orange-700 shadow-md transition-colors duration-150 whitespace-nowrap flex-shrink-0"
+              >Book Enquiry</a>
+            </div>
+
+            {/* ── Mobile: contact pill + hamburger ── */}
+            <div className="flex lg:hidden items-center gap-2 ml-auto">
+              <a
+                href="tel:9540553759"
+                className="flex items-center gap-1 text-xs font-semibold text-gray-700 hover:text-red-600 transition-colors"
+              >
+                <Phone className="h-3.5 w-3.5 text-orange-600" />
+                <span>+91 954055-3759</span>
+              </a>
+
+              <span className="text-gray-300 select-none">|</span>
+
+              <a
+                href="mailto:support@gfc.com"
+                className="flex items-center gap-1 text-xs font-semibold text-gray-700 hover:text-red-600 transition-colors"
+              >
+                <Mail className="h-3.5 w-3.5 text-orange-600" />
+                <span>support@gfc.com</span>
+              </a>
+
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-700 hover:text-amber-300 p-2"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Mobile Menu ── */}
+        {isMenuOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-200 shadow-md">
+            <div className="px-4 py-3 space-y-1">
+
+              <Link
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+                className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive('/')
+                    ? 'text-red-600'
+                    : 'text-gray-700 hover:text-amber-300'
+                }`}
+              >
+                Home
+              </Link>
+
+              {/* Mobile Services accordion */}
+              <div>
+                <button
+                  onClick={() =>
+                    setIsMobileServicesOpen(!isMobileServicesOpen)
+                  }
+                  className="flex items-center justify-between w-full px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-amber-300 transition-colors"
+                >
+                  Services
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${
+                      isMobileServicesOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                {isMobileServicesOpen && (
+                  <div className="mt-1 ml-3 border-l-2 border-orange-200 pl-3 space-y-0.5">
+
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500 pt-1 pb-0.5">
+                      Bike Services
+                    </p>
+
+                    <div className="max-h-56 overflow-y-auto pr-1">
+                      <Link to="/bike-service" onClick={() => setIsMenuOpen(false)} className="block py-1.5 text-sm font-bold text-orange-700">Browse All Bike Models</Link>
+                      <Link to="/scooty-service" onClick={() => setIsMenuOpen(false)} className="block py-1.5 text-sm font-bold text-orange-700">Browse All Scooty Models</Link>
+                      <Link to="/two-wheeler-service/honda" onClick={() => setIsMenuOpen(false)} className="block py-1.5 text-sm font-semibold text-amber-700">Browse by Brand</Link>
+                      {bikeLinks.map(link => (
+                        <Link
+                          key={link.path}
+                          to={link.path}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={`block py-1.5 text-sm transition-colors ${
+                            isActive(link.path)
+                              ? 'text-red-600 font-semibold'
+                              : 'text-gray-600 hover:text-amber-300'
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500 pt-2 pb-0.5">
+                      Car Services
+                    </p>
+
+                    {carLinks.map(link => (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`block py-1.5 text-sm transition-colors ${
+                          isActive(link.path)
+                            ? 'text-red-600 font-semibold'
+                            : 'text-gray-600 hover:text-amber-300'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+
+                    <Link
+                      to="/services"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block py-1.5 text-sm font-semibold text-orange-600 hover:text-orange-700"
+                    >
+                      View All Services →
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <Link
+                to="/pricing"
+                onClick={() => setIsMenuOpen(false)}
+                className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive('/pricing')
+                    ? 'text-red-600'
+                    : 'text-gray-700 hover:text-amber-300'
+                }`}
+              >
+                Pricing
+              </Link>
+
+              <Link
+                to="/blog"
+                onClick={() => setIsMenuOpen(false)}
+                className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive('/blog')
+                    ? 'text-red-600'
+                    : 'text-gray-700 hover:text-amber-300'
+                }`}
+              >
+                Blog
+              </Link>
+
+              <Link
+                to="/contact"
+                onClick={() => setIsMenuOpen(false)}
+                className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive('/contact')
+                    ? 'text-red-600'
+                    : 'text-gray-700 hover:text-amber-300'
+                }`}
+              >
+                Contact
+              </Link>
+
+              {/* Contact info in mobile menu */}
+              <div className="border-t border-gray-100 pt-2 mt-1 space-y-1">
+                <a
+                  href="tel:9540553759"
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors"
+                >
+                  <Phone className="h-4 w-4 text-orange-600" />
+                  +91 954055-3759
+                </a>
+
+                <a
+                  href="mailto:support@gfc.com"
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-red-600 transition-colors"
+                >
+                  <Mail className="h-4 w-4 text-orange-600" />
+                  support@gfc.com
+                </a>
+              </div>
+
+              <a
+                href="https://wa.me/919540553759?text=Hello%20Garage%20Fix%20Care%2C%20I%20would%20like%20to%20book%20a%20service.%20Please%20help%20me%20with%20availability." target="_blank" rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+                className="block w-full text-center mt-2 bg-orange-600 text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-orange-700 shadow-md transition-colors"
+              >Book Enquiry</a>
+            </div>
+          </div>
+        )}
+      </nav>
+    </div>
+  );
+};
+
+export default Navbar;

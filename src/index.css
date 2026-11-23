@@ -1,0 +1,1342 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gfc-paper: #f5f1e8;
+  --gfc-paper-raised: #fffdf8;
+  --gfc-ink: #1d1a16;
+  --gfc-charcoal: #191815;
+  --gfc-charcoal-soft: #25221d;
+  --gfc-muted: #665f55;
+  --gfc-rule: #ded5c7;
+  --gfc-gold: #b58a46;
+  --gfc-gold-light: #d8b777;
+  --gfc-orange: #d85b1b;
+  --gfc-green: #16834b;
+}
+
+html, body {
+  overflow-x: hidden;
+  background: var(--gfc-paper);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee { animation: marquee 20s linear infinite; }
+@media (max-width: 640px) {
+  .animate-marquee { animation-duration: 12s; }
+}
+
+.gfc-site {
+  min-height: 100vh;
+  background: var(--gfc-paper);
+  color: var(--gfc-ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.gfc-site h1,
+.gfc-site h2,
+.gfc-site h3,
+.gfc-site h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.02em;
+}
+
+.gfc-site p,
+.gfc-site li,
+.gfc-site label {
+  text-wrap: pretty;
+}
+
+.gfc-main-shell {
+  background: var(--gfc-charcoal) !important;
+}
+
+/* Premium graphite navigation: no blue cast. */
+.gfc-site .gfc-navbar {
+  background: rgba(25, 24, 21, 0.97) !important;
+  color: var(--gfc-paper) !important;
+  border-bottom: 1px solid rgba(181, 138, 70, 0.75);
+  box-shadow: 0 8px 28px rgba(15, 13, 10, 0.18) !important;
+  backdrop-filter: blur(14px);
+}
+.gfc-site .gfc-navbar a,
+.gfc-site .gfc-navbar button { color: #f5f1e8; }
+.gfc-site .gfc-navbar a:hover,
+.gfc-site .gfc-navbar button:hover { color: var(--gfc-gold-light) !important; }
+.gfc-site .gfc-navbar .text-red-600,
+.gfc-site .gfc-navbar .border-red-600 {
+  color: var(--gfc-gold-light) !important;
+  border-color: var(--gfc-gold-light) !important;
+}
+.gfc-site .gfc-navbar .bg-white,
+.gfc-site .gfc-navbar .bg-sky-100 {
+  background: var(--gfc-charcoal-soft) !important;
+  color: var(--gfc-paper) !important;
+}
+
+/* Replace legacy blue/slate surfaces with warm charcoal rather than navy. */
+.gfc-site .bg-slate-900 { background-color: var(--gfc-charcoal) !important; }
+.gfc-site .bg-slate-800 { background-color: var(--gfc-charcoal-soft) !important; }
+.gfc-site .bg-slate-700 { background-color: #302c25 !important; }
+.gfc-site .bg-sky-100,
+.gfc-site .bg-sky-50,
+.gfc-site .bg-blue-50,
+.gfc-site .bg-blue-100,
+.gfc-site .bg-indigo-50,
+.gfc-site .bg-indigo-100 {
+  background-color: var(--gfc-paper-raised) !important;
+}
+.gfc-site .text-sky-100,
+.gfc-site .text-sky-200,
+.gfc-site .text-blue-600,
+.gfc-site .text-blue-700,
+.gfc-site .text-blue-800,
+.gfc-site .text-blue-900,
+.gfc-site .text-indigo-600,
+.gfc-site .text-indigo-700,
+.gfc-site .text-indigo-800 {
+  color: var(--gfc-muted) !important;
+}
+.gfc-site .border-blue-200,
+.gfc-site .border-indigo-200,
+.gfc-site .border-slate-700 { border-color: var(--gfc-rule) !important; }
+
+/* Gold is the editorial accent; orange remains reserved for conversion actions. */
+.gfc-site .text-red-600,
+.gfc-site .text-red-500,
+.gfc-site .text-brandRed,
+.gfc-site .text-orange-400,
+.gfc-site .text-orange-500 { color: var(--gfc-gold) !important; }
+.gfc-site .border-red-600,
+.gfc-site .border-brandRed { border-color: var(--gfc-gold) !important; }
+.gfc-site .bg-orange-500,
+.gfc-site .bg-orange-600,
+.gfc-site .bg-brandRed { background-color: var(--gfc-orange) !important; }
+.gfc-site .hover\\:bg-orange-700:hover { background-color: #b94713 !important; }
+
+/* Light editorial sections. */
+.gfc-site section.gfc-light-section,
+.gfc-site section.gfc-reviews-section,
+.gfc-site section.gfc-location-hub {
+  background: var(--gfc-paper) !important;
+  color: var(--gfc-ink) !important;
+}
+.gfc-site section.gfc-light-section .text-white,
+.gfc-site section.gfc-light-section .text-gray-200,
+.gfc-site section.gfc-light-section .text-gray-300,
+.gfc-site section.gfc-light-section .text-slate-200,
+.gfc-site section.gfc-light-section .text-slate-300,
+.gfc-site section.gfc-reviews-section .text-white {
+  color: var(--gfc-ink) !important;
+}
+.gfc-site section.gfc-light-section .text-gray-500,
+.gfc-site section.gfc-light-section .text-gray-600,
+.gfc-site section.gfc-light-section .text-slate-500,
+.gfc-site section.gfc-light-section .text-slate-600,
+.gfc-site section.gfc-reviews-section .text-gray-500 {
+  color: var(--gfc-muted) !important;
+}
+.gfc-site section.gfc-light-section .text-orange-400,
+.gfc-site section.gfc-light-section .text-orange-500,
+.gfc-site section.gfc-light-section .text-red-600 {
+  color: var(--gfc-gold) !important;
+}
+.gfc-site section.gfc-light-section button.text-white,
+.gfc-site section.gfc-light-section a.text-white {
+  color: #fff !important;
+}
+.gfc-section-title { color: var(--gfc-ink) !important; }
+.gfc-accent { color: var(--gfc-gold) !important; }
+.gfc-muted-copy { color: var(--gfc-muted) !important; }
+.gfc-ink-copy { color: var(--gfc-ink) !important; }
+
+/* Dark sections use warm graphite, not navy blue. */
+.gfc-site section.gfc-dark-section {
+  background: var(--gfc-charcoal) !important;
+  color: var(--gfc-paper) !important;
+}
+.gfc-site section.gfc-dark-section .text-white { color: var(--gfc-paper) !important; }
+.gfc-site section.gfc-dark-section .text-slate-200,
+.gfc-site section.gfc-dark-section .text-slate-300,
+.gfc-site section.gfc-dark-section .text-gray-200,
+.gfc-site section.gfc-dark-section .text-gray-300 { color: #d0c8bb !important; }
+.gfc-site section.gfc-dark-section .text-red-600,
+.gfc-site section.gfc-dark-section .text-orange-400,
+.gfc-site section.gfc-dark-section .text-orange-500 { color: var(--gfc-gold-light) !important; }
+
+/* Brand marquee tiles. */
+.gfc-brands-marquee-section .brand-tile,
+.gfc-brands-marquee-section .brand-tile > div {
+  background: var(--gfc-paper-raised) !important;
+  border: 1px solid var(--gfc-rule) !important;
+  box-shadow: 0 4px 14px rgba(35, 28, 18, 0.045) !important;
+  border-radius: 12px !important;
+}
+.gfc-brands-marquee-section .brand-tile span {
+  color: var(--gfc-ink) !important;
+}
+
+/* Pricing cards: warm ivory, graphite title bars, quiet borders. */
+.gfc-site .gfc-price-card,
+.gfc-site .pricing-plan-card {
+  background: var(--gfc-paper-raised) !important;
+  color: var(--gfc-ink) !important;
+  border: 1px solid var(--gfc-rule) !important;
+  box-shadow: 0 10px 30px rgba(35, 28, 18, 0.065) !important;
+}
+.gfc-site .pricing-plan-card .pricing-card-header {
+  background: linear-gradient(135deg, #211f1b 0%, #393127 100%) !important;
+}
+.gfc-site .pricing-plan-card .pricing-card-header h3 { color: var(--gfc-paper) !important; }
+.gfc-site .pricing-plan-card .text-slate-200,
+.gfc-site .pricing-plan-card .text-slate-300 { color: var(--gfc-muted) !important; }
+.gfc-site .pricing-plan-card .text-slate-500 { color: #81786c !important; }
+.gfc-site .pricing-plan-card .pricing-checklist-btn {
+  background: var(--gfc-charcoal) !important;
+  color: #fff !important;
+}
+.gfc-site .gfc-price-card .text-green-600,
+.gfc-site .pricing-plan-card .text-green-600 { color: #167344 !important; }
+.gfc-site .gfc-price-card button.bg-green-600,
+.gfc-site button.bg-green-600 { background-color: var(--gfc-green) !important; }
+
+/* Why choose / process content: readable dark text on cream. */
+.gfc-why-section p,
+.gfc-process-section p,
+.gfc-why-section li,
+.gfc-process-section li { color: var(--gfc-muted) !important; }
+.gfc-why-section img,
+.gfc-process-section img { border: 1px solid var(--gfc-rule); box-shadow: 0 18px 40px rgba(35, 28, 18, 0.12); }
+.gfc-why-section h2,
+.gfc-process-section h2 { color: var(--gfc-ink) !important; }
+
+/* Google review cards: preserve customer wording; visually distinct from fabricated marketing quotes. */
+.gfc-reviews-section { border-top: 1px solid var(--gfc-rule); }
+.gfc-review-grid { background: transparent !important; }
+.gfc-review-card {
+  background: var(--gfc-paper-raised) !important;
+  color: var(--gfc-ink) !important;
+  border: 1px solid var(--gfc-rule);
+  box-shadow: 0 10px 28px rgba(35, 28, 18, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.gfc-review-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(181, 138, 70, 0.6);
+  box-shadow: 0 18px 36px rgba(35, 28, 18, 0.10);
+}
+.gfc-review-copy { color: #403a32 !important; }
+.gfc-google-review-link {
+  background: var(--gfc-charcoal) !important;
+  color: var(--gfc-paper) !important;
+  box-shadow: 0 6px 16px rgba(25, 24, 21, 0.14);
+}
+.gfc-google-review-link:hover { background: var(--gfc-gold) !important; color: #fff !important; }
+
+/* FAQ accordions: graphite surfaces, soft gold details and clear contrast. */
+.gfc-faq-section .bg-slate-700,
+.gfc-faq-section [class*="bg-slate-700"] {
+  background: #26231e !important;
+  color: #eee7db !important;
+}
+.gfc-faq-section .text-gray-300,
+.gfc-faq-section .text-slate-300 { color: #d2c9bb !important; }
+.gfc-faq-section .border-slate-700 { border-color: #494238 !important; }
+
+/* Location directory: refined ivory accordions and clear clickable locality chips. */
+.gfc-location-hub .gfc-area-accordion {
+  background: var(--gfc-paper-raised) !important;
+  border-color: var(--gfc-rule) !important;
+  box-shadow: 0 4px 16px rgba(35, 28, 18, 0.045);
+}
+.gfc-location-hub .gfc-area-accordion > button {
+  background: transparent !important;
+  color: var(--gfc-ink) !important;
+}
+.gfc-location-hub .gfc-location-pill {
+  background: #f0e7d7 !important;
+  color: #6d4d1f !important;
+}
+.gfc-location-hub .gfc-location-pill:hover { background: #e7d7bd !important; }
+.gfc-location-hub .gfc-locality-chip {
+  background: #f1ece3 !important;
+  color: #39342d !important;
+  border: 1px solid #e3dacd;
+}
+.gfc-location-hub .gfc-locality-chip:hover {
+  background: #e8dcc8 !important;
+  color: #1d1a16 !important;
+}
+.gfc-location-hub .gfc-locality-muted {
+  color: #776f64 !important;
+  text-decoration: none !important;
+}
+.gfc-location-hub .gfc-location-link { color: #4e473d !important; }
+.gfc-location-hub .gfc-location-link:hover { color: #946c2e !important; }
+
+/* Footer and global borders. */
+.gfc-site footer {
+  background: var(--gfc-charcoal) !important;
+  color: #e7dfd2 !important;
+  border-top: 1px solid rgba(181, 138, 70, 0.45);
+}
+.gfc-site footer h2,
+.gfc-site footer h3,
+.gfc-site footer h4 { color: var(--gfc-paper) !important; }
+.gfc-site footer a:hover { color: var(--gfc-gold-light) !important; }
+.gfc-site .border-gray-200,
+.gfc-site .border-stone-200 { border-color: var(--gfc-rule) !important; }
+
+.gfc-pricing { background: var(--gfc-paper); color: var(--gfc-ink); }
+.gfc-pricing h1,
+.gfc-pricing h2,
+.gfc-pricing h3 { font-family: Georgia, "Times New Roman", serif; }
+.gfc-pricing .gfc-price-card { min-height: 100%; }
+
+@media (max-width: 640px) {
+  .gfc-review-card { padding: 1.25rem !important; }
+  .gfc-site section.gfc-light-section,
+  .gfc-site section.gfc-dark-section,
+  .gfc-site section.gfc-reviews-section { scroll-margin-top: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gfc-site *,
+  .gfc-site *::before,
+  .gfc-site *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.gfc-location-hub a.text-gray-300,
+.gfc-location-hub a.text-slate-300 { color: var(--gfc-muted) !important; }
+.gfc-location-hub .text-gray-500 { color: #746b5e !important; }
+.gfc-major-brands-section > div > div {
+  background: var(--gfc-paper-raised) !important;
+  border: 1px solid var(--gfc-rule);
+  box-shadow: 0 8px 24px rgba(35, 28, 18, 0.055);
+}
+.gfc-major-brands-section p { color: var(--gfc-muted) !important; }
+.gfc-pricing-section .text-white { color: var(--gfc-ink) !important; }
+.gfc-pricing-section .gfc-price-card { background: var(--gfc-paper-raised) !important; }
+
+/* --- Expanded Garage Fix Care design system: alternating editorial surfaces --- */
+.gfc-site section.gfc-major-brands-section { background: #e8dfd1 !important; color: #1d1a16 !important; }
+.gfc-site section.gfc-reviews-section { background: #fffdf8 !important; color: #1d1a16 !important; }
+.gfc-site section.gfc-pricing-section,
+.gfc-site section.gfc-price-section { background: #eee6da !important; color: #1d1a16 !important; }
+.gfc-site section.gfc-brands-marquee-section { background: #f5f1e8 !important; }
+.gfc-site section.gfc-home-blog-section { background: #e5dccd !important; color: #1d1a16 !important; }
+.gfc-site section.gfc-home-blog-section .text-white,
+.gfc-site section.gfc-home-blog-section .text-gray-200,
+.gfc-site section.gfc-home-blog-section .text-gray-300 { color: #1d1a16 !important; }
+
+/* Fix the exact dark-on-dark brand-summary contrast regression from the supplied screenshot. */
+.gfc-major-brands-section .gfc-brand-summary-box {
+  display: block;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: clamp(20px, 3vw, 34px);
+  border: 1px solid #d7c8b1;
+  border-radius: 20px;
+  background: #fffdf8 !important;
+  color: #211f1b !important;
+  box-shadow: 0 16px 38px rgba(35, 28, 18, .08);
+  text-align: left;
+}
+.gfc-brand-summary-box .gfc-brand-summary-label {
+  color: #77664c !important;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .17em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.gfc-brand-summary-links { display: flex; flex-wrap: wrap; gap: 9px; }
+.gfc-brand-summary-links a {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #e1d6c6;
+  border-radius: 999px;
+  padding: 8px 13px;
+  background: #f6f0e6;
+  color: #29251f !important;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.gfc-brand-summary-links a:hover { background: #eadcc4; border-color: #b58a46; transform: translateY(-2px); }
+.gfc-brand-directory-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.gfc-brand-directory-actions a {
+  display: inline-flex; align-items: center; gap: 12px; border-radius: 999px;
+  padding: 11px 17px; background: #211f1b; color: #fffdf8 !important;
+  font-size: 13px; font-weight: 750; text-decoration: none;
+}
+.gfc-brand-directory-actions a span { color: #d8b777; }
+
+/* Genuine review marquee: two rows travel in opposite directions. */
+.gfc-review-marquees { width: 100%; overflow: hidden; margin-top: 34px; }
+.gfc-review-marquee-viewport {
+  width: 100%; overflow: hidden; padding: 10px 0 16px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
+.gfc-review-marquee-track {
+  display: flex; width: max-content; gap: 16px; padding: 0 8px;
+  animation: gfcReviewsLeft 54s linear infinite;
+  will-change: transform;
+}
+.gfc-review-track-right { animation-name: gfcReviewsRight; animation-duration: 58s; }
+.gfc-review-marquee-viewport:hover .gfc-review-marquee-track,
+.gfc-review-marquee-viewport:focus-within .gfc-review-marquee-track { animation-play-state: paused; }
+@keyframes gfcReviewsLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes gfcReviewsRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.gfc-review-marquee-track .gfc-review-card {
+  width: 280px; min-height: 278px; flex: 0 0 280px; padding: 22px 21px;
+  border: 1px solid #e1d6c6; border-radius: 18px; background: #fffdf8 !important;
+  box-shadow: 0 9px 24px rgba(35, 28, 18, .065); color: #211f1b !important;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.gfc-review-marquee-track .gfc-review-card.gfc-review-placeholder {
+  background: #f1e9dc !important; border-style: dashed; border-color: #c8b89e;
+}
+.gfc-review-google { width: 23px; height: 23px; object-fit: contain; margin-bottom: 7px; user-select: none; -webkit-user-drag: none; }
+.gfc-review-stars { color: #e6a900; letter-spacing: 2px; font-size: 16px; line-height: 1.2; margin-bottom: 10px; }
+.gfc-review-marquee-track .gfc-review-copy { color: #494238 !important; font-size: 13px; line-height: 1.65; margin: 0 0 15px; flex: 1; }
+.gfc-review-avatar { width: 42px; height: 42px; flex: 0 0 42px; border-radius: 50%; object-fit: cover; object-position: center; margin-bottom: 8px; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.gfc-review-marquee-track .gfc-review-card h3 { color: #211f1b !important; font-size: 13px; font-weight: 800; margin: 0 0 4px; user-select: none; }
+.gfc-review-marquee-track .gfc-review-card > span { color: #746b5e !important; font-size: 9px; font-weight: 750; letter-spacing: .08em; line-height: 1.4; text-transform: uppercase; }
+.gfc-review-placeholder .gfc-review-copy { font-style: italic; color: #6b5b43 !important; }
+.gfc-review-editor-note { color: #766b5c; font-size: 11px; line-height: 1.5; text-align: center; padding: 0 16px; margin: 3px auto 0; max-width: 850px; }
+@media (prefers-reduced-motion: reduce) { .gfc-review-marquee-track { animation: none !important; transform: none !important; } }
+@media (max-width: 640px) { .gfc-review-marquee-track .gfc-review-card { width: 250px; flex-basis: 250px; min-height: 270px; } .gfc-review-marquee-track { gap: 12px; } }
+
+/* Consistent premium labour cards used on homepage, city pages, model pages and pricing page. */
+.gfc-price-section { color: #211f1b; }
+.gfc-price-section .gfc-price-eyebrow { color: #92713e; }
+.gfc-price-section .gfc-price-title { color: #211f1b; }
+.gfc-price-section .gfc-price-description { color: #665f55; }
+.gfc-tier-card { position: relative; overflow: hidden; border-radius: 19px; border: 1px solid #d8cbb8; background: #fffdf8; box-shadow: 0 12px 30px rgba(38, 31, 22, .07); display: flex; flex-direction: column; min-height: 100%; transition: transform .22s ease, box-shadow .22s ease; }
+.gfc-tier-card:hover { transform: translateY(-5px); box-shadow: 0 18px 38px rgba(38, 31, 22, .12); }
+.gfc-tier-card-featured { border-color: #b58a46; box-shadow: 0 15px 34px rgba(181, 138, 70, .14); }
+.gfc-tier-badge { position: absolute; top: 12px; right: 12px; z-index: 2; border-radius: 999px; padding: 5px 9px; background: #d8b777; color: #211f1b; font-size: 9px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.gfc-tier-card-head { min-height: 178px; padding: 22px 20px 24px; background: linear-gradient(145deg, #211f1b, #40372b); color: #fffdf8; }
+.gfc-tier-card-head svg { color: #d8b777; }
+.gfc-tier-index { color: #d8b777; font-size: 11px; font-weight: 850; letter-spacing: .16em; }
+.gfc-tier-card-head p { color: #d8c9b1; }
+.gfc-tier-card-head h3 { color: #fffdf8; }
+.gfc-tier-card-body { display: flex; flex-direction: column; flex: 1; padding: 21px 20px 20px; }
+.gfc-tier-price { color: #9a6f2f; font-size: 32px; font-weight: 900; line-height: 1; }
+.gfc-tier-price span { color: #80776b; font-size: 10px; font-weight: 650; margin-left: 5px; }
+.gfc-tier-detail { color: #71685d; font-size: 12px; line-height: 1.55; min-height: 58px; margin: 12px 0; }
+.gfc-tier-expand { display: flex; align-items: center; justify-content: space-between; border: 0; border-top: 1px solid #e8dfd2; padding: 12px 0; color: #4a4032; background: transparent; font-size: 12px; font-weight: 800; cursor: pointer; }
+.gfc-tier-expand svg { transition: transform .2s ease; }
+.gfc-tier-includes { list-style: none; display: grid; gap: 8px; margin: 0 0 14px; padding: 0; }
+.gfc-tier-includes li { display: flex; gap: 7px; color: #665f55; font-size: 11px; line-height: 1.4; }
+.gfc-tier-includes svg { color: #268054; flex: 0 0 auto; }
+.gfc-tier-book { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: auto; border: 0; border-radius: 999px; padding: 12px 13px; background: #18784b; color: white; font-size: 11px; font-weight: 850; cursor: pointer; transition: background .2s ease; }
+.gfc-tier-book:hover { background: #105e39; }
+.gfc-price-footnote { color: #766d60; line-height: 1.6; }
+.gfc-price-section-compact { padding-top: 58px; padding-bottom: 58px; }
+
+/* Model, brand and city service landing page system. */
+.gfc-model-hero, .gfc-directory-hero { background: radial-gradient(circle at 80% 15%, rgba(181,138,70,.18), transparent 32%), linear-gradient(130deg, #191815 0%, #28241e 58%, #373025 100%); color: #fffdf8; padding: 64px 0 72px; }
+.gfc-model-hero-copy h1, .gfc-directory-hero h1 { color: #fffdf8; font-size: clamp(34px, 5vw, 58px); line-height: 1.06; font-weight: 850; max-width: 760px; }
+.gfc-model-hero-copy h1 span { color: #d8b777; }
+.gfc-model-lead, .gfc-directory-hero > div > p:not(.gfc-eyebrow) { color: #d8d0c3; font-size: 15px; line-height: 1.8; max-width: 670px; margin-top: 17px; }
+.gfc-eyebrow { display: flex; align-items: center; gap: 8px; color: #b58a46; font-size: 11px; font-weight: 900; letter-spacing: .19em; line-height: 1.4; text-transform: uppercase; margin-bottom: 15px; }
+.gfc-model-hero .gfc-eyebrow, .gfc-directory-hero .gfc-eyebrow { color: #e1bd7b; }
+.gfc-model-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.gfc-model-meta span { border: 1px solid rgba(216,183,119,.4); border-radius: 999px; padding: 6px 11px; color: #f3e8d5; font-size: 11px; font-weight: 750; }
+.gfc-model-proof-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; margin-top: 23px; }
+.gfc-model-proof-grid span { display: flex; align-items: flex-start; gap: 8px; color: #eee6da; font-size: 12px; line-height: 1.5; }
+.gfc-model-proof-grid svg { color: #d8b777; flex: 0 0 auto; margin-top: 1px; }
+.gfc-primary-cta, .gfc-secondary-cta { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border-radius: 999px; padding: 13px 19px; font-size: 13px; font-weight: 850; text-decoration: none; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+.gfc-primary-cta { background: #d85b1b; color: #fff !important; border: 1px solid #d85b1b; }
+.gfc-primary-cta:hover { background: #b94713; transform: translateY(-2px); }
+.gfc-secondary-cta { border: 1px solid rgba(255,253,248,.45); color: #fffdf8 !important; background: rgba(255,255,255,.05); }
+.gfc-secondary-cta:hover { background: rgba(255,255,255,.13); }
+.gfc-video-placeholder { min-height: 320px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(216,183,119,.45); border-radius: 22px; background: radial-gradient(circle at 50% 35%, rgba(181,138,70,.22), transparent 38%), linear-gradient(145deg, #312a20, #11100e); box-shadow: 0 22px 55px rgba(0,0,0,.26); }
+.gfc-video-placeholder-wide { min-height: 290px; }
+.gfc-video-frame-mark { position: absolute; top: 15px; left: 17px; color: rgba(243,232,213,.58); font-size: 9px; font-weight: 850; letter-spacing: .2em; }
+.gfc-video-placeholder-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 9px; padding: 26px; color: #f3e8d5; }
+.gfc-video-placeholder-content > svg, .gfc-video-play { color: #d8b777; font-size: 39px; }
+.gfc-video-placeholder-content strong { font-size: 18px; }
+.gfc-video-placeholder-content small { color: #d1c5b3; font-size: 12px; }
+.gfc-video-placeholder-content code { color: #d8b777; font-size: 10px; overflow-wrap: anywhere; }
+.gfc-city-trust-strip { background: #e9dfd0; border-bottom: 1px solid #d8cbb8; padding: 20px 0; }
+.gfc-city-trust-strip .max-w-7xl > div { display: flex; align-items: center; gap: 12px; color: #8d6b37; }
+.gfc-city-trust-strip span { display: flex; flex-direction: column; gap: 3px; }
+.gfc-city-trust-strip b { color: #29251f; font-size: 13px; }
+.gfc-city-trust-strip small { color: #766d60; font-size: 11px; }
+.gfc-model-services { background: #fffdf8; color: #211f1b; }
+.gfc-model-services h2, .gfc-city-areas h2, .gfc-model-video-band h2, .gfc-model-benefits h2, .gfc-city-faq h2, .gfc-model-related h2, .gfc-model-bottom-cta h2, .gfc-directory-heading { color: #211f1b; font-size: clamp(25px, 3.4vw, 38px); line-height: 1.15; font-weight: 850; }
+.gfc-model-services .max-w-7xl > div > p:not(.gfc-eyebrow), .gfc-city-areas > div > p:not(.gfc-eyebrow), .gfc-model-video-band p:not(.gfc-eyebrow), .gfc-model-benefits p:not(.gfc-eyebrow) { color: #71685d; line-height: 1.75; margin-top: 12px; }
+.gfc-model-check-card, .gfc-service-tile { background: #f5f0e7; border: 1px solid #e4d9c8; border-radius: 16px; padding: 22px; color: #29251f; }
+.gfc-model-check-card > span { display: block; color: #b58a46; font-size: 11px; font-weight: 900; letter-spacing: .14em; margin-bottom: 14px; }
+.gfc-model-check-card > svg, .gfc-service-tile > span { color: #a77b2f; }
+.gfc-model-check-card p, .gfc-service-tile p { color: #5e564b; font-size: 13px; line-height: 1.65; margin-top: 12px; }
+.gfc-model-video-band { background: #e8dfd1; padding: 64px 0; color: #211f1b; }
+.gfc-video-bullets { display: grid; gap: 9px; margin-top: 20px; color: #4e473d; font-size: 13px; }
+.gfc-video-bullets li { display: flex; align-items: center; gap: 8px; }
+.gfc-video-bullets svg { color: #92713e; }
+.gfc-model-benefits { background: #fffdf8; color: #211f1b; }
+.gfc-model-steps { display: grid; gap: 12px; }
+.gfc-model-steps > div { display: flex; align-items: center; gap: 15px; padding: 16px; border: 1px solid #e3d8c8; border-radius: 14px; background: #f7f2e9; }
+.gfc-model-steps > div > b { color: #a77b2f; font-size: 19px; }
+.gfc-model-steps span { display: flex; flex-direction: column; gap: 4px; }
+.gfc-model-steps strong { color: #29251f; font-size: 14px; }
+.gfc-model-steps small { color: #71685d; font-size: 12px; }
+.gfc-city-areas { background: #e9dfd0; color: #211f1b; }
+.gfc-area-chip { border: 1px solid #d3c2a8; border-radius: 999px; background: #fffaf2; color: #514535; padding: 8px 12px; font-size: 12px; font-weight: 700; }
+.gfc-model-brands, .gfc-model-related { background: #25221d; color: #fffdf8; }
+.gfc-model-brands h2, .gfc-model-related h2 { color: #fffdf8; font-size: clamp(24px, 3vw, 34px); font-weight: 850; }
+.gfc-brand-chip { border: 1px solid #5a4d3b; border-radius: 999px; background: #302b23; color: #f4e9d7 !important; padding: 9px 13px; font-size: 12px; font-weight: 750; text-decoration: none; }
+.gfc-brand-chip:hover { background: #4a3b28; border-color: #b58a46; }
+.gfc-city-faq { background: #f5f1e8; color: #211f1b; }
+.gfc-faq-item { border: 1px solid #ded2c0; border-radius: 13px; background: #fffdf8; padding: 16px 18px; }
+.gfc-faq-item summary { color: #29251f; font-size: 14px; font-weight: 800; cursor: pointer; }
+.gfc-faq-item p { color: #6b6256; font-size: 13px; line-height: 1.7; margin-top: 12px; }
+.gfc-model-bottom-cta { background: #191815; color: #fffdf8; padding: 35px 0; }
+.gfc-model-bottom-cta > div { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+.gfc-model-bottom-cta h2 { color: #fffdf8; }
+.gfc-model-bottom-cta p:not(.gfc-eyebrow) { color: #d2c8b8; font-size: 13px; margin-top: 8px; }
+.gfc-model-facts { background: #302b23; padding: 18px 0; }
+.gfc-model-facts > div > div { display: flex; flex-direction: column; gap: 4px; }
+.gfc-model-facts span { color: #c5b59b; font-size: 10px; text-transform: uppercase; letter-spacing: .15em; }
+.gfc-model-facts b { color: #fffdf8; font-size: 13px; }
+.gfc-directory-hero { padding: 64px 0; }
+.gfc-brand-directory-card { border: 1px solid #e1d6c6; border-radius: 18px; background: #fffdf8; padding: 22px; box-shadow: 0 9px 24px rgba(35,28,18,.05); }
+.gfc-brand-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; color: #9a6f2f; background: #f1e7d6; }
+.gfc-brand-count { color: #88704d; font-size: 10px; font-weight: 850; text-transform: uppercase; letter-spacing: .1em; }
+.gfc-brand-directory-card h3 { color: #211f1b; font-size: 20px; font-weight: 850; margin: 16px 0 12px; }
+.gfc-model-link-list { display: grid; gap: 7px; }
+.gfc-model-link-list a { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #51483b !important; font-size: 12px; text-decoration: none; border-bottom: 1px solid #eee6db; padding: 7px 0; }
+.gfc-model-link-list a:hover { color: #a77b2f !important; }
+.gfc-brand-view-all, .gfc-text-link { display: inline-flex; align-items: center; gap: 8px; color: #9a6f2f !important; font-size: 12px; font-weight: 850; text-decoration: none; margin-top: 15px; }
+.gfc-brand-model-group { border: 1px solid #e2d7c8; border-radius: 18px; background: #fffdf8; padding: 22px; }
+.gfc-brand-model-group h2 { color: #211f1b; font-size: 22px; font-weight: 850; }
+.gfc-brand-model-group p { color: #81776a; font-size: 11px; }
+.gfc-model-directory-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid #e7ddcf; border-radius: 13px; padding: 13px; color: #29251f !important; text-decoration: none; background: #f8f4ed; }
+.gfc-model-directory-card:hover { border-color: #b58a46; background: #f0e6d6; }
+.gfc-model-directory-card span { display: flex; flex-direction: column; gap: 4px; }
+.gfc-model-directory-card b { font-size: 12px; }
+.gfc-model-directory-card small { color: #81776a; font-size: 10px; }
+.gfc-model-directory-card > svg { color: #a77b2f; flex: 0 0 auto; }
+
+/* Blog hub and article layout with deliberate image slots for the owner's photos. */
+.gfc-blog-page, .gfc-blog-article { background: #f5f1e8; color: #211f1b; }
+.gfc-blog-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 23px; }
+.gfc-blog-stats span { border: 1px solid rgba(216,183,119,.4); border-radius: 999px; padding: 7px 11px; color: #f2e6d3; font-size: 11px; }
+.gfc-blog-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e0d5c5; border-radius: 18px; background: #fffdf8; box-shadow: 0 10px 25px rgba(35,28,18,.06); }
+.gfc-blog-image-placeholder, .gfc-article-image-placeholder { min-height: 205px; display: block; overflow: hidden; padding: 0; background: #2a261f; color: #fff4e3 !important; text-align: center; text-decoration: none; }
+.gfc-blog-image-placeholder img, .gfc-article-image-placeholder img { display: block; width: 100%; height: 100%; min-height: 205px; max-height: 280px; object-fit: cover; transition: transform .35s ease; }
+.gfc-blog-image-placeholder:hover img { transform: scale(1.035); }
+.gfc-article-image-placeholder img { max-height: 440px; }
+.gfc-blog-image-placeholder span, .gfc-article-image-placeholder span { color: #d8b777; font-size: 9px; font-weight: 900; letter-spacing: .2em; }
+.gfc-blog-image-placeholder b, .gfc-article-image-placeholder b { font-size: 18px; }
+.gfc-blog-image-placeholder small, .gfc-article-image-placeholder small { color: #d9cbb7; font-size: 10px; overflow-wrap: anywhere; }
+.gfc-blog-card-content { display: flex; flex-direction: column; flex: 1; padding: 20px; }
+.gfc-blog-category { border-radius: 999px; background: #efe4d2; color: #77572c; padding: 6px 10px; font-size: 10px; font-weight: 850; }
+.gfc-blog-readtime { display: inline-flex; align-items: center; gap: 5px; color: #807568; font-size: 10px; }
+.gfc-blog-card h2 { color: #211f1b; font-size: 20px; font-weight: 850; line-height: 1.2; margin: 18px 0 10px; }
+.gfc-blog-card h2 a { color: inherit; text-decoration: none; }
+.gfc-blog-card p { color: #71685d; font-size: 13px; line-height: 1.7; flex: 1; }
+.gfc-article-title { color: #211f1b; font-size: clamp(32px, 5vw, 52px); line-height: 1.08; font-weight: 900; }
+.gfc-article-excerpt { color: #6c6256; font-size: 17px; line-height: 1.7; margin: 17px 0 25px; }
+.gfc-article-image-placeholder { min-height: 320px; border-radius: 20px; margin-bottom: 38px; }
+.gfc-article-image-placeholder em { color: #d9cbb7; font-size: 11px; font-style: normal; }
+.gfc-article-body { color: #494238; font-size: 15px; line-height: 1.85; }
+.gfc-article-body > p, .gfc-article-body section p { margin: 13px 0; }
+.gfc-article-body section { margin: 30px 0; }
+.gfc-article-body h2 { color: #211f1b; font-size: 25px; font-weight: 850; line-height: 1.2; margin-bottom: 12px; }
+.gfc-article-body ul { padding-left: 22px; list-style: disc; }
+.gfc-article-body li { margin: 7px 0; }
+.gfc-article-intro { color: #3e382f; font-size: 17px; font-weight: 550; }
+.gfc-article-takeaway { border-left: 4px solid #b58a46; border-radius: 0 14px 14px 0; background: #eee5d7; padding: 20px 22px; margin: 28px 0; }
+.gfc-article-takeaway strong { color: #77572c; }
+.gfc-article-takeaway p { margin-bottom: 0 !important; }
+.gfc-article-disclaimer { color: #84796b; font-size: 12px; border-top: 1px solid #ded5c7; padding-top: 18px; }
+.gfc-article-cta { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px; margin-top: 35px; border-radius: 18px; background: #211f1b; color: #fffdf8; }
+.gfc-article-cta h2 { color: #fffdf8; font-size: 24px; }
+.gfc-article-cta p:not(.gfc-eyebrow) { color: #d0c8bb; font-size: 12px; margin-top: 7px; }
+.gfc-related-articles { background: #e9dfd0; }
+.gfc-related-articles h2 { color: #211f1b; font-size: 25px; font-weight: 850; }
+.gfc-related-article { display: flex; flex-direction: column; gap: 10px; border: 1px solid #d9cbb7; border-radius: 14px; padding: 18px; background: #fffdf8; color: #211f1b !important; text-decoration: none; }
+.gfc-related-article span { color: #9a6f2f; font-size: 10px; font-weight: 850; text-transform: uppercase; }
+.gfc-related-article b { font-size: 14px; line-height: 1.4; }
+.gfc-related-article small { display: inline-flex; align-items: center; gap: 6px; color: #9a6f2f; font-weight: 800; }
+
+/* Pricing page and city page responsive refinements. */
+.gfc-pricing-page { background: #f5f1e8; }
+.gfc-pricing-intro { background: #191815; color: #fffdf8; }
+.gfc-pricing-intro h1 { color: #fffdf8; font-size: clamp(32px, 5vw, 54px); line-height: 1.08; font-weight: 900; }
+.gfc-pricing-intro h1 span { color: #d8b777; }
+.gfc-pricing-intro p { color: #d8d0c3; }
+.gfc-pricing-intro .max-w-5xl > div span { display: inline-flex; align-items: center; gap: 7px; border: 1px solid rgba(216,183,119,.3); border-radius: 999px; padding: 8px 12px; color: #eee2cf; font-size: 11px; }
+.gfc-car-enquiry { background: #e9dfd0; }
+.gfc-car-enquiry-card { display: flex; align-items: flex-start; gap: 22px; border: 1px solid #d7c7ae; border-radius: 20px; padding: clamp(22px, 4vw, 36px); background: #fffdf8; box-shadow: 0 12px 30px rgba(35,28,18,.06); }
+.gfc-car-icon { display: flex; align-items: center; justify-content: center; flex: 0 0 54px; height: 54px; border-radius: 15px; background: #efe4d2; color: #9a6f2f; }
+.gfc-car-enquiry-card h2 { color: #211f1b; font-size: 26px; font-weight: 850; }
+.gfc-car-enquiry-card p { color: #71685d; font-size: 13px; line-height: 1.7; }
+.gfc-car-enquiry-cta { border: 0; border-radius: 999px; padding: 12px 17px; background: #18784b; color: #fff; font-size: 12px; font-weight: 850; cursor: pointer; }
+.gfc-car-enquiry-cta:hover { background: #105e39; }
+
+@media (max-width: 720px) {
+  .gfc-model-hero, .gfc-directory-hero { padding: 42px 0 50px; }
+  .gfc-video-placeholder { min-height: 230px; }
+  .gfc-model-proof-grid { grid-template-columns: 1fr; }
+  .gfc-model-bottom-cta > div, .gfc-article-cta { align-items: flex-start; flex-direction: column; }
+  .gfc-city-trust-strip .max-w-7xl > div { align-items: flex-start; }
+  .gfc-car-enquiry-card { flex-direction: column; }
+  .gfc-blog-image-placeholder { min-height: 180px; }
+}
+
+/* Additional homepage alternating surfaces: cream → sand → graphite → sage → ivory. */
+.gfc-site section.gfc-pricing-section { background: #eee6da !important; }
+.gfc-site section.gfc-why-section { background: #fffdf8 !important; }
+.gfc-site section.gfc-process-section { background: #e8ede6 !important; }
+.gfc-site section.gfc-reviews-section { background: #fffdf8 !important; }
+.gfc-site section.gfc-location-hub { background: #eee6da !important; }
+.gfc-home-services-section { background: #e8ede6 !important; color: #211f1b !important; }
+.gfc-home-services-section h2, .gfc-home-services-section h3 { color: #211f1b !important; }
+.gfc-home-services-section p { color: #665f55 !important; }
+.gfc-home-services-section .bg-sky-100 { background: #fffdf8 !important; border: 1px solid #d9dfd5; }
+.gfc-home-benefits-section { background: #e8dfd1 !important; color: #211f1b !important; }
+.gfc-home-benefits-section .text-white,
+.gfc-home-benefits-section .text-sky-100,
+.gfc-home-benefits-section .text-gray-300 { color: #29251f !important; }
+.gfc-home-benefits-section .bg-sky-100 { background: #fffdf8 !important; border: 1px solid #ded2c0; }
+.gfc-home-benefits-section h2, .gfc-home-benefits-section h3 { color: #211f1b !important; }
+.gfc-home-benefits-section p { color: #665f55 !important; }
+.gfc-home-benefits-section a { color: #8e6428 !important; }
+.gfc-home-blog-card { overflow: hidden; border: 1px solid #ded2c0; border-radius: 18px; background: #fffdf8; text-align: left; box-shadow: 0 10px 24px rgba(35,28,18,.06); }
+.gfc-home-blog-image { min-height: 165px; display: block; overflow: hidden; padding: 0; background: #28231d; color: #fff4e3 !important; text-decoration: none; }
+.gfc-home-blog-image img { display: block; width: 100%; height: 100%; min-height: 165px; max-height: 220px; object-fit: cover; transition: transform .35s ease; }
+.gfc-home-blog-image:hover img { transform: scale(1.035); }
+.gfc-home-blog-image span { color: #d8b777; font-size: 9px; font-weight: 900; letter-spacing: .2em; }
+.gfc-home-blog-image small { color: #d9cbb7; font-size: 10px; overflow-wrap: anywhere; text-align: center; }
+.gfc-home-blog-card h3 { color: #211f1b; font-size: 17px; font-weight: 850; line-height: 1.3; margin: 14px 0 9px; }
+.gfc-home-blog-card h3 a { color: inherit; text-decoration: none; }
+.gfc-home-blog-card p { color: #71685d; font-size: 12px; line-height: 1.65; margin-bottom: 12px; }
+
+
+/* =========================================================
+   GARAGE FIX CARE — TWO-SURFACE DESIGN SYSTEM
+   Only two section/background surfaces: warm cream + chocolate.
+   Gold is a restrained text/border accent, not a third surface.
+   ========================================================= */
+:root {
+  --gfc-cream: #f5f1e8;
+  --gfc-cream-card: #fffdf8;
+  --gfc-chocolate: #211f1b;
+  --gfc-chocolate-soft: #302a22;
+  --gfc-gold: #b58a46;
+  --gfc-gold-light: #d8b777;
+  --gfc-body: #51483d;
+  --gfc-line: #ded5c7;
+}
+
+.gfc-site {
+  background: var(--gfc-cream) !important;
+  color: var(--gfc-chocolate);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+.gfc-site h1, .gfc-site h2, .gfc-site h3, .gfc-site h4,
+.gfc-site .gfc-directory-heading, .gfc-site .gfc-article-title {
+  font-family: Georgia, "Times New Roman", serif !important;
+}
+.gfc-site p, .gfc-site li, .gfc-site a, .gfc-site button, .gfc-site input {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Consistent cream/chocolate alternation across homepage and landing pages. */
+.gfc-site .gfc-navbar,
+.gfc-site .gfc-model-hero,
+.gfc-site .gfc-directory-hero,
+.gfc-site .gfc-pricing-intro,
+.gfc-site .gfc-model-video-band,
+.gfc-site .gfc-model-related,
+.gfc-site .gfc-model-bottom-cta,
+.gfc-site .gfc-city-areas,
+.gfc-site .gfc-city-faq,
+.gfc-site .gfc-faq-section,
+.gfc-site .gfc-trusted-section,
+.gfc-site .gfc-brand-summary-section,
+.gfc-site .gfc-home-benefits-section,
+.gfc-site .gfc-process-section,
+.gfc-site .gfc-major-brands-section,
+.gfc-site .gfc-home-services-section {
+  background: var(--gfc-chocolate) !important;
+  color: var(--gfc-cream) !important;
+}
+.gfc-site .gfc-model-services,
+.gfc-site .gfc-model-benefits,
+.gfc-site .gfc-city-trust-strip,
+.gfc-site .gfc-city-areas + section,
+.gfc-site .gfc-pricing-section,
+.gfc-site .gfc-why-section,
+.gfc-site .gfc-reviews-section,
+.gfc-site .gfc-location-hub,
+.gfc-site .gfc-brands-marquee-section,
+.gfc-site .gfc-home-blog-section,
+.gfc-site .gfc-model-directory-promo,
+.gfc-site .gfc-price-section,
+.gfc-site .gfc-blog-page,
+.gfc-site .gfc-blog-article,
+.gfc-site .gfc-related-articles {
+  background: var(--gfc-cream) !important;
+  color: var(--gfc-chocolate) !important;
+}
+
+/* Text contrast on chocolate sections. */
+.gfc-site .gfc-model-video-band h2,
+.gfc-site .gfc-model-video-band h3,
+.gfc-site .gfc-model-related h2,
+.gfc-site .gfc-model-bottom-cta h2,
+.gfc-site .gfc-city-areas h2,
+.gfc-site .gfc-city-faq h2,
+.gfc-site .gfc-faq-section h2,
+.gfc-site .gfc-trusted-section h2,
+.gfc-site .gfc-brand-summary-section h2,
+.gfc-site .gfc-home-benefits-section h2,
+.gfc-site .gfc-process-section h2,
+.gfc-site .gfc-major-brands-section h2,
+.gfc-site .gfc-home-services-section h2 {
+  color: var(--gfc-cream) !important;
+}
+.gfc-site .gfc-model-video-band p,
+.gfc-site .gfc-model-video-band li,
+.gfc-site .gfc-model-related p,
+.gfc-site .gfc-model-bottom-cta p,
+.gfc-site .gfc-city-areas p,
+.gfc-site .gfc-city-faq p,
+.gfc-site .gfc-faq-section p,
+.gfc-site .gfc-trusted-section p,
+.gfc-site .gfc-brand-summary-section p,
+.gfc-site .gfc-home-benefits-section p,
+.gfc-site .gfc-process-section p,
+.gfc-site .gfc-major-brands-section p,
+.gfc-site .gfc-home-services-section p {
+  color: #e4d9c8 !important;
+}
+.gfc-site .gfc-eyebrow,
+.gfc-site .gfc-model-hero .gfc-eyebrow,
+.gfc-site .gfc-directory-hero .gfc-eyebrow {
+  color: var(--gfc-gold-light) !important;
+}
+
+/* Cream sections use chocolate text and cream cards. */
+.gfc-site .gfc-model-services h2,
+.gfc-site .gfc-model-benefits h2,
+.gfc-site .gfc-reviews-section h2,
+.gfc-site .gfc-location-hub h2,
+.gfc-site .gfc-home-blog-section h2,
+.gfc-site .gfc-model-directory-promo h2,
+.gfc-site .gfc-price-section h2 {
+  color: var(--gfc-chocolate) !important;
+}
+.gfc-site .gfc-model-services p,
+.gfc-site .gfc-model-benefits p,
+.gfc-site .gfc-location-hub p,
+.gfc-site .gfc-home-blog-section p,
+.gfc-site .gfc-model-directory-promo p,
+.gfc-site .gfc-price-section p {
+  color: var(--gfc-body);
+}
+
+/* Cards stay within the same two-colour family. */
+.gfc-site .gfc-model-check-card,
+.gfc-site .gfc-service-tile,
+.gfc-site .gfc-tier-card,
+.gfc-site .gfc-review-card,
+.gfc-site .gfc-blog-card,
+.gfc-site .gfc-home-blog-card,
+.gfc-site .gfc-car-enquiry-card {
+  background: var(--gfc-cream-card) !important;
+  color: var(--gfc-chocolate) !important;
+  border-color: var(--gfc-line) !important;
+}
+.gfc-site .gfc-tier-card-head,
+.gfc-site .gfc-article-cta,
+.gfc-site .gfc-brand-summary-box {
+  background: var(--gfc-chocolate) !important;
+  color: var(--gfc-cream) !important;
+}
+.gfc-site .gfc-tier-card-head h3,
+.gfc-site .gfc-brand-summary-box p,
+.gfc-site .gfc-brand-summary-box a {
+  color: var(--gfc-cream) !important;
+}
+.gfc-site .gfc-price-section,
+.gfc-site .gfc-pricing-section { background: var(--gfc-cream) !important; }
+
+/* Homepage: three category cards before Hot Deals. */
+.gfc-model-directory-promo { padding-top: 58px; padding-bottom: 58px; }
+.gfc-model-directory-heading { text-align: center; max-width: 760px; margin: 0 auto 30px; }
+.gfc-model-directory-heading h2 { font-size: clamp(27px, 3.4vw, 42px); line-height: 1.12; margin: 0; }
+.gfc-model-directory-heading h2 span { color: var(--gfc-gold) !important; }
+.gfc-model-directory-heading > p:last-child { margin-top: 12px; color: var(--gfc-body) !important; }
+.gfc-model-directory-card {
+  display: flex; flex-direction: column; overflow: hidden; min-width: 0;
+  border: 1px solid var(--gfc-line); border-radius: 18px;
+  background: var(--gfc-cream-card); color: var(--gfc-chocolate) !important;
+  text-decoration: none; box-shadow: 0 12px 30px rgba(33,31,27,.07);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.gfc-model-directory-card:hover { transform: translateY(-5px); border-color: var(--gfc-gold); box-shadow: 0 18px 38px rgba(33,31,27,.12); }
+.gfc-model-directory-image { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--gfc-cream); border-bottom: 1px solid var(--gfc-line); }
+.gfc-model-directory-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.gfc-model-directory-card:hover .gfc-model-directory-image img { transform: scale(1.035); }
+.gfc-model-directory-card-copy { padding: 20px 21px 22px; }
+.gfc-model-directory-card-copy > span { color: var(--gfc-gold); font-size: 9px; font-weight: 900; letter-spacing: .18em; }
+.gfc-model-directory-card-copy h3 { margin: 8px 0; color: var(--gfc-chocolate); font-size: 23px; line-height: 1.12; }
+.gfc-model-directory-card-copy p { color: var(--gfc-body) !important; font-size: 12px; line-height: 1.65; min-height: 40px; }
+.gfc-model-directory-card-copy b { display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; color: var(--gfc-gold) !important; font-size: 12px; }
+
+/* Genuine customer reviews are shared on every route, in two opposite-moving rows. */
+.gfc-reviews-section { overflow: hidden; border-top: 1px solid var(--gfc-line); border-bottom: 1px solid var(--gfc-line); }
+.gfc-review-section-title { font-size: clamp(28px, 3.4vw, 42px); line-height: 1.1; margin: 0; color: var(--gfc-chocolate) !important; }
+.gfc-review-section-title span { color: var(--gfc-gold) !important; }
+.gfc-review-subtitle { color: var(--gfc-body) !important; font-size: 13px; margin-top: 10px; }
+.gfc-review-rating { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 14px 0; }
+.gfc-review-rating span, .gfc-review-stars { color: #d99b19 !important; letter-spacing: 1px; }
+.gfc-review-rating strong { color: var(--gfc-chocolate); font-size: 12px; }
+.gfc-review-marquees { display: grid; gap: 14px; margin-top: 34px; }
+.gfc-review-marquee-viewport { overflow: hidden; width: 100%; }
+.gfc-review-marquee-track { display: flex; gap: 16px; width: max-content; will-change: transform; }
+.gfc-review-track-left { animation: gfc-review-scroll-left 42s linear infinite; }
+.gfc-review-track-right { animation: gfc-review-scroll-right 46s linear infinite; }
+.gfc-review-marquees:hover .gfc-review-marquee-track { animation-play-state: paused; }
+.gfc-review-card { display: flex; flex: 0 0 260px; width: 260px; min-height: 286px; flex-direction: column; align-items: center; text-align: center; padding: 19px 18px 17px; border: 1px solid var(--gfc-line); border-radius: 17px; box-shadow: 0 8px 24px rgba(33,31,27,.06); user-select: none; }
+.gfc-review-google-mark { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; font-weight: 900; font-size: 20px; color: #4285f4; }
+.gfc-review-stars { font-size: 13px; margin: 8px 0 12px; }
+.gfc-review-copy { color: var(--gfc-body) !important; font-size: 12px; line-height: 1.65; flex: 1; }
+.gfc-review-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; margin: 13px 0 8px; user-select: none; -webkit-user-drag: none; }
+.gfc-review-card h3 { color: var(--gfc-chocolate) !important; font-size: 13px; font-weight: 800; line-height: 1.25; margin: 0; }
+.gfc-review-card > span { color: #766d60; font-size: 9px; letter-spacing: .04em; text-transform: uppercase; margin-top: 5px; }
+@keyframes gfc-review-scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes gfc-review-scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .gfc-review-marquee-track { animation: none !important; }
+}
+@media (max-width: 640px) {
+  .gfc-model-directory-promo { padding-top: 40px; padding-bottom: 40px; }
+  .gfc-review-card { flex-basis: 235px; width: 235px; min-height: 270px; }
+  .gfc-review-track-left, .gfc-review-track-right { animation-duration: 54s; }
+}
+
+/* Legacy section utilities resolve to one of the two approved surfaces. */
+.gfc-site .bg-slate-900,
+.gfc-site .bg-slate-800,
+.gfc-site .bg-slate-700,
+.gfc-site .bg-gray-900,
+.gfc-site .bg-neutral-900 { background-color: var(--gfc-chocolate) !important; }
+.gfc-site .bg-sky-100,
+.gfc-site .bg-sky-50,
+.gfc-site .bg-blue-50,
+.gfc-site .bg-indigo-50,
+.gfc-site .bg-gray-50,
+.gfc-site .bg-stone-50,
+.gfc-site .bg-white,
+.gfc-site .bg-gray-100,
+.gfc-site .bg-stone-100 { background-color: var(--gfc-cream) !important; }
+.gfc-site .gfc-model-hero,
+.gfc-site .gfc-directory-hero,
+.gfc-site .gfc-pricing-intro { background: var(--gfc-chocolate) !important; }
+.gfc-site .gfc-model-video-band,
+.gfc-site .gfc-model-related,
+.gfc-site .gfc-model-bottom-cta,
+.gfc-site .gfc-city-areas,
+.gfc-site .gfc-city-faq,
+.gfc-site .gfc-faq-section,
+.gfc-site .gfc-trusted-section,
+.gfc-site .gfc-brand-summary-section,
+.gfc-site .gfc-home-benefits-section,
+.gfc-site .gfc-process-section,
+.gfc-site .gfc-major-brands-section,
+.gfc-site .gfc-home-services-section { background: var(--gfc-chocolate) !important; }
+.gfc-site .gfc-home-blog-section,
+.gfc-site .gfc-brands-marquee-section,
+.gfc-site .gfc-pricing-section,
+.gfc-site .gfc-why-section,
+.gfc-site .gfc-reviews-section,
+.gfc-site .gfc-location-hub,
+.gfc-site .gfc-model-directory-promo,
+.gfc-site .gfc-model-services,
+.gfc-site .gfc-model-benefits,
+.gfc-site .gfc-price-section { background: var(--gfc-cream) !important; }
+
+
+/* Final contrast correction for the homepage brand directory. */
+.gfc-site .gfc-major-brands-section {
+  background: var(--gfc-cream) !important;
+  color: var(--gfc-chocolate) !important;
+}
+.gfc-site .gfc-major-brands-section h2,
+.gfc-site .gfc-major-brands-section h2 span {
+  color: var(--gfc-chocolate) !important;
+}
+.gfc-site .gfc-major-brands-section h2 span { color: var(--gfc-gold) !important; }
+.gfc-site .gfc-major-brands-section .gfc-brand-summary-box {
+  background: var(--gfc-chocolate) !important;
+  color: var(--gfc-cream) !important;
+}
+.gfc-site .gfc-major-brands-section .gfc-brand-summary-box .gfc-brand-summary-label {
+  color: var(--gfc-gold-light) !important;
+}
+.gfc-site .gfc-major-brands-section .gfc-brand-summary-box .gfc-brand-summary-links a {
+  background: var(--gfc-cream) !important;
+  border-color: var(--gfc-line) !important;
+  color: var(--gfc-chocolate) !important;
+}
+.gfc-site .gfc-major-brands-section .gfc-brand-summary-box .gfc-brand-summary-links a:hover {
+  background: #e8dfd0 !important;
+  border-color: var(--gfc-gold) !important;
+  color: var(--gfc-chocolate) !important;
+}
+.gfc-site .gfc-major-brands-section .gfc-brand-directory-actions a {
+  background: var(--gfc-cream) !important;
+  color: var(--gfc-chocolate) !important;
+}
+.gfc-site .gfc-major-brands-section .gfc-brand-directory-actions a span {
+  color: var(--gfc-gold) !important;
+}
+
+/* Keep all vehicle selector/stat panels within the cream + chocolate palette. */
+.gfc-site .bg-slate-900\/80,
+.gfc-site .bg-slate-900\/90 {
+  background-color: var(--gfc-cream) !important;
+  color: var(--gfc-chocolate) !important;
+}
+.gfc-site .bg-sky-100 { background-color: var(--gfc-cream) !important; }
+
+
+/* Location landing pages: carry the homepage's cream/chocolate visual rhythm
+   across every service-area page without changing their SEO content or routes. */
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) {
+  background: var(--gfc-cream, #f5f1e8) !important;
+  color: var(--gfc-chocolate, #211f1b) !important;
+}
+.gfc-location-landing > .min-h-screen > section:nth-of-type(even) {
+  background: var(--gfc-charcoal, #191815) !important;
+  color: var(--gfc-paper, #f5f1e8) !important;
+}
+
+/* Readable typography on cream sections. Preserve white-on-dark cards and CTAs. */
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) :is(h1,h2,h3,h4,p,li,label),
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) .text-white:not(button):not(a):not(.pricing-plan-card):not(.pricing-card-header),
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) .text-gray-100,
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) .text-gray-200,
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) .text-gray-300,
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) .text-slate-100 {
+  color: var(--gfc-chocolate, #211f1b) !important;
+}
+
+/* Keep accent words, links and interactive controls visually consistent. */
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) h1 span,
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) h2 span,
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) h3 span {
+  color: var(--gfc-gold, #b58a46) !important;
+}
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) a:not(.bg-orange-600):not(.bg-orange-700):not(.bg-green-700) {
+  color: var(--gfc-gold, #9a702e);
+}
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) :is(button,a).text-white,
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) .pricing-plan-card,
+.gfc-location-landing > .min-h-screen > section:nth-of-type(odd) .pricing-plan-card :is(h1,h2,h3,h4,p,li,span) {
+  color: #fff !important;
+}
+
+/* Cream panels inside chocolate sections stay warm and readable. */
+.gfc-location-landing > .min-h-screen > section:nth-of-type(even) .bg-white,
+.gfc-location-landing > .min-h-screen > section:nth-of-type(even) .bg-gray-50 {
+  color: var(--gfc-chocolate, #211f1b) !important;
+}
+
+
+/* The Noida / city-template location page uses main as its section container. */
+.gfc-city-landing > section:nth-of-type(odd) {
+  background: var(--gfc-cream, #f5f1e8) !important;
+  color: var(--gfc-chocolate, #211f1b) !important;
+}
+.gfc-city-landing > section:nth-of-type(even) {
+  background: var(--gfc-charcoal, #191815) !important;
+  color: var(--gfc-paper, #f5f1e8) !important;
+}
+.gfc-city-landing > section:nth-of-type(odd) :is(h1,h2,h3,h4,p,li,label) {
+  color: var(--gfc-chocolate, #211f1b) !important;
+}
+.gfc-city-landing > section:nth-of-type(odd) :is(h1,h2,h3) span {
+  color: var(--gfc-gold, #b58a46) !important;
+}
+
+
+/* Location pages: use the same alternating cream/chocolate rhythm as Home.
+   The first section is the photographic hero and intentionally stays untouched. */
+.gfc-location-landing > section:nth-of-type(n + 2):nth-of-type(odd) {
+  background: var(--gfc-cream, #f5f1e8) !important;
+  color: var(--gfc-chocolate, #211f1b) !important;
+}
+.gfc-location-landing > section:nth-of-type(n + 2):nth-of-type(even) {
+  background: var(--gfc-chocolate, #211f1b) !important;
+  color: var(--gfc-cream, #f5f1e8) !important;
+}
+.gfc-location-landing > section:nth-of-type(n + 2):nth-of-type(odd) :is(h1,h2,h3,h4,p,li,label,small) {
+  color: var(--gfc-chocolate, #211f1b);
+}
+.gfc-location-landing > section:nth-of-type(n + 2):nth-of-type(even) :is(h1,h2,h3,h4,p,li,label,small) {
+  color: var(--gfc-cream, #f5f1e8);
+}
+.gfc-location-landing > section:nth-of-type(n + 2) :is(h1,h2,h3) span {
+  color: var(--gfc-gold, #b58a46) !important;
+}
+/* Do not recolour dark pricing cards, image overlays, or CTA buttons. */
+.gfc-location-landing > section:nth-of-type(n + 2) .pricing-plan-card {
+  color: #fff !important;
+}
+.gfc-location-landing > section:nth-of-type(n + 2) .pricing-plan-card .pricing-card-header :is(h1,h2,h3,h4,p,li,span,svg) {
+  color: #fff !important;
+}
+
+/* Hero vehicle chooser: readable cream/chocolate selector on every location page. */
+.gfc-location-vehicle-selector {
+  background: rgba(245, 241, 232, .97) !important;
+  border: 1px solid #d8c8ae !important;
+  color: #29251f !important;
+}
+.gfc-location-vehicle-selector > p {
+  color: #29251f !important;
+}
+.gfc-location-vehicle-selector button[aria-pressed="true"],
+.gfc-location-vehicle-selector button:first-child {
+  background: #29251f !important;
+  border-color: #29251f !important;
+  color: #f5f1e8 !important;
+}
+.gfc-location-vehicle-selector button:not([aria-pressed="true"]):not(:first-child) {
+  background: #e8dfd0 !important;
+  border: 1px solid #d1c2aa !important;
+  color: #29251f !important;
+}
+.gfc-location-vehicle-selector button svg,
+.gfc-location-vehicle-selector button span {
+  color: inherit !important;
+}
+
+
+/* Location FAQ accordions: visible, high-contrast questions and expanded answers. */
+.gfc-location-faq-section .border-slate-700,
+.gfc-location-faq-section [class*="border-slate-700"] {
+  border-color: #d8cbb8 !important;
+}
+.gfc-location-faq-section .bg-slate-800\/40,
+.gfc-location-faq-section [class*="bg-slate-800/40"] {
+  background: #fffdf8 !important;
+}
+.gfc-location-faq-section button {
+  color: #29251f !important;
+  background: #fffdf8 !important;
+  text-align: left;
+}
+.gfc-location-faq-section button:hover {
+  background: #f0e7d7 !important;
+}
+.gfc-location-faq-section button span,
+.gfc-location-faq-section button svg {
+  color: #29251f !important;
+}
+.gfc-location-faq-section button span span:first-child {
+  color: #b58a46 !important;
+}
+.gfc-location-faq-section button span span:last-child {
+  color: #29251f !important;
+}
+.gfc-location-faq-section button + div {
+  background: #eee5d7 !important;
+  color: #403a32 !important;
+  border-top: 1px solid #d8cbb8 !important;
+}
+.gfc-location-faq-section button + div,
+.gfc-location-faq-section button + div * {
+  color: #403a32 !important;
+}
+.gfc-location-faq-section :is(h1,h2,h3,h4,p) {
+  color: #29251f;
+}
+.gfc-location-faq-section h2 span {
+  color: #b58a46 !important;
+}
+
+/* Pricing cards: dark headers, cream bodies, dark legible prices and feature copy. */
+.gfc-location-landing .pricing-plan-card {
+  background: #fffdf8 !important;
+  border-color: #d8cbb8 !important;
+}
+.gfc-location-landing .pricing-plan-card .pricing-card-header,
+.gfc-location-landing .pricing-plan-card .pricing-card-header :is(h1,h2,h3,h4,p,span,svg) {
+  color: #fff !important;
+}
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header),
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header) :is(h1,h2,h3,h4,p,span,li,small) {
+  color: #29251f !important;
+}
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header) .text-slate-400 {
+  color: #746b5e !important;
+}
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header) button {
+  color: #fff !important;
+}
+
+
+/* Location FAQ accordions: visible, high-contrast questions and expanded answers. */
+.gfc-location-faq-section .border-slate-700,
+.gfc-location-faq-section [class*="border-slate-700"] {
+  border-color: #d8cbb8 !important;
+}
+.gfc-location-faq-section .bg-slate-800\/40,
+.gfc-location-faq-section [class*="bg-slate-800/40"] {
+  background: #fffdf8 !important;
+}
+.gfc-location-faq-section button {
+  color: #29251f !important;
+  background: #fffdf8 !important;
+  text-align: left;
+}
+.gfc-location-faq-section button:hover {
+  background: #f0e7d7 !important;
+}
+.gfc-location-faq-section button span,
+.gfc-location-faq-section button svg {
+  color: #29251f !important;
+}
+.gfc-location-faq-section button span span:first-child {
+  color: #b58a46 !important;
+}
+.gfc-location-faq-section button span span:last-child {
+  color: #29251f !important;
+}
+.gfc-location-faq-section button + div {
+  background: #eee5d7 !important;
+  color: #403a32 !important;
+  border-top: 1px solid #d8cbb8 !important;
+}
+.gfc-location-faq-section button + div,
+.gfc-location-faq-section button + div * {
+  color: #403a32 !important;
+}
+.gfc-location-faq-section :is(h1,h2,h3,h4,p) {
+  color: #29251f;
+}
+.gfc-location-faq-section h2 span {
+  color: #b58a46 !important;
+}
+
+/* Pricing cards: dark headers, cream bodies, dark legible prices and feature copy. */
+.gfc-location-landing .pricing-plan-card {
+  background: #fffdf8 !important;
+  border-color: #d8cbb8 !important;
+}
+.gfc-location-landing .pricing-plan-card .pricing-card-header,
+.gfc-location-landing .pricing-plan-card .pricing-card-header :is(h1,h2,h3,h4,p,span,svg) {
+  color: #fff !important;
+}
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header),
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header) :is(h1,h2,h3,h4,p,span,li,small) {
+  color: #29251f !important;
+}
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header) .text-slate-400 {
+  color: #746b5e !important;
+}
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header) button {
+  color: #fff !important;
+}
+
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header) .text-3xl,
+.gfc-location-landing .pricing-plan-card > :not(.pricing-card-header) .sm\:text-\[34px\] {
+  color: #b7791f !important;
+}
+
+
+/* Final pricing-card readability override: keep feature text dark on cream bodies. */
+.gfc-location-landing > section:nth-of-type(n + 2) .pricing-plan-card > div:not(.pricing-card-header) ul li,
+.gfc-location-landing > section:nth-of-type(n + 2) .pricing-plan-card > div:not(.pricing-card-header) ul li * {
+  color: #29251f !important;
+  opacity: 1 !important;
+}
+.gfc-location-landing > section:nth-of-type(n + 2) .pricing-plan-card > div:not(.pricing-card-header) > div span:not(.text-slate-400) {
+  color: #b7791f !important;
+}
+
+
+/* Location-page section rhythm: chocolate -> cream -> chocolate. */
+.gfc-location-landing section.gfc-location-hotdeals-section {
+  background: #211f1b !important;
+  color: #f5f1e8 !important;
+}
+.gfc-location-landing section.gfc-location-brands-section {
+  background: #f5f1e8 !important;
+  color: #29251f !important;
+  border-top: 1px solid #e5dac9;
+  border-bottom: 1px solid #e5dac9;
+}
+.gfc-location-landing section.gfc-location-brands-section :is(h1,h2,h3,h4,p) {
+  color: #29251f !important;
+}
+.gfc-location-landing section.gfc-location-brands-section .text-orange-400 {
+  color: #a77b2f !important;
+}
+.gfc-location-landing section.gfc-location-brands-section .brand-tile {
+  background: #fffdf8 !important;
+  border-color: #ded5c7 !important;
+}
+.gfc-location-landing section.gfc-location-brands-section .brand-tile span {
+  color: #665f55 !important;
+}
+.gfc-location-landing section.gfc-location-brands-section .brand-tile:hover span {
+  color: #a77b2f !important;
+}
+.gfc-location-landing section.gfc-location-pricing-section {
+  background: #211f1b !important;
+  color: #f5f1e8 !important;
+}
+.gfc-location-landing section.gfc-location-pricing-section :is(h1,h2,h3,h4,p) {
+  color: #f5f1e8 !important;
+}
+.gfc-location-landing section.gfc-location-pricing-section h2 span:last-child {
+  color: #c49a55 !important;
+}
+
+
+/* Model landing pages reuse the homepage workshop footage in the first media slot. */
+.gfc-model-hero-video { min-height: 320px; }
+.gfc-model-hero-video video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gfc-model-hero-video .gfc-video-frame-mark {
+  z-index: 2;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(25, 22, 18, .62);
+}
+@media (max-width: 720px) {
+  .gfc-model-hero-video { min-height: 230px; }
+}
+
+
+/* Initials fallback for customer stories that do not have a supplied profile photo. */
+.gfc-review-initials {
+  display: grid;
+  place-items: center;
+  background: #e8dfd1;
+  color: #29251f !important;
+  font-size: 12px !important;
+  font-weight: 800;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+
+
+/* Model landing pages: use the same full-width cinematic workshop-video hero as the homepage. */
+.gfc-model-hero-fullbleed {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 680px;
+  padding: 0 !important;
+  overflow: hidden;
+  background: #191815;
+}
+.gfc-model-hero-video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: #191815;
+}
+.gfc-model-hero-video-bg video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+.gfc-model-hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.68) 34%, rgba(0,0,0,.25) 72%, rgba(0,0,0,.16) 100%),
+    linear-gradient(0deg, rgba(0,0,0,.35), transparent 48%, rgba(0,0,0,.12));
+}
+.gfc-model-hero-fullbleed-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: 76px;
+  padding-bottom: 76px;
+}
+.gfc-model-hero-fullbleed .gfc-model-hero-copy {
+  max-width: 560px;
+  color: #fffdf8;
+}
+.gfc-model-hero-fullbleed .gfc-model-hero-copy h1 {
+  color: #fffdf8;
+  text-shadow: 0 2px 18px rgba(0,0,0,.28);
+}
+.gfc-model-hero-fullbleed .gfc-model-lead {
+  color: rgba(255,253,248,.9);
+}
+.gfc-model-hero-fullbleed .gfc-model-meta span {
+  background: rgba(25,24,21,.72);
+  border-color: rgba(216,183,119,.62);
+  color: #fff7e8;
+}
+.gfc-model-hero-fullbleed .gfc-model-proof-grid {
+  color: #fff7e8;
+}
+.gfc-model-hero-fullbleed .gfc-secondary-cta {
+  color: #fffdf8;
+  border-color: rgba(255,253,248,.75);
+  background: rgba(25,24,21,.35);
+}
+@media (max-width: 640px) {
+  .gfc-model-hero-fullbleed {
+    min-height: 700px;
+    align-items: flex-start;
+  }
+  .gfc-model-hero-video-bg video {
+    object-position: 58% center;
+  }
+  .gfc-model-hero-video-overlay {
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.76) 0%, rgba(0,0,0,.68) 48%, rgba(0,0,0,.42) 100%),
+      linear-gradient(90deg, rgba(0,0,0,.38), rgba(0,0,0,.08));
+  }
+  .gfc-model-hero-fullbleed-content {
+    padding-top: 56px;
+    padding-bottom: 44px;
+  }
+}
+
+/* Distinguish additional customer-feedback cards from Google-sourced reviews. */
+.gfc-review-customer-mark {
+  width: 25px; height: 25px; border-radius: 50%; display: grid; place-items: center;
+  margin-bottom: 7px; background: #2b261f; color: #d8b777; font-size: 8px;
+  font-weight: 900; letter-spacing: -.04em;
+}
