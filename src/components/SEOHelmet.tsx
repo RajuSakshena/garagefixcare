@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
 // ─────────────────────────────────────────────
 // Types
@@ -62,8 +63,6 @@ const DEFAULT_ROBOTS = 'index, follow';
 
 const SITE_ORIGIN = 'https://www.garagefixcare.in';
 
-const DEFAULT_CANONICAL = `${SITE_ORIGIN}/`;
-
 const DEFAULT_OG_IMAGE =
   'https://www.garagefixcare.in/og-banner.png';
 
@@ -87,15 +86,22 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
   twitter = {},
   structuredData,
 }) => {
-  // Use the explicitly supplied canonical URL.
-  // Otherwise, derive it from the current page path.
-  const currentPath =
-    typeof window !== 'undefined'
-      ? window.location.pathname
-      : '/';
+  // Get the current route from React Router.
+  // This works during both browser rendering and prerendering.
 
+  const { pathname } = useLocation();
+
+  // Remove trailing slashes except for the homepage.
+  const normalizedPath =
+    pathname === '/'
+      ? '/'
+      : pathname.replace(/\/+$/, '');
+
+  // Generate page-specific canonical URL.
   const resolvedCanonical =
-    canonical ?? `${SITE_ORIGIN}${currentPath}`;
+    canonical ?? `${SITE_ORIGIN}${normalizedPath}`;
+
+  // Open Graph defaults
 
   const ogTitle = og.title ?? title;
   const ogDescription = og.description ?? description;
@@ -104,6 +110,8 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
   const ogLocale = og.locale ?? 'en_IN';
   const ogImage = og.image ?? DEFAULT_OG_IMAGE;
   const ogImageAlt = og.imageAlt ?? DEFAULT_OG_IMAGE_ALT;
+
+  // Twitter defaults
 
   const twitterCard =
     twitter.card ?? 'summary_large_image';
@@ -121,6 +129,8 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
 
   const twitterImageAlt =
     twitter.imageAlt ?? DEFAULT_OG_IMAGE_ALT;
+
+  // Structured Data
 
   const schemas: JsonLdObject[] = structuredData
     ? Array.isArray(structuredData)
