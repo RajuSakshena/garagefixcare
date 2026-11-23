@@ -58,13 +58,12 @@ const DEFAULT_KEYWORDS =
   'bike service near me, car service near me, bike repair noida, bike repair delhi, bike repair gurgaon, bike repair ghaziabad, car service noida, car service delhi, car service gurgaon, car service ghaziabad, doorstep bike service, doorstep car service, mechanic near me, garage fix care, greater noida, faridabad, delhi ncr, bike repair delhi ncr, bike service delhi ncr, doorstep mechanic delhi ncr, bike repair greater noida, bike repair faridabad, car service greater noida, car service faridabad';
 
 const DEFAULT_AUTHOR = 'Garage Fix Care';
-
 const DEFAULT_ROBOTS = 'index, follow';
 
 const SITE_ORIGIN = 'https://www.garagefixcare.in';
 
 const DEFAULT_OG_IMAGE =
-  'https://www.garagefixcare.in/og-banner.png';
+  `${SITE_ORIGIN}/og-banner.png`;
 
 const DEFAULT_OG_IMAGE_ALT =
   'Garage Fix Care Doorstep Bike & Car Service';
@@ -86,22 +85,20 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
   twitter = {},
   structuredData,
 }) => {
-  // Get the current route from React Router.
-  // This works during both browser rendering and prerendering.
+  // React Router provides the correct pathname
+  // during both browser rendering and prerendering.
 
   const { pathname } = useLocation();
 
-  // Remove trailing slashes except for the homepage.
   const normalizedPath =
     pathname === '/'
       ? '/'
       : pathname.replace(/\/+$/, '');
 
-  // Generate page-specific canonical URL.
   const resolvedCanonical =
     canonical ?? `${SITE_ORIGIN}${normalizedPath}`;
 
-  // Open Graph defaults
+  // Open Graph
 
   const ogTitle = og.title ?? title;
   const ogDescription = og.description ?? description;
@@ -111,7 +108,7 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
   const ogImage = og.image ?? DEFAULT_OG_IMAGE;
   const ogImageAlt = og.imageAlt ?? DEFAULT_OG_IMAGE_ALT;
 
-  // Twitter defaults
+  // Twitter Cards
 
   const twitterCard =
     twitter.card ?? 'summary_large_image';
@@ -164,7 +161,7 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
         content={robots}
       />
 
-      {/* Canonical URL */}
+      {/* Canonical */}
 
       <link
         rel="canonical"
@@ -252,7 +249,7 @@ const SEOHelmet: React.FC<SEOHelmetProps> = ({
         />
       )}
 
-      {/* Structured Data */}
+      {/* JSON-LD Structured Data */}
 
       {schemas.map((schema, index) => (
         <script

@@ -1,10 +1,8 @@
+
 import fs from 'node:fs';
 import path from 'node:path';
-import React from 'react';
-import { renderToString } from 'react-dom/server';
+import { pathToFileURL } from 'node:url';
 import { createServer } from 'vite';
-import { MemoryRouter } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
 
 const projectRoot = process.cwd();
 const distDir = path.join(projectRoot, 'dist');
@@ -12,72 +10,131 @@ const sitemapPath = path.join(projectRoot, 'public', 'sitemap.xml');
 const templatePath = path.join(distDir, 'index.html');
 
 if (!fs.existsSync(templatePath)) {
-  throw new Error('dist/index.html not found. Run vite build before prerendering.');
+  throw new Error(
+    'dist/index.html not found. Run vite build before prerendering.'
+  );
 }
 
+if (!fs.existsSync(sitemapPath)) {
+  throw new Error('public/sitemap.xml not found.');
+}
+
+// Read existing sitemap. Do not modify it.
 const sitemap = fs.readFileSync(sitemapPath, 'utf8');
-const routes = [...sitemap.matchAll(/<loc>https:\/\/www\.garagefixcare\.in(\/[^<]*)?<\/loc>/g)]
-  .map((match) => match[1] || '/');
 
-if (!routes.includes('/')) routes.unshift('/');
-if (routes.length < 2) {
-  throw new Error('No valid routes found in public/sitemap.xml.');
+const routes = [
+  ...sitemap.matchAll(
+    /<loc>\s*https:\/\/www\.garagefixcare\.in(\/[^<]*)?\s*<\/loc>/gi
+  ),
+].map((match) => match[1] || '/');
+
+if (!routes.includes('/')) {
+  routes.unshift('/');
 }
 
-const template = fs.readFileSync(templatePath, 'utf8');
+const uniqueRoutes = [...new Set(routes)];
+
+if (uniqueRoutes.length < 2) {
+  throw new Error('Insufficient routes found in sitemap.');
+}
+
 const vite = await createServer({
   configFile: path.join(projectRoot, 'vite.config.ts'),
-  server: { middlewareMode: true },
+  server: {
+    middlewareMode: true,
+  },
   appType: 'custom',
 });
 
 try {
-  const { AppRoutes } = await vite.ssrLoadModule('/src/App.tsx');
+  // Load the server renderer from the same Vite module graph.
+  const serverEntry = await vite.ssrLoadModule('/src/entry-server.tsx');
+
+  if (typeof serverEntry.render !== 'function') {
+    throw new Error(
+      'src/entry-server.tsx must export a render(url) function.'
+    );
+  }
+
+  const template = fs.readFileSync(templatePath, 'utf8');
+
   let completed = 0;
 
-  for (const route of [...new Set(routes)]) {
-    const helmetContext = {};
-    const app = React.createElement(
-      HelmetProvider,
-      { context: helmetContext },
-      React.createElement(
-        MemoryRouter,
-        { initialEntries: [route] },
-        React.createElement(AppRoutes),
-      ),
-    );
+  for (const route of uniqueRoutes) {
+    console.log(`Prerendering: ${route}`);
 
-    const renderedApp = renderToString(app);
-    const helmet = helmetContext.helmet;
+    const result = serverEntry.render(route);
 
-    if (!helmet || !helmet.title || !helmet.title.toString()) {
-      throw new Error(`SEO metadata was not rendered for ${route}`);
+    if (!result || typeof result.html !== 'string') {
+      throw new Error(`HTML rendering failed for ${route}`);
     }
 
-    let html = template
-      .replace(/<title>[\s\S]*?<\/title>/i, '')
-      .replace(/<meta\s+name="description"[^>]*>/i, '')
-      .replace('<div id="root"></div>', `<div id="root">${renderedApp}</div>`);
+    const helmet = result.helmet;
+
+    if (!helmet) {
+      throw new Error(
+        `Helmet metadata was not collected for ${route}.`
+      );
+    }
 
     const headMarkup = [
-      helmet.title.toString(),
-      helmet.meta.toString(),
-      helmet.link.toString(),
-      helmet.script.toString(),
-    ].filter(Boolean).join('\n');
+      helmet.title?.toString() || '',
+      helmet.meta?.toString() || '',
+      helmet.link?.toString() || '',
+      helmet.script?.toString() || '',
+      helmet.noscript?.toString() || '',
+      helmet.style?.toString() || '',
+    ]
+      .filter(Boolean)
+      .join('\n');
 
-    html = html.replace('</head>', `${headMarkup}\n</head>`);
+    if (!headMarkup.trim()) {
+      throw new Error(
+        `SEO head metadata is empty for ${route}.`
+      );
+    }
 
-    const outputPath = route === '/'
-      ? templatePath
-      : path.join(distDir, route.replace(/^\/+/, ''), 'index.html');
+    // Remove default Vite title and existing description.
+    let html = template
+      .replace(/<title\b[^>]*>[\s\S]*?<\/title>/i, '')
+      .replace(
+        /<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/gi,
+        ''
+      );
 
-    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    // Inject rendered React application.
+    html = html.replace(
+      '<div id="root"></div>',
+      `<div id="root">${result.html}</div>`
+    );
+
+    // Inject Helmet metadata into document head.
+    html = html.replace(
+      '</head>',
+      `${headMarkup}\n</head>`
+    );
+
+    const outputPath =
+      route === '/'
+        ? templatePath
+        : path.join(
+            distDir,
+            route.replace(/^\/+/, ''),
+            'index.html'
+          );
+
+    fs.mkdirSync(path.dirname(outputPath), {
+      recursive: true,
+    });
+
     fs.writeFileSync(outputPath, html, 'utf8');
+
     completed += 1;
   }
 
-  console.log(`Prerendered ${completed} routes into dist/.`);
+  console.log(
+    `Successfully prerendered ${completed} routes into dist/.`
+  );
 } finally {
   await vite.close();
 }

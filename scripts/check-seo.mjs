@@ -4,36 +4,51 @@ import path from 'node:path';
 
 const root = process.cwd();
 
-const app = fs.readFileSync(
-  path.join(root, 'src', 'App.tsx'),
-  'utf8'
-);
+const sitemapPath = path.join(root, 'public', 'sitemap.xml');
+const distDir = path.join(root, 'dist');
+const appPath = path.join(root, 'src', 'App.tsx');
 
-const sitemap = fs.readFileSync(
-  path.join(root, 'public', 'sitemap.xml'),
-  'utf8'
-);
+if (!fs.existsSync(sitemapPath)) {
+  throw new Error('public/sitemap.xml not found.');
+}
 
+if (!fs.existsSync(appPath)) {
+  throw new Error('src/App.tsx not found.');
+}
+
+const sitemap = fs.readFileSync(sitemapPath, 'utf8');
+const app = fs.readFileSync(appPath, 'utf8');
+
+const SITE_ORIGIN = 'https://www.garagefixcare.in';
+
+// Extract registered React Router paths.
 const routePatterns = [
-  ...app.matchAll(/<Route path="([^"]+)" element=\{<\w+\s*\/>\} \/>/g)
-]
-  .map((match) => match[1])
-  .map((route) =>
-    new RegExp(
-      `^${route
-        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-        .replace(/:[^/]+/g, '[^/]+')}/?$`
-    )
-  );
+  ...app.matchAll(
+    /<Route\s+path=["']([^"']+)["']/g
+  ),
+].map((match) => {
+  const route = match[1];
 
+  const escaped = route
+    .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    .replace(/:[^/]+/g, '[^/]+');
+
+  return new RegExp(`^${escaped}/?$`);
+});
+
+// Extract sitemap URLs.
 const sitemapRoutes = [
   ...sitemap.matchAll(
-    /<loc>https:\/\/www\.garagefixcare\.in(\/[^<]*)?<\/loc>/g
-  )
+    /<loc>\s*https:\/\/www\.garagefixcare\.in(\/[^<]*)?\s*<\/loc>/gi
+  ),
 ].map((match) => match[1] || '/');
 
 const errors = [];
 const seen = new Set();
+
+if (sitemapRoutes.length === 0) {
+  errors.push('No valid URLs found in sitemap.xml.');
+}
 
 for (const route of sitemapRoutes) {
   if (seen.has(route)) {
@@ -42,15 +57,21 @@ for (const route of sitemapRoutes) {
 
   seen.add(route);
 
+  // Check route registration.
   if (!routePatterns.some((pattern) => pattern.test(route))) {
     errors.push(`Sitemap URL is not matched by an App route: ${route}`);
     continue;
   }
 
+  // Check prerendered HTML.
   const outputPath =
     route === '/'
-      ? path.join(root, 'dist', 'index.html')
-      : path.join(root, 'dist', route.replace(/^\/+/, ''), 'index.html');
+      ? path.join(distDir, 'index.html')
+      : path.join(
+          distDir,
+          route.replace(/^\/+/, ''),
+          'index.html'
+        );
 
   if (!fs.existsSync(outputPath)) {
     errors.push(`Prerendered HTML missing: ${route}`);
@@ -59,25 +80,12 @@ for (const route of sitemapRoutes) {
 
   const html = fs.readFileSync(outputPath, 'utf8');
 
-  const expectedCanonical = `https://www.garagefixcare.in${route}`;
-
-  // Read canonical regardless of attribute order
-  const linkTags = html.match(/<link\b[^>]*>/gi) || [];
-
-  const canonicalTag = linkTags.find((tag) =>
-    /\brel=["']canonical["']/i.test(tag)
-  );
-
-  const canonical = canonicalTag?.match(
-    /\bhref=["']([^"']+)["']/i
-  )?.[1];
-
-  // Read title even when data-rh is present
+  // Extract title.
   const title = html.match(
     /<title\b[^>]*>([\s\S]*?)<\/title>/i
   )?.[1];
 
-  // Read description regardless of attribute order
+  // Extract meta description regardless of attribute order.
   const metaTags = html.match(/<meta\b[^>]*>/gi) || [];
 
   const descriptionTag = metaTags.find((tag) =>
@@ -88,33 +96,54 @@ for (const route of sitemapRoutes) {
     /\bcontent=["']([^"']*)["']/i
   )?.[1];
 
-  const h1Count = [...html.matchAll(/<h1\b/gi)].length;
+  // Extract canonical regardless of attribute order.
+  const linkTags = html.match(/<link\b[^>]*>/gi) || [];
 
-  if (canonical !== expectedCanonical) {
-    errors.push(
-      `Canonical mismatch for ${route}: ${canonical || 'missing'}`
-    );
-  }
+  const canonicalTag = linkTags.find((tag) =>
+    /\brel=["']canonical["']/i.test(tag)
+  );
 
-  if (!title || !title.trim()) {
+  const canonical = canonicalTag?.match(
+    /\bhref=["']([^"']+)["']/i
+  )?.[1];
+
+  const expectedCanonical =
+    route === '/'
+      ? `${SITE_ORIGIN}/`
+      : `${SITE_ORIGIN}${route.replace(/\/+$/, '')}`;
+
+  // Count H1 elements.
+  const h1Count = [
+    ...html.matchAll(/<h1\b/gi),
+  ].length;
+
+  if (!title?.trim()) {
     errors.push(`Title missing for ${route}`);
   }
 
-  if (!description || !description.trim()) {
+  if (!description?.trim()) {
     errors.push(`Meta description missing for ${route}`);
   }
 
+  if (canonical !== expectedCanonical) {
+    errors.push(
+      `Canonical mismatch for ${route}: ${canonical || 'missing'} (expected ${expectedCanonical})`
+    );
+  }
+
   if (h1Count !== 1) {
-    errors.push(`Expected one H1 in ${route}; found ${h1Count}`);
+    errors.push(
+      `Expected one H1 in ${route}; found ${h1Count}`
+    );
   }
 }
 
-if (errors.length) {
+if (errors.length > 0) {
   console.error(
     `SEO validation failed with ${errors.length} issue(s):`
   );
 
-  for (const error of errors.slice(0, 80)) {
+  for (const error of errors.slice(0, 100)) {
     console.error(`- ${error}`);
   }
 
@@ -122,5 +151,5 @@ if (errors.length) {
 }
 
 console.log(
-  `SEO validation passed: ${sitemapRoutes.length} sitemap URLs matched App routes; all prerendered pages have unique canonicals, titles, descriptions and one H1.`
+  `SEO validation passed: ${sitemapRoutes.length} sitemap URLs matched App routes. All pages have titles, descriptions, canonicals and exactly one H1.`
 );
